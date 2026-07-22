@@ -1,0 +1,2 @@
+# Minimal dependency lock for the public code-only repository.
+pyarrow==25.0.0

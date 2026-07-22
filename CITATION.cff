@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the repository release."
+title: "Open AIS Port Screening Explorer"
+type: software
+version: 0.1.0
+date-released: 2026-07-22
+repository-code: "https://github.com/TristanLib/open-ais-port-screening"
+url: "https://github.com/TristanLib/open-ais-port-screening"
+authors:
+  - family-names: "Li"
+    given-names: "Bo"
+    orcid: "https://orcid.org/0009-0002-0772-5138"
+keywords:
+  - AIS
+  - maritime traffic
+  - anomaly screening
+  - CPA/TCPA
+  - reproducible research
+license: MIT

@@ -1,0 +1,21 @@
+{
+  "default_dataset": "sf_bay",
+  "datasets": [
+    {
+      "id": "sf_bay",
+      "manifest": "manifest.json",
+      "label": {
+        "en": "San Francisco Bay",
+        "zh": "旧金山湾"
+      }
+    },
+    {
+      "id": "tokyo_bay",
+      "manifest": "manifest_tokyo_bay.json",
+      "label": {
+        "en": "Tokyo Bay",
+        "zh": "东京湾"
+      }
+    }
+  ]
+}

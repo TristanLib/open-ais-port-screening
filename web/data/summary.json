@@ -1,0 +1,501 @@
+{
+  "project": "Open AIS Port Screening Explorer",
+  "study_area": "San Francisco Bay and Port of Oakland Approaches",
+  "date_range": {
+    "start": "2025-05-01",
+    "end": "2025-05-07"
+  },
+  "publication_mode": "sanitized_research_demo",
+  "disclaimer": "Historical AIS first-pass screening evidence demo. Not real-time, not for navigation, not for enforcement, and not for operational decision-making.",
+  "dataset": {
+    "days": 7,
+    "cropped_ais_points": 1119812,
+    "clean_ais_points": 1114862,
+    "trajectory_segments": 21446,
+    "min20_segments": 6304,
+    "min20_points": 1056298,
+    "mean_daily_clean_points": 159266.0
+  },
+  "traffic_patterns": {
+    "normal_route_cells": 760,
+    "high_confidence_route_cells": 311,
+    "moving_cells": 3037,
+    "min_sog": 1.0
+  },
+  "anomaly_detection": {
+    "anomaly_points": 48398,
+    "anomaly_rate_percent": 4.341165,
+    "normal_pattern_cells": 760,
+    "corroborated_candidate_points": 28555,
+    "low_support_only_points": 19843,
+    "dominant_reasons": [
+      {
+        "reason": "low_empirical_route_support",
+        "count": 28026
+      },
+      {
+        "reason": "direction_mismatch",
+        "count": 19543
+      },
+      {
+        "reason": "high_turn",
+        "count": 12677
+      },
+      {
+        "reason": "high_speed",
+        "count": 12149
+      },
+      {
+        "reason": "high_accel",
+        "count": 7246
+      },
+      {
+        "reason": "implied_speed",
+        "count": 6796
+      },
+      {
+        "reason": "suspicious_stop",
+        "count": 447
+      }
+    ]
+  },
+  "encounter_risk": {
+    "encounters": 52311,
+    "deduplicated_encounter_episodes": 18386,
+    "unique_vessel_pairs": 9315,
+    "unique_vessel_pair_days": 12119,
+    "episode_gap_min": 15.0,
+    "vessel_states": 157334,
+    "pair_checks_within_distance": 243063,
+    "pair_opportunity_cells": 1901,
+    "time_bin_seconds": 60,
+    "max_state_skew_s": 60,
+    "state_alignment": "propagate_earlier_state_to_later_observation_time",
+    "accepted_state_skew_s": {
+      "median": 16.0,
+      "p95": 46.0,
+      "max": 59.0
+    },
+    "dcpa_threshold_nm": 0.5,
+    "tcpa_threshold_min": 15.0
+  },
+  "encounter_backtest": {
+    "method": "strict_future_synchronized_geometric_check_for_encounter_candidate_screening",
+    "future_only": true,
+    "episodes_with_aligned_followup": 17444,
+    "supported_episodes_within_threshold": 12495,
+    "support_rate_observable": 0.716292,
+    "near_supported_episodes_within_1nm": 15637,
+    "near_support_rate_observable": 0.896411,
+    "median_actual_min_distance_nm": 0.285899,
+    "median_predicted_observed_delta_min": 1.75002,
+    "median_predicted_dcpa_abs_error_nm": 0.142861,
+    "observable_rate": 0.948765
+  },
+  "hotspots": {
+    "anomaly_only_hotspots": 36,
+    "fused_hotspots": 56,
+    "eligible_fused_cells": 564,
+    "encounter_weight": 0.75,
+    "top_percent": 0.1
+  },
+  "workload_compression": {
+    "key_message": "The pipeline aggregates 1,114,862 cleaned AIS observations into 56 spatial review units containing 5,389 candidate episodes; actual analyst review time was not measured.",
+    "method": "evidence_aggregation_summary",
+    "analyst_time_measured": false,
+    "stages": [
+      {
+        "stage_id": "clean_points",
+        "stage": "Cleaned AIS observations",
+        "review_object": "AIS point",
+        "count": 1114862,
+        "share_of_clean_points_percent": 100.0,
+        "aggregation_ratio_from_clean_points": 1.0,
+        "interpretation": "Starting point after quality control."
+      },
+      {
+        "stage_id": "anomaly_candidate_points",
+        "stage": "Anomaly-candidate observations",
+        "review_object": "candidate point",
+        "count": 48398,
+        "share_of_clean_points_percent": 4.341165,
+        "aggregation_ratio_from_clean_points": 23.035,
+        "interpretation": "Behavioral candidates selected for review, not event labels."
+      },
+      {
+        "stage_id": "encounter_candidate_records",
+        "stage": "CPA/TCPA future encounter-candidate records",
+        "review_object": "time-bin pair record",
+        "count": 52311,
+        "share_of_clean_points_percent": 4.69215,
+        "aggregation_ratio_from_clean_points": 21.312,
+        "interpretation": "Pair records generated from future CPA/TCPA screening."
+      },
+      {
+        "stage_id": "encounter_audit_episodes",
+        "stage": "Deduplicated encounter audit episodes",
+        "review_object": "audit episode",
+        "count": 18386,
+        "share_of_clean_points_percent": 1.649173,
+        "aggregation_ratio_from_clean_points": 60.636,
+        "interpretation": "Repeated time-bin records merged into pair-day audit episodes."
+      },
+      {
+        "stage_id": "backtest_supported_episodes",
+        "stage": "Strict-future supported encounter episodes",
+        "review_object": "future-supported episode",
+        "count": 12495,
+        "share_of_clean_points_percent": 1.120767,
+        "aggregation_ratio_from_clean_points": 89.225,
+        "interpretation": "Episodes with synchronized future AIS separation within the screening threshold."
+      },
+      {
+        "stage_id": "fused_hotspot_cells",
+        "stage": "Fused evidence hotspot cells",
+        "review_object": "hotspot cell",
+        "count": 56,
+        "share_of_clean_points_percent": 0.005023,
+        "aggregation_ratio_from_clean_points": 19908.25,
+        "risk_cell_share_percent": 1.658277,
+        "eligible_cell_share_percent": 9.929078,
+        "interpretation": "Spatial triage layer for human review; cells are not incident labels."
+      },
+      {
+        "stage_id": "representative_case_tracks",
+        "stage": "Representative case tracks",
+        "review_object": "de-identified case track",
+        "count": 7,
+        "share_of_clean_points_percent": 0.000628,
+        "aggregation_ratio_from_clean_points": 159266.0,
+        "interpretation": "Small explanation set for audit and presentation."
+      }
+    ]
+  },
+  "ranking_evaluation": {
+    "interpretation": "ranking enrichment for review prioritization; not accident or near-miss accuracy",
+    "eligible_cells": 564,
+    "episodes_assigned_to_eligible_cells": 14669,
+    "observable_episodes_in_eligible_cells": 13929,
+    "strict_future_supported_episodes_in_eligible_cells": 10220,
+    "global_support_rate_in_eligible_cells": 0.733721,
+    "rankings": {
+      "density_only": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 28,
+          "observable_episodes": 1111,
+          "supported_episodes": 856,
+          "supported_episode_capture_rate": 0.083757,
+          "support_rate_selected": 0.770477,
+          "support_rate_enrichment": 1.050095
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 56,
+          "observable_episodes": 2051,
+          "supported_episodes": 1607,
+          "supported_episode_capture_rate": 0.157241,
+          "support_rate_selected": 0.78352,
+          "support_rate_enrichment": 1.067872
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 112,
+          "observable_episodes": 3621,
+          "supported_episodes": 2946,
+          "supported_episode_capture_rate": 0.288258,
+          "support_rate_selected": 0.813587,
+          "support_rate_enrichment": 1.108851
+        }
+      ],
+      "anomaly_only": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 28,
+          "observable_episodes": 933,
+          "supported_episodes": 535,
+          "supported_episode_capture_rate": 0.052348,
+          "support_rate_selected": 0.573419,
+          "support_rate_enrichment": 0.781522
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 56,
+          "observable_episodes": 2573,
+          "supported_episodes": 1786,
+          "supported_episode_capture_rate": 0.174755,
+          "support_rate_selected": 0.694131,
+          "support_rate_enrichment": 0.946043
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 112,
+          "observable_episodes": 4208,
+          "supported_episodes": 3171,
+          "supported_episode_capture_rate": 0.310274,
+          "support_rate_selected": 0.753565,
+          "support_rate_enrichment": 1.027045
+        }
+      ],
+      "encounter_only": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 28,
+          "observable_episodes": 3119,
+          "supported_episodes": 2793,
+          "supported_episode_capture_rate": 0.273288,
+          "support_rate_selected": 0.895479,
+          "support_rate_enrichment": 1.220463
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 56,
+          "observable_episodes": 4868,
+          "supported_episodes": 4164,
+          "supported_episode_capture_rate": 0.407436,
+          "support_rate_selected": 0.855382,
+          "support_rate_enrichment": 1.165814
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 112,
+          "observable_episodes": 6953,
+          "supported_episodes": 5652,
+          "supported_episode_capture_rate": 0.553033,
+          "support_rate_selected": 0.812887,
+          "support_rate_enrichment": 1.107896
+        }
+      ],
+      "fused_w0.50": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 28,
+          "observable_episodes": 3512,
+          "supported_episodes": 2902,
+          "supported_episode_capture_rate": 0.283953,
+          "support_rate_selected": 0.82631,
+          "support_rate_enrichment": 1.126191
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 56,
+          "observable_episodes": 4988,
+          "supported_episodes": 3989,
+          "supported_episode_capture_rate": 0.390313,
+          "support_rate_selected": 0.799719,
+          "support_rate_enrichment": 1.08995
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 112,
+          "observable_episodes": 6548,
+          "supported_episodes": 5170,
+          "supported_episode_capture_rate": 0.505871,
+          "support_rate_selected": 0.789554,
+          "support_rate_enrichment": 1.076096
+        }
+      ],
+      "fused_w0.75": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 28,
+          "observable_episodes": 3491,
+          "supported_episodes": 2936,
+          "supported_episode_capture_rate": 0.28728,
+          "support_rate_selected": 0.84102,
+          "support_rate_enrichment": 1.146239
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 56,
+          "observable_episodes": 5103,
+          "supported_episodes": 4091,
+          "supported_episode_capture_rate": 0.400294,
+          "support_rate_selected": 0.801685,
+          "support_rate_enrichment": 1.09263
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 112,
+          "observable_episodes": 6866,
+          "supported_episodes": 5449,
+          "supported_episode_capture_rate": 0.53317,
+          "support_rate_selected": 0.793621,
+          "support_rate_enrichment": 1.081638
+        }
+      ],
+      "fused_w1.00": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 28,
+          "observable_episodes": 3321,
+          "supported_episodes": 2868,
+          "supported_episode_capture_rate": 0.280626,
+          "support_rate_selected": 0.863595,
+          "support_rate_enrichment": 1.177008
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 56,
+          "observable_episodes": 5048,
+          "supported_episodes": 4191,
+          "supported_episode_capture_rate": 0.410078,
+          "support_rate_selected": 0.83023,
+          "support_rate_enrichment": 1.131533
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 112,
+          "observable_episodes": 7132,
+          "supported_episodes": 5655,
+          "supported_episode_capture_rate": 0.553327,
+          "support_rate_selected": 0.792905,
+          "support_rate_enrichment": 1.080663
+        }
+      ]
+    },
+    "top_10_percent_jaccard": [
+      {
+        "method_a": "density_only",
+        "method_b": "anomaly_only",
+        "top_10_percent_jaccard": 0.131313
+      },
+      {
+        "method_a": "density_only",
+        "method_b": "encounter_only",
+        "top_10_percent_jaccard": 0.131313
+      },
+      {
+        "method_a": "density_only",
+        "method_b": "fused_w0.50",
+        "top_10_percent_jaccard": 0.108911
+      },
+      {
+        "method_a": "density_only",
+        "method_b": "fused_w0.75",
+        "top_10_percent_jaccard": 0.12
+      },
+      {
+        "method_a": "density_only",
+        "method_b": "fused_w1.00",
+        "top_10_percent_jaccard": 0.108911
+      },
+      {
+        "method_a": "anomaly_only",
+        "method_b": "encounter_only",
+        "top_10_percent_jaccard": 0.12
+      },
+      {
+        "method_a": "anomaly_only",
+        "method_b": "fused_w0.50",
+        "top_10_percent_jaccard": 0.272727
+      },
+      {
+        "method_a": "anomaly_only",
+        "method_b": "fused_w0.75",
+        "top_10_percent_jaccard": 0.204301
+      },
+      {
+        "method_a": "anomaly_only",
+        "method_b": "fused_w1.00",
+        "top_10_percent_jaccard": 0.166667
+      },
+      {
+        "method_a": "encounter_only",
+        "method_b": "fused_w0.50",
+        "top_10_percent_jaccard": 0.577465
+      },
+      {
+        "method_a": "encounter_only",
+        "method_b": "fused_w0.75",
+        "top_10_percent_jaccard": 0.671642
+      },
+      {
+        "method_a": "encounter_only",
+        "method_b": "fused_w1.00",
+        "top_10_percent_jaccard": 0.75
+      },
+      {
+        "method_a": "fused_w0.50",
+        "method_b": "fused_w0.75",
+        "top_10_percent_jaccard": 0.836066
+      },
+      {
+        "method_a": "fused_w0.50",
+        "method_b": "fused_w1.00",
+        "top_10_percent_jaccard": 0.75
+      },
+      {
+        "method_a": "fused_w0.75",
+        "method_b": "fused_w1.00",
+        "top_10_percent_jaccard": 0.898305
+      }
+    ]
+  },
+  "hotspot_typology": {
+    "counts_by_hotspot_type": {
+      "stable-exposure review hotspot": 4,
+      "persistent candidate-evidence hotspot": 3,
+      "event-sensitive review hotspot": 25,
+      "fused-evidence review hotspot": 15,
+      "encounter-dominated review hotspot": 9
+    },
+    "counts_by_dominant_evidence": {
+      "encounter-dominated fused evidence": 26,
+      "balanced anomaly-encounter evidence": 30
+    },
+    "counts_by_stability_class": {
+      "stable traffic-exposure hotspot": 4,
+      "persistent candidate-evidence hotspot": 3,
+      "event-sensitive candidate hotspot": 25,
+      "high-exposure context cell": 22,
+      "intermittent evidence cell": 2
+    }
+  },
+  "evidence_cards": {
+    "card_count": 56,
+    "total_encounter_episodes_on_cards": 5389,
+    "total_backtest_supported_episodes_on_cards": 4091
+  },
+  "stability": {
+    "top_k": 50,
+    "mean_previous_day_jaccard": 0.8041,
+    "min_previous_day_jaccard": 0.6949,
+    "max_previous_day_jaccard": 0.8868,
+    "mean_vs_first_day_jaccard": 0.6723
+  },
+  "ablation": [
+    {
+      "variant": "Density-only",
+      "result": "Descriptive baseline",
+      "interpretation": "High-density cells include berth/anchorage behavior and are not sufficient as safety evidence."
+    },
+    {
+      "variant": "Anomaly-only",
+      "result": "36 hotspot cells",
+      "interpretation": "Finds behavior deviations but misses dense crossing/meeting evidence."
+    },
+    {
+      "variant": "Encounter-only",
+      "result": "52,311 records; 18,386 episodes",
+      "interpretation": "Captures close-quarters candidates but lacks behavioral context."
+    },
+    {
+      "variant": "Fused screening",
+      "result": "56 hotspot cells",
+      "interpretation": "Combines anomaly evidence and future encounter-candidate evidence."
+    }
+  ],
+  "cases": {
+    "case_count": 7,
+    "case_ids": [
+      "case_01_low_empirical_route_support",
+      "case_02_direction_mismatch",
+      "case_03_high_turn",
+      "case_04_high_speed",
+      "case_05_high_accel",
+      "case_06_implied_speed",
+      "case_07_suspicious_stop"
+    ]
+  }
+}

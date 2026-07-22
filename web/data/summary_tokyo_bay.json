@@ -1,0 +1,379 @@
+{
+  "project": "Open AIS Port Screening Explorer",
+  "dataset_id": "tokyo_bay",
+  "study_area": "Tokyo Bay",
+  "date_range": {
+    "start": "2024-08-01",
+    "end": "2024-08-07"
+  },
+  "publication_mode": "sanitized_research_demo",
+  "disclaimer": "Historical AIS first-pass screening evidence demo. Not real-time, not for navigation, not for enforcement, and not for operational decision-making.",
+  "dataset": {
+    "days": 7,
+    "cropped_ais_points": 561304,
+    "clean_ais_points": 475530,
+    "trajectory_segments": 6982,
+    "min20_segments": 3432
+  },
+  "traffic_patterns": {
+    "normal_route_cells": 655,
+    "high_confidence_route_cells": 262,
+    "moving_cells": 2601,
+    "min_sog": 1.0
+  },
+  "anomaly_detection": {
+    "anomaly_points": 41702,
+    "anomaly_rate_percent": 8.769583,
+    "normal_pattern_cells": 655,
+    "corroborated_candidate_points": 14891,
+    "low_support_only_points": 26811,
+    "dominant_reasons": [
+      {
+        "reason": "low_empirical_route_support",
+        "count": 32334
+      },
+      {
+        "reason": "high_turn",
+        "count": 10061
+      },
+      {
+        "reason": "direction_mismatch",
+        "count": 9249
+      },
+      {
+        "reason": "high_speed",
+        "count": 3825
+      },
+      {
+        "reason": "high_accel",
+        "count": 3344
+      },
+      {
+        "reason": "implied_speed",
+        "count": 336
+      },
+      {
+        "reason": "suspicious_stop",
+        "count": 101
+      }
+    ]
+  },
+  "encounter_risk": {
+    "encounters": 26389,
+    "deduplicated_encounter_episodes": 8929,
+    "unique_vessel_pairs": 7376,
+    "unique_vessel_pair_days": 8081,
+    "episode_gap_min": 15.0,
+    "vessel_states": 160312,
+    "pair_checks_within_distance": 146852,
+    "pair_opportunity_cells": 1928,
+    "time_bin_seconds": 60,
+    "max_state_skew_s": 60,
+    "state_alignment": "propagate_earlier_state_to_later_observation_time",
+    "dcpa_threshold_nm": 0.5,
+    "tcpa_threshold_min": 15.0
+  },
+  "encounter_backtest": {
+    "method": "strict_future_synchronized_geometric_check_for_encounter_candidate_screening",
+    "future_only": true,
+    "episodes_with_aligned_followup": 8178,
+    "supported_episodes_within_threshold": 5428,
+    "support_rate_observable": 0.663732,
+    "near_supported_episodes_within_1nm": 7450,
+    "near_support_rate_observable": 0.910981,
+    "median_actual_min_distance_nm": 0.384463,
+    "median_predicted_dcpa_abs_error_nm": 0.137433,
+    "observable_rate": 0.915892
+  },
+  "hotspots": {
+    "fused_hotspots": 39,
+    "eligible_fused_cells": 393,
+    "encounter_weight": 0.75,
+    "top_percent": 0.1
+  },
+  "workload_compression": {
+    "key_message": "The supplemental pipeline aggregates 475,530 cleaned AIS observations into 39 spatial review units; analyst review time was not measured.",
+    "method": "evidence_aggregation_summary",
+    "analyst_time_measured": false
+  },
+  "ranking_evaluation": {
+    "interpretation": "ranking enrichment for review prioritization; not accident or near-miss accuracy",
+    "eligible_cells": 393,
+    "episodes_assigned_to_eligible_cells": 6836,
+    "observable_episodes_in_eligible_cells": 6432,
+    "strict_future_supported_episodes_in_eligible_cells": 4367,
+    "global_support_rate_in_eligible_cells": 0.678949,
+    "rankings": {
+      "density_only": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 19,
+          "observable_episodes": 419,
+          "supported_episodes": 335,
+          "supported_episode_capture_rate": 0.076712,
+          "support_rate_selected": 0.799523,
+          "support_rate_enrichment": 1.177589
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 39,
+          "observable_episodes": 1002,
+          "supported_episodes": 759,
+          "supported_episode_capture_rate": 0.173804,
+          "support_rate_selected": 0.757485,
+          "support_rate_enrichment": 1.115673
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 78,
+          "observable_episodes": 2037,
+          "supported_episodes": 1519,
+          "supported_episode_capture_rate": 0.347836,
+          "support_rate_selected": 0.745704,
+          "support_rate_enrichment": 1.098322
+        }
+      ],
+      "anomaly_only": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 19,
+          "observable_episodes": 338,
+          "supported_episodes": 257,
+          "supported_episode_capture_rate": 0.05885,
+          "support_rate_selected": 0.760355,
+          "support_rate_enrichment": 1.1199
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 39,
+          "observable_episodes": 469,
+          "supported_episodes": 362,
+          "supported_episode_capture_rate": 0.082894,
+          "support_rate_selected": 0.771855,
+          "support_rate_enrichment": 1.136838
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 78,
+          "observable_episodes": 1023,
+          "supported_episodes": 770,
+          "supported_episode_capture_rate": 0.176322,
+          "support_rate_selected": 0.752688,
+          "support_rate_enrichment": 1.108608
+        }
+      ],
+      "encounter_only": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 19,
+          "observable_episodes": 1088,
+          "supported_episodes": 825,
+          "supported_episode_capture_rate": 0.188917,
+          "support_rate_selected": 0.758272,
+          "support_rate_enrichment": 1.116832
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 39,
+          "observable_episodes": 1631,
+          "supported_episodes": 1239,
+          "supported_episode_capture_rate": 0.283719,
+          "support_rate_selected": 0.759657,
+          "support_rate_enrichment": 1.118871
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 78,
+          "observable_episodes": 2626,
+          "supported_episodes": 1908,
+          "supported_episode_capture_rate": 0.436913,
+          "support_rate_selected": 0.72658,
+          "support_rate_enrichment": 1.070155
+        }
+      ],
+      "fused_w0.50": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 19,
+          "observable_episodes": 836,
+          "supported_episodes": 677,
+          "supported_episode_capture_rate": 0.155026,
+          "support_rate_selected": 0.809809,
+          "support_rate_enrichment": 1.192738
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 39,
+          "observable_episodes": 1236,
+          "supported_episodes": 953,
+          "supported_episode_capture_rate": 0.218228,
+          "support_rate_selected": 0.771036,
+          "support_rate_enrichment": 1.135631
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 78,
+          "observable_episodes": 2168,
+          "supported_episodes": 1640,
+          "supported_episode_capture_rate": 0.375544,
+          "support_rate_selected": 0.756458,
+          "support_rate_enrichment": 1.11416
+        }
+      ],
+      "fused_w0.75": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 19,
+          "observable_episodes": 850,
+          "supported_episodes": 689,
+          "supported_episode_capture_rate": 0.157774,
+          "support_rate_selected": 0.810588,
+          "support_rate_enrichment": 1.193887
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 39,
+          "observable_episodes": 1526,
+          "supported_episodes": 1194,
+          "supported_episode_capture_rate": 0.273414,
+          "support_rate_selected": 0.782438,
+          "support_rate_enrichment": 1.152425
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 78,
+          "observable_episodes": 2387,
+          "supported_episodes": 1756,
+          "supported_episode_capture_rate": 0.402107,
+          "support_rate_selected": 0.735651,
+          "support_rate_enrichment": 1.083515
+        }
+      ],
+      "fused_w1.00": [
+        {
+          "top_fraction": 0.05,
+          "selected_cells": 19,
+          "observable_episodes": 865,
+          "supported_episodes": 701,
+          "supported_episode_capture_rate": 0.160522,
+          "support_rate_selected": 0.810405,
+          "support_rate_enrichment": 1.193616
+        },
+        {
+          "top_fraction": 0.1,
+          "selected_cells": 39,
+          "observable_episodes": 1609,
+          "supported_episodes": 1260,
+          "supported_episode_capture_rate": 0.288528,
+          "support_rate_selected": 0.783095,
+          "support_rate_enrichment": 1.153393
+        },
+        {
+          "top_fraction": 0.2,
+          "selected_cells": 78,
+          "observable_episodes": 2527,
+          "supported_episodes": 1846,
+          "supported_episode_capture_rate": 0.422716,
+          "support_rate_selected": 0.73051,
+          "support_rate_enrichment": 1.075943
+        }
+      ]
+    },
+    "top_10_percent_jaccard": [
+      {
+        "method_a": "density_only",
+        "method_b": "anomaly_only",
+        "top_10_percent_jaccard": 0.21875
+      },
+      {
+        "method_a": "density_only",
+        "method_b": "encounter_only",
+        "top_10_percent_jaccard": 0.164179
+      },
+      {
+        "method_a": "density_only",
+        "method_b": "fused_w0.50",
+        "top_10_percent_jaccard": 0.258065
+      },
+      {
+        "method_a": "density_only",
+        "method_b": "fused_w0.75",
+        "top_10_percent_jaccard": 0.2
+      },
+      {
+        "method_a": "density_only",
+        "method_b": "fused_w1.00",
+        "top_10_percent_jaccard": 0.2
+      },
+      {
+        "method_a": "anomaly_only",
+        "method_b": "encounter_only",
+        "top_10_percent_jaccard": 0.054054
+      },
+      {
+        "method_a": "anomaly_only",
+        "method_b": "fused_w0.50",
+        "top_10_percent_jaccard": 0.322034
+      },
+      {
+        "method_a": "anomaly_only",
+        "method_b": "fused_w0.75",
+        "top_10_percent_jaccard": 0.2
+      },
+      {
+        "method_a": "anomaly_only",
+        "method_b": "fused_w1.00",
+        "top_10_percent_jaccard": 0.114286
+      },
+      {
+        "method_a": "encounter_only",
+        "method_b": "fused_w0.50",
+        "top_10_percent_jaccard": 0.322034
+      },
+      {
+        "method_a": "encounter_only",
+        "method_b": "fused_w0.75",
+        "top_10_percent_jaccard": 0.5
+      },
+      {
+        "method_a": "encounter_only",
+        "method_b": "fused_w1.00",
+        "top_10_percent_jaccard": 0.625
+      },
+      {
+        "method_a": "fused_w0.50",
+        "method_b": "fused_w0.75",
+        "top_10_percent_jaccard": 0.659574
+      },
+      {
+        "method_a": "fused_w0.50",
+        "method_b": "fused_w1.00",
+        "top_10_percent_jaccard": 0.5
+      },
+      {
+        "method_a": "fused_w0.75",
+        "method_b": "fused_w1.00",
+        "top_10_percent_jaccard": 0.772727
+      }
+    ]
+  },
+  "evidence_cards": {
+    "card_count": null
+  },
+  "stability": {
+    "mean_previous_day_jaccard": null
+  },
+  "ablation": [],
+  "cases": {
+    "case_count": 0,
+    "case_ids": []
+  },
+  "transferability": {
+    "role": "Asian port-water supplemental validation",
+    "source_sog": "self-reported",
+    "source_cog": "not available",
+    "source_heading": "not available",
+    "direction_used": "derived from consecutive positions",
+    "interpretation": "cross-source executability and common output-schema portability; thresholds and operational relevance require regional validation"
+  }
+}

@@ -1,0 +1,3 @@
+# The core pipeline uses the Python standard library. PyArrow is required for
+# adapting the public Tokyo Bay Parquet source and for its unit test.
+pyarrow>=25,<26

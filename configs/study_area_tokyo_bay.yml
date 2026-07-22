@@ -1,0 +1,55 @@
+name: tokyo_bay
+display_name: Tokyo Bay
+description: >
+  Asian port-water supplemental validation area for the open AIS
+  screening workflow. The bounding box follows the full spatial extent of the
+  verified Figshare AIS message dataset, rounded outward for reproducibility.
+
+data_source:
+  provider: Figshare
+  author: Moritz Huetten
+  article_id: 29037401
+  version: 2
+  file_id: 57954736
+  doi: 10.6084/m9.figshare.29037401.v2
+  license: CC BY 4.0
+  date_start: 2024-07-29
+  date_end: 2024-10-27
+  validation_start: 2024-08-01
+  validation_end: 2024-08-07
+
+crs:
+  source: EPSG:4326
+  analysis: EPSG:4326 with nautical-mile geodesic calculations
+
+bbox:
+  min_lon: 139.62
+  min_lat: 34.90
+  max_lon: 140.13
+  max_lat: 35.69
+
+ports_and_landmarks:
+  - Port of Tokyo
+  - Port of Yokohama
+  - Port of Kawasaki
+  - Port of Chiba
+  - Uraga Channel approaches
+
+field_mapping:
+  lat: latitude
+  lon: longitude
+  timestamp: base_date_time (UTC)
+  mmsi: mmsi
+  sog: sog
+  type: vessel_type
+  destination: destination
+  cog: unavailable
+  heading: unavailable
+  bearing: derived from consecutive positions
+
+notes:
+  - The source is an open research dataset collected through aisstream.io, not a Japanese government AIS archive.
+  - Negative or out-of-range vessel-type values are normalized to missing.
+  - Missing SOG rows are removed by the same cleaning rule used for the NOAA benchmark.
+  - Results are supplemental transferability evidence, not equalized port-safety performance.
+  - The bounding box is not a legal port boundary.

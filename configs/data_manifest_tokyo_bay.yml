@@ -1,0 +1,76 @@
+project: open_ais_port_screening
+role: asian_port_water_cross_source_run
+updated: 2026-07-22
+
+dataset:
+  provider: Figshare
+  title: High-Resolution Mapping of Port Dynamics from Open-Access AIS Data in Tokyo Bay
+  doi: 10.6084/m9.figshare.29037401.v2
+  article_id: 29037401
+  version: 2
+  license: CC BY 4.0
+  file:
+    name: ais_messages_tokyobay_2024.parquet
+    file_id: 57954736
+    download_url: https://ndownloader.figshare.com/files/57954736
+    size_bytes: 65622524
+    md5: 460973e34735cb608289fc3e5438dbcd
+  raw_path: data/raw/tokyo_bay/figshare_v2/ais_messages_tokyobay_2024.parquet
+
+validation_window:
+  start: 2024-08-01
+  end: 2024-08-07
+  timezone: UTC
+  bbox: [139.62, 34.90, 140.13, 35.69]
+  dataset_prefix: tokyo_bay_ais
+
+pipeline_parameters:
+  trajectory_segmentation:
+    max_time_gap_s: 1800
+    max_distance_gap_nm: 5.0
+    max_implied_speed_kn: 60.0
+  track_filter:
+    min_points: 20
+  grid:
+    cell_size_deg: 0.005
+  traffic_patterns:
+    moving_sog_min_kn: 1.0
+    normal_percentile: 75
+    high_confidence_percentile: 90
+    min_track_segments_per_cell: 5
+  anomaly_detection:
+    min_score: 0.35
+  encounter_screening:
+    time_bin_seconds: 60
+    max_state_skew_s: 60
+    state_alignment: propagate earlier state to later observation time
+    min_sog_kn: 1.0
+    max_current_distance_nm: 2.0
+    dcpa_threshold_nm: 0.5
+    tcpa_threshold_min: 15.0
+  strict_future_check:
+    lookahead_min: 15
+    evaluation_step_s: 30
+    max_interpolation_gap_s: 180
+  fused_hotspots:
+    encounter_weight: 0.75
+    low_support_weight: 0.25
+    top_percent: 0.10
+
+reference_results:
+  converted_ais_points: 561304
+  clean_ais_points: 475530
+  clean_keep_percent: 84.7188
+  trajectory_segments: 6982
+  min20_segments: 3432
+  normal_traffic_pattern_cells: 655
+  high_confidence_pattern_cells: 262
+  anomaly_candidate_points: 41702
+  anomaly_candidate_rate_percent: 8.769583
+  encounter_candidate_records: 26389
+  encounter_audit_episodes: 8929
+  episodes_with_aligned_followup: 8178
+  backtest_supported_episodes: 5428
+  backtest_support_rate_observable: 0.663732
+  backtest_near_support_rate_observable: 0.910981
+  fused_hotspot_cells: 39

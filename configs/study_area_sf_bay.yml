@@ -1,0 +1,42 @@
+name: san_francisco_bay
+display_name: San Francisco Bay and Port of Oakland Approaches
+description: >
+  Primary study area for the open AIS port screening reference workflow.
+  The bounding box covers San Francisco Bay, Oakland approaches, Golden Gate,
+  anchorage areas, bridge-adjacent waters, and major port traffic corridors.
+
+data_source:
+  provider: NOAA MarineCadastre
+  year: 2025
+  index_url: https://coast.noaa.gov/htdata/CMSP/AISDataHandler/2025/index.html
+  candidate_dates:
+    - 2025-05-01
+    - 2025-05-02
+    - 2025-05-03
+    - 2025-05-04
+    - 2025-05-05
+    - 2025-05-06
+    - 2025-05-07
+
+crs:
+  source: EPSG:4326
+  analysis: EPSG:3310
+
+bbox:
+  min_lon: -122.62
+  min_lat: 37.42
+  max_lon: -121.92
+  max_lat: 38.18
+
+ports_and_landmarks:
+  - Port of Oakland
+  - San Francisco Bay
+  - Golden Gate
+  - Bay Bridge
+  - Richmond-San Rafael Bridge
+  - San Pablo Bay
+
+notes:
+  - The bounding box is intentionally broad for the first data audit.
+  - It should be refined after inspecting traffic density and vessel distribution.
+  - Do not treat the bounding box as a legal port boundary.

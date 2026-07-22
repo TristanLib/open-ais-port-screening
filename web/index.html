@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Open AIS Port Screening Explorer</title>
+    <link rel="icon" href="data:," />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="side-panel">
+        <header class="brand-block">
+          <div class="brand-topline">
+            <p id="eyebrowText" class="eyebrow">San Francisco Bay · NOAA AIS 2025</p>
+            <div class="language-switch" role="group" aria-label="Language">
+              <button type="button" id="langEn" class="language-option" data-lang="en" aria-pressed="true">EN</button>
+              <button type="button" id="langZh" class="language-option" data-lang="zh" aria-pressed="false">中文</button>
+            </div>
+          </div>
+          <h1 id="appTitle">Open AIS Port Screening Explorer</h1>
+          <div id="datasetSwitch" class="dataset-switch" role="group" aria-label="Study area"></div>
+          <p id="dateRange" class="date-range">Loading data</p>
+          <p id="demoNotice" class="demo-notice">
+            Historical AIS first-pass screening evidence demo. Not real-time, not for navigation, not for enforcement, and not for operational decision-making.
+          </p>
+        </header>
+
+        <section class="metrics-grid" aria-label="Layer metrics">
+          <div>
+            <span id="metricClean" class="metric-value">-</span>
+            <span id="metricCleanLabel" class="metric-label">clean AIS points</span>
+          </div>
+          <div>
+            <span id="metricEpisodes" class="metric-value">-</span>
+            <span id="metricEpisodesLabel" class="metric-label">audit episodes</span>
+          </div>
+          <div>
+            <span id="metricHotspots" class="metric-value">-</span>
+            <span id="metricHotspotsLabel" class="metric-label">fused hotspots</span>
+          </div>
+        </section>
+
+        <section class="control-section chain-section" aria-label="Evidence chain">
+          <h2 id="evidenceChainTitle">Evidence Chain</h2>
+          <div id="evidenceChain" class="chain-list"></div>
+        </section>
+
+        <section class="control-section validation-section" aria-label="Validation summary">
+          <h2 id="auditEvidenceTitle">Audit Evidence</h2>
+          <div id="validationMetrics" class="evidence-grid"></div>
+          <div id="ablationList" class="ablation-list"></div>
+        </section>
+
+        <section id="evidenceCardsSection" class="control-section cards-section" aria-label="Hotspot evidence cards">
+          <h2 id="evidenceCardsTitle">Evidence Cards</h2>
+          <div id="evidenceCards" class="card-list"></div>
+        </section>
+
+        <section class="control-section" aria-label="Map layers">
+          <h2 id="layersTitle">Layers</h2>
+          <div id="layerControls" class="layer-controls"></div>
+        </section>
+
+        <section class="control-section repro-section" aria-label="Data and reproducibility">
+          <h2 id="reproTitle">Data &amp; Reproducibility</h2>
+          <div id="reproPanel" class="repro-panel"></div>
+        </section>
+
+        <section id="casesSection" class="control-section" aria-label="Case studies">
+          <h2 id="casesTitle">Cases</h2>
+          <div id="caseList" class="case-list"></div>
+        </section>
+      </aside>
+
+      <section class="map-wrap">
+        <div id="map" aria-label="AIS screening map"></div>
+        <div id="statusBar" class="status-bar">Preparing map</div>
+      </section>
+    </main>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

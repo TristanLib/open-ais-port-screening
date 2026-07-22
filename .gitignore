@@ -1,0 +1,25 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Local environments
+.venv/
+venv/
+env/
+
+# Full-resolution data and generated analytical outputs
+data/raw/
+data/processed/
+outputs/
+output/
+dist/
+tmp/
+*.parquet
+*.feather
+*.zst
+*.zip
+
+# Browser and editor state
+.playwright-cli/
+.idea/
+.vscode/

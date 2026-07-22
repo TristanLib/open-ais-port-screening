@@ -1,0 +1,85 @@
+{
+  "project": "Open AIS Port Screening Explorer",
+  "dataset_id": "sf_bay",
+  "study_area": "San Francisco Bay and Port of Oakland Approaches",
+  "study_area_zh": "旧金山湾与奥克兰港进近水域",
+  "source": "NOAA MarineCadastre AIS 2025",
+  "source_zh": "NOAA MarineCadastre AIS 2025",
+  "workflow_role": "Primary open-data benchmark",
+  "workflow_role_zh": "主要开放数据基准",
+  "date_range": {
+    "start": "2025-05-01",
+    "end": "2025-05-07"
+  },
+  "map_view": {
+    "center": [
+      37.84,
+      -122.36
+    ],
+    "zoom": 10
+  },
+  "publication_mode": "sanitized_research_demo",
+  "disclaimer": "Historical AIS first-pass screening evidence demo. Not real-time, not for navigation, not for enforcement, and not for operational decision-making.",
+  "basemap": {
+    "provider": "OpenStreetMap Standard",
+    "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "attribution": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors",
+    "policy": "https://operations.osmfoundation.org/policies/tiles/",
+    "deployment_note": "For public deployment, keep visible attribution and valid browser Referer/caching behavior, or replace this URL with a hosted/commercial/self-hosted tile service."
+  },
+  "companion_data": {
+    "summary": "summary.json",
+    "evidence_cards": "evidence_cards.json"
+  },
+  "layers": [
+    {
+      "id": "traffic_density",
+      "label": "Traffic density",
+      "type": "polygon-geojson",
+      "path": "sf_bay_grid_density_2025-05-01_to_2025-05-07.geojson",
+      "value_property": "density_norm"
+    },
+    {
+      "id": "traffic_patterns",
+      "label": "Regular traffic pattern cells",
+      "type": "polygon-geojson",
+      "path": "sf_bay_traffic_patterns_2025-05-01_to_2025-05-07.geojson",
+      "value_property": "moving_points"
+    },
+    {
+      "id": "anomaly_points",
+      "label": "Anomaly candidate points",
+      "type": "point-geojson",
+      "path": "sf_bay_anomaly_points_2025-05-01_to_2025-05-07.geojson",
+      "value_property": "screening_score"
+    },
+    {
+      "id": "risk_hotspots",
+      "label": "Anomaly-only evidence hotspot cells",
+      "type": "polygon-geojson",
+      "path": "sf_bay_risk_hotspots_2025-05-01_to_2025-05-07.geojson",
+      "value_property": "screening_score"
+    },
+    {
+      "id": "encounter_points",
+      "label": "CPA/TCPA future encounter candidate records",
+      "type": "point-geojson",
+      "path": "sf_bay_encounters_2025-05-01_to_2025-05-07.geojson",
+      "value_property": "screening_score"
+    },
+    {
+      "id": "fused_risk_hotspots",
+      "label": "Fused first-pass evidence hotspot cells",
+      "type": "polygon-geojson",
+      "path": "sf_bay_fused_risk_hotspots_2025-05-01_to_2025-05-07.geojson",
+      "value_property": "screening_score"
+    },
+    {
+      "id": "case_tracks",
+      "label": "Representative de-identified case tracks",
+      "type": "line-geojson",
+      "path": "sf_bay_case_tracks_2025-05-01_to_2025-05-07.geojson",
+      "value_property": "mean_screening_score"
+    }
+  ]
+}

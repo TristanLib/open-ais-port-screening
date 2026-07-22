@@ -1,0 +1,73 @@
+project: open_ais_port_screening
+release: 0.1.0
+updated: 2026-07-22
+
+public_boundary:
+  raw_ais_committed: false
+  processed_full_resolution_ais_committed: false
+  identity_bearing_analytical_tables_committed: false
+  web_layers: sanitized_lightweight_derivatives
+
+primary_dataset:
+  provider: NOAA MarineCadastre
+  product: Nationwide Automatic Identification System 2025
+  source_url: https://coast.noaa.gov/htdata/CMSP/AISDataHandler/2025/
+  metadata_url: https://www.fisheries.noaa.gov/inport/item/77594
+  date_start: 2025-05-01
+  date_end: 2025-05-07
+  raw_pattern: data/raw/noaa/2025/ais-{date}.csv.zst
+
+study_area:
+  name: San Francisco Bay and Port of Oakland Approaches
+  crs: EPSG:4326
+  bbox: [-122.62, 37.42, -121.92, 38.18]
+
+pipeline_parameters:
+  trajectory_segmentation:
+    max_time_gap_s: 1800
+    max_distance_gap_nm: 5.0
+    max_implied_speed_kn: 60.0
+  track_filter:
+    min_points: 20
+  grid:
+    cell_size_deg: 0.005
+  traffic_patterns:
+    moving_sog_min_kn: 1.0
+    normal_percentile: 75
+    high_confidence_percentile: 90
+    min_track_segments_per_cell: 5
+  anomaly_detection:
+    min_score: 0.35
+    candidate_tiers: [corroborated, low_support_only]
+  encounter_screening:
+    time_bin_seconds: 60
+    max_state_skew_s: 60
+    state_alignment: propagate earlier state to later observation time
+    min_sog_kn: 1.0
+    max_current_distance_nm: 2.0
+    dcpa_threshold_nm: 0.5
+    tcpa_threshold_min: 15.0
+  strict_future_check:
+    lookahead_min: 15
+    evaluation_step_s: 30
+    max_interpolation_gap_s: 180
+  fused_hotspots:
+    encounter_weight: 0.75
+    low_support_weight: 0.25
+    top_percent: 0.10
+
+reference_results:
+  cropped_ais_points: 1119812
+  clean_ais_points: 1114862
+  trajectory_segments: 21446
+  normal_traffic_pattern_cells: 760
+  anomaly_candidate_points: 48398
+  corroborated_candidate_points: 28555
+  low_support_only_points: 19843
+  evaluated_pair_opportunities: 243063
+  encounter_candidate_records: 52311
+  encounter_audit_episodes: 18386
+  episodes_with_aligned_followup: 17444
+  supported_episodes_within_0_5_nm: 12495
+  support_rate_observable: 0.716292
+  fused_hotspot_cells: 56

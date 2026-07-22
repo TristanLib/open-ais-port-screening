@@ -1,0 +1,1937 @@
+{
+  "project": "Open AIS Port Screening Explorer",
+  "publication_mode": "sanitized_research_demo",
+  "disclaimer": "Evidence cards are de-identified review aids. They are not alarms, incident labels, near-miss determinations, or enforcement findings.",
+  "card_count": 56,
+  "summary": {
+    "counts_by_hotspot_type": {
+      "stable-exposure review hotspot": 4,
+      "persistent candidate-evidence hotspot": 3,
+      "event-sensitive review hotspot": 25,
+      "fused-evidence review hotspot": 15,
+      "encounter-dominated review hotspot": 9
+    },
+    "counts_by_dominant_evidence": {
+      "encounter-dominated fused evidence": 26,
+      "balanced anomaly-encounter evidence": 30
+    },
+    "total_encounter_episodes_on_cards": 5389,
+    "total_backtest_supported_episodes_on_cards": 4091
+  },
+  "cards": [
+    {
+      "card_id": "hotspot_card_001",
+      "rank": 1,
+      "cell_id": "r136_c70",
+      "screening_score": 1.0,
+      "hotspot_type": "stable-exposure review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "stable traffic-exposure hotspot",
+      "review_focus": "Compare stable traffic exposure with candidate evidence; density alone is not a safety finding.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 24967,
+        "moving_points": 1381,
+        "anomaly_candidates": 315,
+        "corroborated_anomaly_candidates": 315,
+        "low_support_only_candidates": 0,
+        "encounter_records": 1715,
+        "pair_opportunities": 4308,
+        "encounter_episodes": 456,
+        "backtest_supported_episodes": 425
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.409683,
+        "mean_encounter_evidence_score": 0.783311,
+        "max_encounter_evidence_score": 0.996896,
+        "anomaly_component_share": 0.289741,
+        "encounter_component_share": 0.710259
+      },
+      "stability": {
+        "density_topk_days": 7,
+        "fused_topk_days": 2
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_002",
+      "rank": 2,
+      "cell_id": "r75_c46",
+      "screening_score": 0.974278,
+      "hotspot_type": "persistent candidate-evidence hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "persistent candidate-evidence hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 1048,
+        "moving_points": 1045,
+        "anomaly_candidates": 403,
+        "corroborated_anomaly_candidates": 403,
+        "low_support_only_candidates": 0,
+        "encounter_records": 607,
+        "pair_opportunities": 1304,
+        "encounter_episodes": 282,
+        "backtest_supported_episodes": 166
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.41464,
+        "mean_encounter_evidence_score": 0.683378,
+        "max_encounter_evidence_score": 0.972974,
+        "anomaly_component_share": 0.408074,
+        "encounter_component_share": 0.591926
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 6
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_003",
+      "rank": 3,
+      "cell_id": "r90_c46",
+      "screening_score": 0.943772,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 663,
+        "moving_points": 663,
+        "anomaly_candidates": 160,
+        "corroborated_anomaly_candidates": 160,
+        "low_support_only_candidates": 0,
+        "encounter_records": 2064,
+        "pair_opportunities": 5334,
+        "encounter_episodes": 303,
+        "backtest_supported_episodes": 298
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.399375,
+        "mean_encounter_evidence_score": 0.750161,
+        "max_encounter_evidence_score": 0.994957,
+        "anomaly_component_share": 0.271771,
+        "encounter_component_share": 0.728229
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_004",
+      "rank": 4,
+      "cell_id": "r137_c69",
+      "screening_score": 0.910046,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 1541,
+        "moving_points": 1058,
+        "anomaly_candidates": 202,
+        "corroborated_anomaly_candidates": 202,
+        "low_support_only_candidates": 0,
+        "encounter_records": 1077,
+        "pair_opportunities": 2789,
+        "encounter_episodes": 397,
+        "backtest_supported_episodes": 382
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.403713,
+        "mean_encounter_evidence_score": 0.798888,
+        "max_encounter_evidence_score": 0.993037,
+        "anomaly_component_share": 0.264973,
+        "encounter_component_share": 0.735027
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 2
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_005",
+      "rank": 5,
+      "cell_id": "r90_c47",
+      "screening_score": 0.822645,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 355,
+        "moving_points": 354,
+        "anomaly_candidates": 50,
+        "corroborated_anomaly_candidates": 50,
+        "low_support_only_candidates": 0,
+        "encounter_records": 876,
+        "pair_opportunities": 2054,
+        "encounter_episodes": 95,
+        "backtest_supported_episodes": 87
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.401,
+        "mean_encounter_evidence_score": 0.784839,
+        "max_encounter_evidence_score": 0.989599,
+        "anomaly_component_share": 0.185315,
+        "encounter_component_share": 0.814685
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_006",
+      "rank": 6,
+      "cell_id": "r75_c45",
+      "screening_score": 0.81354,
+      "hotspot_type": "persistent candidate-evidence hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "persistent candidate-evidence hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 14978,
+        "moving_points": 1376,
+        "anomaly_candidates": 405,
+        "corroborated_anomaly_candidates": 405,
+        "low_support_only_candidates": 0,
+        "encounter_records": 307,
+        "pair_opportunities": 795,
+        "encounter_episodes": 173,
+        "backtest_supported_episodes": 106
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.36963,
+        "mean_encounter_evidence_score": 0.733033,
+        "max_encounter_evidence_score": 0.988827,
+        "anomaly_component_share": 0.380907,
+        "encounter_component_share": 0.619093
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 5
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_007",
+      "rank": 7,
+      "cell_id": "r89_c47",
+      "screening_score": 0.776575,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 221,
+        "moving_points": 220,
+        "anomaly_candidates": 45,
+        "corroborated_anomaly_candidates": 45,
+        "low_support_only_candidates": 0,
+        "encounter_records": 550,
+        "pair_opportunities": 1119,
+        "encounter_episodes": 105,
+        "backtest_supported_episodes": 100
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.4,
+        "mean_encounter_evidence_score": 0.700804,
+        "max_encounter_evidence_score": 0.989713,
+        "anomaly_component_share": 0.229466,
+        "encounter_component_share": 0.770534
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_008",
+      "rank": 8,
+      "cell_id": "r74_c68",
+      "screening_score": 0.759291,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "high_turn",
+      "counts": {
+        "ais_points": 7159,
+        "moving_points": 811,
+        "anomaly_candidates": 271,
+        "corroborated_anomaly_candidates": 271,
+        "low_support_only_candidates": 0,
+        "encounter_records": 87,
+        "pair_opportunities": 209,
+        "encounter_episodes": 57,
+        "backtest_supported_episodes": 44
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.410332,
+        "mean_encounter_evidence_score": 0.748458,
+        "max_encounter_evidence_score": 0.975165,
+        "anomaly_component_share": 0.450549,
+        "encounter_component_share": 0.549451
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 3
+      },
+      "related_case_ids": [
+        "case_07_suspicious_stop"
+      ]
+    },
+    {
+      "card_id": "hotspot_card_009",
+      "rank": 9,
+      "cell_id": "r78_c36",
+      "screening_score": 0.733695,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 1448,
+        "moving_points": 976,
+        "anomaly_candidates": 253,
+        "corroborated_anomaly_candidates": 253,
+        "low_support_only_candidates": 0,
+        "encounter_records": 302,
+        "pair_opportunities": 884,
+        "encounter_episodes": 97,
+        "backtest_supported_episodes": 93
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.40751,
+        "mean_encounter_evidence_score": 0.679872,
+        "max_encounter_evidence_score": 0.990426,
+        "anomaly_component_share": 0.402866,
+        "encounter_component_share": 0.597134
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 2
+      },
+      "related_case_ids": [
+        "case_02_direction_mismatch"
+      ]
+    },
+    {
+      "card_id": "hotspot_card_010",
+      "rank": 10,
+      "cell_id": "r74_c67",
+      "screening_score": 0.703547,
+      "hotspot_type": "stable-exposure review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "stable traffic-exposure hotspot",
+      "review_focus": "Compare stable traffic exposure with candidate evidence; density alone is not a safety finding.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 19139,
+        "moving_points": 813,
+        "anomaly_candidates": 201,
+        "corroborated_anomaly_candidates": 201,
+        "low_support_only_candidates": 0,
+        "encounter_records": 163,
+        "pair_opportunities": 370,
+        "encounter_episodes": 86,
+        "backtest_supported_episodes": 62
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.431343,
+        "mean_encounter_evidence_score": 0.628702,
+        "max_encounter_evidence_score": 0.962265,
+        "anomaly_component_share": 0.41633,
+        "encounter_component_share": 0.58367
+      },
+      "stability": {
+        "density_topk_days": 4,
+        "fused_topk_days": 2
+      },
+      "related_case_ids": [
+        "case_07_suspicious_stop"
+      ]
+    },
+    {
+      "card_id": "hotspot_card_011",
+      "rank": 11,
+      "cell_id": "r76_c46",
+      "screening_score": 0.702516,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 629,
+        "moving_points": 627,
+        "anomaly_candidates": 165,
+        "corroborated_anomaly_candidates": 165,
+        "low_support_only_candidates": 0,
+        "encounter_records": 369,
+        "pair_opportunities": 1170,
+        "encounter_episodes": 180,
+        "backtest_supported_episodes": 105
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.434848,
+        "mean_encounter_evidence_score": 0.638459,
+        "max_encounter_evidence_score": 0.981053,
+        "anomaly_component_share": 0.417621,
+        "encounter_component_share": 0.582379
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 3
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_012",
+      "rank": 12,
+      "cell_id": "r135_c71",
+      "screening_score": 0.700255,
+      "hotspot_type": "persistent candidate-evidence hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "persistent candidate-evidence hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 5502,
+        "moving_points": 714,
+        "anomaly_candidates": 183,
+        "corroborated_anomaly_candidates": 183,
+        "low_support_only_candidates": 0,
+        "encounter_records": 580,
+        "pair_opportunities": 2091,
+        "encounter_episodes": 235,
+        "backtest_supported_episodes": 200
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.404372,
+        "mean_encounter_evidence_score": 0.657971,
+        "max_encounter_evidence_score": 0.991662,
+        "anomaly_component_share": 0.39224,
+        "encounter_component_share": 0.60776
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 4
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_013",
+      "rank": 13,
+      "cell_id": "r74_c64",
+      "screening_score": 0.699989,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 1586,
+        "moving_points": 813,
+        "anomaly_candidates": 120,
+        "corroborated_anomaly_candidates": 120,
+        "low_support_only_candidates": 0,
+        "encounter_records": 290,
+        "pair_opportunities": 720,
+        "encounter_episodes": 96,
+        "backtest_supported_episodes": 65
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.43,
+        "mean_encounter_evidence_score": 0.714141,
+        "max_encounter_evidence_score": 0.992581,
+        "anomaly_component_share": 0.291196,
+        "encounter_component_share": 0.708804
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 2
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_014",
+      "rank": 14,
+      "cell_id": "r74_c46",
+      "screening_score": 0.697126,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 6307,
+        "moving_points": 328,
+        "anomaly_candidates": 115,
+        "corroborated_anomaly_candidates": 115,
+        "low_support_only_candidates": 0,
+        "encounter_records": 171,
+        "pair_opportunities": 516,
+        "encounter_episodes": 81,
+        "backtest_supported_episodes": 53
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.460435,
+        "mean_encounter_evidence_score": 0.636072,
+        "max_encounter_evidence_score": 0.979122,
+        "anomaly_component_share": 0.478292,
+        "encounter_component_share": 0.521708
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 3
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_015",
+      "rank": 15,
+      "cell_id": "r74_c65",
+      "screening_score": 0.694831,
+      "hotspot_type": "stable-exposure review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "stable traffic-exposure hotspot",
+      "review_focus": "Compare stable traffic exposure with candidate evidence; density alone is not a safety finding.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 18557,
+        "moving_points": 1116,
+        "anomaly_candidates": 126,
+        "corroborated_anomaly_candidates": 126,
+        "low_support_only_candidates": 0,
+        "encounter_records": 273,
+        "pair_opportunities": 682,
+        "encounter_episodes": 89,
+        "backtest_supported_episodes": 68
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.396429,
+        "mean_encounter_evidence_score": 0.7717,
+        "max_encounter_evidence_score": 0.980417,
+        "anomaly_component_share": 0.238925,
+        "encounter_component_share": 0.761075
+      },
+      "stability": {
+        "density_topk_days": 5,
+        "fused_topk_days": 3
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_016",
+      "rank": 16,
+      "cell_id": "r74_c62",
+      "screening_score": 0.694441,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 1603,
+        "moving_points": 719,
+        "anomaly_candidates": 104,
+        "corroborated_anomaly_candidates": 104,
+        "low_support_only_candidates": 0,
+        "encounter_records": 229,
+        "pair_opportunities": 595,
+        "encounter_episodes": 72,
+        "backtest_supported_episodes": 60
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.410577,
+        "mean_encounter_evidence_score": 0.779549,
+        "max_encounter_evidence_score": 0.980504,
+        "anomaly_component_share": 0.269238,
+        "encounter_component_share": 0.730762
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_017",
+      "rank": 17,
+      "cell_id": "r97_c51",
+      "screening_score": 0.69416,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 1153,
+        "moving_points": 742,
+        "anomaly_candidates": 132,
+        "corroborated_anomaly_candidates": 132,
+        "low_support_only_candidates": 0,
+        "encounter_records": 141,
+        "pair_opportunities": 332,
+        "encounter_episodes": 47,
+        "backtest_supported_episodes": 24
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.435606,
+        "mean_encounter_evidence_score": 0.742945,
+        "max_encounter_evidence_score": 0.995765,
+        "anomaly_component_share": 0.333013,
+        "encounter_component_share": 0.666987
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 3
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_018",
+      "rank": 18,
+      "cell_id": "r90_c33",
+      "screening_score": 0.675698,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 348,
+        "moving_points": 347,
+        "anomaly_candidates": 96,
+        "corroborated_anomaly_candidates": 96,
+        "low_support_only_candidates": 0,
+        "encounter_records": 65,
+        "pair_opportunities": 130,
+        "encounter_episodes": 28,
+        "backtest_supported_episodes": 24
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.401563,
+        "mean_encounter_evidence_score": 0.747149,
+        "max_encounter_evidence_score": 0.96681,
+        "anomaly_component_share": 0.367906,
+        "encounter_component_share": 0.632094
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_019",
+      "rank": 19,
+      "cell_id": "r75_c58",
+      "screening_score": 0.663231,
+      "hotspot_type": "encounter-dominated review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 738,
+        "moving_points": 657,
+        "anomaly_candidates": 106,
+        "corroborated_anomaly_candidates": 106,
+        "low_support_only_candidates": 0,
+        "encounter_records": 154,
+        "pair_opportunities": 412,
+        "encounter_episodes": 53,
+        "backtest_supported_episodes": 47
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.403774,
+        "mean_encounter_evidence_score": 0.787005,
+        "max_encounter_evidence_score": 0.988486,
+        "anomaly_component_share": 0.293985,
+        "encounter_component_share": 0.706015
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_020",
+      "rank": 20,
+      "cell_id": "r74_c47",
+      "screening_score": 0.659186,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 439,
+        "moving_points": 439,
+        "anomaly_candidates": 151,
+        "corroborated_anomaly_candidates": 151,
+        "low_support_only_candidates": 0,
+        "encounter_records": 199,
+        "pair_opportunities": 671,
+        "encounter_episodes": 98,
+        "backtest_supported_episodes": 49
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.381788,
+        "mean_encounter_evidence_score": 0.66415,
+        "max_encounter_evidence_score": 0.963932,
+        "anomaly_component_share": 0.439048,
+        "encounter_component_share": 0.560952
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 3
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_021",
+      "rank": 21,
+      "cell_id": "r137_c70",
+      "screening_score": 0.656009,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 868,
+        "moving_points": 199,
+        "anomaly_candidates": 25,
+        "corroborated_anomaly_candidates": 25,
+        "low_support_only_candidates": 0,
+        "encounter_records": 224,
+        "pair_opportunities": 538,
+        "encounter_episodes": 75,
+        "backtest_supported_episodes": 71
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.396,
+        "mean_encounter_evidence_score": 0.798337,
+        "max_encounter_evidence_score": 0.998816,
+        "anomaly_component_share": 0.179347,
+        "encounter_component_share": 0.820653
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_022",
+      "rank": 22,
+      "cell_id": "r136_c69",
+      "screening_score": 0.655547,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 3487,
+        "moving_points": 182,
+        "anomaly_candidates": 35,
+        "corroborated_anomaly_candidates": 35,
+        "low_support_only_candidates": 0,
+        "encounter_records": 164,
+        "pair_opportunities": 438,
+        "encounter_episodes": 44,
+        "backtest_supported_episodes": 43
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.41,
+        "mean_encounter_evidence_score": 0.812416,
+        "max_encounter_evidence_score": 0.993176,
+        "anomaly_component_share": 0.252866,
+        "encounter_component_share": 0.747134
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_023",
+      "rank": 23,
+      "cell_id": "r136_c71",
+      "screening_score": 0.65358,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "low_empirical_route_support",
+      "counts": {
+        "ais_points": 734,
+        "moving_points": 51,
+        "anomaly_candidates": 43,
+        "corroborated_anomaly_candidates": 21,
+        "low_support_only_candidates": 22,
+        "encounter_records": 55,
+        "pair_opportunities": 139,
+        "encounter_episodes": 19,
+        "backtest_supported_episodes": 13
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.431395,
+        "mean_encounter_evidence_score": 0.731252,
+        "max_encounter_evidence_score": 0.957819,
+        "anomaly_component_share": 0.45335,
+        "encounter_component_share": 0.54665
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_024",
+      "rank": 24,
+      "cell_id": "r97_c47",
+      "screening_score": 0.648811,
+      "hotspot_type": "stable-exposure review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "stable traffic-exposure hotspot",
+      "review_focus": "Compare stable traffic exposure with candidate evidence; density alone is not a safety finding.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 21381,
+        "moving_points": 690,
+        "anomaly_candidates": 100,
+        "corroborated_anomaly_candidates": 100,
+        "low_support_only_candidates": 0,
+        "encounter_records": 182,
+        "pair_opportunities": 516,
+        "encounter_episodes": 55,
+        "backtest_supported_episodes": 44
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.397,
+        "mean_encounter_evidence_score": 0.786203,
+        "max_encounter_evidence_score": 0.984855,
+        "anomaly_component_share": 0.276588,
+        "encounter_component_share": 0.723412
+      },
+      "stability": {
+        "density_topk_days": 6,
+        "fused_topk_days": 2
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_025",
+      "rank": 25,
+      "cell_id": "r76_c45",
+      "screening_score": 0.642211,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 531,
+        "moving_points": 529,
+        "anomaly_candidates": 149,
+        "corroborated_anomaly_candidates": 149,
+        "low_support_only_candidates": 0,
+        "encounter_records": 338,
+        "pair_opportunities": 1183,
+        "encounter_episodes": 172,
+        "backtest_supported_episodes": 102
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.412416,
+        "mean_encounter_evidence_score": 0.599189,
+        "max_encounter_evidence_score": 0.958601,
+        "anomaly_component_share": 0.439357,
+        "encounter_component_share": 0.560643
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 2
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_026",
+      "rank": 26,
+      "cell_id": "r76_c47",
+      "screening_score": 0.636845,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 323,
+        "moving_points": 323,
+        "anomaly_candidates": 128,
+        "corroborated_anomaly_candidates": 128,
+        "low_support_only_candidates": 0,
+        "encounter_records": 252,
+        "pair_opportunities": 978,
+        "encounter_episodes": 143,
+        "backtest_supported_episodes": 72
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.398438,
+        "mean_encounter_evidence_score": 0.5964,
+        "max_encounter_evidence_score": 0.946557,
+        "anomaly_component_share": 0.492438,
+        "encounter_component_share": 0.507562
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 2
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_027",
+      "rank": 27,
+      "cell_id": "r78_c35",
+      "screening_score": 0.630875,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 527,
+        "moving_points": 474,
+        "anomaly_candidates": 86,
+        "corroborated_anomaly_candidates": 86,
+        "low_support_only_candidates": 0,
+        "encounter_records": 353,
+        "pair_opportunities": 985,
+        "encounter_episodes": 113,
+        "backtest_supported_episodes": 105
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.410465,
+        "mean_encounter_evidence_score": 0.63422,
+        "max_encounter_evidence_score": 0.998606,
+        "anomaly_component_share": 0.318423,
+        "encounter_component_share": 0.681577
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 2
+      },
+      "related_case_ids": [
+        "case_02_direction_mismatch"
+      ]
+    },
+    {
+      "card_id": "hotspot_card_028",
+      "rank": 28,
+      "cell_id": "r75_c57",
+      "screening_score": 0.630367,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 540,
+        "moving_points": 540,
+        "anomaly_candidates": 98,
+        "corroborated_anomaly_candidates": 98,
+        "low_support_only_candidates": 0,
+        "encounter_records": 124,
+        "pair_opportunities": 355,
+        "encounter_episodes": 37,
+        "backtest_supported_episodes": 28
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.392347,
+        "mean_encounter_evidence_score": 0.785958,
+        "max_encounter_evidence_score": 0.980933,
+        "anomaly_component_share": 0.313467,
+        "encounter_component_share": 0.686533
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_029",
+      "rank": 29,
+      "cell_id": "r75_c59",
+      "screening_score": 0.629557,
+      "hotspot_type": "encounter-dominated review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 2799,
+        "moving_points": 726,
+        "anomaly_candidates": 108,
+        "corroborated_anomaly_candidates": 108,
+        "low_support_only_candidates": 0,
+        "encounter_records": 195,
+        "pair_opportunities": 593,
+        "encounter_episodes": 82,
+        "backtest_supported_episodes": 67
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.385648,
+        "mean_encounter_evidence_score": 0.770561,
+        "max_encounter_evidence_score": 0.982669,
+        "anomaly_component_share": 0.285167,
+        "encounter_component_share": 0.714833
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_030",
+      "rank": 30,
+      "cell_id": "r90_c45",
+      "screening_score": 0.627094,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 259,
+        "moving_points": 258,
+        "anomaly_candidates": 68,
+        "corroborated_anomaly_candidates": 68,
+        "low_support_only_candidates": 0,
+        "encounter_records": 382,
+        "pair_opportunities": 1370,
+        "encounter_episodes": 98,
+        "backtest_supported_episodes": 80
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.397794,
+        "mean_encounter_evidence_score": 0.667646,
+        "max_encounter_evidence_score": 0.975757,
+        "anomaly_component_share": 0.354759,
+        "encounter_component_share": 0.645241
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_031",
+      "rank": 31,
+      "cell_id": "r97_c46",
+      "screening_score": 0.625011,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 475,
+        "moving_points": 475,
+        "anomaly_candidates": 84,
+        "corroborated_anomaly_candidates": 84,
+        "low_support_only_candidates": 0,
+        "encounter_records": 182,
+        "pair_opportunities": 483,
+        "encounter_episodes": 54,
+        "backtest_supported_episodes": 42
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.40119,
+        "mean_encounter_evidence_score": 0.700388,
+        "max_encounter_evidence_score": 0.980049,
+        "anomaly_component_share": 0.308532,
+        "encounter_component_share": 0.691468
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_032",
+      "rank": 32,
+      "cell_id": "r88_c45",
+      "screening_score": 0.622995,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 250,
+        "moving_points": 250,
+        "anomaly_candidates": 49,
+        "corroborated_anomaly_candidates": 49,
+        "low_support_only_candidates": 0,
+        "encounter_records": 279,
+        "pair_opportunities": 776,
+        "encounter_episodes": 49,
+        "backtest_supported_episodes": 39
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.39898,
+        "mean_encounter_evidence_score": 0.682901,
+        "max_encounter_evidence_score": 0.979304,
+        "anomaly_component_share": 0.285363,
+        "encounter_component_share": 0.714637
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_033",
+      "rank": 33,
+      "cell_id": "r78_c41",
+      "screening_score": 0.621383,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 1997,
+        "moving_points": 774,
+        "anomaly_candidates": 156,
+        "corroborated_anomaly_candidates": 156,
+        "low_support_only_candidates": 0,
+        "encounter_records": 272,
+        "pair_opportunities": 909,
+        "encounter_episodes": 126,
+        "backtest_supported_episodes": 109
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.41859,
+        "mean_encounter_evidence_score": 0.636594,
+        "max_encounter_evidence_score": 0.962409,
+        "anomaly_component_share": 0.393416,
+        "encounter_component_share": 0.606584
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_034",
+      "rank": 34,
+      "cell_id": "r78_c42",
+      "screening_score": 0.621353,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 4952,
+        "moving_points": 813,
+        "anomaly_candidates": 119,
+        "corroborated_anomaly_candidates": 119,
+        "low_support_only_candidates": 0,
+        "encounter_records": 370,
+        "pair_opportunities": 1109,
+        "encounter_episodes": 146,
+        "backtest_supported_episodes": 130
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.415126,
+        "mean_encounter_evidence_score": 0.645644,
+        "max_encounter_evidence_score": 0.963311,
+        "anomaly_component_share": 0.314833,
+        "encounter_component_share": 0.685167
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_035",
+      "rank": 35,
+      "cell_id": "r75_c47",
+      "screening_score": 0.610618,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 229,
+        "moving_points": 229,
+        "anomaly_candidates": 85,
+        "corroborated_anomaly_candidates": 85,
+        "low_support_only_candidates": 0,
+        "encounter_records": 218,
+        "pair_opportunities": 888,
+        "encounter_episodes": 121,
+        "backtest_supported_episodes": 55
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.41,
+        "mean_encounter_evidence_score": 0.629541,
+        "max_encounter_evidence_score": 0.972933,
+        "anomaly_component_share": 0.468805,
+        "encounter_component_share": 0.531195
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 2
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_036",
+      "rank": 36,
+      "cell_id": "r96_c51",
+      "screening_score": 0.606107,
+      "hotspot_type": "encounter-dominated review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 356,
+        "moving_points": 346,
+        "anomaly_candidates": 58,
+        "corroborated_anomaly_candidates": 58,
+        "low_support_only_candidates": 0,
+        "encounter_records": 48,
+        "pair_opportunities": 107,
+        "encounter_episodes": 8,
+        "backtest_supported_episodes": 6
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.397414,
+        "mean_encounter_evidence_score": 0.865678,
+        "max_encounter_evidence_score": 0.988594,
+        "anomaly_component_share": 0.281624,
+        "encounter_component_share": 0.718376
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_037",
+      "rank": 37,
+      "cell_id": "r81_c39",
+      "screening_score": 0.604678,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 3382,
+        "moving_points": 798,
+        "anomaly_candidates": 151,
+        "corroborated_anomaly_candidates": 151,
+        "low_support_only_candidates": 0,
+        "encounter_records": 181,
+        "pair_opportunities": 575,
+        "encounter_episodes": 53,
+        "backtest_supported_episodes": 40
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.386755,
+        "mean_encounter_evidence_score": 0.687318,
+        "max_encounter_evidence_score": 0.994045,
+        "anomaly_component_share": 0.359617,
+        "encounter_component_share": 0.640383
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_038",
+      "rank": 38,
+      "cell_id": "r96_c50",
+      "screening_score": 0.604478,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 1032,
+        "moving_points": 374,
+        "anomaly_candidates": 91,
+        "corroborated_anomaly_candidates": 91,
+        "low_support_only_candidates": 0,
+        "encounter_records": 54,
+        "pair_opportunities": 124,
+        "encounter_episodes": 16,
+        "backtest_supported_episodes": 9
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.395604,
+        "mean_encounter_evidence_score": 0.739721,
+        "max_encounter_evidence_score": 0.994782,
+        "anomaly_component_share": 0.375558,
+        "encounter_component_share": 0.624442
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_039",
+      "rank": 39,
+      "cell_id": "r74_c61",
+      "screening_score": 0.592787,
+      "hotspot_type": "encounter-dominated review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 2515,
+        "moving_points": 702,
+        "anomaly_candidates": 107,
+        "corroborated_anomaly_candidates": 107,
+        "low_support_only_candidates": 0,
+        "encounter_records": 148,
+        "pair_opportunities": 479,
+        "encounter_episodes": 53,
+        "backtest_supported_episodes": 43
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.402804,
+        "mean_encounter_evidence_score": 0.751525,
+        "max_encounter_evidence_score": 0.983044,
+        "anomaly_component_share": 0.319569,
+        "encounter_component_share": 0.680431
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_040",
+      "rank": 40,
+      "cell_id": "r77_c36",
+      "screening_score": 0.589727,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 363,
+        "moving_points": 266,
+        "anomaly_candidates": 80,
+        "corroborated_anomaly_candidates": 80,
+        "low_support_only_candidates": 0,
+        "encounter_records": 49,
+        "pair_opportunities": 117,
+        "encounter_episodes": 21,
+        "backtest_supported_episodes": 18
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.421875,
+        "mean_encounter_evidence_score": 0.671748,
+        "max_encounter_evidence_score": 0.976285,
+        "anomaly_component_share": 0.443551,
+        "encounter_component_share": 0.556449
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": [
+        "case_02_direction_mismatch"
+      ]
+    },
+    {
+      "card_id": "hotspot_card_041",
+      "rank": 41,
+      "cell_id": "r74_c63",
+      "screening_score": 0.587791,
+      "hotspot_type": "encounter-dominated review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 1155,
+        "moving_points": 673,
+        "anomaly_candidates": 88,
+        "corroborated_anomaly_candidates": 88,
+        "low_support_only_candidates": 0,
+        "encounter_records": 212,
+        "pair_opportunities": 660,
+        "encounter_episodes": 92,
+        "backtest_supported_episodes": 63
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.422159,
+        "mean_encounter_evidence_score": 0.701846,
+        "max_encounter_evidence_score": 0.985301,
+        "anomaly_component_share": 0.299919,
+        "encounter_component_share": 0.700081
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_042",
+      "rank": 42,
+      "cell_id": "r79_c28",
+      "screening_score": 0.580959,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 521,
+        "moving_points": 521,
+        "anomaly_candidates": 98,
+        "corroborated_anomaly_candidates": 98,
+        "low_support_only_candidates": 0,
+        "encounter_records": 102,
+        "pair_opportunities": 273,
+        "encounter_episodes": 23,
+        "backtest_supported_episodes": 16
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.427041,
+        "mean_encounter_evidence_score": 0.66222,
+        "max_encounter_evidence_score": 0.950531,
+        "anomaly_component_share": 0.376892,
+        "encounter_component_share": 0.623108
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_043",
+      "rank": 43,
+      "cell_id": "r77_c46",
+      "screening_score": 0.573979,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 347,
+        "moving_points": 347,
+        "anomaly_candidates": 94,
+        "corroborated_anomaly_candidates": 94,
+        "low_support_only_candidates": 0,
+        "encounter_records": 188,
+        "pair_opportunities": 776,
+        "encounter_episodes": 94,
+        "backtest_supported_episodes": 53
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.436702,
+        "mean_encounter_evidence_score": 0.618035,
+        "max_encounter_evidence_score": 0.947403,
+        "anomaly_component_share": 0.463951,
+        "encounter_component_share": 0.536049
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_044",
+      "rank": 44,
+      "cell_id": "r78_c34",
+      "screening_score": 0.568179,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 642,
+        "moving_points": 597,
+        "anomaly_candidates": 132,
+        "corroborated_anomaly_candidates": 132,
+        "low_support_only_candidates": 0,
+        "encounter_records": 160,
+        "pair_opportunities": 525,
+        "encounter_episodes": 51,
+        "backtest_supported_episodes": 44
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.402273,
+        "mean_encounter_evidence_score": 0.610003,
+        "max_encounter_evidence_score": 0.951377,
+        "anomaly_component_share": 0.418868,
+        "encounter_component_share": 0.581132
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_045",
+      "rank": 45,
+      "cell_id": "r70_c61",
+      "screening_score": 0.56727,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "intermittent evidence cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 207,
+        "moving_points": 207,
+        "anomaly_candidates": 50,
+        "corroborated_anomaly_candidates": 50,
+        "low_support_only_candidates": 0,
+        "encounter_records": 29,
+        "pair_opportunities": 60,
+        "encounter_episodes": 12,
+        "backtest_supported_episodes": 8
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.42,
+        "mean_encounter_evidence_score": 0.785644,
+        "max_encounter_evidence_score": 0.953535,
+        "anomaly_component_share": 0.368091,
+        "encounter_component_share": 0.631909
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_046",
+      "rank": 46,
+      "cell_id": "r74_c66",
+      "screening_score": 0.565951,
+      "hotspot_type": "event-sensitive review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "event-sensitive candidate hotspot",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 6960,
+        "moving_points": 1051,
+        "anomaly_candidates": 148,
+        "corroborated_anomaly_candidates": 148,
+        "low_support_only_candidates": 0,
+        "encounter_records": 159,
+        "pair_opportunities": 557,
+        "encounter_episodes": 87,
+        "backtest_supported_episodes": 66
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.412838,
+        "mean_encounter_evidence_score": 0.70048,
+        "max_encounter_evidence_score": 0.980229,
+        "anomaly_component_share": 0.352407,
+        "encounter_component_share": 0.647593
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 1
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_047",
+      "rank": 47,
+      "cell_id": "r69_c56",
+      "screening_score": 0.563011,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "low_empirical_route_support",
+      "counts": {
+        "ais_points": 1275,
+        "moving_points": 92,
+        "anomaly_candidates": 70,
+        "corroborated_anomaly_candidates": 43,
+        "low_support_only_candidates": 27,
+        "encounter_records": 11,
+        "pair_opportunities": 41,
+        "encounter_episodes": 6,
+        "backtest_supported_episodes": 6
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.450714,
+        "mean_encounter_evidence_score": 0.796027,
+        "max_encounter_evidence_score": 0.933039,
+        "anomaly_component_share": 0.648853,
+        "encounter_component_share": 0.351147
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_048",
+      "rank": 48,
+      "cell_id": "r101_c40",
+      "screening_score": 0.554868,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 3789,
+        "moving_points": 275,
+        "anomaly_candidates": 60,
+        "corroborated_anomaly_candidates": 60,
+        "low_support_only_candidates": 0,
+        "encounter_records": 43,
+        "pair_opportunities": 124,
+        "encounter_episodes": 12,
+        "backtest_supported_episodes": 11
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.410833,
+        "mean_encounter_evidence_score": 0.818406,
+        "max_encounter_evidence_score": 0.970446,
+        "anomaly_component_share": 0.365781,
+        "encounter_component_share": 0.634219
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_049",
+      "rank": 49,
+      "cell_id": "r76_c44",
+      "screening_score": 0.551824,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "high_turn",
+      "counts": {
+        "ais_points": 9974,
+        "moving_points": 400,
+        "anomaly_candidates": 139,
+        "corroborated_anomaly_candidates": 139,
+        "low_support_only_candidates": 0,
+        "encounter_records": 252,
+        "pair_opportunities": 1256,
+        "encounter_episodes": 169,
+        "backtest_supported_episodes": 33
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.402878,
+        "mean_encounter_evidence_score": 0.522486,
+        "max_encounter_evidence_score": 0.944621,
+        "anomaly_component_share": 0.547171,
+        "encounter_component_share": 0.452829
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_050",
+      "rank": 50,
+      "cell_id": "r71_c47",
+      "screening_score": 0.550705,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 411,
+        "moving_points": 386,
+        "anomaly_candidates": 84,
+        "corroborated_anomaly_candidates": 84,
+        "low_support_only_candidates": 0,
+        "encounter_records": 52,
+        "pair_opportunities": 121,
+        "encounter_episodes": 25,
+        "backtest_supported_episodes": 19
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.377976,
+        "mean_encounter_evidence_score": 0.695248,
+        "max_encounter_evidence_score": 0.933952,
+        "anomaly_component_share": 0.365962,
+        "encounter_component_share": 0.634038
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_051",
+      "rank": 51,
+      "cell_id": "r75_c60",
+      "screening_score": 0.546643,
+      "hotspot_type": "encounter-dominated review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 3195,
+        "moving_points": 514,
+        "anomaly_candidates": 58,
+        "corroborated_anomaly_candidates": 58,
+        "low_support_only_candidates": 0,
+        "encounter_records": 158,
+        "pair_opportunities": 475,
+        "encounter_episodes": 78,
+        "backtest_supported_episodes": 62
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.392241,
+        "mean_encounter_evidence_score": 0.724013,
+        "max_encounter_evidence_score": 0.970183,
+        "anomaly_component_share": 0.252861,
+        "encounter_component_share": 0.747139
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_052",
+      "rank": 52,
+      "cell_id": "r77_c47",
+      "screening_score": 0.545862,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 345,
+        "moving_points": 345,
+        "anomaly_candidates": 87,
+        "corroborated_anomaly_candidates": 87,
+        "low_support_only_candidates": 0,
+        "encounter_records": 183,
+        "pair_opportunities": 668,
+        "encounter_episodes": 101,
+        "backtest_supported_episodes": 56
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.387356,
+        "mean_encounter_evidence_score": 0.610979,
+        "max_encounter_evidence_score": 0.964215,
+        "anomaly_component_share": 0.410487,
+        "encounter_component_share": 0.589513
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_053",
+      "rank": 53,
+      "cell_id": "r122_c92",
+      "screening_score": 0.540463,
+      "hotspot_type": "encounter-dominated review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "intermittent evidence cell",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 216,
+        "moving_points": 203,
+        "anomaly_candidates": 19,
+        "corroborated_anomaly_candidates": 19,
+        "low_support_only_candidates": 0,
+        "encounter_records": 61,
+        "pair_opportunities": 117,
+        "encounter_episodes": 2,
+        "backtest_supported_episodes": 2
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.394737,
+        "mean_encounter_evidence_score": 0.778034,
+        "max_encounter_evidence_score": 0.986619,
+        "anomaly_component_share": 0.172217,
+        "encounter_component_share": 0.827783
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_054",
+      "rank": 54,
+      "cell_id": "r78_c58",
+      "screening_score": 0.535107,
+      "hotspot_type": "encounter-dominated review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 444,
+        "moving_points": 327,
+        "anomaly_candidates": 53,
+        "corroborated_anomaly_candidates": 53,
+        "low_support_only_candidates": 0,
+        "encounter_records": 68,
+        "pair_opportunities": 202,
+        "encounter_episodes": 15,
+        "backtest_supported_episodes": 13
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.403774,
+        "mean_encounter_evidence_score": 0.776916,
+        "max_encounter_evidence_score": 0.958825,
+        "anomaly_component_share": 0.311764,
+        "encounter_component_share": 0.688236
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_055",
+      "rank": 55,
+      "cell_id": "r74_c48",
+      "screening_score": 0.532747,
+      "hotspot_type": "fused-evidence review hotspot",
+      "dominant_evidence": "balanced anomaly-encounter evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review combined behavioral and encounter evidence before any operational interpretation.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 261,
+        "moving_points": 261,
+        "anomaly_candidates": 84,
+        "corroborated_anomaly_candidates": 84,
+        "low_support_only_candidates": 0,
+        "encounter_records": 125,
+        "pair_opportunities": 590,
+        "encounter_episodes": 85,
+        "backtest_supported_episodes": 43
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.407143,
+        "mean_encounter_evidence_score": 0.625653,
+        "max_encounter_evidence_score": 0.958909,
+        "anomaly_component_share": 0.495552,
+        "encounter_component_share": 0.504448
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    },
+    {
+      "card_id": "hotspot_card_056",
+      "rank": 56,
+      "cell_id": "r100_c41",
+      "screening_score": 0.531475,
+      "hotspot_type": "encounter-dominated review hotspot",
+      "dominant_evidence": "encounter-dominated fused evidence",
+      "stability_class": "high-exposure context cell",
+      "review_focus": "Review close-quarters candidate episodes and local crossing or meeting context.",
+      "dominant_anomaly_reason": "direction_mismatch",
+      "counts": {
+        "ais_points": 6085,
+        "moving_points": 479,
+        "anomaly_candidates": 67,
+        "corroborated_anomaly_candidates": 67,
+        "low_support_only_candidates": 0,
+        "encounter_records": 63,
+        "pair_opportunities": 197,
+        "encounter_episodes": 22,
+        "backtest_supported_episodes": 22
+      },
+      "scores": {
+        "mean_anomaly_screening_score": 0.412687,
+        "mean_encounter_evidence_score": 0.801918,
+        "max_encounter_evidence_score": 0.970997,
+        "anomaly_component_share": 0.315262,
+        "encounter_component_share": 0.684738
+      },
+      "stability": {
+        "density_topk_days": 0,
+        "fused_topk_days": 0
+      },
+      "related_case_ids": []
+    }
+  ]
+}
