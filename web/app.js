@@ -199,7 +199,7 @@ const COPY = {
       traffic_density: "AIS 交通密度",
       traffic_patterns: "经验常规交通模式网格",
       anomaly_points: "异常候选点",
-      risk_hotspots: "仅异常证据热区网格",
+      risk_hotspots: "仅行为证据分量对照网格",
       encounter_points: "CPA/TCPA 未来会遇候选记录",
       fused_risk_hotspots: "融合复核优先网格",
       case_tracks: "去标识化代表案例轨迹",

@@ -44,6 +44,9 @@ class WebBundleTest(unittest.TestCase):
         self.assertEqual({item["id"] for item in catalog["datasets"]}, {"sf_bay", "tokyo_bay"})
 
     def test_v10_card_and_behavior_component_contract(self) -> None:
+        app_source = (ROOT / "web" / "app.js").read_text(encoding="utf-8")
+        self.assertIn("仅行为证据分量对照网格", app_source)
+        self.assertNotIn("仅异常证据热区网格", app_source)
         for manifest_name in ("manifest.json", "manifest_tokyo_bay.json"):
             manifest = json.loads((WEB_DATA / manifest_name).read_text(encoding="utf-8"))
             card_path = WEB_DATA / manifest["companion_data"]["encounter_evidence_cards"]
