@@ -460,7 +460,7 @@ class GeometricControlOutcomeTest(unittest.TestCase):
         self.assertEqual(bootstrap["dependency_components"], 1)
         self.assertEqual(
             bootstrap["dependency_unit"],
-            "connected_component_of_candidate_control_vessel_pair_day_graph",
+            "connected_component_of_physical_vessel_pair_day_match_graph",
         )
         self.assertEqual(
             report_one["matched_outcomes"]["within_0_5_nm"]["cluster_bootstrap_95_ci"],
@@ -605,6 +605,65 @@ class GeometricControlOutcomeTest(unittest.TestCase):
         self.assertEqual(bootstrap["candidate_vessel_pair_day_nodes"], 2)
         self.assertEqual(bootstrap["control_vessel_pair_day_nodes"], 1)
         self.assertEqual(bootstrap["dependency_components"], 1)
+        self.assertEqual(bootstrap["matched_set_edges"], 2)
+
+    def test_bootstrap_unifies_same_physical_pair_day_across_match_roles(self) -> None:
+        base = dt.datetime(2025, 5, 1, 12, 0)
+
+        def anchor(
+            anchor_id: str,
+            anchor_type: str,
+            mmsi_a: str,
+            mmsi_b: str,
+            minute: int,
+        ) -> dict[str, object]:
+            return {
+                "anchor_id": anchor_id,
+                "anchor_type": anchor_type,
+                "date": "2025-05-01",
+                "reference_time": base + dt.timedelta(minutes=minute),
+                "mmsi_a": mmsi_a,
+                "mmsi_b": mmsi_b,
+                "current_distance_nm": 0.8,
+                "state_skew_s": 10.0,
+                "relative_speed_kn": 8.0,
+                "closing_speed_kn": 4.0,
+                "local_opportunity_exposure": 10,
+            }
+
+        candidates = [
+            anchor("c1", "candidate", "101", "102", 0),
+            anchor("c2", "candidate", "103", "104", 20),
+        ]
+        controls_only = [
+            anchor("k1", "control", "201", "202", 5),
+            # The reversed MMSI order represents the same physical pair-day
+            # as c1, despite appearing here in the control role.
+            anchor("k2", "control", "102", "101", 25),
+        ]
+        matches = [
+            {"match_id": "m1", "candidate": candidates[0], "control": controls_only[0]},
+            {"match_id": "m2", "candidate": candidates[1], "control": controls_only[1]},
+        ]
+        evaluated = [
+            {**row, "observable_followup": 1, "actual_min_distance_nm": 0.4}
+            for row in candidates + controls_only
+        ]
+
+        report = controls.summarize_evaluation(
+            candidates,
+            controls_only,
+            matches,
+            evaluated,
+            bootstrap_iterations=10,
+        )
+        bootstrap = report["matched_outcomes"]["within_0_5_nm"][
+            "cluster_bootstrap_95_ci"
+        ]
+
+        self.assertEqual(bootstrap["dependency_components"], 1)
+        self.assertEqual(bootstrap["physical_vessel_pair_day_nodes"], 3)
+        self.assertEqual(bootstrap["cross_role_reused_vessel_pair_day_nodes"], 1)
         self.assertEqual(bootstrap["matched_set_edges"], 2)
 
     def test_undefined_control_tcpa_does_not_define_future_track_observability(self) -> None:

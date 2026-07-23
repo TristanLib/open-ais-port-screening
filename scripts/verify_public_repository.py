@@ -131,6 +131,8 @@ def main() -> int:
             errors.append(f"private Tokyo manifest reference remains: {private_reference}")
     if "protocol: docs/METHOD_PROTOCOL.md" not in tokyo_manifest:
         errors.append("Tokyo public manifest does not reference docs/METHOD_PROTOCOL.md")
+    if "statistical_correction: docs/METHOD_CORRECTIONS.md" not in tokyo_manifest:
+        errors.append("Tokyo public manifest does not reference the final dependency correction")
 
     sf_manifest = (ROOT / "configs/data_manifest.yml").read_text(encoding="utf-8")
     required_sf_values = (
@@ -157,6 +159,8 @@ def main() -> int:
             errors.append(f"private San Francisco manifest reference remains: {private_reference}")
     if "protocol: docs/METHOD_PROTOCOL.md" not in sf_manifest:
         errors.append("San Francisco public manifest does not reference docs/METHOD_PROTOCOL.md")
+    if "statistical_correction: docs/METHOD_CORRECTIONS.md" not in sf_manifest:
+        errors.append("San Francisco public manifest does not reference the final dependency correction")
 
     method_protocol = (ROOT / "docs/METHOD_PROTOCOL.md").read_text(encoding="utf-8")
     required_method_terms = (
@@ -171,6 +175,19 @@ def main() -> int:
         if term not in method_protocol:
             errors.append(f"review-v10 method contract is missing: {term}")
 
+    correction_path = ROOT / "docs/METHOD_CORRECTIONS.md"
+    if not correction_path.is_file():
+        errors.append("final statistical correction note is missing")
+    else:
+        correction = correction_path.read_text(encoding="utf-8")
+        for term in (
+            "physical vessel-pair/day",
+            "regardless of candidate or control role",
+            "confidence intervals only",
+        ):
+            if term not in correction:
+                errors.append(f"statistical correction note is missing: {term}")
+
     for summary_name in ("summary.json", "summary_tokyo_bay.json"):
         summary_path = ROOT / "web/data" / summary_name
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
@@ -178,6 +195,14 @@ def main() -> int:
             errors.append(f"unexpected evidence-card schema in {summary_path.relative_to(ROOT)}")
         if summary.get("ranking_evaluation", {}).get("protocol") != "docs/METHOD_PROTOCOL.md":
             errors.append(f"non-public protocol path in {summary_path.relative_to(ROOT)}")
+        bootstrap = (
+            summary.get("geometric_controls", {})
+            .get("matched_outcomes", {})
+            .get("within_0_5_nm", {})
+            .get("cluster_bootstrap_95_ci", {})
+        )
+        if bootstrap.get("dependency_unit") != "connected_component_of_physical_vessel_pair_day_match_graph":
+            errors.append(f"stale dependency unit in {summary_path.relative_to(ROOT)}")
 
     sf_summary = json.loads((ROOT / "web/data/summary.json").read_text(encoding="utf-8"))
     expected_ablation = {

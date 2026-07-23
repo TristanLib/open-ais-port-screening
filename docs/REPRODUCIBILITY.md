@@ -22,9 +22,10 @@ to reproduce a preferred headline value.
 
 Review-v10 additionally removes selected-anchor composition from any
 all-opportunity recall interpretation, uses prespecified control calipers and a
-bipartite pair/day dependency bootstrap, performs a six-day traffic-pattern
-refit in every leave-one-day-out fold, and binds evidence-card current distance
-to the causal prediction state.
+physical vessel-pair/day dependency-component bootstrap that unifies candidate
+and control roles, performs a six-day traffic-pattern refit in every
+leave-one-day-out fold, and binds evidence-card current distance to the causal
+prediction state.
 
 ## San Francisco Bay review-v10 validation
 

@@ -880,7 +880,8 @@ def _interval(values: list[float]) -> list[float | None]:
 
 
 def _cluster_key(row: Mapping[str, object]) -> tuple[str, str, str]:
-    return str(row["date"]), str(row["mmsi_a"]), str(row["mmsi_b"])
+    mmsi_a, mmsi_b = sorted((str(row["mmsi_a"]), str(row["mmsi_b"])))
+    return str(row["date"]), mmsi_a, mmsi_b
 
 
 def _dependency_components(
@@ -889,11 +890,17 @@ def _dependency_components(
     list[list[tuple[Mapping[str, object], Mapping[str, object]]]],
     int,
     int,
+    int,
+    int,
 ]:
-    """Return connected components of the bipartite pair/day match graph."""
-    parent: dict[tuple[str, str, str, str], tuple[str, str, str, str]] = {}
+    """Return components of the physical vessel-pair/day match graph.
 
-    def find(node: tuple[str, str, str, str]) -> tuple[str, str, str, str]:
+    A vessel-pair/day is one dependency node even when different anchors from
+    that physical pair appear in both the candidate and control roles.
+    """
+    parent: dict[tuple[str, str, str], tuple[str, str, str]] = {}
+
+    def find(node: tuple[str, str, str]) -> tuple[str, str, str]:
         parent.setdefault(node, node)
         while parent[node] != node:
             parent[node] = parent[parent[node]]
@@ -901,8 +908,8 @@ def _dependency_components(
         return node
 
     def union(
-        left: tuple[str, str, str, str],
-        right: tuple[str, str, str, str],
+        left: tuple[str, str, str],
+        right: tuple[str, str, str],
     ) -> None:
         left_root = find(left)
         right_root = find(right)
@@ -911,24 +918,24 @@ def _dependency_components(
 
     edge_nodes: list[
         tuple[
-            tuple[str, str, str, str],
-            tuple[str, str, str, str],
+            tuple[str, str, str],
+            tuple[str, str, str],
             tuple[Mapping[str, object], Mapping[str, object]],
         ]
     ] = []
-    candidate_nodes: set[tuple[str, str, str, str]] = set()
-    control_nodes: set[tuple[str, str, str, str]] = set()
+    candidate_nodes: set[tuple[str, str, str]] = set()
+    control_nodes: set[tuple[str, str, str]] = set()
     for pair in paired_rows:
         candidate, control = pair
-        candidate_node = ("candidate", *_cluster_key(candidate))
-        control_node = ("control", *_cluster_key(control))
+        candidate_node = _cluster_key(candidate)
+        control_node = _cluster_key(control)
         candidate_nodes.add(candidate_node)
         control_nodes.add(control_node)
         union(candidate_node, control_node)
         edge_nodes.append((candidate_node, control_node, pair))
 
     by_component: dict[
-        tuple[str, str, str, str],
+        tuple[str, str, str],
         list[tuple[Mapping[str, object], Mapping[str, object]]],
     ] = {}
     for candidate_node, _, pair in edge_nodes:
@@ -937,7 +944,15 @@ def _dependency_components(
         by_component[key]
         for key in sorted(by_component)
     ]
-    return components, len(candidate_nodes), len(control_nodes)
+    physical_nodes = candidate_nodes | control_nodes
+    cross_role_nodes = candidate_nodes & control_nodes
+    return (
+        components,
+        len(candidate_nodes),
+        len(control_nodes),
+        len(physical_nodes),
+        len(cross_role_nodes),
+    )
 
 
 def _matched_bootstrap(
@@ -946,9 +961,13 @@ def _matched_bootstrap(
     iterations: int,
     seed: int,
 ) -> dict[str, object]:
-    components, candidate_node_count, control_node_count = _dependency_components(
-        paired_rows
-    )
+    (
+        components,
+        candidate_node_count,
+        control_node_count,
+        physical_node_count,
+        cross_role_node_count,
+    ) = _dependency_components(paired_rows)
     candidate_rates: list[float] = []
     control_rates: list[float] = []
     risk_differences: list[float] = []
@@ -973,13 +992,17 @@ def _matched_bootstrap(
             if control_rate > 0:
                 lifts.append(candidate_rate / control_rate)
     return {
-        "method": "percentile bipartite-dependency-component cluster bootstrap",
+        "method": (
+            "percentile physical-vessel-pair/day dependency-component cluster bootstrap"
+        ),
         "dependency_unit": (
-            "connected_component_of_candidate_control_vessel_pair_day_graph"
+            "connected_component_of_physical_vessel_pair_day_match_graph"
         ),
         "dependency_components": len(components),
         "candidate_vessel_pair_day_nodes": candidate_node_count,
         "control_vessel_pair_day_nodes": control_node_count,
+        "physical_vessel_pair_day_nodes": physical_node_count,
+        "cross_role_reused_vessel_pair_day_nodes": cross_role_node_count,
         "matched_set_edges": len(paired_rows),
         "iterations": iterations,
         "seed": seed,
@@ -1492,9 +1515,10 @@ def summarize_evaluation(
             "not_all_opportunity_capture_or_recall": True,
         },
         "uncertainty_boundary": (
-            "Connected-component bootstrap preserves repeated candidate or control "
-            "vessel-pair/day use within the bipartite match graph. Dependence between "
-            "separate components is assumed negligible."
+            "Connected-component bootstrap uses one physical vessel-pair/day node "
+            "regardless of candidate or control role, preserving repeated and "
+            "cross-role use within the match graph. Dependence between separate "
+            "components is assumed negligible."
         ),
     }
 

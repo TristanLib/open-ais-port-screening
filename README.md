@@ -20,4 +20,5 @@ Canonical public repository:
 Some regression-test filenames retain `review_v9` for path compatibility; their
 assertions and expected schemas are updated for review-v10.
 
-Start with `docs/REPRODUCIBILITY.md` and `docs/PUBLIC_DATA_BOUNDARY.md`.
+Start with `docs/REPRODUCIBILITY.md`, `docs/METHOD_CORRECTIONS.md`, and
+`docs/PUBLIC_DATA_BOUNDARY.md`.

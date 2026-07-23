@@ -78,7 +78,7 @@ pipeline_parameters:
     relative_speed_caliper_kn: 5
     closing_speed_caliper_kn: 2.5
     matching: deterministic 1-to-1 without replacement on six normalized differences
-    bootstrap_unit: connected component of candidate/control vessel-pair-day bipartite graph
+    bootstrap_unit: connected component of the physical vessel-pair-day match graph, with candidate/control roles unified
     bootstrap_iterations: 2000
     bootstrap_seed: 20260722
   dual_objective_ranking:
@@ -96,6 +96,7 @@ result_state:
   protocol_commit: f755aa0
   verified_at: 2026-07-22
   protocol: docs/METHOD_PROTOCOL.md
+  statistical_correction: docs/METHOD_CORRECTIONS.md
   authoritative_source: public manifest and sanitized Web summaries
   claim_boundary: cross-source executability and common output-schema generation only
 

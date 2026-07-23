@@ -1435,29 +1435,31 @@
         "lift": 4.737705,
         "control_rate_zero": false,
         "cluster_bootstrap_95_ci": {
-          "method": "percentile bipartite-dependency-component cluster bootstrap",
-          "dependency_unit": "connected_component_of_candidate_control_vessel_pair_day_graph",
-          "dependency_components": 490,
+          "method": "percentile physical-vessel-pair/day dependency-component cluster bootstrap",
+          "dependency_unit": "connected_component_of_physical_vessel_pair_day_match_graph",
+          "dependency_components": 479,
           "candidate_vessel_pair_day_nodes": 494,
           "control_vessel_pair_day_nodes": 498,
+          "physical_vessel_pair_day_nodes": 981,
+          "cross_role_reused_vessel_pair_day_nodes": 11,
           "matched_set_edges": 502,
           "iterations": 2000,
           "seed": 20260722,
           "candidate_rate": [
-            0.532538,
-            0.618007
+            0.527886,
+            0.619814
           ],
           "control_rate": [
-            0.092881,
-            0.151093
+            0.092184,
+            0.151697
           ],
           "risk_difference": [
-            0.409182,
-            0.5
+            0.406746,
+            0.499006
           ],
           "lift": [
-            3.826608,
-            6.106785
+            3.814262,
+            6.152174
           ]
         }
       },
@@ -1471,29 +1473,31 @@
         "lift": 1.548736,
         "control_rate_zero": false,
         "cluster_bootstrap_95_ci": {
-          "method": "percentile bipartite-dependency-component cluster bootstrap",
-          "dependency_unit": "connected_component_of_candidate_control_vessel_pair_day_graph",
-          "dependency_components": 490,
+          "method": "percentile physical-vessel-pair/day dependency-component cluster bootstrap",
+          "dependency_unit": "connected_component_of_physical_vessel_pair_day_match_graph",
+          "dependency_components": 479,
           "candidate_vessel_pair_day_nodes": 494,
           "control_vessel_pair_day_nodes": 498,
+          "physical_vessel_pair_day_nodes": 981,
+          "cross_role_reused_vessel_pair_day_nodes": 11,
           "matched_set_edges": 502,
           "iterations": 2000,
           "seed": 20260722,
           "candidate_rate": [
-            0.823641,
-            0.882937
+            0.823287,
+            0.883403
           ],
           "control_rate": [
-            0.507014,
-            0.596465
+            0.506983,
+            0.594869
           ],
           "risk_difference": [
-            0.254,
-            0.349901
+            0.25646,
+            0.349319
           ],
           "lift": [
-            1.429031,
-            1.680965
+            1.436064,
+            1.679688
           ]
         }
       }
@@ -1512,29 +1516,31 @@
           "lift": 11.0,
           "control_rate_zero": false,
           "cluster_bootstrap_95_ci": {
-            "method": "percentile bipartite-dependency-component cluster bootstrap",
-            "dependency_unit": "connected_component_of_candidate_control_vessel_pair_day_graph",
-            "dependency_components": 445,
+            "method": "percentile physical-vessel-pair/day dependency-component cluster bootstrap",
+            "dependency_unit": "connected_component_of_physical_vessel_pair_day_match_graph",
+            "dependency_components": 439,
             "candidate_vessel_pair_day_nodes": 449,
             "control_vessel_pair_day_nodes": 451,
+            "physical_vessel_pair_day_nodes": 894,
+            "cross_role_reused_vessel_pair_day_nodes": 6,
             "matched_set_edges": 455,
             "iterations": 2000,
             "seed": 20260722,
             "candidate_rate": [
-              0.484512,
-              0.578022
+              0.486723,
+              0.577353
             ],
             "control_rate": [
-              0.030369,
-              0.069422
+              0.028823,
+              0.069873
             ],
             "risk_difference": [
-              0.436404,
-              0.530435
+              0.434876,
+              0.532162
             ],
             "lift": [
-              7.718523,
-              17.785714
+              7.533281,
+              18.235714
             ]
           }
         },
@@ -1548,29 +1554,31 @@
           "lift": 1.66087,
           "control_rate_zero": false,
           "cluster_bootstrap_95_ci": {
-            "method": "percentile bipartite-dependency-component cluster bootstrap",
-            "dependency_unit": "connected_component_of_candidate_control_vessel_pair_day_graph",
-            "dependency_components": 445,
+            "method": "percentile physical-vessel-pair/day dependency-component cluster bootstrap",
+            "dependency_unit": "connected_component_of_physical_vessel_pair_day_match_graph",
+            "dependency_components": 439,
             "candidate_vessel_pair_day_nodes": 449,
             "control_vessel_pair_day_nodes": 451,
+            "physical_vessel_pair_day_nodes": 894,
+            "cross_role_reused_vessel_pair_day_nodes": 6,
             "matched_set_edges": 455,
             "iterations": 2000,
             "seed": 20260722,
             "candidate_rate": [
-              0.805252,
-              0.873092
+              0.804396,
+              0.871681
             ],
             "control_rate": [
-              0.458329,
-              0.551198
+              0.45898,
+              0.552632
             ],
             "risk_difference": [
-              0.283806,
-              0.381903
+              0.284463,
+              0.38326
             ],
             "lift": [
-              1.519996,
-              1.818203
+              1.518828,
+              1.822967
             ]
           }
         }
@@ -1588,29 +1596,31 @@
           "lift": 16.818182,
           "control_rate_zero": false,
           "cluster_bootstrap_95_ci": {
-            "method": "percentile bipartite-dependency-component cluster bootstrap",
-            "dependency_unit": "connected_component_of_candidate_control_vessel_pair_day_graph",
-            "dependency_components": 383,
+            "method": "percentile physical-vessel-pair/day dependency-component cluster bootstrap",
+            "dependency_unit": "connected_component_of_physical_vessel_pair_day_match_graph",
+            "dependency_components": 379,
             "candidate_vessel_pair_day_nodes": 384,
             "control_vessel_pair_day_nodes": 385,
+            "physical_vessel_pair_day_nodes": 765,
+            "cross_role_reused_vessel_pair_day_nodes": 4,
             "matched_set_edges": 386,
             "iterations": 2000,
             "seed": 20260722,
             "candidate_rate": [
               0.428562,
-              0.528497
+              0.528669
             ],
             "control_rate": [
               0.012987,
-              0.046395
+              0.046392
             ],
             "risk_difference": [
-              0.400491,
-              0.501299
+              0.397403,
+              0.501344
             ],
             "lift": [
-              10.3875,
-              35.815
+              10.235294,
+              36.4
             ]
           }
         },
@@ -1624,29 +1634,31 @@
           "lift": 1.920245,
           "control_rate_zero": false,
           "cluster_bootstrap_95_ci": {
-            "method": "percentile bipartite-dependency-component cluster bootstrap",
-            "dependency_unit": "connected_component_of_candidate_control_vessel_pair_day_graph",
-            "dependency_components": 383,
+            "method": "percentile physical-vessel-pair/day dependency-component cluster bootstrap",
+            "dependency_unit": "connected_component_of_physical_vessel_pair_day_match_graph",
+            "dependency_components": 379,
             "candidate_vessel_pair_day_nodes": 384,
             "control_vessel_pair_day_nodes": 385,
+            "physical_vessel_pair_day_nodes": 765,
+            "cross_role_reused_vessel_pair_day_nodes": 4,
             "matched_set_edges": 386,
             "iterations": 2000,
             "seed": 20260722,
             "candidate_rate": [
-              0.771199,
-              0.849351
+              0.77201,
+              0.848958
             ],
             "control_rate": [
-              0.374677,
-              0.472731
+              0.372086,
+              0.473962
             ],
             "risk_difference": [
-              0.333312,
-              0.441558
+              0.335078,
+              0.443005
             ],
             "lift": [
-              1.711842,
-              2.157153
+              1.717373,
+              2.162162
             ]
           }
         }
@@ -1978,7 +1990,7 @@
       "reason": "The evaluated denominator is the selected candidate/control anchor sample after candidate-window exclusion and control thinning, not all pair opportunities and not a candidate-independent outcome cohort.",
       "not_all_opportunity_capture_or_recall": true
     },
-    "uncertainty_boundary": "Connected-component bootstrap preserves repeated candidate or control vessel-pair/day use within the bipartite match graph. Dependence between separate components is assumed negligible.",
+    "uncertainty_boundary": "Connected-component bootstrap uses one physical vessel-pair/day node regardless of candidate or control role, preserving repeated and cross-role use within the match graph. Dependence between separate components is assumed negligible.",
     "input": {
       "opportunity_csv": "outputs/tables/tokyo_bay_ais_2024-08-01_to_2024-08-07_pair_opportunity_records.csv",
       "opportunity_csv_sha256": "4e22a2895d3c2293c70e032b2688ef25d8552bf8d20da5b45a71de99e3471b50",
