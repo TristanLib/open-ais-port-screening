@@ -2,25 +2,19 @@
 
 ## Included
 
-- Analysis and validation source code
-- Fixed study-area and parameter configurations
-- Synthetic smoke-test data
-- Unit tests and CI workflow
-- Public source URLs, checksums, and aggregate reference results
+- Analysis and validation source code from an explicit allowlist
+- Public study-area and parameter configurations with private author blocks removed
+- Synthetic smoke-test data and unit tests
+- Public source and reproduction notes
 - Sanitized static Web layers
 
 ## Excluded
 
+- Manuscripts, abstracts, reviewer material, and submission correspondence
 - Raw or processed full-resolution AIS messages
-- MMSI, IMO, callsign, vessel name, or original track identifiers
-- Vessel-pair coordinates and exact observation timestamps
-- Identity-bearing candidate and backtest tables
-- Manuscripts, abstracts, reviewer materials, and submission correspondence
-- Local environments, caches, screenshots, and generated packages
+- MMSI, IMO, callsign, vessel name, original track identifiers, exact pair states, and exact observation timestamps
+- Author contact, affiliation, ORCID, local paths, credentials, environments, screenshots, and delivery packages
 
-## Interpretation
-
-The Web layers are rounded and de-identified derivatives for demonstrating the
-screening workflow. They remain historical research outputs and must not be
-used for navigation, operational watchkeeping, enforcement, vessel profiling,
-or comparative port-safety rankings.
+The Web data are de-identified historical derivatives for demonstrating the
+screening workflow. They must not be used for navigation, operational
+watchkeeping, enforcement, vessel profiling, or comparative port-safety claims.

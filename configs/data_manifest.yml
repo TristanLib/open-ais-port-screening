@@ -1,12 +1,11 @@
 project: open_ais_port_screening
-release: 0.1.0
-updated: 2026-07-22
-
 public_boundary:
   raw_ais_committed: false
   processed_full_resolution_ais_committed: false
   identity_bearing_analytical_tables_committed: false
   web_layers: sanitized_lightweight_derivatives
+
+updated: 2026-07-22
 
 primary_dataset:
   provider: NOAA MarineCadastre
@@ -16,11 +15,16 @@ primary_dataset:
   date_start: 2025-05-01
   date_end: 2025-05-07
   raw_pattern: data/raw/noaa/2025/ais-{date}.csv.zst
+  repository_policy: raw files are not committed
 
 study_area:
   name: San Francisco Bay and Port of Oakland Approaches
   crs: EPSG:4326
-  bbox: [-122.62, 37.42, -121.92, 38.18]
+  bbox:
+    min_lon: -122.62
+    min_lat: 37.42
+    max_lon: -121.92
+    max_lat: 38.18
 
 pipeline_parameters:
   trajectory_segmentation:
@@ -38,11 +42,21 @@ pipeline_parameters:
     min_track_segments_per_cell: 5
   anomaly_detection:
     min_score: 0.35
-    candidate_tiers: [corroborated, low_support_only]
-  encounter_screening:
+    candidate_tiers: corroborated and low-support-only
+    indicators:
+      low_empirical_route_support: 0.35
+      direction_mismatch: 0.25
+      high_turn: 0.15
+      high_accel: 0.10
+      high_speed: 0.10
+      suspicious_stop: 0.15
+      implied_speed: 0.10
+  encounter_risk:
     time_bin_seconds: 60
     max_state_skew_s: 60
-    state_alignment: propagate earlier state to later observation time
+    max_state_age_s: 60
+    state_alignment: epoch-aligned causal grid with latest valid state propagated forward
+    spatial_index: dynamic bucket radius plus exact 2 nm distance filter
     min_sog_kn: 1.0
     max_current_distance_nm: 2.0
     dcpa_threshold_nm: 0.5
@@ -51,23 +65,61 @@ pipeline_parameters:
     lookahead_min: 15
     evaluation_step_s: 30
     max_interpolation_gap_s: 180
+    min_common_fraction: 0.70
+    required_common_samples_30s_grid: 21
+    required_common_coverage_s: 630
+    max_uncovered_gap_s: 180
+    predicted_time_tolerance_s: 60
+    primary_minimum: continuous same-segment piecewise-linear solution
+    grid_sensitivity_s: 10, 30, 60
   fused_hotspots:
     encounter_weight: 0.75
-    low_support_weight: 0.25
     top_percent: 0.10
+    min_exposure_points: 100
+    min_moving_points: 20
+    min_anomaly_count: 20
+    min_encounter_count: 20
 
-reference_results:
+result_state:
+  review_version: review-v9
+  status: review_v9_recomputed_verified
+  verified_at: 2026-07-22
+  protocol: docs/METHOD_PROTOCOL.md
+  authoritative_source: public manifest and sanitized Web summaries
+  claim_boundary: candidate screening and geometric support only
+
+headline_results:
   cropped_ais_points: 1119812
   clean_ais_points: 1114862
   trajectory_segments: 21446
+  min20_segments: 6304
   normal_traffic_pattern_cells: 760
-  anomaly_candidate_points: 48398
-  corroborated_candidate_points: 28555
+  high_confidence_cells: 311
+  anomaly_candidate_points: 47867
+  corroborated_candidate_points: 28024
   low_support_only_points: 19843
-  evaluated_pair_opportunities: 243063
-  encounter_candidate_records: 52311
-  encounter_audit_episodes: 18386
-  episodes_with_aligned_followup: 17444
-  supported_episodes_within_0_5_nm: 12495
-  support_rate_observable: 0.716292
-  fused_hotspot_cells: 56
+  evaluated_pair_opportunities: 300904
+  encounter_candidates: 56221
+  encounter_candidate_records: 56221
+  encounter_audit_episodes: 19805
+  encounter_backtest_observable_episodes: 11530
+  encounter_backtest_observable_rate: 0.582176
+  encounter_backtest_supported_episodes: 7945
+  encounter_backtest_support_rate_observable: 0.689072
+  encounter_backtest_near_supported_episodes: 10244
+  encounter_backtest_near_support_rate_observable: 0.888465
+  common_samples_30s_median: 24
+  common_coverage_duration_s_median: 712.0
+  predicted_dcpa_abs_error_nm_median: 0.16883
+  predicted_closest_time_abs_error_min_median: 1.583869
+  controls_matched_both_observable: 5337
+  control_0_5nm_candidate_rate: 0.635376
+  control_0_5nm_control_rate: 0.098557
+  control_0_5nm_lift: 6.446768
+  control_1_0nm_candidate_rate: 0.870152
+  control_1_0nm_control_rate: 0.423084
+  control_1_0nm_lift: 2.056687
+  fused_hotspot_cells: 57
+  fusion_incremental_value_gate_passed: true
+  fusion_gate_passing_budgets: 0.05, 0.10
+  encounter_evidence_card_count: 12

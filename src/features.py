@@ -178,6 +178,13 @@ def build_features(
                     previous_bearing = None
                     break_reason = "implied_speed_gap"
 
+                # A segment break rejects the edge from the previous point to
+                # this point.  The course computed from that rejected edge is
+                # therefore not a valid within-segment ground-track course for
+                # the first point of the new segment.
+                if break_reason:
+                    current_bearing = None
+
                 if not break_reason and current_bearing is not None:
                     bearing_delta = angular_delta_deg(previous_bearing, current_bearing)
                     if prev_sog is not None:

@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from anomaly_score import score_row
-from encounter_backtest import build_episode, interpolated_future_min_distance
+from encounter_backtest import Position, build_episode, interpolated_future_min_distance
 from encounter_risk import synchronize_pair_states
 from risk_hotspots import calculate_cell_components
 from screening_rank_evaluation import evaluate_rankings
@@ -95,14 +95,14 @@ class FutureOnlyBacktestTest(unittest.TestCase):
     def test_geometric_check_uses_only_times_after_prediction(self) -> None:
         t0 = dt.datetime(2025, 5, 1, 12, 0)
         rows_a = [
-            (t0 - dt.timedelta(seconds=30), 0.0, 0.0),
-            (t0, 0.0, 0.0),
-            (t0 + dt.timedelta(seconds=60), 0.0, 0.0),
+            Position(t0 - dt.timedelta(seconds=30), 0.0, 0.0, "a-1"),
+            Position(t0, 0.0, 0.0, "a-1"),
+            Position(t0 + dt.timedelta(seconds=60), 0.0, 0.0, "a-1"),
         ]
         rows_b = [
-            (t0 - dt.timedelta(seconds=30), 0.0, 0.0),
-            (t0, 0.02, 0.0),
-            (t0 + dt.timedelta(seconds=60), 0.02, 0.0),
+            Position(t0 - dt.timedelta(seconds=30), 0.0, 0.0, "b-1"),
+            Position(t0, 0.02, 0.0, "b-1"),
+            Position(t0 + dt.timedelta(seconds=60), 0.02, 0.0, "b-1"),
         ]
 
         result = interpolated_future_min_distance(
@@ -114,7 +114,9 @@ class FutureOnlyBacktestTest(unittest.TestCase):
             max_interpolation_gap_s=120,
         )
 
-        self.assertEqual(result["synchronized_sample_count"], 2)
+        # The edge from t0 to t0+60 is intentionally excluded because the
+        # frozen review-v9 rule requires both endpoints to be post-candidate.
+        self.assertEqual(result["synchronized_sample_count"], 1)
         self.assertGreater(float(result["actual_min_distance_nm"]), 1.0)
         self.assertGreater(result["actual_min_time"], t0)  # type: ignore[operator]
 

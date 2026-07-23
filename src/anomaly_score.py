@@ -280,7 +280,20 @@ def compute_anomalies(
             }
         )
     output_geojson.write_text(
-        json.dumps({"type": "FeatureCollection", "features": features}, ensure_ascii=False) + "\n",
+        json.dumps(
+            {
+                "type": "FeatureCollection",
+                "features": features,
+                "metadata": {
+                    "source_count": int(counters["anomaly_rows"]),
+                    "published_count": len(features),
+                    "geojson_limit": geojson_limit,
+                    "selection_rule": "highest anomaly score; stable source order for ties",
+                },
+            },
+            ensure_ascii=False,
+        )
+        + "\n",
         encoding="utf-8",
     )
 

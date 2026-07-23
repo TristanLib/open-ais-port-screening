@@ -7,9 +7,7 @@ date-released: 2026-07-22
 repository-code: "https://github.com/TristanLib/open-ais-port-screening"
 url: "https://github.com/TristanLib/open-ais-port-screening"
 authors:
-  - family-names: "Li"
-    given-names: "Bo"
-    orcid: "https://orcid.org/0009-0002-0772-5138"
+  - name: "Open AIS Port Screening contributors"
 keywords:
   - AIS
   - maritime traffic

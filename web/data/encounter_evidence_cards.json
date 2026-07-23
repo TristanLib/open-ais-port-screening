@@ -1,0 +1,5398 @@
+{
+  "schema_version": "review-v9.encounter-evidence-card.v1",
+  "dataset_id": "sf_bay",
+  "publication_mode": "sanitized_research_demo",
+  "disclaimer": "De-identified historical AIS encounter-candidate evidence for human audit. Geometric support is not prediction accuracy, an incident or near-miss label, an enforcement finding, or navigation or collision-avoidance advice.",
+  "selection": {
+    "method": "deterministic compact audit sample ranked by observability, predicted-time coverage, geometric support, common coverage, then screening score",
+    "max_cards": 12,
+    "geometry_input_status": "available"
+  },
+  "card_count": 12,
+  "summary": {
+    "support_status_counts": {
+      "geometrically_supported_within_0_5_nm": 12
+    },
+    "geometry_available_cards": 12
+  },
+  "cards": [
+    {
+      "case_id": "sf-bay-enc-rv9-001",
+      "rank": 1,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 54,
+        "max_source_state_age_s": 57,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": 0.67,
+              "y_nm": -0.65
+            },
+            {
+              "label": "B",
+              "x_nm": -0.67,
+              "y_nm": 0.65
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.13,
+              "y_nm": 0.08
+            },
+            {
+              "label": "B",
+              "x_nm": 0.09,
+              "y_nm": 0.42
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.02,
+            "y_nm": 0.25
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.410512,
+        "tcpa_min": 11.019048,
+        "closest_time_t_s": 661,
+        "current_distance_nm": 0.201955,
+        "screening_score": 0.209223
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.190285,
+        "continuous_min_time_t_s": 678,
+        "dcpa_abs_error_nm": 0.220227,
+        "closest_time_abs_error_s": 18,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 887.0,
+        "common_coverage_fraction": 0.985556,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 7.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 89,
+          "min_distance_nm": 0.190323
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.193136
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.197738
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.15,
+            "y_nm": 0.25
+          },
+          {
+            "label": "B",
+            "x_nm": -0.01,
+            "y_nm": 0.38
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 7,
+            "end_t_s": 894,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 7,
+                    "x_nm": 0.66,
+                    "y_nm": -0.64
+                  },
+                  {
+                    "t_s": 37,
+                    "x_nm": 0.63,
+                    "y_nm": -0.61
+                  },
+                  {
+                    "t_s": 67,
+                    "x_nm": 0.6,
+                    "y_nm": -0.57
+                  },
+                  {
+                    "t_s": 97,
+                    "x_nm": 0.57,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 127,
+                    "x_nm": 0.54,
+                    "y_nm": -0.49
+                  },
+                  {
+                    "t_s": 157,
+                    "x_nm": 0.5,
+                    "y_nm": -0.45
+                  },
+                  {
+                    "t_s": 187,
+                    "x_nm": 0.46,
+                    "y_nm": -0.41
+                  },
+                  {
+                    "t_s": 217,
+                    "x_nm": 0.43,
+                    "y_nm": -0.38
+                  },
+                  {
+                    "t_s": 247,
+                    "x_nm": 0.39,
+                    "y_nm": -0.34
+                  },
+                  {
+                    "t_s": 277,
+                    "x_nm": 0.35,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 307,
+                    "x_nm": 0.32,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 337,
+                    "x_nm": 0.28,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 367,
+                    "x_nm": 0.25,
+                    "y_nm": -0.18
+                  },
+                  {
+                    "t_s": 397,
+                    "x_nm": 0.21,
+                    "y_nm": -0.14
+                  },
+                  {
+                    "t_s": 427,
+                    "x_nm": 0.18,
+                    "y_nm": -0.1
+                  },
+                  {
+                    "t_s": 487,
+                    "x_nm": 0.1,
+                    "y_nm": -0.01
+                  },
+                  {
+                    "t_s": 517,
+                    "x_nm": 0.07,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 547,
+                    "x_nm": 0.03,
+                    "y_nm": 0.07
+                  },
+                  {
+                    "t_s": 577,
+                    "x_nm": -0.01,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 607,
+                    "x_nm": -0.05,
+                    "y_nm": 0.15
+                  },
+                  {
+                    "t_s": 637,
+                    "x_nm": -0.09,
+                    "y_nm": 0.19
+                  },
+                  {
+                    "t_s": 661,
+                    "x_nm": -0.12,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 667,
+                    "x_nm": -0.13,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 678,
+                    "x_nm": -0.15,
+                    "y_nm": 0.25
+                  },
+                  {
+                    "t_s": 697,
+                    "x_nm": -0.17,
+                    "y_nm": 0.28
+                  },
+                  {
+                    "t_s": 727,
+                    "x_nm": -0.21,
+                    "y_nm": 0.32
+                  },
+                  {
+                    "t_s": 757,
+                    "x_nm": -0.25,
+                    "y_nm": 0.36
+                  },
+                  {
+                    "t_s": 787,
+                    "x_nm": -0.3,
+                    "y_nm": 0.4
+                  },
+                  {
+                    "t_s": 817,
+                    "x_nm": -0.34,
+                    "y_nm": 0.44
+                  },
+                  {
+                    "t_s": 847,
+                    "x_nm": -0.38,
+                    "y_nm": 0.48
+                  },
+                  {
+                    "t_s": 877,
+                    "x_nm": -0.43,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 894,
+                    "x_nm": -0.45,
+                    "y_nm": 0.53
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 7,
+                    "x_nm": -0.66,
+                    "y_nm": 0.65
+                  },
+                  {
+                    "t_s": 37,
+                    "x_nm": -0.63,
+                    "y_nm": 0.64
+                  },
+                  {
+                    "t_s": 67,
+                    "x_nm": -0.6,
+                    "y_nm": 0.63
+                  },
+                  {
+                    "t_s": 97,
+                    "x_nm": -0.56,
+                    "y_nm": 0.62
+                  },
+                  {
+                    "t_s": 127,
+                    "x_nm": -0.53,
+                    "y_nm": 0.61
+                  },
+                  {
+                    "t_s": 157,
+                    "x_nm": -0.49,
+                    "y_nm": 0.6
+                  },
+                  {
+                    "t_s": 187,
+                    "x_nm": -0.46,
+                    "y_nm": 0.59
+                  },
+                  {
+                    "t_s": 217,
+                    "x_nm": -0.42,
+                    "y_nm": 0.59
+                  },
+                  {
+                    "t_s": 247,
+                    "x_nm": -0.39,
+                    "y_nm": 0.58
+                  },
+                  {
+                    "t_s": 277,
+                    "x_nm": -0.35,
+                    "y_nm": 0.57
+                  },
+                  {
+                    "t_s": 307,
+                    "x_nm": -0.32,
+                    "y_nm": 0.56
+                  },
+                  {
+                    "t_s": 337,
+                    "x_nm": -0.29,
+                    "y_nm": 0.55
+                  },
+                  {
+                    "t_s": 367,
+                    "x_nm": -0.26,
+                    "y_nm": 0.54
+                  },
+                  {
+                    "t_s": 397,
+                    "x_nm": -0.23,
+                    "y_nm": 0.53
+                  },
+                  {
+                    "t_s": 427,
+                    "x_nm": -0.21,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 487,
+                    "x_nm": -0.16,
+                    "y_nm": 0.5
+                  },
+                  {
+                    "t_s": 517,
+                    "x_nm": -0.13,
+                    "y_nm": 0.48
+                  },
+                  {
+                    "t_s": 547,
+                    "x_nm": -0.11,
+                    "y_nm": 0.47
+                  },
+                  {
+                    "t_s": 577,
+                    "x_nm": -0.08,
+                    "y_nm": 0.45
+                  },
+                  {
+                    "t_s": 607,
+                    "x_nm": -0.06,
+                    "y_nm": 0.43
+                  },
+                  {
+                    "t_s": 637,
+                    "x_nm": -0.04,
+                    "y_nm": 0.41
+                  },
+                  {
+                    "t_s": 661,
+                    "x_nm": -0.02,
+                    "y_nm": 0.39
+                  },
+                  {
+                    "t_s": 667,
+                    "x_nm": -0.02,
+                    "y_nm": 0.39
+                  },
+                  {
+                    "t_s": 678,
+                    "x_nm": -0.01,
+                    "y_nm": 0.38
+                  },
+                  {
+                    "t_s": 697,
+                    "x_nm": 0.0,
+                    "y_nm": 0.37
+                  },
+                  {
+                    "t_s": 727,
+                    "x_nm": 0.02,
+                    "y_nm": 0.35
+                  },
+                  {
+                    "t_s": 757,
+                    "x_nm": 0.04,
+                    "y_nm": 0.33
+                  },
+                  {
+                    "t_s": 787,
+                    "x_nm": 0.06,
+                    "y_nm": 0.31
+                  },
+                  {
+                    "t_s": 817,
+                    "x_nm": 0.08,
+                    "y_nm": 0.29
+                  },
+                  {
+                    "t_s": 847,
+                    "x_nm": 0.1,
+                    "y_nm": 0.26
+                  },
+                  {
+                    "t_s": 877,
+                    "x_nm": 0.12,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 894,
+                    "x_nm": 0.13,
+                    "y_nm": 0.23
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "sf-bay-enc-rv9-002",
+      "rank": 2,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 6,
+        "max_source_state_age_s": 60,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.0,
+              "y_nm": -0.04
+            },
+            {
+              "label": "B",
+              "x_nm": 0.0,
+              "y_nm": 0.04
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.0,
+              "y_nm": -0.04
+            },
+            {
+              "label": "B",
+              "x_nm": 0.01,
+              "y_nm": 0.04
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": 0.01,
+            "y_nm": 0.0
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.07906,
+        "tcpa_min": 0.086057,
+        "closest_time_t_s": 5,
+        "current_distance_nm": 0.079607,
+        "screening_score": 0.895214
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.260394,
+        "continuous_min_time_t_s": 9,
+        "dcpa_abs_error_nm": 0.181334,
+        "closest_time_abs_error_s": 4,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 879.0,
+        "common_coverage_fraction": 0.976667,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 12.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.26299
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.319269
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.413612
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": 0.25,
+            "y_nm": 0.35
+          },
+          {
+            "label": "B",
+            "x_nm": 0.19,
+            "y_nm": 0.09
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 9,
+            "end_t_s": 888,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 9,
+                    "x_nm": 0.25,
+                    "y_nm": 0.35
+                  },
+                  {
+                    "t_s": 39,
+                    "x_nm": 0.32,
+                    "y_nm": 0.54
+                  },
+                  {
+                    "t_s": 69,
+                    "x_nm": 0.4,
+                    "y_nm": 0.73
+                  },
+                  {
+                    "t_s": 99,
+                    "x_nm": 0.4,
+                    "y_nm": 0.94
+                  },
+                  {
+                    "t_s": 129,
+                    "x_nm": 0.4,
+                    "y_nm": 1.15
+                  },
+                  {
+                    "t_s": 159,
+                    "x_nm": 0.36,
+                    "y_nm": 1.36
+                  },
+                  {
+                    "t_s": 189,
+                    "x_nm": 0.32,
+                    "y_nm": 1.56
+                  },
+                  {
+                    "t_s": 219,
+                    "x_nm": 0.27,
+                    "y_nm": 1.77
+                  },
+                  {
+                    "t_s": 249,
+                    "x_nm": 0.22,
+                    "y_nm": 1.97
+                  },
+                  {
+                    "t_s": 279,
+                    "x_nm": 0.18,
+                    "y_nm": 2.18
+                  },
+                  {
+                    "t_s": 309,
+                    "x_nm": 0.14,
+                    "y_nm": 2.39
+                  },
+                  {
+                    "t_s": 339,
+                    "x_nm": 0.12,
+                    "y_nm": 2.6
+                  },
+                  {
+                    "t_s": 369,
+                    "x_nm": 0.11,
+                    "y_nm": 2.81
+                  },
+                  {
+                    "t_s": 399,
+                    "x_nm": 0.08,
+                    "y_nm": 3.01
+                  },
+                  {
+                    "t_s": 429,
+                    "x_nm": 0.02,
+                    "y_nm": 3.22
+                  },
+                  {
+                    "t_s": 459,
+                    "x_nm": -0.02,
+                    "y_nm": 3.43
+                  },
+                  {
+                    "t_s": 489,
+                    "x_nm": -0.07,
+                    "y_nm": 3.64
+                  },
+                  {
+                    "t_s": 519,
+                    "x_nm": -0.1,
+                    "y_nm": 3.85
+                  },
+                  {
+                    "t_s": 549,
+                    "x_nm": -0.11,
+                    "y_nm": 4.06
+                  },
+                  {
+                    "t_s": 579,
+                    "x_nm": -0.13,
+                    "y_nm": 4.27
+                  },
+                  {
+                    "t_s": 609,
+                    "x_nm": -0.18,
+                    "y_nm": 4.48
+                  },
+                  {
+                    "t_s": 639,
+                    "x_nm": -0.22,
+                    "y_nm": 4.68
+                  },
+                  {
+                    "t_s": 669,
+                    "x_nm": -0.26,
+                    "y_nm": 4.89
+                  },
+                  {
+                    "t_s": 699,
+                    "x_nm": -0.29,
+                    "y_nm": 5.09
+                  },
+                  {
+                    "t_s": 729,
+                    "x_nm": -0.32,
+                    "y_nm": 5.29
+                  },
+                  {
+                    "t_s": 759,
+                    "x_nm": -0.36,
+                    "y_nm": 5.49
+                  },
+                  {
+                    "t_s": 789,
+                    "x_nm": -0.4,
+                    "y_nm": 5.69
+                  },
+                  {
+                    "t_s": 819,
+                    "x_nm": -0.43,
+                    "y_nm": 5.89
+                  },
+                  {
+                    "t_s": 849,
+                    "x_nm": -0.44,
+                    "y_nm": 6.09
+                  },
+                  {
+                    "t_s": 879,
+                    "x_nm": -0.44,
+                    "y_nm": 6.29
+                  },
+                  {
+                    "t_s": 888,
+                    "x_nm": -0.44,
+                    "y_nm": 6.36
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 9,
+                    "x_nm": 0.19,
+                    "y_nm": 0.09
+                  },
+                  {
+                    "t_s": 39,
+                    "x_nm": 0.32,
+                    "y_nm": 0.19
+                  },
+                  {
+                    "t_s": 69,
+                    "x_nm": 0.46,
+                    "y_nm": 0.29
+                  },
+                  {
+                    "t_s": 99,
+                    "x_nm": 0.57,
+                    "y_nm": 0.42
+                  },
+                  {
+                    "t_s": 129,
+                    "x_nm": 0.67,
+                    "y_nm": 0.56
+                  },
+                  {
+                    "t_s": 159,
+                    "x_nm": 0.75,
+                    "y_nm": 0.72
+                  },
+                  {
+                    "t_s": 189,
+                    "x_nm": 0.82,
+                    "y_nm": 0.88
+                  },
+                  {
+                    "t_s": 219,
+                    "x_nm": 0.86,
+                    "y_nm": 1.01
+                  },
+                  {
+                    "t_s": 249,
+                    "x_nm": 0.85,
+                    "y_nm": 1.09
+                  },
+                  {
+                    "t_s": 279,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 309,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 339,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 369,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 399,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 429,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 459,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 489,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 519,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 549,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 579,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 609,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 639,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 669,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 699,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 729,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 759,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 789,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 819,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 849,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 879,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 888,
+                    "x_nm": 0.84,
+                    "y_nm": 1.16
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "sf-bay-enc-rv9-003",
+      "rank": 3,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 37,
+        "max_source_state_age_s": 41,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.22,
+              "y_nm": 0.3
+            },
+            {
+              "label": "B",
+              "x_nm": 0.22,
+              "y_nm": -0.3
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.07,
+              "y_nm": 0.05
+            },
+            {
+              "label": "B",
+              "x_nm": -0.03,
+              "y_nm": 0.07
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.05,
+            "y_nm": 0.06
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.050084,
+        "tcpa_min": 5.851226,
+        "closest_time_t_s": 351,
+        "current_distance_nm": 0.118268,
+        "screening_score": 0.798362
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.068,
+        "continuous_min_time_t_s": 271,
+        "dcpa_abs_error_nm": 0.017916,
+        "closest_time_abs_error_s": 80,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 879.0,
+        "common_coverage_fraction": 0.976667,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 11.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.068128
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.068128
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.111617
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.12,
+            "y_nm": 0.16
+          },
+          {
+            "label": "B",
+            "x_nm": -0.06,
+            "y_nm": 0.19
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 10,
+            "end_t_s": 889,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 10,
+                    "x_nm": -0.22,
+                    "y_nm": 0.29
+                  },
+                  {
+                    "t_s": 40,
+                    "x_nm": -0.21,
+                    "y_nm": 0.27
+                  },
+                  {
+                    "t_s": 70,
+                    "x_nm": -0.2,
+                    "y_nm": 0.25
+                  },
+                  {
+                    "t_s": 100,
+                    "x_nm": -0.19,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 130,
+                    "x_nm": -0.18,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 160,
+                    "x_nm": -0.17,
+                    "y_nm": 0.21
+                  },
+                  {
+                    "t_s": 190,
+                    "x_nm": -0.16,
+                    "y_nm": 0.2
+                  },
+                  {
+                    "t_s": 220,
+                    "x_nm": -0.14,
+                    "y_nm": 0.18
+                  },
+                  {
+                    "t_s": 250,
+                    "x_nm": -0.13,
+                    "y_nm": 0.17
+                  },
+                  {
+                    "t_s": 271,
+                    "x_nm": -0.12,
+                    "y_nm": 0.16
+                  },
+                  {
+                    "t_s": 280,
+                    "x_nm": -0.11,
+                    "y_nm": 0.16
+                  },
+                  {
+                    "t_s": 310,
+                    "x_nm": -0.1,
+                    "y_nm": 0.14
+                  },
+                  {
+                    "t_s": 340,
+                    "x_nm": -0.09,
+                    "y_nm": 0.13
+                  },
+                  {
+                    "t_s": 351,
+                    "x_nm": -0.09,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 370,
+                    "x_nm": -0.09,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 400,
+                    "x_nm": -0.1,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 430,
+                    "x_nm": -0.12,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 490,
+                    "x_nm": -0.14,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 520,
+                    "x_nm": -0.16,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 550,
+                    "x_nm": -0.17,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 580,
+                    "x_nm": -0.18,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 610,
+                    "x_nm": -0.19,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 640,
+                    "x_nm": -0.2,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 670,
+                    "x_nm": -0.21,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 700,
+                    "x_nm": -0.22,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 730,
+                    "x_nm": -0.22,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 760,
+                    "x_nm": -0.23,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 790,
+                    "x_nm": -0.23,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 820,
+                    "x_nm": -0.24,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 850,
+                    "x_nm": -0.24,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 880,
+                    "x_nm": -0.24,
+                    "y_nm": 0.09
+                  },
+                  {
+                    "t_s": 889,
+                    "x_nm": -0.24,
+                    "y_nm": 0.09
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 10,
+                    "x_nm": 0.21,
+                    "y_nm": -0.28
+                  },
+                  {
+                    "t_s": 40,
+                    "x_nm": 0.18,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 70,
+                    "x_nm": 0.15,
+                    "y_nm": -0.19
+                  },
+                  {
+                    "t_s": 100,
+                    "x_nm": 0.12,
+                    "y_nm": -0.15
+                  },
+                  {
+                    "t_s": 130,
+                    "x_nm": 0.09,
+                    "y_nm": -0.1
+                  },
+                  {
+                    "t_s": 160,
+                    "x_nm": 0.06,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 190,
+                    "x_nm": 0.02,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 220,
+                    "x_nm": -0.01,
+                    "y_nm": 0.07
+                  },
+                  {
+                    "t_s": 250,
+                    "x_nm": -0.04,
+                    "y_nm": 0.14
+                  },
+                  {
+                    "t_s": 271,
+                    "x_nm": -0.06,
+                    "y_nm": 0.19
+                  },
+                  {
+                    "t_s": 280,
+                    "x_nm": -0.07,
+                    "y_nm": 0.21
+                  },
+                  {
+                    "t_s": 310,
+                    "x_nm": -0.09,
+                    "y_nm": 0.28
+                  },
+                  {
+                    "t_s": 340,
+                    "x_nm": -0.12,
+                    "y_nm": 0.34
+                  },
+                  {
+                    "t_s": 351,
+                    "x_nm": -0.13,
+                    "y_nm": 0.37
+                  },
+                  {
+                    "t_s": 370,
+                    "x_nm": -0.15,
+                    "y_nm": 0.41
+                  },
+                  {
+                    "t_s": 400,
+                    "x_nm": -0.18,
+                    "y_nm": 0.49
+                  },
+                  {
+                    "t_s": 430,
+                    "x_nm": -0.21,
+                    "y_nm": 0.56
+                  },
+                  {
+                    "t_s": 490,
+                    "x_nm": -0.27,
+                    "y_nm": 0.72
+                  },
+                  {
+                    "t_s": 520,
+                    "x_nm": -0.3,
+                    "y_nm": 0.8
+                  },
+                  {
+                    "t_s": 550,
+                    "x_nm": -0.33,
+                    "y_nm": 0.88
+                  },
+                  {
+                    "t_s": 580,
+                    "x_nm": -0.36,
+                    "y_nm": 0.96
+                  },
+                  {
+                    "t_s": 610,
+                    "x_nm": -0.39,
+                    "y_nm": 1.04
+                  },
+                  {
+                    "t_s": 640,
+                    "x_nm": -0.42,
+                    "y_nm": 1.11
+                  },
+                  {
+                    "t_s": 670,
+                    "x_nm": -0.45,
+                    "y_nm": 1.19
+                  },
+                  {
+                    "t_s": 700,
+                    "x_nm": -0.48,
+                    "y_nm": 1.27
+                  },
+                  {
+                    "t_s": 730,
+                    "x_nm": -0.52,
+                    "y_nm": 1.35
+                  },
+                  {
+                    "t_s": 760,
+                    "x_nm": -0.55,
+                    "y_nm": 1.43
+                  },
+                  {
+                    "t_s": 790,
+                    "x_nm": -0.59,
+                    "y_nm": 1.51
+                  },
+                  {
+                    "t_s": 820,
+                    "x_nm": -0.62,
+                    "y_nm": 1.59
+                  },
+                  {
+                    "t_s": 850,
+                    "x_nm": -0.66,
+                    "y_nm": 1.67
+                  },
+                  {
+                    "t_s": 880,
+                    "x_nm": -0.69,
+                    "y_nm": 1.75
+                  },
+                  {
+                    "t_s": 889,
+                    "x_nm": -0.71,
+                    "y_nm": 1.77
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "sf-bay-enc-rv9-004",
+      "rank": 4,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 15,
+        "max_source_state_age_s": 60,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.73,
+              "y_nm": -0.29
+            },
+            {
+              "label": "B",
+              "x_nm": 0.73,
+              "y_nm": 0.29
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.64,
+              "y_nm": 0.42
+            },
+            {
+              "label": "B",
+              "x_nm": -0.58,
+              "y_nm": 0.3
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.61,
+            "y_nm": 0.36
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.138225,
+        "tcpa_min": 3.223767,
+        "closest_time_t_s": 193,
+        "current_distance_nm": 0.323037,
+        "screening_score": 0.745087
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.082187,
+        "continuous_min_time_t_s": 212,
+        "dcpa_abs_error_nm": 0.056038,
+        "closest_time_abs_error_s": 19,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 878.0,
+        "common_coverage_fraction": 0.975556,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 17.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.083479
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.083479
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.215674
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.7,
+            "y_nm": 0.66
+          },
+          {
+            "label": "B",
+            "x_nm": -0.75,
+            "y_nm": 0.72
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 17,
+            "end_t_s": 895,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 17,
+                    "x_nm": -0.71,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 47,
+                    "x_nm": -0.72,
+                    "y_nm": 0.09
+                  },
+                  {
+                    "t_s": 77,
+                    "x_nm": -0.73,
+                    "y_nm": 0.2
+                  },
+                  {
+                    "t_s": 107,
+                    "x_nm": -0.73,
+                    "y_nm": 0.3
+                  },
+                  {
+                    "t_s": 137,
+                    "x_nm": -0.74,
+                    "y_nm": 0.41
+                  },
+                  {
+                    "t_s": 167,
+                    "x_nm": -0.73,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 193,
+                    "x_nm": -0.71,
+                    "y_nm": 0.59
+                  },
+                  {
+                    "t_s": 197,
+                    "x_nm": -0.71,
+                    "y_nm": 0.61
+                  },
+                  {
+                    "t_s": 212,
+                    "x_nm": -0.7,
+                    "y_nm": 0.66
+                  },
+                  {
+                    "t_s": 227,
+                    "x_nm": -0.72,
+                    "y_nm": 0.71
+                  },
+                  {
+                    "t_s": 257,
+                    "x_nm": -0.77,
+                    "y_nm": 0.8
+                  },
+                  {
+                    "t_s": 287,
+                    "x_nm": -0.8,
+                    "y_nm": 0.9
+                  },
+                  {
+                    "t_s": 317,
+                    "x_nm": -0.77,
+                    "y_nm": 1.0
+                  },
+                  {
+                    "t_s": 347,
+                    "x_nm": -0.75,
+                    "y_nm": 1.11
+                  },
+                  {
+                    "t_s": 377,
+                    "x_nm": -0.67,
+                    "y_nm": 1.2
+                  },
+                  {
+                    "t_s": 407,
+                    "x_nm": -0.59,
+                    "y_nm": 1.28
+                  },
+                  {
+                    "t_s": 437,
+                    "x_nm": -0.5,
+                    "y_nm": 1.36
+                  },
+                  {
+                    "t_s": 497,
+                    "x_nm": -0.29,
+                    "y_nm": 1.48
+                  },
+                  {
+                    "t_s": 527,
+                    "x_nm": -0.17,
+                    "y_nm": 1.51
+                  },
+                  {
+                    "t_s": 557,
+                    "x_nm": -0.06,
+                    "y_nm": 1.54
+                  },
+                  {
+                    "t_s": 587,
+                    "x_nm": 0.06,
+                    "y_nm": 1.58
+                  },
+                  {
+                    "t_s": 617,
+                    "x_nm": 0.18,
+                    "y_nm": 1.61
+                  },
+                  {
+                    "t_s": 647,
+                    "x_nm": 0.25,
+                    "y_nm": 1.67
+                  },
+                  {
+                    "t_s": 677,
+                    "x_nm": 0.33,
+                    "y_nm": 1.72
+                  },
+                  {
+                    "t_s": 707,
+                    "x_nm": 0.39,
+                    "y_nm": 1.78
+                  },
+                  {
+                    "t_s": 737,
+                    "x_nm": 0.46,
+                    "y_nm": 1.84
+                  },
+                  {
+                    "t_s": 767,
+                    "x_nm": 0.51,
+                    "y_nm": 1.89
+                  },
+                  {
+                    "t_s": 797,
+                    "x_nm": 0.56,
+                    "y_nm": 1.94
+                  },
+                  {
+                    "t_s": 827,
+                    "x_nm": 0.6,
+                    "y_nm": 1.98
+                  },
+                  {
+                    "t_s": 857,
+                    "x_nm": 0.63,
+                    "y_nm": 2.01
+                  },
+                  {
+                    "t_s": 887,
+                    "x_nm": 0.66,
+                    "y_nm": 2.04
+                  },
+                  {
+                    "t_s": 895,
+                    "x_nm": 0.67,
+                    "y_nm": 2.05
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 17,
+                    "x_nm": 0.61,
+                    "y_nm": 0.42
+                  },
+                  {
+                    "t_s": 47,
+                    "x_nm": 0.4,
+                    "y_nm": 0.48
+                  },
+                  {
+                    "t_s": 77,
+                    "x_nm": 0.19,
+                    "y_nm": 0.54
+                  },
+                  {
+                    "t_s": 107,
+                    "x_nm": -0.01,
+                    "y_nm": 0.61
+                  },
+                  {
+                    "t_s": 137,
+                    "x_nm": -0.22,
+                    "y_nm": 0.67
+                  },
+                  {
+                    "t_s": 167,
+                    "x_nm": -0.43,
+                    "y_nm": 0.7
+                  },
+                  {
+                    "t_s": 193,
+                    "x_nm": -0.62,
+                    "y_nm": 0.72
+                  },
+                  {
+                    "t_s": 197,
+                    "x_nm": -0.64,
+                    "y_nm": 0.73
+                  },
+                  {
+                    "t_s": 212,
+                    "x_nm": -0.75,
+                    "y_nm": 0.72
+                  },
+                  {
+                    "t_s": 227,
+                    "x_nm": -0.86,
+                    "y_nm": 0.71
+                  },
+                  {
+                    "t_s": 257,
+                    "x_nm": -1.08,
+                    "y_nm": 0.68
+                  },
+                  {
+                    "t_s": 287,
+                    "x_nm": -1.29,
+                    "y_nm": 0.64
+                  },
+                  {
+                    "t_s": 317,
+                    "x_nm": -1.51,
+                    "y_nm": 0.61
+                  },
+                  {
+                    "t_s": 347,
+                    "x_nm": -1.72,
+                    "y_nm": 0.6
+                  },
+                  {
+                    "t_s": 377,
+                    "x_nm": -1.93,
+                    "y_nm": 0.6
+                  },
+                  {
+                    "t_s": 407,
+                    "x_nm": -2.14,
+                    "y_nm": 0.58
+                  },
+                  {
+                    "t_s": 437,
+                    "x_nm": -2.34,
+                    "y_nm": 0.55
+                  },
+                  {
+                    "t_s": 497,
+                    "x_nm": -2.69,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 527,
+                    "x_nm": -2.81,
+                    "y_nm": 0.49
+                  },
+                  {
+                    "t_s": 557,
+                    "x_nm": -2.89,
+                    "y_nm": 0.47
+                  },
+                  {
+                    "t_s": 587,
+                    "x_nm": -2.96,
+                    "y_nm": 0.45
+                  },
+                  {
+                    "t_s": 617,
+                    "x_nm": -2.99,
+                    "y_nm": 0.42
+                  },
+                  {
+                    "t_s": 647,
+                    "x_nm": -3.02,
+                    "y_nm": 0.4
+                  },
+                  {
+                    "t_s": 677,
+                    "x_nm": -3.02,
+                    "y_nm": 0.39
+                  },
+                  {
+                    "t_s": 707,
+                    "x_nm": -3.03,
+                    "y_nm": 0.38
+                  },
+                  {
+                    "t_s": 737,
+                    "x_nm": -3.03,
+                    "y_nm": 0.38
+                  },
+                  {
+                    "t_s": 767,
+                    "x_nm": -3.04,
+                    "y_nm": 0.38
+                  },
+                  {
+                    "t_s": 797,
+                    "x_nm": -3.04,
+                    "y_nm": 0.38
+                  },
+                  {
+                    "t_s": 827,
+                    "x_nm": -3.03,
+                    "y_nm": 0.38
+                  },
+                  {
+                    "t_s": 857,
+                    "x_nm": -3.04,
+                    "y_nm": 0.38
+                  },
+                  {
+                    "t_s": 887,
+                    "x_nm": -3.04,
+                    "y_nm": 0.38
+                  },
+                  {
+                    "t_s": 895,
+                    "x_nm": -3.04,
+                    "y_nm": 0.38
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "sf-bay-enc-rv9-005",
+      "rank": 5,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 0,
+        "max_source_state_age_s": 45,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.54,
+              "y_nm": -0.14
+            },
+            {
+              "label": "B",
+              "x_nm": 0.54,
+              "y_nm": 0.14
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.26,
+              "y_nm": -0.06
+            },
+            {
+              "label": "B",
+              "x_nm": -0.21,
+              "y_nm": -0.17
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.23,
+            "y_nm": -0.12
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.120511,
+        "tcpa_min": 4.106825,
+        "closest_time_t_s": 246,
+        "current_distance_nm": 0.384322,
+        "screening_score": 0.747509
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.450307,
+        "continuous_min_time_t_s": 141,
+        "dcpa_abs_error_nm": 0.329796,
+        "closest_time_abs_error_s": 105,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 877.0,
+        "common_coverage_fraction": 0.974444,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 17.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.451443
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.453805
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.485063
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.77,
+            "y_nm": 0.04
+          },
+          {
+            "label": "B",
+            "x_nm": -0.52,
+            "y_nm": 0.42
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 17,
+            "end_t_s": 894,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 17,
+                    "x_nm": -0.58,
+                    "y_nm": -0.08
+                  },
+                  {
+                    "t_s": 47,
+                    "x_nm": -0.61,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 77,
+                    "x_nm": -0.64,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 107,
+                    "x_nm": -0.7,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 137,
+                    "x_nm": -0.76,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 141,
+                    "x_nm": -0.77,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 167,
+                    "x_nm": -0.82,
+                    "y_nm": 0.07
+                  },
+                  {
+                    "t_s": 197,
+                    "x_nm": -0.89,
+                    "y_nm": 0.09
+                  },
+                  {
+                    "t_s": 227,
+                    "x_nm": -0.96,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 246,
+                    "x_nm": -1.01,
+                    "y_nm": 0.13
+                  },
+                  {
+                    "t_s": 257,
+                    "x_nm": -1.03,
+                    "y_nm": 0.14
+                  },
+                  {
+                    "t_s": 287,
+                    "x_nm": -1.11,
+                    "y_nm": 0.16
+                  },
+                  {
+                    "t_s": 317,
+                    "x_nm": -1.18,
+                    "y_nm": 0.17
+                  },
+                  {
+                    "t_s": 347,
+                    "x_nm": -1.26,
+                    "y_nm": 0.18
+                  },
+                  {
+                    "t_s": 377,
+                    "x_nm": -1.33,
+                    "y_nm": 0.19
+                  },
+                  {
+                    "t_s": 407,
+                    "x_nm": -1.41,
+                    "y_nm": 0.2
+                  },
+                  {
+                    "t_s": 437,
+                    "x_nm": -1.49,
+                    "y_nm": 0.2
+                  },
+                  {
+                    "t_s": 497,
+                    "x_nm": -1.64,
+                    "y_nm": 0.21
+                  },
+                  {
+                    "t_s": 527,
+                    "x_nm": -1.71,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 557,
+                    "x_nm": -1.79,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 587,
+                    "x_nm": -1.87,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 617,
+                    "x_nm": -1.95,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 647,
+                    "x_nm": -2.02,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 677,
+                    "x_nm": -2.1,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 707,
+                    "x_nm": -2.17,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 737,
+                    "x_nm": -2.25,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 767,
+                    "x_nm": -2.32,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 797,
+                    "x_nm": -2.39,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 827,
+                    "x_nm": -2.46,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 857,
+                    "x_nm": -2.51,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 887,
+                    "x_nm": -2.56,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 894,
+                    "x_nm": -2.58,
+                    "y_nm": 0.24
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 17,
+                    "x_nm": 0.36,
+                    "y_nm": 0.19
+                  },
+                  {
+                    "t_s": 47,
+                    "x_nm": 0.14,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 77,
+                    "x_nm": -0.09,
+                    "y_nm": 0.25
+                  },
+                  {
+                    "t_s": 107,
+                    "x_nm": -0.29,
+                    "y_nm": 0.33
+                  },
+                  {
+                    "t_s": 137,
+                    "x_nm": -0.5,
+                    "y_nm": 0.41
+                  },
+                  {
+                    "t_s": 141,
+                    "x_nm": -0.52,
+                    "y_nm": 0.42
+                  },
+                  {
+                    "t_s": 167,
+                    "x_nm": -0.69,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 197,
+                    "x_nm": -0.88,
+                    "y_nm": 0.64
+                  },
+                  {
+                    "t_s": 227,
+                    "x_nm": -1.07,
+                    "y_nm": 0.75
+                  },
+                  {
+                    "t_s": 246,
+                    "x_nm": -1.19,
+                    "y_nm": 0.82
+                  },
+                  {
+                    "t_s": 257,
+                    "x_nm": -1.27,
+                    "y_nm": 0.86
+                  },
+                  {
+                    "t_s": 287,
+                    "x_nm": -1.47,
+                    "y_nm": 0.96
+                  },
+                  {
+                    "t_s": 317,
+                    "x_nm": -1.67,
+                    "y_nm": 1.04
+                  },
+                  {
+                    "t_s": 347,
+                    "x_nm": -1.87,
+                    "y_nm": 1.14
+                  },
+                  {
+                    "t_s": 377,
+                    "x_nm": -2.08,
+                    "y_nm": 1.24
+                  },
+                  {
+                    "t_s": 407,
+                    "x_nm": -2.28,
+                    "y_nm": 1.3
+                  },
+                  {
+                    "t_s": 437,
+                    "x_nm": -2.5,
+                    "y_nm": 1.33
+                  },
+                  {
+                    "t_s": 497,
+                    "x_nm": -2.76,
+                    "y_nm": 1.43
+                  },
+                  {
+                    "t_s": 527,
+                    "x_nm": -2.83,
+                    "y_nm": 1.48
+                  },
+                  {
+                    "t_s": 557,
+                    "x_nm": -2.86,
+                    "y_nm": 1.51
+                  },
+                  {
+                    "t_s": 587,
+                    "x_nm": -2.9,
+                    "y_nm": 1.54
+                  },
+                  {
+                    "t_s": 617,
+                    "x_nm": -2.94,
+                    "y_nm": 1.56
+                  },
+                  {
+                    "t_s": 647,
+                    "x_nm": -2.98,
+                    "y_nm": 1.55
+                  },
+                  {
+                    "t_s": 677,
+                    "x_nm": -3.02,
+                    "y_nm": 1.51
+                  },
+                  {
+                    "t_s": 707,
+                    "x_nm": -3.06,
+                    "y_nm": 1.47
+                  },
+                  {
+                    "t_s": 737,
+                    "x_nm": -3.1,
+                    "y_nm": 1.43
+                  },
+                  {
+                    "t_s": 767,
+                    "x_nm": -3.14,
+                    "y_nm": 1.39
+                  },
+                  {
+                    "t_s": 797,
+                    "x_nm": -3.15,
+                    "y_nm": 1.38
+                  },
+                  {
+                    "t_s": 827,
+                    "x_nm": -3.16,
+                    "y_nm": 1.37
+                  },
+                  {
+                    "t_s": 857,
+                    "x_nm": -3.16,
+                    "y_nm": 1.37
+                  },
+                  {
+                    "t_s": 887,
+                    "x_nm": -3.16,
+                    "y_nm": 1.37
+                  },
+                  {
+                    "t_s": 894,
+                    "x_nm": -3.16,
+                    "y_nm": 1.37
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "sf-bay-enc-rv9-006",
+      "rank": 6,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 0,
+        "max_source_state_age_s": 58,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": 0.55,
+              "y_nm": -0.07
+            },
+            {
+              "label": "B",
+              "x_nm": -0.55,
+              "y_nm": 0.07
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": 0.68,
+              "y_nm": -0.32
+            },
+            {
+              "label": "B",
+              "x_nm": 0.69,
+              "y_nm": -0.29
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": 0.69,
+            "y_nm": -0.3
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.034159,
+        "tcpa_min": 3.691265,
+        "closest_time_t_s": 221,
+        "current_distance_nm": 0.247545,
+        "screening_score": 0.869463
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.082929,
+        "continuous_min_time_t_s": 660,
+        "dcpa_abs_error_nm": 0.04877,
+        "closest_time_abs_error_s": 439,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 876.0,
+        "common_coverage_fraction": 0.973333,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 12.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 87,
+          "min_distance_nm": 0.082932
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.082932
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.082932
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": 0.19,
+            "y_nm": 0.03
+          },
+          {
+            "label": "B",
+            "x_nm": 0.21,
+            "y_nm": -0.05
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 12,
+            "end_t_s": 888,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 12,
+                    "x_nm": 0.48,
+                    "y_nm": -0.04
+                  },
+                  {
+                    "t_s": 42,
+                    "x_nm": 0.46,
+                    "y_nm": -0.03
+                  },
+                  {
+                    "t_s": 72,
+                    "x_nm": 0.45,
+                    "y_nm": -0.03
+                  },
+                  {
+                    "t_s": 102,
+                    "x_nm": 0.43,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 132,
+                    "x_nm": 0.41,
+                    "y_nm": -0.01
+                  },
+                  {
+                    "t_s": 162,
+                    "x_nm": 0.4,
+                    "y_nm": 0.0
+                  },
+                  {
+                    "t_s": 192,
+                    "x_nm": 0.4,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 221,
+                    "x_nm": 0.4,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 222,
+                    "x_nm": 0.4,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 252,
+                    "x_nm": 0.41,
+                    "y_nm": 0.05
+                  },
+                  {
+                    "t_s": 282,
+                    "x_nm": 0.41,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 312,
+                    "x_nm": 0.41,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 342,
+                    "x_nm": 0.41,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 372,
+                    "x_nm": 0.4,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 402,
+                    "x_nm": 0.38,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 432,
+                    "x_nm": 0.36,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 492,
+                    "x_nm": 0.32,
+                    "y_nm": 0.05
+                  },
+                  {
+                    "t_s": 522,
+                    "x_nm": 0.3,
+                    "y_nm": 0.05
+                  },
+                  {
+                    "t_s": 552,
+                    "x_nm": 0.28,
+                    "y_nm": 0.05
+                  },
+                  {
+                    "t_s": 582,
+                    "x_nm": 0.25,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 612,
+                    "x_nm": 0.23,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 642,
+                    "x_nm": 0.21,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 660,
+                    "x_nm": 0.19,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 672,
+                    "x_nm": 0.18,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 702,
+                    "x_nm": 0.16,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 732,
+                    "x_nm": 0.13,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 762,
+                    "x_nm": 0.11,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 792,
+                    "x_nm": 0.08,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 822,
+                    "x_nm": 0.06,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 852,
+                    "x_nm": 0.04,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 882,
+                    "x_nm": 0.02,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 888,
+                    "x_nm": 0.02,
+                    "y_nm": 0.02
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 12,
+                    "x_nm": -0.49,
+                    "y_nm": 0.05
+                  },
+                  {
+                    "t_s": 42,
+                    "x_nm": -0.34,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 72,
+                    "x_nm": -0.2,
+                    "y_nm": -0.01
+                  },
+                  {
+                    "t_s": 102,
+                    "x_nm": -0.12,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 132,
+                    "x_nm": -0.04,
+                    "y_nm": -0.04
+                  },
+                  {
+                    "t_s": 162,
+                    "x_nm": 0.02,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 192,
+                    "x_nm": 0.07,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 221,
+                    "x_nm": 0.12,
+                    "y_nm": -0.06
+                  },
+                  {
+                    "t_s": 222,
+                    "x_nm": 0.12,
+                    "y_nm": -0.06
+                  },
+                  {
+                    "t_s": 252,
+                    "x_nm": 0.16,
+                    "y_nm": -0.06
+                  },
+                  {
+                    "t_s": 282,
+                    "x_nm": 0.18,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 312,
+                    "x_nm": 0.2,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 342,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 372,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 402,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 432,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 492,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 522,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 552,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 582,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 612,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 642,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 660,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 672,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 702,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 732,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 762,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 792,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 822,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 852,
+                    "x_nm": 0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 882,
+                    "x_nm": 0.2,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 888,
+                    "x_nm": 0.2,
+                    "y_nm": -0.05
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "sf-bay-enc-rv9-007",
+      "rank": 7,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 3,
+        "max_source_state_age_s": 59,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": 0.5,
+              "y_nm": 0.12
+            },
+            {
+              "label": "B",
+              "x_nm": -0.5,
+              "y_nm": -0.12
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.1,
+              "y_nm": -0.09
+            },
+            {
+              "label": "B",
+              "x_nm": -0.23,
+              "y_nm": -0.57
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.17,
+            "y_nm": -0.33
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.48489,
+        "tcpa_min": 3.120116,
+        "closest_time_t_s": 187,
+        "current_distance_nm": 0.040389,
+        "screening_score": 0.296841
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.03839,
+        "continuous_min_time_t_s": 587,
+        "dcpa_abs_error_nm": 0.4465,
+        "closest_time_abs_error_s": 400,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 875.0,
+        "common_coverage_fraction": 0.972222,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 20.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.0387
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.039734
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.039734
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": 0.64,
+            "y_nm": -0.25
+          },
+          {
+            "label": "B",
+            "x_nm": 0.6,
+            "y_nm": -0.26
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 5,
+            "end_t_s": 880,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 5,
+                    "x_nm": 0.49,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 35,
+                    "x_nm": 0.39,
+                    "y_nm": 0.07
+                  },
+                  {
+                    "t_s": 65,
+                    "x_nm": 0.3,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 95,
+                    "x_nm": 0.21,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 125,
+                    "x_nm": 0.12,
+                    "y_nm": -0.07
+                  },
+                  {
+                    "t_s": 155,
+                    "x_nm": 0.07,
+                    "y_nm": -0.13
+                  },
+                  {
+                    "t_s": 185,
+                    "x_nm": 0.01,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 187,
+                    "x_nm": 0.01,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 215,
+                    "x_nm": 0.04,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 245,
+                    "x_nm": 0.09,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 275,
+                    "x_nm": 0.14,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 305,
+                    "x_nm": 0.19,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 335,
+                    "x_nm": 0.25,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 365,
+                    "x_nm": 0.3,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 395,
+                    "x_nm": 0.35,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 425,
+                    "x_nm": 0.4,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 485,
+                    "x_nm": 0.49,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 515,
+                    "x_nm": 0.54,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 545,
+                    "x_nm": 0.58,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 575,
+                    "x_nm": 0.62,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 587,
+                    "x_nm": 0.64,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 605,
+                    "x_nm": 0.66,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 635,
+                    "x_nm": 0.7,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 665,
+                    "x_nm": 0.74,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 695,
+                    "x_nm": 0.78,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 725,
+                    "x_nm": 0.81,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 755,
+                    "x_nm": 0.84,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 785,
+                    "x_nm": 0.87,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 815,
+                    "x_nm": 0.9,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 845,
+                    "x_nm": 0.93,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 875,
+                    "x_nm": 0.95,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 880,
+                    "x_nm": 0.95,
+                    "y_nm": -0.2
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 5,
+                    "x_nm": -0.48,
+                    "y_nm": -0.11
+                  },
+                  {
+                    "t_s": 35,
+                    "x_nm": -0.41,
+                    "y_nm": -0.15
+                  },
+                  {
+                    "t_s": 65,
+                    "x_nm": -0.35,
+                    "y_nm": -0.19
+                  },
+                  {
+                    "t_s": 95,
+                    "x_nm": -0.28,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 125,
+                    "x_nm": -0.22,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 155,
+                    "x_nm": -0.16,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 185,
+                    "x_nm": -0.1,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 187,
+                    "x_nm": -0.1,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 215,
+                    "x_nm": -0.04,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 245,
+                    "x_nm": 0.01,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 275,
+                    "x_nm": 0.06,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 305,
+                    "x_nm": 0.12,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 335,
+                    "x_nm": 0.17,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 365,
+                    "x_nm": 0.22,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 395,
+                    "x_nm": 0.27,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 425,
+                    "x_nm": 0.32,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 485,
+                    "x_nm": 0.43,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 515,
+                    "x_nm": 0.49,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 545,
+                    "x_nm": 0.54,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 575,
+                    "x_nm": 0.58,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 587,
+                    "x_nm": 0.6,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 605,
+                    "x_nm": 0.63,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 635,
+                    "x_nm": 0.66,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 665,
+                    "x_nm": 0.7,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 695,
+                    "x_nm": 0.74,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 725,
+                    "x_nm": 0.77,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 755,
+                    "x_nm": 0.8,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 785,
+                    "x_nm": 0.83,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 815,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 845,
+                    "x_nm": 0.89,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 875,
+                    "x_nm": 0.91,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 880,
+                    "x_nm": 0.92,
+                    "y_nm": -0.22
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "sf-bay-enc-rv9-008",
+      "rank": 8,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 25,
+        "max_source_state_age_s": 44,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.79,
+              "y_nm": 0.41
+            },
+            {
+              "label": "B",
+              "x_nm": 0.79,
+              "y_nm": -0.41
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.24,
+              "y_nm": -0.1
+            },
+            {
+              "label": "B",
+              "x_nm": -0.3,
+              "y_nm": -0.29
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.27,
+            "y_nm": -0.2
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.214383,
+        "tcpa_min": 6.533182,
+        "closest_time_t_s": 391,
+        "current_distance_nm": 0.392019,
+        "screening_score": 0.568861
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.209602,
+        "continuous_min_time_t_s": 368,
+        "dcpa_abs_error_nm": 0.004781,
+        "closest_time_abs_error_s": 23,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 874.0,
+        "common_coverage_fraction": 0.971111,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 18.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.209669
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.213488
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.213488
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.21,
+            "y_nm": -0.04
+          },
+          {
+            "label": "B",
+            "x_nm": -0.05,
+            "y_nm": 0.09
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 8,
+            "end_t_s": 882,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 8,
+                    "x_nm": -0.77,
+                    "y_nm": 0.4
+                  },
+                  {
+                    "t_s": 38,
+                    "x_nm": -0.73,
+                    "y_nm": 0.36
+                  },
+                  {
+                    "t_s": 68,
+                    "x_nm": -0.68,
+                    "y_nm": 0.32
+                  },
+                  {
+                    "t_s": 98,
+                    "x_nm": -0.63,
+                    "y_nm": 0.29
+                  },
+                  {
+                    "t_s": 128,
+                    "x_nm": -0.58,
+                    "y_nm": 0.25
+                  },
+                  {
+                    "t_s": 158,
+                    "x_nm": -0.54,
+                    "y_nm": 0.21
+                  },
+                  {
+                    "t_s": 188,
+                    "x_nm": -0.49,
+                    "y_nm": 0.18
+                  },
+                  {
+                    "t_s": 218,
+                    "x_nm": -0.44,
+                    "y_nm": 0.14
+                  },
+                  {
+                    "t_s": 248,
+                    "x_nm": -0.4,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 278,
+                    "x_nm": -0.35,
+                    "y_nm": 0.07
+                  },
+                  {
+                    "t_s": 308,
+                    "x_nm": -0.3,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 338,
+                    "x_nm": -0.26,
+                    "y_nm": -0.01
+                  },
+                  {
+                    "t_s": 368,
+                    "x_nm": -0.21,
+                    "y_nm": -0.04
+                  },
+                  {
+                    "t_s": 391,
+                    "x_nm": -0.18,
+                    "y_nm": -0.07
+                  },
+                  {
+                    "t_s": 398,
+                    "x_nm": -0.17,
+                    "y_nm": -0.07
+                  },
+                  {
+                    "t_s": 428,
+                    "x_nm": -0.12,
+                    "y_nm": -0.11
+                  },
+                  {
+                    "t_s": 458,
+                    "x_nm": -0.08,
+                    "y_nm": -0.14
+                  },
+                  {
+                    "t_s": 488,
+                    "x_nm": -0.02,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 518,
+                    "x_nm": 0.03,
+                    "y_nm": -0.19
+                  },
+                  {
+                    "t_s": 548,
+                    "x_nm": 0.08,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 578,
+                    "x_nm": 0.13,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 608,
+                    "x_nm": 0.19,
+                    "y_nm": -0.27
+                  },
+                  {
+                    "t_s": 638,
+                    "x_nm": 0.24,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 668,
+                    "x_nm": 0.29,
+                    "y_nm": -0.32
+                  },
+                  {
+                    "t_s": 698,
+                    "x_nm": 0.33,
+                    "y_nm": -0.34
+                  },
+                  {
+                    "t_s": 728,
+                    "x_nm": 0.38,
+                    "y_nm": -0.36
+                  },
+                  {
+                    "t_s": 758,
+                    "x_nm": 0.42,
+                    "y_nm": -0.37
+                  },
+                  {
+                    "t_s": 788,
+                    "x_nm": 0.46,
+                    "y_nm": -0.38
+                  },
+                  {
+                    "t_s": 818,
+                    "x_nm": 0.5,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 848,
+                    "x_nm": 0.54,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 878,
+                    "x_nm": 0.58,
+                    "y_nm": -0.41
+                  },
+                  {
+                    "t_s": 882,
+                    "x_nm": 0.59,
+                    "y_nm": -0.42
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 8,
+                    "x_nm": 0.76,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 38,
+                    "x_nm": 0.68,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 68,
+                    "x_nm": 0.6,
+                    "y_nm": -0.38
+                  },
+                  {
+                    "t_s": 98,
+                    "x_nm": 0.52,
+                    "y_nm": -0.36
+                  },
+                  {
+                    "t_s": 128,
+                    "x_nm": 0.44,
+                    "y_nm": -0.32
+                  },
+                  {
+                    "t_s": 158,
+                    "x_nm": 0.38,
+                    "y_nm": -0.28
+                  },
+                  {
+                    "t_s": 188,
+                    "x_nm": 0.31,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 218,
+                    "x_nm": 0.25,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 248,
+                    "x_nm": 0.18,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 278,
+                    "x_nm": 0.12,
+                    "y_nm": -0.08
+                  },
+                  {
+                    "t_s": 308,
+                    "x_nm": 0.06,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 338,
+                    "x_nm": -0.0,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 368,
+                    "x_nm": -0.05,
+                    "y_nm": 0.09
+                  },
+                  {
+                    "t_s": 391,
+                    "x_nm": -0.09,
+                    "y_nm": 0.14
+                  },
+                  {
+                    "t_s": 398,
+                    "x_nm": -0.1,
+                    "y_nm": 0.16
+                  },
+                  {
+                    "t_s": 428,
+                    "x_nm": -0.14,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 458,
+                    "x_nm": -0.17,
+                    "y_nm": 0.31
+                  },
+                  {
+                    "t_s": 488,
+                    "x_nm": -0.21,
+                    "y_nm": 0.38
+                  },
+                  {
+                    "t_s": 518,
+                    "x_nm": -0.23,
+                    "y_nm": 0.45
+                  },
+                  {
+                    "t_s": 548,
+                    "x_nm": -0.25,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 578,
+                    "x_nm": -0.27,
+                    "y_nm": 0.58
+                  },
+                  {
+                    "t_s": 608,
+                    "x_nm": -0.29,
+                    "y_nm": 0.64
+                  },
+                  {
+                    "t_s": 638,
+                    "x_nm": -0.3,
+                    "y_nm": 0.67
+                  },
+                  {
+                    "t_s": 668,
+                    "x_nm": -0.3,
+                    "y_nm": 0.69
+                  },
+                  {
+                    "t_s": 698,
+                    "x_nm": -0.31,
+                    "y_nm": 0.7
+                  },
+                  {
+                    "t_s": 728,
+                    "x_nm": -0.3,
+                    "y_nm": 0.71
+                  },
+                  {
+                    "t_s": 758,
+                    "x_nm": -0.3,
+                    "y_nm": 0.71
+                  },
+                  {
+                    "t_s": 788,
+                    "x_nm": -0.3,
+                    "y_nm": 0.71
+                  },
+                  {
+                    "t_s": 818,
+                    "x_nm": -0.3,
+                    "y_nm": 0.72
+                  },
+                  {
+                    "t_s": 848,
+                    "x_nm": -0.3,
+                    "y_nm": 0.73
+                  },
+                  {
+                    "t_s": 878,
+                    "x_nm": -0.3,
+                    "y_nm": 0.73
+                  },
+                  {
+                    "t_s": 882,
+                    "x_nm": -0.3,
+                    "y_nm": 0.73
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "sf-bay-enc-rv9-009",
+      "rank": 9,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 5,
+        "max_source_state_age_s": 56,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.85,
+              "y_nm": 0.22
+            },
+            {
+              "label": "B",
+              "x_nm": 0.85,
+              "y_nm": -0.22
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": 0.82,
+              "y_nm": 0.02
+            },
+            {
+              "label": "B",
+              "x_nm": 0.78,
+              "y_nm": -0.16
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": 0.8,
+            "y_nm": -0.07
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.177107,
+        "tcpa_min": 4.113235,
+        "closest_time_t_s": 246,
+        "current_distance_nm": 1.763236,
+        "screening_score": 0.673785
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.018112,
+        "continuous_min_time_t_s": 884,
+        "dcpa_abs_error_nm": 0.158995,
+        "closest_time_abs_error_s": 637,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 873.0,
+        "common_coverage_fraction": 0.97,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 16.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 87,
+          "min_distance_nm": 0.018182
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.018358
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.018861
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": 0.86,
+            "y_nm": -0.21
+          },
+          {
+            "label": "B",
+            "x_nm": 0.86,
+            "y_nm": -0.23
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 11,
+            "end_t_s": 884,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 11,
+                    "x_nm": -0.83,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 41,
+                    "x_nm": -0.62,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 71,
+                    "x_nm": -0.41,
+                    "y_nm": -0.03
+                  },
+                  {
+                    "t_s": 101,
+                    "x_nm": -0.21,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 131,
+                    "x_nm": -0.02,
+                    "y_nm": -0.08
+                  },
+                  {
+                    "t_s": 161,
+                    "x_nm": 0.05,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 191,
+                    "x_nm": 0.1,
+                    "y_nm": -0.1
+                  },
+                  {
+                    "t_s": 221,
+                    "x_nm": 0.17,
+                    "y_nm": -0.13
+                  },
+                  {
+                    "t_s": 246,
+                    "x_nm": 0.23,
+                    "y_nm": -0.15
+                  },
+                  {
+                    "t_s": 251,
+                    "x_nm": 0.24,
+                    "y_nm": -0.16
+                  },
+                  {
+                    "t_s": 281,
+                    "x_nm": 0.32,
+                    "y_nm": -0.18
+                  },
+                  {
+                    "t_s": 311,
+                    "x_nm": 0.4,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 341,
+                    "x_nm": 0.47,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 371,
+                    "x_nm": 0.55,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 401,
+                    "x_nm": 0.62,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 431,
+                    "x_nm": 0.68,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 461,
+                    "x_nm": 0.75,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 491,
+                    "x_nm": 0.8,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 521,
+                    "x_nm": 0.84,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 551,
+                    "x_nm": 0.87,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 581,
+                    "x_nm": 0.88,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 611,
+                    "x_nm": 0.88,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 641,
+                    "x_nm": 0.87,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 671,
+                    "x_nm": 0.86,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 701,
+                    "x_nm": 0.86,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 731,
+                    "x_nm": 0.86,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 761,
+                    "x_nm": 0.86,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 791,
+                    "x_nm": 0.86,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 821,
+                    "x_nm": 0.86,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 851,
+                    "x_nm": 0.86,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 881,
+                    "x_nm": 0.86,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 884,
+                    "x_nm": 0.86,
+                    "y_nm": -0.21
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 11,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 41,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 71,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 101,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 131,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 161,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 191,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 221,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 246,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 251,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 281,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 311,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 341,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 371,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 401,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 431,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 461,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 491,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 521,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 551,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 581,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 611,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 641,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 671,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 701,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 731,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 761,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 791,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 821,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 851,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 881,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 884,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "sf-bay-enc-rv9-010",
+      "rank": 10,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 7,
+        "max_source_state_age_s": 58,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.56,
+              "y_nm": 0.46
+            },
+            {
+              "label": "B",
+              "x_nm": 0.56,
+              "y_nm": -0.46
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": 0.08,
+              "y_nm": 0.25
+            },
+            {
+              "label": "B",
+              "x_nm": -0.03,
+              "y_nm": 0.06
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": 0.03,
+            "y_nm": 0.15
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.235571,
+        "tcpa_min": 4.636874,
+        "closest_time_t_s": 278,
+        "current_distance_nm": 1.017365,
+        "screening_score": 0.585563
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.076943,
+        "continuous_min_time_t_s": 632,
+        "dcpa_abs_error_nm": 0.158628,
+        "closest_time_abs_error_s": 354,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 873.0,
+        "common_coverage_fraction": 0.97,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 17.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.077071
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.077071
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.094147
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": 0.47,
+            "y_nm": -0.53
+          },
+          {
+            "label": "B",
+            "x_nm": 0.42,
+            "y_nm": -0.59
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 10,
+            "end_t_s": 883,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 10,
+                    "x_nm": -0.54,
+                    "y_nm": 0.45
+                  },
+                  {
+                    "t_s": 40,
+                    "x_nm": -0.47,
+                    "y_nm": 0.42
+                  },
+                  {
+                    "t_s": 70,
+                    "x_nm": -0.4,
+                    "y_nm": 0.39
+                  },
+                  {
+                    "t_s": 100,
+                    "x_nm": -0.33,
+                    "y_nm": 0.36
+                  },
+                  {
+                    "t_s": 130,
+                    "x_nm": -0.26,
+                    "y_nm": 0.33
+                  },
+                  {
+                    "t_s": 160,
+                    "x_nm": -0.19,
+                    "y_nm": 0.29
+                  },
+                  {
+                    "t_s": 190,
+                    "x_nm": -0.13,
+                    "y_nm": 0.25
+                  },
+                  {
+                    "t_s": 220,
+                    "x_nm": -0.07,
+                    "y_nm": 0.21
+                  },
+                  {
+                    "t_s": 250,
+                    "x_nm": -0.01,
+                    "y_nm": 0.16
+                  },
+                  {
+                    "t_s": 278,
+                    "x_nm": 0.04,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 280,
+                    "x_nm": 0.04,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 310,
+                    "x_nm": 0.09,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 340,
+                    "x_nm": 0.13,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 370,
+                    "x_nm": 0.16,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 400,
+                    "x_nm": 0.18,
+                    "y_nm": -0.11
+                  },
+                  {
+                    "t_s": 430,
+                    "x_nm": 0.21,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 490,
+                    "x_nm": 0.27,
+                    "y_nm": -0.29
+                  },
+                  {
+                    "t_s": 520,
+                    "x_nm": 0.3,
+                    "y_nm": -0.34
+                  },
+                  {
+                    "t_s": 550,
+                    "x_nm": 0.35,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 580,
+                    "x_nm": 0.39,
+                    "y_nm": -0.46
+                  },
+                  {
+                    "t_s": 610,
+                    "x_nm": 0.44,
+                    "y_nm": -0.5
+                  },
+                  {
+                    "t_s": 632,
+                    "x_nm": 0.47,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 640,
+                    "x_nm": 0.48,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 670,
+                    "x_nm": 0.53,
+                    "y_nm": -0.57
+                  },
+                  {
+                    "t_s": 700,
+                    "x_nm": 0.59,
+                    "y_nm": -0.6
+                  },
+                  {
+                    "t_s": 730,
+                    "x_nm": 0.64,
+                    "y_nm": -0.63
+                  },
+                  {
+                    "t_s": 760,
+                    "x_nm": 0.7,
+                    "y_nm": -0.66
+                  },
+                  {
+                    "t_s": 790,
+                    "x_nm": 0.76,
+                    "y_nm": -0.69
+                  },
+                  {
+                    "t_s": 820,
+                    "x_nm": 0.82,
+                    "y_nm": -0.72
+                  },
+                  {
+                    "t_s": 850,
+                    "x_nm": 0.88,
+                    "y_nm": -0.76
+                  },
+                  {
+                    "t_s": 880,
+                    "x_nm": 0.93,
+                    "y_nm": -0.79
+                  },
+                  {
+                    "t_s": 883,
+                    "x_nm": 0.94,
+                    "y_nm": -0.79
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 10,
+                    "x_nm": 0.54,
+                    "y_nm": -0.48
+                  },
+                  {
+                    "t_s": 40,
+                    "x_nm": 0.51,
+                    "y_nm": -0.47
+                  },
+                  {
+                    "t_s": 70,
+                    "x_nm": 0.48,
+                    "y_nm": -0.45
+                  },
+                  {
+                    "t_s": 100,
+                    "x_nm": 0.45,
+                    "y_nm": -0.47
+                  },
+                  {
+                    "t_s": 130,
+                    "x_nm": 0.42,
+                    "y_nm": -0.5
+                  },
+                  {
+                    "t_s": 160,
+                    "x_nm": 0.41,
+                    "y_nm": -0.52
+                  },
+                  {
+                    "t_s": 190,
+                    "x_nm": 0.41,
+                    "y_nm": -0.54
+                  },
+                  {
+                    "t_s": 220,
+                    "x_nm": 0.41,
+                    "y_nm": -0.56
+                  },
+                  {
+                    "t_s": 250,
+                    "x_nm": 0.42,
+                    "y_nm": -0.57
+                  },
+                  {
+                    "t_s": 278,
+                    "x_nm": 0.42,
+                    "y_nm": -0.58
+                  },
+                  {
+                    "t_s": 280,
+                    "x_nm": 0.42,
+                    "y_nm": -0.58
+                  },
+                  {
+                    "t_s": 310,
+                    "x_nm": 0.42,
+                    "y_nm": -0.58
+                  },
+                  {
+                    "t_s": 340,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 370,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 400,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 430,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 490,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 520,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 550,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 580,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 610,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 632,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 640,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 670,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 700,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 730,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 760,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 790,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 820,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 850,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 880,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 883,
+                    "x_nm": 0.42,
+                    "y_nm": -0.59
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "sf-bay-enc-rv9-011",
+      "rank": 11,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 1,
+        "max_source_state_age_s": 49,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.12,
+              "y_nm": 0.91
+            },
+            {
+              "label": "B",
+              "x_nm": 0.12,
+              "y_nm": -0.91
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.47,
+              "y_nm": 0.84
+            },
+            {
+              "label": "B",
+              "x_nm": -0.44,
+              "y_nm": 0.83
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.45,
+            "y_nm": 0.83
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.030388,
+        "tcpa_min": 3.012026,
+        "closest_time_t_s": 180,
+        "current_distance_nm": 0.799,
+        "screening_score": 0.890215
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.479962,
+        "continuous_min_time_t_s": 184,
+        "dcpa_abs_error_nm": 0.449574,
+        "closest_time_abs_error_s": 4,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 872.0,
+        "common_coverage_fraction": 0.968889,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 15.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 87,
+          "min_distance_nm": 0.481936
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.481936
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.481936
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.46,
+            "y_nm": 0.83
+          },
+          {
+            "label": "B",
+            "x_nm": -0.9,
+            "y_nm": 0.66
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 13,
+            "end_t_s": 885,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 13,
+                    "x_nm": -0.14,
+                    "y_nm": 0.9
+                  },
+                  {
+                    "t_s": 43,
+                    "x_nm": -0.2,
+                    "y_nm": 0.89
+                  },
+                  {
+                    "t_s": 73,
+                    "x_nm": -0.25,
+                    "y_nm": 0.88
+                  },
+                  {
+                    "t_s": 103,
+                    "x_nm": -0.31,
+                    "y_nm": 0.87
+                  },
+                  {
+                    "t_s": 133,
+                    "x_nm": -0.36,
+                    "y_nm": 0.85
+                  },
+                  {
+                    "t_s": 163,
+                    "x_nm": -0.42,
+                    "y_nm": 0.84
+                  },
+                  {
+                    "t_s": 180,
+                    "x_nm": -0.45,
+                    "y_nm": 0.83
+                  },
+                  {
+                    "t_s": 184,
+                    "x_nm": -0.46,
+                    "y_nm": 0.83
+                  },
+                  {
+                    "t_s": 193,
+                    "x_nm": -0.47,
+                    "y_nm": 0.83
+                  },
+                  {
+                    "t_s": 223,
+                    "x_nm": -0.53,
+                    "y_nm": 0.81
+                  },
+                  {
+                    "t_s": 253,
+                    "x_nm": -0.58,
+                    "y_nm": 0.8
+                  },
+                  {
+                    "t_s": 283,
+                    "x_nm": -0.63,
+                    "y_nm": 0.78
+                  },
+                  {
+                    "t_s": 313,
+                    "x_nm": -0.69,
+                    "y_nm": 0.77
+                  },
+                  {
+                    "t_s": 343,
+                    "x_nm": -0.74,
+                    "y_nm": 0.76
+                  },
+                  {
+                    "t_s": 373,
+                    "x_nm": -0.79,
+                    "y_nm": 0.74
+                  },
+                  {
+                    "t_s": 403,
+                    "x_nm": -0.85,
+                    "y_nm": 0.73
+                  },
+                  {
+                    "t_s": 433,
+                    "x_nm": -0.9,
+                    "y_nm": 0.71
+                  },
+                  {
+                    "t_s": 493,
+                    "x_nm": -1.01,
+                    "y_nm": 0.68
+                  },
+                  {
+                    "t_s": 523,
+                    "x_nm": -1.07,
+                    "y_nm": 0.67
+                  },
+                  {
+                    "t_s": 553,
+                    "x_nm": -1.13,
+                    "y_nm": 0.65
+                  },
+                  {
+                    "t_s": 583,
+                    "x_nm": -1.19,
+                    "y_nm": 0.64
+                  },
+                  {
+                    "t_s": 613,
+                    "x_nm": -1.25,
+                    "y_nm": 0.62
+                  },
+                  {
+                    "t_s": 643,
+                    "x_nm": -1.3,
+                    "y_nm": 0.6
+                  },
+                  {
+                    "t_s": 673,
+                    "x_nm": -1.36,
+                    "y_nm": 0.59
+                  },
+                  {
+                    "t_s": 703,
+                    "x_nm": -1.42,
+                    "y_nm": 0.57
+                  },
+                  {
+                    "t_s": 733,
+                    "x_nm": -1.47,
+                    "y_nm": 0.55
+                  },
+                  {
+                    "t_s": 763,
+                    "x_nm": -1.52,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 793,
+                    "x_nm": -1.58,
+                    "y_nm": 0.5
+                  },
+                  {
+                    "t_s": 823,
+                    "x_nm": -1.61,
+                    "y_nm": 0.47
+                  },
+                  {
+                    "t_s": 853,
+                    "x_nm": -1.64,
+                    "y_nm": 0.45
+                  },
+                  {
+                    "t_s": 883,
+                    "x_nm": -1.67,
+                    "y_nm": 0.42
+                  },
+                  {
+                    "t_s": 885,
+                    "x_nm": -1.68,
+                    "y_nm": 0.42
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 13,
+                    "x_nm": -0.01,
+                    "y_nm": -0.83
+                  },
+                  {
+                    "t_s": 43,
+                    "x_nm": -0.17,
+                    "y_nm": -0.57
+                  },
+                  {
+                    "t_s": 73,
+                    "x_nm": -0.33,
+                    "y_nm": -0.31
+                  },
+                  {
+                    "t_s": 103,
+                    "x_nm": -0.48,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 133,
+                    "x_nm": -0.64,
+                    "y_nm": 0.21
+                  },
+                  {
+                    "t_s": 163,
+                    "x_nm": -0.8,
+                    "y_nm": 0.48
+                  },
+                  {
+                    "t_s": 180,
+                    "x_nm": -0.88,
+                    "y_nm": 0.62
+                  },
+                  {
+                    "t_s": 184,
+                    "x_nm": -0.9,
+                    "y_nm": 0.66
+                  },
+                  {
+                    "t_s": 193,
+                    "x_nm": -0.95,
+                    "y_nm": 0.74
+                  },
+                  {
+                    "t_s": 223,
+                    "x_nm": -1.13,
+                    "y_nm": 0.98
+                  },
+                  {
+                    "t_s": 253,
+                    "x_nm": -1.31,
+                    "y_nm": 1.22
+                  },
+                  {
+                    "t_s": 283,
+                    "x_nm": -1.47,
+                    "y_nm": 1.48
+                  },
+                  {
+                    "t_s": 313,
+                    "x_nm": -1.63,
+                    "y_nm": 1.73
+                  },
+                  {
+                    "t_s": 343,
+                    "x_nm": -1.84,
+                    "y_nm": 1.94
+                  },
+                  {
+                    "t_s": 373,
+                    "x_nm": -2.06,
+                    "y_nm": 2.15
+                  },
+                  {
+                    "t_s": 403,
+                    "x_nm": -2.33,
+                    "y_nm": 2.31
+                  },
+                  {
+                    "t_s": 433,
+                    "x_nm": -2.61,
+                    "y_nm": 2.46
+                  },
+                  {
+                    "t_s": 493,
+                    "x_nm": -3.06,
+                    "y_nm": 2.68
+                  },
+                  {
+                    "t_s": 523,
+                    "x_nm": -3.17,
+                    "y_nm": 2.74
+                  },
+                  {
+                    "t_s": 553,
+                    "x_nm": -3.25,
+                    "y_nm": 2.77
+                  },
+                  {
+                    "t_s": 583,
+                    "x_nm": -3.32,
+                    "y_nm": 2.81
+                  },
+                  {
+                    "t_s": 613,
+                    "x_nm": -3.4,
+                    "y_nm": 2.84
+                  },
+                  {
+                    "t_s": 643,
+                    "x_nm": -3.47,
+                    "y_nm": 2.88
+                  },
+                  {
+                    "t_s": 673,
+                    "x_nm": -3.55,
+                    "y_nm": 2.91
+                  },
+                  {
+                    "t_s": 703,
+                    "x_nm": -3.62,
+                    "y_nm": 2.96
+                  },
+                  {
+                    "t_s": 733,
+                    "x_nm": -3.7,
+                    "y_nm": 3.01
+                  },
+                  {
+                    "t_s": 763,
+                    "x_nm": -3.77,
+                    "y_nm": 3.05
+                  },
+                  {
+                    "t_s": 793,
+                    "x_nm": -3.84,
+                    "y_nm": 3.1
+                  },
+                  {
+                    "t_s": 823,
+                    "x_nm": -3.91,
+                    "y_nm": 3.15
+                  },
+                  {
+                    "t_s": 853,
+                    "x_nm": -3.97,
+                    "y_nm": 3.18
+                  },
+                  {
+                    "t_s": 883,
+                    "x_nm": -4.02,
+                    "y_nm": 3.21
+                  },
+                  {
+                    "t_s": 885,
+                    "x_nm": -4.03,
+                    "y_nm": 3.21
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "sf-bay-enc-rv9-012",
+      "rank": 12,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 4,
+        "max_source_state_age_s": 51,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": 0.58,
+              "y_nm": -0.5
+            },
+            {
+              "label": "B",
+              "x_nm": -0.58,
+              "y_nm": 0.5
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -1.33,
+              "y_nm": 0.7
+            },
+            {
+              "label": "B",
+              "x_nm": -1.25,
+              "y_nm": 0.8
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -1.29,
+            "y_nm": 0.75
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.109851,
+        "tcpa_min": 4.631412,
+        "closest_time_t_s": 277,
+        "current_distance_nm": 1.536565,
+        "screening_score": 0.749127
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.013946,
+        "continuous_min_time_t_s": 892,
+        "dcpa_abs_error_nm": 0.095905,
+        "closest_time_abs_error_s": 614,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 871.0,
+        "common_coverage_fraction": 0.967778,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 21.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 87,
+          "min_distance_nm": 0.014001
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.014552
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.015384
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.75,
+            "y_nm": 0.5
+          },
+          {
+            "label": "B",
+            "x_nm": -0.76,
+            "y_nm": 0.51
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 21,
+            "end_t_s": 892,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 21,
+                    "x_nm": 2.97,
+                    "y_nm": -0.85
+                  },
+                  {
+                    "t_s": 51,
+                    "x_nm": 2.83,
+                    "y_nm": -0.82
+                  },
+                  {
+                    "t_s": 81,
+                    "x_nm": 2.67,
+                    "y_nm": -0.78
+                  },
+                  {
+                    "t_s": 111,
+                    "x_nm": 2.45,
+                    "y_nm": -0.77
+                  },
+                  {
+                    "t_s": 141,
+                    "x_nm": 2.24,
+                    "y_nm": -0.76
+                  },
+                  {
+                    "t_s": 171,
+                    "x_nm": 2.03,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 201,
+                    "x_nm": 1.82,
+                    "y_nm": -0.7
+                  },
+                  {
+                    "t_s": 231,
+                    "x_nm": 1.62,
+                    "y_nm": -0.65
+                  },
+                  {
+                    "t_s": 261,
+                    "x_nm": 1.43,
+                    "y_nm": -0.55
+                  },
+                  {
+                    "t_s": 277,
+                    "x_nm": 1.33,
+                    "y_nm": -0.5
+                  },
+                  {
+                    "t_s": 291,
+                    "x_nm": 1.24,
+                    "y_nm": -0.45
+                  },
+                  {
+                    "t_s": 321,
+                    "x_nm": 1.05,
+                    "y_nm": -0.35
+                  },
+                  {
+                    "t_s": 351,
+                    "x_nm": 0.87,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 381,
+                    "x_nm": 0.68,
+                    "y_nm": -0.13
+                  },
+                  {
+                    "t_s": 411,
+                    "x_nm": 0.5,
+                    "y_nm": -0.03
+                  },
+                  {
+                    "t_s": 441,
+                    "x_nm": 0.31,
+                    "y_nm": 0.08
+                  },
+                  {
+                    "t_s": 471,
+                    "x_nm": 0.12,
+                    "y_nm": 0.18
+                  },
+                  {
+                    "t_s": 501,
+                    "x_nm": -0.07,
+                    "y_nm": 0.27
+                  },
+                  {
+                    "t_s": 531,
+                    "x_nm": -0.27,
+                    "y_nm": 0.36
+                  },
+                  {
+                    "t_s": 561,
+                    "x_nm": -0.39,
+                    "y_nm": 0.42
+                  },
+                  {
+                    "t_s": 591,
+                    "x_nm": -0.49,
+                    "y_nm": 0.46
+                  },
+                  {
+                    "t_s": 621,
+                    "x_nm": -0.56,
+                    "y_nm": 0.48
+                  },
+                  {
+                    "t_s": 651,
+                    "x_nm": -0.62,
+                    "y_nm": 0.5
+                  },
+                  {
+                    "t_s": 681,
+                    "x_nm": -0.68,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 711,
+                    "x_nm": -0.73,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 741,
+                    "x_nm": -0.74,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 771,
+                    "x_nm": -0.75,
+                    "y_nm": 0.5
+                  },
+                  {
+                    "t_s": 801,
+                    "x_nm": -0.75,
+                    "y_nm": 0.5
+                  },
+                  {
+                    "t_s": 831,
+                    "x_nm": -0.75,
+                    "y_nm": 0.5
+                  },
+                  {
+                    "t_s": 861,
+                    "x_nm": -0.75,
+                    "y_nm": 0.5
+                  },
+                  {
+                    "t_s": 891,
+                    "x_nm": -0.75,
+                    "y_nm": 0.5
+                  },
+                  {
+                    "t_s": 892,
+                    "x_nm": -0.75,
+                    "y_nm": 0.5
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 21,
+                    "x_nm": -0.62,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 51,
+                    "x_nm": -0.66,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 81,
+                    "x_nm": -0.71,
+                    "y_nm": 0.53
+                  },
+                  {
+                    "t_s": 111,
+                    "x_nm": -0.74,
+                    "y_nm": 0.53
+                  },
+                  {
+                    "t_s": 141,
+                    "x_nm": -0.75,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 171,
+                    "x_nm": -0.76,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 201,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 231,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 261,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 277,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 291,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 321,
+                    "x_nm": -0.76,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 351,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 381,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 411,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 441,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 471,
+                    "x_nm": -0.76,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 501,
+                    "x_nm": -0.76,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 531,
+                    "x_nm": -0.76,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 561,
+                    "x_nm": -0.76,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 591,
+                    "x_nm": -0.76,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 621,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 651,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 681,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 711,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 741,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 771,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 801,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 831,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 861,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 891,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 892,
+                    "x_nm": -0.76,
+                    "y_nm": 0.51
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

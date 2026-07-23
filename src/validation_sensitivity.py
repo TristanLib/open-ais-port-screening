@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Run lightweight out-of-sample and threshold-sensitivity checks.
 
-The workflow uses interpretable screening rules rather than a supervised
-classifier. These checks report stability of candidate counts and rates, not
-classification accuracy against incident labels.
+The main paper intentionally uses interpretable screening rules rather than a
+supervised classifier. These checks therefore report stability of candidate
+counts and rates, not classification accuracy against incident labels.
 """
 
 from __future__ import annotations

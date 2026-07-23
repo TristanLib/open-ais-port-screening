@@ -449,6 +449,162 @@ h2 {
   margin: 0;
 }
 
+.encounter-card-details {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+}
+
+.encounter-card-details > summary {
+  display: grid;
+  gap: 5px;
+  padding: 10px 12px;
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+.encounter-card-details > summary::marker {
+  color: var(--purple);
+}
+
+.encounter-card-details[open] > summary {
+  border-bottom: 1px solid var(--line);
+  background: #fbfcfd;
+}
+
+.encounter-card-heading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  font-size: 12px;
+}
+
+.encounter-card-heading strong {
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.encounter-support {
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: #edf6ff;
+  color: #255d9e;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.encounter-support.is-insufficient {
+  background: #fff4dc;
+  color: #78520a;
+}
+
+.encounter-card-headline {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.encounter-card-body {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+}
+
+.encounter-card-body h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.encounter-card-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.encounter-metric {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: 7px 8px;
+  border: 1px solid #e5ebf1;
+  border-radius: 7px;
+  background: #fbfcfd;
+}
+
+.encounter-metric strong {
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.encounter-metric span,
+.encounter-sensitivity,
+.encounter-boundary,
+.geometry-unavailable,
+.geometry-legend {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.encounter-sensitivity,
+.encounter-boundary,
+.geometry-unavailable,
+.geometry-legend {
+  margin: 0;
+}
+
+.encounter-boundary {
+  padding: 7px 8px;
+  border-left: 3px solid var(--orange);
+  background: #fff9ed;
+  color: #684b19;
+}
+
+.encounter-geometry-wrap {
+  display: grid;
+  gap: 5px;
+}
+
+.encounter-geometry {
+  width: 100%;
+  height: auto;
+  max-height: 190px;
+  overflow: visible;
+  border: 1px solid #dce5ed;
+  border-radius: 8px;
+}
+
+.geometry-background {
+  fill: #f6f9fb;
+}
+
+.geometry-track {
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.predicted-marker {
+  fill: #fff;
+  stroke: #7b61ff;
+  stroke-width: 2;
+}
+
+.observed-marker {
+  fill: #fff;
+  stroke: #16202a;
+  stroke-width: 2;
+}
+
 .layer-role {
   color: var(--muted);
   font-size: 11px;

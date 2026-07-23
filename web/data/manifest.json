@@ -29,7 +29,8 @@
   },
   "companion_data": {
     "summary": "summary.json",
-    "evidence_cards": "evidence_cards.json"
+    "evidence_cards": "evidence_cards.json",
+    "encounter_evidence_cards": "encounter_evidence_cards.json"
   },
   "layers": [
     {

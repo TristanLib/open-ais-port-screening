@@ -18,12 +18,19 @@ import math
 import statistics
 import sys
 from pathlib import Path
+from typing import NamedTuple
 
 
 EARTH_RADIUS_NM = 3440.065
 
 
-Position = tuple[dt.datetime, float, float]
+class Position(NamedTuple):
+    """One observed position with its trajectory-segment identity."""
+
+    timestamp: dt.datetime
+    lon: float
+    lat: float
+    track_id: str = ""
 
 
 def parse_date(value: str) -> dt.date:
@@ -232,7 +239,17 @@ def load_positions(
                     timestamp = parse_time(row["base_date_time"])
                 except (KeyError, ValueError):
                     continue
-                positions[mmsi].append((timestamp, lon, lat))
+                source_track_id = row.get("track_id", "").strip()
+                if not source_track_id:
+                    continue
+                # Daily feature extraction restarts its segment counter.  A
+                # raw id such as ``123456789_0001`` can therefore occur on
+                # adjacent dates without denoting one continuous segment.
+                # Qualifying with the source day makes the continuity key
+                # globally unambiguous and conservatively prevents a
+                # cross-midnight interpolation edge.
+                track_id = f"{day.isoformat()}::{source_track_id}"
+                positions[mmsi].append(Position(timestamp, lon, lat, track_id))
 
     for rows in positions.values():
         rows.sort(key=lambda item: item[0])
@@ -251,25 +268,228 @@ def interpolate_position(
     timestamp: dt.datetime,
     max_interpolation_gap_s: int,
     times: list[dt.datetime] | None = None,
+    *,
+    window_start: dt.datetime | None = None,
+    window_end: dt.datetime | None = None,
 ) -> tuple[float, float] | None:
+    """Reconstruct a position without crossing a segment or outcome window.
+
+    Both interpolation endpoints must be strictly after ``window_start`` and
+    no later than ``window_end``.  Exact observed positions follow the same
+    window and non-empty-track rules.
+    """
     if not rows:
         return None
+    if window_start is not None and timestamp <= window_start:
+        return None
+    if window_end is not None and timestamp > window_end:
+        return None
     if times is None:
-        times = [item[0] for item in rows]
+        times = [item.timestamp for item in rows]
     index = bisect.bisect_left(times, timestamp)
-    if index < len(rows) and rows[index][0] == timestamp:
-        return rows[index][1], rows[index][2]
+    if index < len(rows) and rows[index].timestamp == timestamp:
+        exact = rows[index]
+        if not exact.track_id:
+            return None
+        if window_start is not None and exact.timestamp <= window_start:
+            return None
+        if window_end is not None and exact.timestamp > window_end:
+            return None
+        return exact.lon, exact.lat
     if index == 0 or index >= len(rows):
         return None
     before = rows[index - 1]
     after = rows[index]
-    gap_s = (after[0] - before[0]).total_seconds()
+    if not before.track_id or before.track_id != after.track_id:
+        return None
+    if window_start is not None and (before.timestamp <= window_start or after.timestamp <= window_start):
+        return None
+    if window_end is not None and (before.timestamp > window_end or after.timestamp > window_end):
+        return None
+    gap_s = (after.timestamp - before.timestamp).total_seconds()
     if gap_s <= 0 or gap_s > max_interpolation_gap_s:
         return None
-    fraction = (timestamp - before[0]).total_seconds() / gap_s
-    lon = before[1] + (after[1] - before[1]) * fraction
-    lat = before[2] + (after[2] - before[2]) * fraction
+    fraction = (timestamp - before.timestamp).total_seconds() / gap_s
+    lon = before.lon + (after.lon - before.lon) * fraction
+    lat = before.lat + (after.lat - before.lat) * fraction
     return lon, lat
+
+
+Segment = tuple[Position, Position]
+TimeInterval = tuple[dt.datetime, dt.datetime]
+
+
+def eligible_segments(
+    rows: list[Position],
+    window_start: dt.datetime,
+    window_end: dt.datetime,
+    max_interpolation_gap_s: int,
+) -> list[Segment]:
+    """Return same-track, future-only piecewise-linear trajectory edges."""
+    future_rows = [row for row in rows if window_start < row.timestamp <= window_end and row.track_id]
+    segments: list[Segment] = []
+    for before, after in zip(future_rows, future_rows[1:]):
+        gap_s = (after.timestamp - before.timestamp).total_seconds()
+        if (
+            before.track_id == after.track_id
+            and 0 < gap_s <= max_interpolation_gap_s
+        ):
+            segments.append((before, after))
+    return segments
+
+
+def segment_position(segment: Segment, timestamp: dt.datetime) -> tuple[float, float]:
+    before, after = segment
+    duration_s = (after.timestamp - before.timestamp).total_seconds()
+    if duration_s <= 0:
+        return before.lon, before.lat
+    fraction = (timestamp - before.timestamp).total_seconds() / duration_s
+    return (
+        before.lon + (after.lon - before.lon) * fraction,
+        before.lat + (after.lat - before.lat) * fraction,
+    )
+
+
+def merge_intervals(intervals: list[TimeInterval]) -> list[TimeInterval]:
+    if not intervals:
+        return []
+    merged: list[list[dt.datetime]] = []
+    for start, end in sorted(intervals):
+        if not merged or start > merged[-1][1]:
+            merged.append([start, end])
+        else:
+            merged[-1][1] = max(merged[-1][1], end)
+    return [(start, end) for start, end in merged]
+
+
+def continuous_common_min_distance(
+    segments_a: list[Segment],
+    segments_b: list[Segment],
+) -> tuple[float | None, dt.datetime | None, list[TimeInterval]]:
+    """Solve minimum separation over overlapping linear segment intervals."""
+    best_distance: float | None = None
+    best_time: dt.datetime | None = None
+    overlaps: list[TimeInterval] = []
+    index_a = 0
+    index_b = 0
+    while index_a < len(segments_a) and index_b < len(segments_b):
+        segment_a = segments_a[index_a]
+        segment_b = segments_b[index_b]
+        overlap_start = max(segment_a[0].timestamp, segment_b[0].timestamp)
+        overlap_end = min(segment_a[1].timestamp, segment_b[1].timestamp)
+        if overlap_start <= overlap_end:
+            overlaps.append((overlap_start, overlap_end))
+            a_start = segment_position(segment_a, overlap_start)
+            b_start = segment_position(segment_b, overlap_start)
+            a_end = segment_position(segment_a, overlap_end)
+            b_end = segment_position(segment_b, overlap_end)
+
+            ref_lon = (a_start[0] + b_start[0] + a_end[0] + b_end[0]) / 4
+            ref_lat = (a_start[1] + b_start[1] + a_end[1] + b_end[1]) / 4
+            ax0, ay0 = xy_nm(a_start[0], a_start[1], ref_lon, ref_lat)
+            bx0, by0 = xy_nm(b_start[0], b_start[1], ref_lon, ref_lat)
+            ax1, ay1 = xy_nm(a_end[0], a_end[1], ref_lon, ref_lat)
+            bx1, by1 = xy_nm(b_end[0], b_end[1], ref_lon, ref_lat)
+            rx0 = bx0 - ax0
+            ry0 = by0 - ay0
+            duration_s = (overlap_end - overlap_start).total_seconds()
+            if duration_s <= 0:
+                fraction = 0.0
+            else:
+                drx = (bx1 - ax1) - rx0
+                dry = (by1 - ay1) - ry0
+                delta2 = drx * drx + dry * dry
+                fraction = max(0.0, min(1.0, -((rx0 * drx + ry0 * dry) / delta2))) if delta2 > 1e-18 else 0.0
+            closest_rx = rx0 + ((bx1 - ax1) - rx0) * fraction
+            closest_ry = ry0 + ((by1 - ay1) - ry0) * fraction
+            candidate_distance = math.hypot(closest_rx, closest_ry)
+            candidate_time = overlap_start + dt.timedelta(seconds=duration_s * fraction)
+            if best_distance is None or candidate_distance < best_distance:
+                best_distance = candidate_distance
+                best_time = candidate_time
+
+        if segment_a[1].timestamp <= segment_b[1].timestamp:
+            index_a += 1
+        else:
+            index_b += 1
+
+    return best_distance, best_time, merge_intervals(overlaps)
+
+
+def interval_coverage_metrics(
+    intervals: list[TimeInterval],
+    window_start: dt.datetime,
+    window_end: dt.datetime,
+) -> tuple[float, float]:
+    coverage_s = sum(max(0.0, (end - start).total_seconds()) for start, end in intervals)
+    cursor = window_start
+    max_gap_s = 0.0
+    for start, end in intervals:
+        max_gap_s = max(max_gap_s, max(0.0, (start - cursor).total_seconds()))
+        cursor = max(cursor, end)
+    max_gap_s = max(max_gap_s, max(0.0, (window_end - cursor).total_seconds()))
+    return coverage_s, max_gap_s
+
+
+def interval_overlaps(
+    intervals: list[TimeInterval],
+    target_start: dt.datetime,
+    target_end: dt.datetime,
+) -> bool:
+    return any(max(start, target_start) <= min(end, target_end) for start, end in intervals)
+
+
+def grid_distance_metrics(
+    rows_a: list[Position],
+    rows_b: list[Position],
+    prediction_time: dt.datetime,
+    window_end: dt.datetime,
+    step_s: int,
+    max_interpolation_gap_s: int,
+) -> dict[str, object]:
+    times_a = [item.timestamp for item in rows_a]
+    times_b = [item.timestamp for item in rows_b]
+    best_distance: float | None = None
+    best_time: dt.datetime | None = None
+    common_count = 0
+    timestamp = prediction_time + dt.timedelta(seconds=step_s)
+    evaluation_times: list[dt.datetime] = []
+    while timestamp <= window_end:
+        evaluation_times.append(timestamp)
+        timestamp += dt.timedelta(seconds=step_s)
+    if not evaluation_times or evaluation_times[-1] < window_end:
+        evaluation_times.append(window_end)
+    for timestamp in evaluation_times:
+        position_a = interpolate_position(
+            rows_a,
+            timestamp,
+            max_interpolation_gap_s,
+            times_a,
+            window_start=prediction_time,
+            window_end=window_end,
+        )
+        position_b = interpolate_position(
+            rows_b,
+            timestamp,
+            max_interpolation_gap_s,
+            times_b,
+            window_start=prediction_time,
+            window_end=window_end,
+        )
+        if position_a is None or position_b is None:
+            continue
+        common_count += 1
+        observed_distance = distance_nm(position_a[0], position_a[1], position_b[0], position_b[1])
+        if best_distance is None or observed_distance < best_distance:
+            best_distance = observed_distance
+            best_time = timestamp
+    return {
+        "step_s": step_s,
+        "scheduled_count": len(evaluation_times),
+        "common_sample_count": common_count,
+        "min_distance_nm": best_distance,
+        "min_time": best_time,
+    }
 
 
 def interpolated_future_min_distance(
@@ -285,41 +505,42 @@ def interpolated_future_min_distance(
     if window_end <= prediction_time:
         raise ValueError("window_end must be after prediction_time")
 
-    future_start = prediction_time + dt.timedelta(microseconds=1)
-    window_a = window_positions(rows_a, future_start, window_end)
-    window_b = window_positions(rows_b, future_start, window_end)
+    window_a = window_positions(rows_a, prediction_time + dt.timedelta(microseconds=1), window_end)
+    window_b = window_positions(rows_b, prediction_time + dt.timedelta(microseconds=1), window_end)
+    segments_a = eligible_segments(window_a, prediction_time, window_end, max_interpolation_gap_s)
+    segments_b = eligible_segments(window_b, prediction_time, window_end, max_interpolation_gap_s)
+    best_distance, best_time, common_intervals = continuous_common_min_distance(segments_a, segments_b)
+    coverage_s, max_uncovered_gap_s = interval_coverage_metrics(common_intervals, prediction_time, window_end)
 
-    best_distance: float | None = None
-    best_time: dt.datetime | None = None
-    synchronized_count = 0
-    evaluation_time = prediction_time + dt.timedelta(seconds=evaluation_step_s)
-    evaluation_times: list[dt.datetime] = []
-    while evaluation_time <= window_end:
-        evaluation_times.append(evaluation_time)
-        evaluation_time += dt.timedelta(seconds=evaluation_step_s)
-    if not evaluation_times or evaluation_times[-1] < window_end:
-        evaluation_times.append(window_end)
-
-    times_a = [item[0] for item in rows_a]
-    times_b = [item[0] for item in rows_b]
-    for timestamp in evaluation_times:
-        position_a = interpolate_position(rows_a, timestamp, max_interpolation_gap_s, times_a)
-        position_b = interpolate_position(rows_b, timestamp, max_interpolation_gap_s, times_b)
-        if position_a is None or position_b is None:
-            continue
-        synchronized_count += 1
-        observed_distance = distance_nm(position_a[0], position_a[1], position_b[0], position_b[1])
-        if best_distance is None or observed_distance < best_distance:
-            best_distance = observed_distance
-            best_time = timestamp
+    sensitivity: dict[str, dict[str, object]] = {}
+    for step_s in sorted({10, 30, 60, evaluation_step_s}):
+        sensitivity[str(step_s)] = grid_distance_metrics(
+            window_a,
+            window_b,
+            prediction_time,
+            window_end,
+            step_s,
+            max_interpolation_gap_s,
+        )
+    primary_grid = sensitivity[str(evaluation_step_s)]
+    if best_distance is None and primary_grid["min_distance_nm"] is not None:
+        best_distance = float(primary_grid["min_distance_nm"])
+        best_time = primary_grid["min_time"]  # type: ignore[assignment]
 
     return {
         "actual_min_distance_nm": best_distance,
         "actual_min_time": best_time,
-        "synchronized_sample_count": synchronized_count,
-        "aligned_sample_count": synchronized_count,
+        "continuous_min_distance_nm": best_distance,
+        "continuous_min_time": best_time,
+        "synchronized_sample_count": int(primary_grid["common_sample_count"]),
+        "aligned_sample_count": int(primary_grid["common_sample_count"]),
+        "scheduled_sample_count": int(primary_grid["scheduled_count"]),
         "observations_a": len(window_a),
         "observations_b": len(window_b),
+        "common_coverage_duration_s": coverage_s,
+        "max_uncovered_gap_s": max_uncovered_gap_s,
+        "common_intervals": common_intervals,
+        "grid_sensitivity": sensitivity,
     }
 
 
@@ -331,7 +552,12 @@ def backtest_episodes(
     max_interpolation_gap_s: int,
     support_distance_nm: float,
     near_distance_nm: float,
+    min_common_fraction: float = 0.70,
+    max_uncovered_gap_s: int = 180,
+    predicted_time_tolerance_s: int = 60,
 ) -> list[dict[str, object]]:
+    if not 0 < min_common_fraction <= 1:
+        raise ValueError("min_common_fraction must be in (0, 1]")
     rows: list[dict[str, object]] = []
     for episode in episodes:
         prediction_time: dt.datetime = episode["prediction_time"]  # type: ignore[assignment]
@@ -348,13 +574,37 @@ def backtest_episodes(
         )
         actual_min = actual["actual_min_distance_nm"]
         actual_time = actual["actual_min_time"]
-        observable = actual_min is not None
+        scheduled_count = int(actual["scheduled_sample_count"])
+        synchronized_count = int(actual["synchronized_sample_count"])
+        common_coverage_s = float(actual["common_coverage_duration_s"])
+        longest_gap_s = float(actual["max_uncovered_gap_s"])
+        predicted_time: dt.datetime = episode["predicted_closest_time"]  # type: ignore[assignment]
+        tolerance = dt.timedelta(seconds=predicted_time_tolerance_s)
+        target_start = max(prediction_time + dt.timedelta(microseconds=1), predicted_time - tolerance)
+        target_end = min(window_end, predicted_time + tolerance)
+        predicted_window_covered = bool(
+            target_start <= target_end
+            and interval_overlaps(actual["common_intervals"], target_start, target_end)  # type: ignore[arg-type]
+        )
+
+        def observable_at(fraction: float) -> bool:
+            required_samples = math.ceil(scheduled_count * fraction)
+            required_duration_s = lookahead_min * 60 * fraction
+            return bool(
+                actual_min is not None
+                and synchronized_count >= required_samples
+                and common_coverage_s >= required_duration_s
+                and longest_gap_s <= max_uncovered_gap_s
+            )
+
+        observable_50 = observable_at(0.50)
+        observable = observable_at(min_common_fraction)
+        observable_90 = observable_at(0.90)
         supported = bool(observable and float(actual_min) <= support_distance_nm)
         near_supported = bool(observable and float(actual_min) <= near_distance_nm)
-        predicted_time: dt.datetime = episode["predicted_closest_time"]  # type: ignore[assignment]
         time_error = (
             abs((actual_time - predicted_time).total_seconds()) / 60
-            if isinstance(actual_time, dt.datetime)
+            if observable and predicted_window_covered and isinstance(actual_time, dt.datetime)
             else None
         )
         predicted_dcpa = episode.get("predicted_dcpa_nm")
@@ -372,13 +622,29 @@ def backtest_episodes(
                 "window_end": window_end,
                 "actual_min_distance_nm": actual_min,
                 "actual_min_time": actual_time,
-                "synchronized_sample_count": actual["synchronized_sample_count"],
+                "continuous_min_distance_nm": actual["continuous_min_distance_nm"],
+                "continuous_min_time": actual["continuous_min_time"],
+                "synchronized_sample_count": synchronized_count,
                 "aligned_sample_count": actual["aligned_sample_count"],
+                "scheduled_sample_count": scheduled_count,
                 "observations_a": actual["observations_a"],
                 "observations_b": actual["observations_b"],
+                "common_coverage_duration_s": common_coverage_s,
+                "common_coverage_fraction": common_coverage_s / (lookahead_min * 60),
+                "max_uncovered_gap_s": longest_gap_s,
+                "predicted_time_window_covered": int(predicted_window_covered),
+                "predicted_time_error_eligible": int(observable and predicted_window_covered),
+                "observable_followup_50pct": int(observable_50),
                 "observable_followup": int(observable),
+                "observable_followup_90pct": int(observable_90),
                 "supported_within_threshold": int(supported),
                 "near_supported_within_1nm": int(near_supported),
+                "grid_10s_common_sample_count": actual["grid_sensitivity"]["10"]["common_sample_count"],  # type: ignore[index]
+                "grid_10s_min_distance_nm": actual["grid_sensitivity"]["10"]["min_distance_nm"],  # type: ignore[index]
+                "grid_30s_common_sample_count": actual["grid_sensitivity"]["30"]["common_sample_count"],  # type: ignore[index]
+                "grid_30s_min_distance_nm": actual["grid_sensitivity"]["30"]["min_distance_nm"],  # type: ignore[index]
+                "grid_60s_common_sample_count": actual["grid_sensitivity"]["60"]["common_sample_count"],  # type: ignore[index]
+                "grid_60s_min_distance_nm": actual["grid_sensitivity"]["60"]["min_distance_nm"],  # type: ignore[index]
                 "predicted_to_observed_abs_delta_min": time_error,
                 "predicted_dcpa_abs_error_nm": distance_error,
                 "backtest_status": status,
@@ -395,6 +661,9 @@ def summarize(
     lookahead_min: float,
     evaluation_step_s: int,
     max_interpolation_gap_s: int,
+    min_common_fraction: float = 0.70,
+    max_uncovered_gap_s: int = 180,
+    predicted_time_tolerance_s: int = 60,
 ) -> dict[str, object]:
     observable = [row for row in backtest_rows if int(row["observable_followup"])]
     supported = [row for row in observable if int(row["supported_within_threshold"])]
@@ -411,6 +680,70 @@ def summarize(
         if row.get("predicted_dcpa_abs_error_nm") is not None
     ]
     episode_lengths = [int(row["record_count"]) for row in backtest_rows]
+    common_sample_counts = [int(row["synchronized_sample_count"]) for row in backtest_rows]
+    coverage_durations = [float(row["common_coverage_duration_s"]) for row in backtest_rows]
+    maximum_gaps = [float(row["max_uncovered_gap_s"]) for row in backtest_rows]
+
+    observability_sensitivity: dict[str, dict[str, object]] = {}
+    for label, field in (
+        ("50pct", "observable_followup_50pct"),
+        ("70pct_primary", "observable_followup"),
+        ("90pct", "observable_followup_90pct"),
+    ):
+        rows_at_threshold = [row for row in backtest_rows if int(row[field])]
+        supported_at_threshold = [
+            row for row in rows_at_threshold if float(row["actual_min_distance_nm"]) <= support_distance_nm
+        ]
+        observability_sensitivity[label] = {
+            "observable_episodes": len(rows_at_threshold),
+            "observable_rate": round(len(rows_at_threshold) / len(backtest_rows), 6) if backtest_rows else None,
+            "supported_episodes_within_threshold": len(supported_at_threshold),
+            "support_rate_observable": (
+                round(len(supported_at_threshold) / len(rows_at_threshold), 6) if rows_at_threshold else None
+            ),
+        }
+
+    continuous_sensitivity = {
+        "episodes_with_continuous_minimum_all": sum(
+            row.get("continuous_min_distance_nm") is not None for row in backtest_rows
+        ),
+        "primary_observable_episodes": len(observable),
+        "supported_primary_observable": len(supported),
+        "support_rate_primary_observable": (
+            round(len(supported) / len(observable), 6) if observable else None
+        ),
+    }
+    grid_sensitivity: dict[str, dict[str, object]] = {}
+    for step_s in (10, 30, 60):
+        field = f"grid_{step_s}s_min_distance_nm"
+        reconstructed = [row for row in backtest_rows if row.get(field) is not None]
+        supported_grid = [row for row in reconstructed if float(row[field]) <= support_distance_nm]
+        observable_reconstructed = [row for row in observable if row.get(field) is not None]
+        observable_supported = [
+            row for row in observable_reconstructed if float(row[field]) <= support_distance_nm
+        ]
+        grid_sensitivity[str(step_s)] = {
+            # Compatibility aliases retain the all-reconstructed denominator;
+            # the explicitly named primary-observable fields below are the
+            # comparison used in review-v9 reporting.
+            "episodes_with_grid_minimum": len(reconstructed),
+            "supported_within_threshold": len(supported_grid),
+            "support_rate_reconstructed": (
+                round(len(supported_grid) / len(reconstructed), 6) if reconstructed else None
+            ),
+            "episodes_with_grid_minimum_all": len(reconstructed),
+            "supported_all_reconstructed": len(supported_grid),
+            "support_rate_all_reconstructed": (
+                round(len(supported_grid) / len(reconstructed), 6) if reconstructed else None
+            ),
+            "primary_observable_episodes_with_grid_minimum": len(observable_reconstructed),
+            "supported_primary_observable": len(observable_supported),
+            "support_rate_primary_observable": (
+                round(len(observable_supported) / len(observable_reconstructed), 6)
+                if observable_reconstructed
+                else None
+            ),
+        }
     return {
         "method": "strict_future_synchronized_geometric_check_for_encounter_candidate_screening",
         "future_only": True,
@@ -423,11 +756,41 @@ def summarize(
         "lookahead_min": lookahead_min,
         "evaluation_step_s": evaluation_step_s,
         "max_interpolation_gap_s": max_interpolation_gap_s,
+        "primary_observability": {
+            "common_grid_fraction": min_common_fraction,
+            "required_common_samples_30s_grid": math.ceil((lookahead_min * 60 / evaluation_step_s) * min_common_fraction),
+            "required_common_coverage_duration_s": lookahead_min * 60 * min_common_fraction,
+            "maximum_uncovered_gap_s": max_uncovered_gap_s,
+            "predicted_closest_time_tolerance_s": predicted_time_tolerance_s,
+            "predicted_closest_time_coverage_is_primary_requirement": False,
+        },
         "supported_episodes_within_threshold": len(supported),
         "near_supported_episodes_within_1nm": len(near_supported),
         "support_rate_observable": round(len(supported) / len(observable), 6) if observable else None,
         "near_support_rate_observable": round(len(near_supported) / len(observable), 6) if observable else None,
         "observable_rate": round(len(observable) / len(backtest_rows), 6) if backtest_rows else None,
+        "future_coverage": {
+            "common_sample_count_30s": {
+                "median": rounded(statistics.median(common_sample_counts), 2) if common_sample_counts else None,
+                "p10": rounded(percentile([float(value) for value in common_sample_counts], 0.10), 2),
+                "p90": rounded(percentile([float(value) for value in common_sample_counts], 0.90), 2),
+            },
+            "common_coverage_duration_s": {
+                "median": rounded(statistics.median(coverage_durations), 2) if coverage_durations else None,
+                "p10": rounded(percentile(coverage_durations, 0.10), 2),
+                "p90": rounded(percentile(coverage_durations, 0.90), 2),
+            },
+            "maximum_uncovered_gap_s": {
+                "median": rounded(statistics.median(maximum_gaps), 2) if maximum_gaps else None,
+                "p90": rounded(percentile(maximum_gaps, 0.90), 2),
+            },
+        },
+        "observability_sensitivity": observability_sensitivity,
+        "minimum_distance_solver_sensitivity": {
+            "continuous_primary": continuous_sensitivity,
+            "fixed_grids": grid_sensitivity,
+        },
+        "minimum_distance_grid_sensitivity": grid_sensitivity,
         "actual_min_distance_nm": {
             "min": rounded(min(actual_distances), 6) if actual_distances else None,
             "median": rounded(statistics.median(actual_distances), 6) if actual_distances else None,
@@ -436,6 +799,8 @@ def summarize(
             "max": rounded(max(actual_distances), 6) if actual_distances else None,
         },
         "predicted_to_observed_abs_delta_min": {
+            "eligible_episodes": len(time_errors),
+            "eligibility": "primary observable and common coverage within predicted closest time +/- tolerance",
             "median": rounded(statistics.median(time_errors), 6) if time_errors else None,
             "p75": rounded(percentile(time_errors, 0.75), 6),
             "p90": rounded(percentile(time_errors, 0.90), 6),
@@ -507,13 +872,29 @@ def write_csv(output_csv: Path, rows: list[dict[str, object]]) -> None:
         "min_current_distance_nm",
         "actual_min_distance_nm",
         "actual_min_time",
+        "continuous_min_distance_nm",
+        "continuous_min_time",
         "synchronized_sample_count",
         "aligned_sample_count",
+        "scheduled_sample_count",
         "observations_a",
         "observations_b",
+        "common_coverage_duration_s",
+        "common_coverage_fraction",
+        "max_uncovered_gap_s",
+        "predicted_time_window_covered",
+        "predicted_time_error_eligible",
+        "observable_followup_50pct",
         "observable_followup",
+        "observable_followup_90pct",
         "supported_within_threshold",
         "near_supported_within_1nm",
+        "grid_10s_common_sample_count",
+        "grid_10s_min_distance_nm",
+        "grid_30s_common_sample_count",
+        "grid_30s_min_distance_nm",
+        "grid_60s_common_sample_count",
+        "grid_60s_min_distance_nm",
         "predicted_to_observed_abs_delta_min",
         "predicted_dcpa_abs_error_nm",
         "backtest_status",
@@ -586,6 +967,24 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--support-distance-nm", type=float, default=0.5, help="Actual-distance support threshold.")
     parser.add_argument("--near-distance-nm", type=float, default=1.0, help="Secondary near-support threshold.")
+    parser.add_argument(
+        "--min-common-fraction",
+        type=float,
+        default=0.70,
+        help="Primary minimum common 30 s samples and continuous coverage fraction.",
+    )
+    parser.add_argument(
+        "--max-uncovered-gap-s",
+        type=int,
+        default=180,
+        help="Primary maximum uncovered run anywhere in the future window.",
+    )
+    parser.add_argument(
+        "--predicted-time-tolerance-s",
+        type=int,
+        default=60,
+        help="Required common coverage around the predicted closest time.",
+    )
     parser.add_argument("--dataset-prefix", default="sf_bay_ais", help="Daily feature-file prefix.")
     return parser
 
@@ -611,6 +1010,9 @@ def main(argv: list[str] | None = None) -> int:
         args.max_interpolation_gap_s,
         args.support_distance_nm,
         args.near_distance_nm,
+        args.min_common_fraction,
+        args.max_uncovered_gap_s,
+        args.predicted_time_tolerance_s,
     )
     stats = summarize(
         encounter_rows,
@@ -620,6 +1022,9 @@ def main(argv: list[str] | None = None) -> int:
         args.lookahead_min,
         args.evaluation_step_s,
         args.max_interpolation_gap_s,
+        args.min_common_fraction,
+        args.max_uncovered_gap_s,
+        args.predicted_time_tolerance_s,
     )
     write_csv(args.output_csv, backtest_rows)
     args.stats_json.parent.mkdir(parents=True, exist_ok=True)

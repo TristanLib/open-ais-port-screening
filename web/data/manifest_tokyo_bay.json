@@ -5,7 +5,7 @@
   "study_area_zh": "东京湾",
   "source": "Hutten 2026 / Figshare v2 (CC BY 4.0)",
   "source_zh": "Hutten 2026 / Figshare v2（CC BY 4.0）",
-  "workflow_role": "Asian port-water supplemental validation",
+  "workflow_role": "Asian port-water cross-source supplemental execution",
   "workflow_role_zh": "亚洲港口水域补充可执行性验证",
   "date_range": {
     "start": "2024-08-01",
@@ -28,7 +28,8 @@
     "deployment_note": "For public deployment, keep visible attribution and valid browser Referer/caching behavior, or replace this URL with a hosted/commercial/self-hosted tile service."
   },
   "companion_data": {
-    "summary": "summary_tokyo_bay.json"
+    "summary": "summary_tokyo_bay.json",
+    "encounter_evidence_cards": "encounter_evidence_cards_tokyo_bay.json"
   },
   "layers": [
     {

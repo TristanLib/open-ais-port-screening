@@ -35,7 +35,7 @@ const COPY = {
     sections: {
       evidenceChain: "Evidence Chain",
       auditEvidence: "Audit Evidence",
-      evidenceCards: "Evidence Cards",
+      evidenceCards: "CPA/TCPA Encounter Evidence Cards",
       layers: "Layers",
       reproducibility: "Data & Reproducibility",
       cases: "Cases",
@@ -45,7 +45,7 @@ const COPY = {
       ["02", "Regular patterns", "Learned moving-traffic cells define local route expectations."],
       ["03", "Candidate evidence", "Anomaly and future encounter records identify what deserves review."],
       ["04", "Review-priority cells", "Evidence layers are aggregated into auditable spatial review units."],
-      ["05", "Evidence cards", "Each hotspot is summarized as a review card with counts, type, and focus."],
+      ["05", "Encounter evidence cards", "De-identified relative-time cards expose the CPA/TCPA prediction, strict-future coverage, and geometric outcome for audit."],
       ["06", "Case audit", "Representative tracks explain why candidates were selected."],
     ],
     layerLabels: {
@@ -105,7 +105,34 @@ const COPY = {
       ["Audit encounter episodes", "encounter_risk.deduplicated_encounter_episodes"],
       ["Review-priority cells", "hotspots.fused_hotspots"],
     ],
-    evidenceCardsEmpty: "No evidence cards loaded.",
+    evidenceCardsEmpty: "No encounter evidence cards loaded for this study area.",
+    encounterCardLabels: {
+      prediction: "Prediction",
+      observed: "Continuous future minimum",
+      dcpa: "predicted DCPA",
+      tcpa: "predicted TCPA",
+      actualDistance: "observed minimum",
+      timeError: "closest-time error",
+      sourceSkew: "source-state skew",
+      coverage: "common coverage",
+      samples: "common samples",
+      maxGap: "maximum uncovered gap",
+      sensitivity: "10 / 30 / 60 s sensitivity",
+      futureGeometry: "De-identified future geometry",
+      unavailableGeometry: "Relative future geometry is unavailable for this card.",
+      vesselA: "vessel A",
+      vesselB: "vessel B",
+      predictedMarker: "predicted closest positions",
+      observedMarker: "observed minimum-time positions",
+      boundary: "Candidate-screening geometric support only; not prediction accuracy or an event label.",
+      seconds: "s",
+      minutes: "min",
+      nauticalMiles: "nm",
+      supported05: "geometrically supported within 0.5 nm",
+      supported10: "geometrically supported within 1.0 nm only",
+      unsupported: "observable without 1.0 nm geometric support",
+      insufficient: "insufficient common future coverage",
+    },
     cardCounts: {
       episodes: "eps",
       supported: "future-supported",
@@ -155,7 +182,7 @@ const COPY = {
     sections: {
       evidenceChain: "证据链",
       auditEvidence: "审计证据",
-      evidenceCards: "证据卡片",
+      evidenceCards: "CPA/TCPA 会遇证据卡片",
       layers: "图层",
       reproducibility: "数据与复现",
       cases: "案例",
@@ -165,7 +192,7 @@ const COPY = {
       ["02", "常规交通模式", "学习移动交通网格，用作本地航路期望。"],
       ["03", "候选证据", "异常候选与未来会遇候选指出值得复核的对象。"],
       ["04", "复核优先网格", "多层证据聚合成可审计的空间复核单元。"],
-      ["05", "证据卡片", "每个热区用计数、类型和复核重点形成卡片。"],
+      ["05", "会遇证据卡片", "以去标识化相对时间卡片展示 CPA/TCPA 预测、严格未来覆盖和几何结果，供人工复核。"],
       ["06", "案例审查", "代表性轨迹解释候选对象为何被选中。"],
     ],
     layerLabels: {
@@ -225,7 +252,34 @@ const COPY = {
       ["会遇审计 episodes", "encounter_risk.deduplicated_encounter_episodes"],
       ["复核优先网格", "hotspots.fused_hotspots"],
     ],
-    evidenceCardsEmpty: "未加载证据卡片。",
+    evidenceCardsEmpty: "当前研究水域未加载会遇证据卡片。",
+    encounterCardLabels: {
+      prediction: "预测",
+      observed: "连续未来最小距离",
+      dcpa: "预测 DCPA",
+      tcpa: "预测 TCPA",
+      actualDistance: "实际最小距离",
+      timeError: "最近时刻误差",
+      sourceSkew: "源状态时间差",
+      coverage: "共同覆盖",
+      samples: "共同样本",
+      maxGap: "最大未覆盖缺口",
+      sensitivity: "10 / 30 / 60 秒敏感性",
+      futureGeometry: "去标识化未来几何",
+      unavailableGeometry: "此卡片暂无可用的相对未来轨迹。",
+      vesselA: "船舶 A",
+      vesselB: "船舶 B",
+      predictedMarker: "预测最近位置",
+      observedMarker: "实际最小时刻位置",
+      boundary: "仅表示候选筛查的几何支持，不是预测准确率或事件标签。",
+      seconds: "秒",
+      minutes: "分钟",
+      nauticalMiles: "海里",
+      supported05: "0.5 海里内几何支持",
+      supported10: "仅 1.0 海里内几何支持",
+      unsupported: "可观测但未获 1.0 海里内几何支持",
+      insufficient: "共同未来覆盖不足",
+    },
     cardCounts: {
       episodes: "episodes",
       supported: "严格未来支持",
@@ -263,9 +317,9 @@ const COPY = {
       "Encounter-only": "仅会遇",
       "Fused screening": "融合筛查",
       "Descriptive baseline": "描述性基线",
-      "36 hotspot cells": "36 个热区网格",
-      "52,311 records; 18,386 episodes": "52,311 条记录；18,386 个 episodes",
-      "56 hotspot cells": "56 个热区网格",
+      "35 hotspot cells": "35 个热区网格",
+      "56,221 records; 19,805 episodes": "56,221 条记录；19,805 个 episodes",
+      "57 hotspot cells": "57 个热区网格",
       "High-density cells include berth/anchorage behavior and are not sufficient as safety evidence.":
         "高密度网格包含泊位、锚地等常规作业，不能单独作为安全证据。",
       "Finds behavior deviations but misses dense crossing/meeting evidence.": "能发现行为偏离，但会遗漏密集交叉/对遇证据。",
@@ -675,6 +729,205 @@ function hotspotFeatureByCell(cellId) {
   return data.features.find((feature) => feature.properties?.cell_id === cellId) || null;
 }
 
+function encounterSupportLabel(status) {
+  const labels = currentCopy().encounterCardLabels;
+  const mapping = {
+    geometrically_supported_within_0_5_nm: labels.supported05,
+    geometrically_supported_within_1_0_nm_only: labels.supported10,
+    observable_without_1_0_nm_geometric_support: labels.unsupported,
+    insufficient_common_future_coverage: labels.insufficient,
+  };
+  return mapping[status] || translateText(status);
+}
+
+function encounterMetric(label, value) {
+  const item = document.createElement("span");
+  item.className = "encounter-metric";
+  const valueEl = document.createElement("strong");
+  valueEl.textContent = value;
+  const labelEl = document.createElement("span");
+  labelEl.textContent = label;
+  item.append(valueEl, labelEl);
+  return item;
+}
+
+function metricWithUnit(value, unit) {
+  return value === undefined || value === null ? "-" : `${formatNumber(value)} ${unit}`;
+}
+
+function encounterGeometrySvg(card) {
+  const labels = currentCopy().encounterCardLabels;
+  const geometry = card.future_geometry || {};
+  const segments = Array.isArray(geometry.common_segments) ? geometry.common_segments : [];
+  if (geometry.status !== "available" || !segments.length) {
+    const unavailable = document.createElement("p");
+    unavailable.className = "geometry-unavailable";
+    unavailable.textContent = labels.unavailableGeometry;
+    return unavailable;
+  }
+
+  const t0Geometry = card.synchronized_t0?.relative_positions || {};
+  const predictedPositions = Array.isArray(t0Geometry.predicted_closest_positions)
+    ? t0Geometry.predicted_closest_positions
+    : [];
+  const observedPositions = Array.isArray(geometry.observed_minimum_positions)
+    ? geometry.observed_minimum_positions
+    : [];
+  const coordinateItems = [];
+  for (const segment of segments) {
+    for (const vessel of segment.vessels || []) {
+      for (const point of vessel.points || []) coordinateItems.push(point);
+    }
+  }
+  coordinateItems.push(...predictedPositions, ...observedPositions);
+  if (!coordinateItems.length) {
+    const unavailable = document.createElement("p");
+    unavailable.className = "geometry-unavailable";
+    unavailable.textContent = labels.unavailableGeometry;
+    return unavailable;
+  }
+
+  const width = 320;
+  const height = 180;
+  const padding = 20;
+  const xs = coordinateItems.map((point) => Number(point.x_nm)).filter(Number.isFinite);
+  const ys = coordinateItems.map((point) => Number(point.y_nm)).filter(Number.isFinite);
+  let minX = Math.min(...xs);
+  let maxX = Math.max(...xs);
+  let minY = Math.min(...ys);
+  let maxY = Math.max(...ys);
+  if (maxX - minX < 0.05) {
+    minX -= 0.025;
+    maxX += 0.025;
+  }
+  if (maxY - minY < 0.05) {
+    minY -= 0.025;
+    maxY += 0.025;
+  }
+  const scale = Math.min((width - 2 * padding) / (maxX - minX), (height - 2 * padding) / (maxY - minY));
+  const project = (point) => [
+    padding + (Number(point.x_nm) - minX) * scale,
+    height - padding - (Number(point.y_nm) - minY) * scale,
+  ];
+  const svgNamespace = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNamespace, "svg");
+  svg.classList.add("encounter-geometry");
+  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", labels.futureGeometry);
+
+  const grid = document.createElementNS(svgNamespace, "rect");
+  grid.setAttribute("x", "0");
+  grid.setAttribute("y", "0");
+  grid.setAttribute("width", String(width));
+  grid.setAttribute("height", String(height));
+  grid.setAttribute("class", "geometry-background");
+  svg.append(grid);
+
+  const colors = { A: "#2f80ed", B: "#d64545" };
+  for (const segment of segments) {
+    for (const vessel of segment.vessels || []) {
+      const points = (vessel.points || []).map(project);
+      if (!points.length) continue;
+      const polyline = document.createElementNS(svgNamespace, "polyline");
+      polyline.setAttribute("points", points.map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(" "));
+      polyline.setAttribute("fill", "none");
+      polyline.setAttribute("stroke", colors[vessel.label] || "#52606d");
+      polyline.setAttribute("class", "geometry-track");
+      svg.append(polyline);
+    }
+  }
+  for (const point of predictedPositions) {
+    const [x, y] = project(point);
+    const marker = document.createElementNS(svgNamespace, "rect");
+    marker.setAttribute("x", (x - 3.5).toFixed(2));
+    marker.setAttribute("y", (y - 3.5).toFixed(2));
+    marker.setAttribute("width", "7");
+    marker.setAttribute("height", "7");
+    marker.setAttribute("class", "predicted-marker");
+    svg.append(marker);
+  }
+  for (const point of observedPositions) {
+    const [x, y] = project(point);
+    const marker = document.createElementNS(svgNamespace, "circle");
+    marker.setAttribute("cx", x.toFixed(2));
+    marker.setAttribute("cy", y.toFixed(2));
+    marker.setAttribute("r", "4");
+    marker.setAttribute("class", "observed-marker");
+    svg.append(marker);
+  }
+
+  const wrap = document.createElement("div");
+  wrap.className = "encounter-geometry-wrap";
+  wrap.append(svg);
+  const legend = document.createElement("div");
+  legend.className = "geometry-legend";
+  legend.textContent = `${labels.vesselA} · ${labels.vesselB} · □ ${labels.predictedMarker} · ○ ${labels.observedMarker}`;
+  wrap.append(legend);
+  return wrap;
+}
+
+function renderEncounterEvidenceCards(container, cards) {
+  const labels = currentCopy().encounterCardLabels;
+  for (const card of cards) {
+    const details = document.createElement("details");
+    details.className = "encounter-card-details";
+    const summary = document.createElement("summary");
+    const heading = document.createElement("span");
+    heading.className = "encounter-card-heading";
+    const caseId = document.createElement("strong");
+    caseId.textContent = card.case_id;
+    const status = document.createElement("span");
+    status.className = `encounter-support ${card.support?.observable ? "is-observable" : "is-insufficient"}`;
+    status.textContent = encounterSupportLabel(card.support?.status);
+    heading.append(caseId, status);
+    const headline = document.createElement("span");
+    headline.className = "encounter-card-headline";
+    headline.textContent = `${labels.dcpa} ${metricWithUnit(card.prediction?.dcpa_nm, labels.nauticalMiles)} · ${labels.actualDistance} ${metricWithUnit(
+      card.observation?.continuous_min_distance_nm,
+      labels.nauticalMiles,
+    )}`;
+    summary.append(heading, headline);
+
+    const body = document.createElement("div");
+    body.className = "encounter-card-body";
+    const metrics = document.createElement("div");
+    metrics.className = "encounter-card-metrics";
+    metrics.append(
+      encounterMetric(labels.tcpa, metricWithUnit(card.prediction?.tcpa_min, labels.minutes)),
+      encounterMetric(labels.sourceSkew, metricWithUnit(card.synchronized_t0?.source_state_skew_s, labels.seconds)),
+      encounterMetric(labels.timeError, metricWithUnit(card.observation?.closest_time_abs_error_s, labels.seconds)),
+      encounterMetric(
+        labels.coverage,
+        `${metricWithUnit(card.coverage?.common_coverage_duration_s, labels.seconds)} (${card.coverage?.common_coverage_fraction == null ? "-" : formatPercent(
+          Number(card.coverage.common_coverage_fraction) * 100,
+        )})`,
+      ),
+      encounterMetric(
+        labels.samples,
+        `${formatNumber(card.coverage?.common_sample_count)} / ${formatNumber(card.coverage?.scheduled_sample_count)}`,
+      ),
+      encounterMetric(labels.maxGap, metricWithUnit(card.coverage?.max_uncovered_gap_s, labels.seconds)),
+    );
+    const sensitivity = document.createElement("p");
+    sensitivity.className = "encounter-sensitivity";
+    sensitivity.textContent = `${labels.sensitivity}: ${["10_s", "30_s", "60_s"]
+      .map((key) => metricWithUnit(card.grid_sensitivity?.[key]?.min_distance_nm, labels.nauticalMiles))
+      .join(" · ")}`;
+    const geometryTitle = document.createElement("h3");
+    geometryTitle.textContent = labels.futureGeometry;
+    const boundary = document.createElement("p");
+    boundary.className = "encounter-boundary";
+    boundary.textContent = labels.boundary;
+    body.append(metrics, sensitivity, geometryTitle, encounterGeometrySvg(card), boundary);
+    details.append(summary, body);
+    details.addEventListener("toggle", () => {
+      if (details.open) setStatus(`${card.case_id}: ${encounterSupportLabel(card.support?.status)}`);
+    });
+    container.append(details);
+  }
+}
+
 function renderEvidenceCards() {
   const container = document.getElementById("evidenceCards");
   const section = document.getElementById("evidenceCardsSection");
@@ -686,6 +939,10 @@ function renderEvidenceCards() {
     empty.className = "empty-note";
     empty.textContent = currentCopy().evidenceCardsEmpty;
     container.append(empty);
+    return;
+  }
+  if (state.evidenceCards?.schema_version === "review-v9.encounter-evidence-card.v1") {
+    renderEncounterEvidenceCards(container, cards);
     return;
   }
   for (const card of cards) {
@@ -841,8 +1098,9 @@ async function loadDataset(datasetId, options = {}) {
   const manifestData = options.manifest || (await loadJson(`${DATA_DIR}${dataset.manifest}`));
   const companion = manifestData.companion_data || {};
   const summaryPromise = companion.summary ? loadJson(`${DATA_DIR}${companion.summary}`) : Promise.resolve(null);
-  const cardsPromise = companion.evidence_cards
-    ? loadJson(`${DATA_DIR}${companion.evidence_cards}`).catch(() => null)
+  const evidenceCardPath = companion.encounter_evidence_cards || companion.evidence_cards;
+  const cardsPromise = evidenceCardPath
+    ? loadJson(`${DATA_DIR}${evidenceCardPath}`).catch(() => null)
     : Promise.resolve(null);
   const layerEntries = await Promise.all(
     (manifestData.layers || []).map(async (layerMeta) => [layerMeta, await loadJson(`${DATA_DIR}${layerMeta.path}`)]),

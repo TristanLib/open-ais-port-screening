@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extract representative anomaly track case studies for audit and Web use."""
+"""Extract representative anomaly track case studies for paper and web use."""
 
 from __future__ import annotations
 

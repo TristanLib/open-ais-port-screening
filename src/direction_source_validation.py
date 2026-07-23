@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit derived-bearing coverage and agreement with native AIS COG."""
+"""Audit segment-derived ground-track-course coverage and native AIS COG agreement."""
 
 from __future__ import annotations
 
@@ -130,10 +130,10 @@ def write_markdown(path: Path, results: list[dict[str, Any]]) -> None:
     lines = [
         "# Direction-Source Portability Audit",
         "",
-        "The analysis pipeline prefers segment-derived bearing and uses native COG only as a fallback. "
+        "The analysis pipeline prefers segment-derived ground-track course and uses valid native COG only as a fallback. "
         "This audit therefore tests coverage and agreement rather than repeating a redundant COG-disable run.",
         "",
-        "| Dataset | Moving states | Derived coverage | COG fallback | No direction | Derived/COG median delta | Same 45-deg bin |",
+        "| Dataset | Moving states | Segment-course coverage | COG fallback | No direction | Segment-course/COG median delta | Same 45-deg bin |",
         "|---|---:|---:|---:|---:|---:|---:|",
     ]
     for result in results:
@@ -149,7 +149,9 @@ def write_markdown(path: Path, results: list[dict[str, Any]]) -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Audit derived bearing and native COG availability.")
+    parser = argparse.ArgumentParser(
+        description="Audit segment-derived ground-track course and native COG availability."
+    )
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--output-json", type=Path, required=True)
     parser.add_argument("--output-md", type=Path, required=True)
@@ -163,8 +165,12 @@ def main() -> int:
         audit_dataset(args.processed_dir, "tokyo_bay_ais", dt.date(2024, 8, 1), dt.date(2024, 8, 7)),
     ]
     payload = {
-        "method": "derived-bearing coverage and native-COG agreement audit",
-        "pipeline_direction_precedence": "bearing_deg then cog fallback",
+        "method": "segment-derived ground-track-course coverage and native-COG agreement audit",
+        "pipeline_direction_precedence": "same-segment bearing_deg as ground-track course, then valid native COG fallback",
+        "terminology": (
+            "Legacy JSON field names beginning with derived_ are retained for schema compatibility; "
+            "they denote segment-derived ground-track course, not heading."
+        ),
         "datasets": results,
     }
     args.output_json.parent.mkdir(parents=True, exist_ok=True)

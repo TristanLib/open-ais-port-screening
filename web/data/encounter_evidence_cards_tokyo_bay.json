@@ -1,0 +1,5408 @@
+{
+  "schema_version": "review-v9.encounter-evidence-card.v1",
+  "dataset_id": "tokyo_bay",
+  "publication_mode": "sanitized_research_demo",
+  "disclaimer": "De-identified historical AIS encounter-candidate evidence for human audit. Geometric support is not prediction accuracy, an incident or near-miss label, an enforcement finding, or navigation or collision-avoidance advice.",
+  "selection": {
+    "method": "deterministic compact audit sample ranked by observability, predicted-time coverage, geometric support, common coverage, then screening score",
+    "max_cards": 12,
+    "geometry_input_status": "available"
+  },
+  "card_count": 12,
+  "summary": {
+    "support_status_counts": {
+      "geometrically_supported_within_0_5_nm": 12
+    },
+    "geometry_available_cards": 12
+  },
+  "cards": [
+    {
+      "case_id": "tokyo-bay-enc-rv9-001",
+      "rank": 1,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 24,
+        "max_source_state_age_s": 42,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": 0.2,
+              "y_nm": -0.14
+            },
+            {
+              "label": "B",
+              "x_nm": -0.2,
+              "y_nm": 0.14
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": 0.16,
+              "y_nm": -0.11
+            },
+            {
+              "label": "B",
+              "x_nm": 0.02,
+              "y_nm": 0.26
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": 0.09,
+            "y_nm": 0.08
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.392896,
+        "tcpa_min": 2.693299,
+        "closest_time_t_s": 161,
+        "current_distance_nm": 0.4833,
+        "screening_score": 0.426392
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.459689,
+        "continuous_min_time_t_s": 38,
+        "dcpa_abs_error_nm": 0.066793,
+        "closest_time_abs_error_s": 123,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 887.0,
+        "common_coverage_fraction": 0.985556,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 7.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 89,
+          "min_distance_nm": 0.459699
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.460287
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.469281
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": 0.23,
+            "y_nm": -0.13
+          },
+          {
+            "label": "B",
+            "x_nm": -0.2,
+            "y_nm": 0.04
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 6,
+            "end_t_s": 893,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 6,
+                    "x_nm": 0.21,
+                    "y_nm": -0.14
+                  },
+                  {
+                    "t_s": 36,
+                    "x_nm": 0.23,
+                    "y_nm": -0.13
+                  },
+                  {
+                    "t_s": 38,
+                    "x_nm": 0.23,
+                    "y_nm": -0.13
+                  },
+                  {
+                    "t_s": 66,
+                    "x_nm": 0.25,
+                    "y_nm": -0.11
+                  },
+                  {
+                    "t_s": 96,
+                    "x_nm": 0.31,
+                    "y_nm": -0.07
+                  },
+                  {
+                    "t_s": 126,
+                    "x_nm": 0.37,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 156,
+                    "x_nm": 0.41,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 161,
+                    "x_nm": 0.42,
+                    "y_nm": 0.05
+                  },
+                  {
+                    "t_s": 186,
+                    "x_nm": 0.46,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 216,
+                    "x_nm": 0.51,
+                    "y_nm": 0.16
+                  },
+                  {
+                    "t_s": 246,
+                    "x_nm": 0.57,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 276,
+                    "x_nm": 0.64,
+                    "y_nm": 0.26
+                  },
+                  {
+                    "t_s": 306,
+                    "x_nm": 0.7,
+                    "y_nm": 0.26
+                  },
+                  {
+                    "t_s": 336,
+                    "x_nm": 0.77,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 366,
+                    "x_nm": 0.83,
+                    "y_nm": 0.18
+                  },
+                  {
+                    "t_s": 396,
+                    "x_nm": 0.89,
+                    "y_nm": 0.13
+                  },
+                  {
+                    "t_s": 426,
+                    "x_nm": 0.96,
+                    "y_nm": 0.08
+                  },
+                  {
+                    "t_s": 486,
+                    "x_nm": 1.09,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 516,
+                    "x_nm": 1.14,
+                    "y_nm": -0.07
+                  },
+                  {
+                    "t_s": 546,
+                    "x_nm": 1.21,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 576,
+                    "x_nm": 1.27,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 606,
+                    "x_nm": 1.34,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 636,
+                    "x_nm": 1.4,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 666,
+                    "x_nm": 1.47,
+                    "y_nm": -0.31
+                  },
+                  {
+                    "t_s": 696,
+                    "x_nm": 1.53,
+                    "y_nm": -0.35
+                  },
+                  {
+                    "t_s": 726,
+                    "x_nm": 1.6,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 756,
+                    "x_nm": 1.66,
+                    "y_nm": -0.44
+                  },
+                  {
+                    "t_s": 786,
+                    "x_nm": 1.73,
+                    "y_nm": -0.49
+                  },
+                  {
+                    "t_s": 816,
+                    "x_nm": 1.78,
+                    "y_nm": -0.54
+                  },
+                  {
+                    "t_s": 846,
+                    "x_nm": 1.84,
+                    "y_nm": -0.6
+                  },
+                  {
+                    "t_s": 876,
+                    "x_nm": 1.9,
+                    "y_nm": -0.65
+                  },
+                  {
+                    "t_s": 893,
+                    "x_nm": 1.94,
+                    "y_nm": -0.68
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 6,
+                    "x_nm": -0.2,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 36,
+                    "x_nm": -0.2,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 38,
+                    "x_nm": -0.2,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 66,
+                    "x_nm": -0.21,
+                    "y_nm": -0.01
+                  },
+                  {
+                    "t_s": 96,
+                    "x_nm": -0.23,
+                    "y_nm": -0.07
+                  },
+                  {
+                    "t_s": 126,
+                    "x_nm": -0.25,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 156,
+                    "x_nm": -0.28,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 161,
+                    "x_nm": -0.28,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 186,
+                    "x_nm": -0.31,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 216,
+                    "x_nm": -0.33,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 246,
+                    "x_nm": -0.35,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 276,
+                    "x_nm": -0.36,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 306,
+                    "x_nm": -0.36,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 336,
+                    "x_nm": -0.37,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 366,
+                    "x_nm": -0.37,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 396,
+                    "x_nm": -0.38,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 426,
+                    "x_nm": -0.38,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 486,
+                    "x_nm": -0.37,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 516,
+                    "x_nm": -0.34,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 546,
+                    "x_nm": -0.28,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 576,
+                    "x_nm": -0.2,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 606,
+                    "x_nm": -0.12,
+                    "y_nm": 0.0
+                  },
+                  {
+                    "t_s": 636,
+                    "x_nm": -0.01,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 666,
+                    "x_nm": 0.11,
+                    "y_nm": 0.19
+                  },
+                  {
+                    "t_s": 696,
+                    "x_nm": 0.25,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 726,
+                    "x_nm": 0.39,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 756,
+                    "x_nm": 0.54,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 786,
+                    "x_nm": 0.7,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 816,
+                    "x_nm": 0.85,
+                    "y_nm": 0.21
+                  },
+                  {
+                    "t_s": 846,
+                    "x_nm": 1.0,
+                    "y_nm": 0.19
+                  },
+                  {
+                    "t_s": 876,
+                    "x_nm": 1.15,
+                    "y_nm": 0.15
+                  },
+                  {
+                    "t_s": 893,
+                    "x_nm": 1.24,
+                    "y_nm": 0.13
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "tokyo-bay-enc-rv9-002",
+      "rank": 2,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 16,
+        "max_source_state_age_s": 26,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.1,
+              "y_nm": 0.17
+            },
+            {
+              "label": "B",
+              "x_nm": 0.1,
+              "y_nm": -0.17
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": 0.11,
+              "y_nm": -0.11
+            },
+            {
+              "label": "B",
+              "x_nm": 0.11,
+              "y_nm": -0.12
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": 0.11,
+            "y_nm": -0.11
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.000448,
+        "tcpa_min": 2.003029,
+        "closest_time_t_s": 120,
+        "current_distance_nm": 0.388629,
+        "screening_score": 0.95268
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.403582,
+        "continuous_min_time_t_s": 23,
+        "dcpa_abs_error_nm": 0.403134,
+        "closest_time_abs_error_s": 96,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 886.0,
+        "common_coverage_fraction": 0.984444,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 10.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 89,
+          "min_distance_nm": 0.40378
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.404133
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.420833
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.18,
+            "y_nm": 0.12
+          },
+          {
+            "label": "B",
+            "x_nm": 0.1,
+            "y_nm": -0.17
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 4,
+            "end_t_s": 890,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 4,
+                    "x_nm": -0.14,
+                    "y_nm": 0.16
+                  },
+                  {
+                    "t_s": 23,
+                    "x_nm": -0.18,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 34,
+                    "x_nm": -0.21,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 64,
+                    "x_nm": -0.28,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 94,
+                    "x_nm": -0.34,
+                    "y_nm": -0.03
+                  },
+                  {
+                    "t_s": 120,
+                    "x_nm": -0.4,
+                    "y_nm": -0.08
+                  },
+                  {
+                    "t_s": 124,
+                    "x_nm": -0.41,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 154,
+                    "x_nm": -0.47,
+                    "y_nm": -0.15
+                  },
+                  {
+                    "t_s": 184,
+                    "x_nm": -0.54,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 214,
+                    "x_nm": -0.62,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 244,
+                    "x_nm": -0.71,
+                    "y_nm": -0.29
+                  },
+                  {
+                    "t_s": 274,
+                    "x_nm": -0.8,
+                    "y_nm": -0.27
+                  },
+                  {
+                    "t_s": 304,
+                    "x_nm": -0.88,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 334,
+                    "x_nm": -0.96,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 364,
+                    "x_nm": -1.04,
+                    "y_nm": -0.16
+                  },
+                  {
+                    "t_s": 394,
+                    "x_nm": -1.12,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 424,
+                    "x_nm": -1.21,
+                    "y_nm": -0.08
+                  },
+                  {
+                    "t_s": 484,
+                    "x_nm": -1.38,
+                    "y_nm": -0.01
+                  },
+                  {
+                    "t_s": 514,
+                    "x_nm": -1.46,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 544,
+                    "x_nm": -1.54,
+                    "y_nm": 0.07
+                  },
+                  {
+                    "t_s": 574,
+                    "x_nm": -1.63,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 604,
+                    "x_nm": -1.72,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 634,
+                    "x_nm": -1.81,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 664,
+                    "x_nm": -1.9,
+                    "y_nm": 0.13
+                  },
+                  {
+                    "t_s": 694,
+                    "x_nm": -1.99,
+                    "y_nm": 0.14
+                  },
+                  {
+                    "t_s": 724,
+                    "x_nm": -2.07,
+                    "y_nm": 0.14
+                  },
+                  {
+                    "t_s": 754,
+                    "x_nm": -2.15,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 784,
+                    "x_nm": -2.24,
+                    "y_nm": 0.07
+                  },
+                  {
+                    "t_s": 814,
+                    "x_nm": -2.32,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 844,
+                    "x_nm": -2.38,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 874,
+                    "x_nm": -2.41,
+                    "y_nm": -0.06
+                  },
+                  {
+                    "t_s": 890,
+                    "x_nm": -2.42,
+                    "y_nm": -0.08
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 4,
+                    "x_nm": 0.1,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 23,
+                    "x_nm": 0.1,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 34,
+                    "x_nm": 0.1,
+                    "y_nm": -0.16
+                  },
+                  {
+                    "t_s": 64,
+                    "x_nm": 0.1,
+                    "y_nm": -0.16
+                  },
+                  {
+                    "t_s": 94,
+                    "x_nm": 0.11,
+                    "y_nm": -0.15
+                  },
+                  {
+                    "t_s": 120,
+                    "x_nm": 0.11,
+                    "y_nm": -0.15
+                  },
+                  {
+                    "t_s": 124,
+                    "x_nm": 0.11,
+                    "y_nm": -0.15
+                  },
+                  {
+                    "t_s": 154,
+                    "x_nm": 0.1,
+                    "y_nm": -0.14
+                  },
+                  {
+                    "t_s": 184,
+                    "x_nm": 0.11,
+                    "y_nm": -0.13
+                  },
+                  {
+                    "t_s": 214,
+                    "x_nm": 0.11,
+                    "y_nm": -0.13
+                  },
+                  {
+                    "t_s": 244,
+                    "x_nm": 0.11,
+                    "y_nm": -0.13
+                  },
+                  {
+                    "t_s": 274,
+                    "x_nm": 0.1,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 304,
+                    "x_nm": 0.1,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 334,
+                    "x_nm": 0.1,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 364,
+                    "x_nm": 0.1,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 394,
+                    "x_nm": 0.09,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 424,
+                    "x_nm": 0.09,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 484,
+                    "x_nm": 0.1,
+                    "y_nm": -0.11
+                  },
+                  {
+                    "t_s": 514,
+                    "x_nm": 0.11,
+                    "y_nm": -0.1
+                  },
+                  {
+                    "t_s": 544,
+                    "x_nm": 0.11,
+                    "y_nm": -0.1
+                  },
+                  {
+                    "t_s": 574,
+                    "x_nm": 0.11,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 604,
+                    "x_nm": 0.12,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 634,
+                    "x_nm": 0.12,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 664,
+                    "x_nm": 0.12,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 694,
+                    "x_nm": 0.12,
+                    "y_nm": -0.08
+                  },
+                  {
+                    "t_s": 724,
+                    "x_nm": 0.12,
+                    "y_nm": -0.08
+                  },
+                  {
+                    "t_s": 754,
+                    "x_nm": 0.12,
+                    "y_nm": -0.08
+                  },
+                  {
+                    "t_s": 784,
+                    "x_nm": 0.11,
+                    "y_nm": -0.08
+                  },
+                  {
+                    "t_s": 814,
+                    "x_nm": 0.11,
+                    "y_nm": -0.07
+                  },
+                  {
+                    "t_s": 844,
+                    "x_nm": 0.11,
+                    "y_nm": -0.07
+                  },
+                  {
+                    "t_s": 874,
+                    "x_nm": 0.11,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 890,
+                    "x_nm": 0.12,
+                    "y_nm": -0.15
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "tokyo-bay-enc-rv9-003",
+      "rank": 3,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 25,
+        "max_source_state_age_s": 36,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.2,
+              "y_nm": 0.48
+            },
+            {
+              "label": "B",
+              "x_nm": 0.2,
+              "y_nm": -0.48
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.24,
+              "y_nm": 0.68
+            },
+            {
+              "label": "B",
+              "x_nm": -0.34,
+              "y_nm": 0.62
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.29,
+            "y_nm": 0.65
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.107462,
+        "tcpa_min": 6.951196,
+        "closest_time_t_s": 417,
+        "current_distance_nm": 0.037162,
+        "screening_score": 0.698105
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.061744,
+        "continuous_min_time_t_s": 713,
+        "dcpa_abs_error_nm": 0.045718,
+        "closest_time_abs_error_s": 296,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 883.0,
+        "common_coverage_fraction": 0.981111,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 13.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.061956
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.062327
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.062327
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": 0.09,
+            "y_nm": 1.07
+          },
+          {
+            "label": "B",
+            "x_nm": 0.04,
+            "y_nm": 1.05
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 13,
+            "end_t_s": 896,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 13,
+                    "x_nm": -0.21,
+                    "y_nm": 0.47
+                  },
+                  {
+                    "t_s": 43,
+                    "x_nm": -0.22,
+                    "y_nm": 0.47
+                  },
+                  {
+                    "t_s": 73,
+                    "x_nm": -0.25,
+                    "y_nm": 0.46
+                  },
+                  {
+                    "t_s": 103,
+                    "x_nm": -0.27,
+                    "y_nm": 0.45
+                  },
+                  {
+                    "t_s": 133,
+                    "x_nm": -0.29,
+                    "y_nm": 0.45
+                  },
+                  {
+                    "t_s": 163,
+                    "x_nm": -0.29,
+                    "y_nm": 0.45
+                  },
+                  {
+                    "t_s": 193,
+                    "x_nm": -0.3,
+                    "y_nm": 0.45
+                  },
+                  {
+                    "t_s": 223,
+                    "x_nm": -0.33,
+                    "y_nm": 0.48
+                  },
+                  {
+                    "t_s": 253,
+                    "x_nm": -0.36,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 283,
+                    "x_nm": -0.39,
+                    "y_nm": 0.58
+                  },
+                  {
+                    "t_s": 313,
+                    "x_nm": -0.41,
+                    "y_nm": 0.64
+                  },
+                  {
+                    "t_s": 343,
+                    "x_nm": -0.41,
+                    "y_nm": 0.69
+                  },
+                  {
+                    "t_s": 373,
+                    "x_nm": -0.41,
+                    "y_nm": 0.74
+                  },
+                  {
+                    "t_s": 403,
+                    "x_nm": -0.39,
+                    "y_nm": 0.78
+                  },
+                  {
+                    "t_s": 417,
+                    "x_nm": -0.37,
+                    "y_nm": 0.8
+                  },
+                  {
+                    "t_s": 433,
+                    "x_nm": -0.35,
+                    "y_nm": 0.83
+                  },
+                  {
+                    "t_s": 493,
+                    "x_nm": -0.26,
+                    "y_nm": 0.89
+                  },
+                  {
+                    "t_s": 523,
+                    "x_nm": -0.23,
+                    "y_nm": 0.89
+                  },
+                  {
+                    "t_s": 553,
+                    "x_nm": -0.21,
+                    "y_nm": 0.89
+                  },
+                  {
+                    "t_s": 583,
+                    "x_nm": -0.18,
+                    "y_nm": 0.91
+                  },
+                  {
+                    "t_s": 613,
+                    "x_nm": -0.13,
+                    "y_nm": 0.95
+                  },
+                  {
+                    "t_s": 643,
+                    "x_nm": -0.07,
+                    "y_nm": 0.99
+                  },
+                  {
+                    "t_s": 673,
+                    "x_nm": 0.0,
+                    "y_nm": 1.03
+                  },
+                  {
+                    "t_s": 703,
+                    "x_nm": 0.07,
+                    "y_nm": 1.06
+                  },
+                  {
+                    "t_s": 713,
+                    "x_nm": 0.09,
+                    "y_nm": 1.07
+                  },
+                  {
+                    "t_s": 733,
+                    "x_nm": 0.13,
+                    "y_nm": 1.1
+                  },
+                  {
+                    "t_s": 763,
+                    "x_nm": 0.2,
+                    "y_nm": 1.13
+                  },
+                  {
+                    "t_s": 793,
+                    "x_nm": 0.26,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 823,
+                    "x_nm": 0.32,
+                    "y_nm": 1.19
+                  },
+                  {
+                    "t_s": 853,
+                    "x_nm": 0.38,
+                    "y_nm": 1.22
+                  },
+                  {
+                    "t_s": 883,
+                    "x_nm": 0.44,
+                    "y_nm": 1.25
+                  },
+                  {
+                    "t_s": 896,
+                    "x_nm": 0.46,
+                    "y_nm": 1.26
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 13,
+                    "x_nm": 0.18,
+                    "y_nm": -0.44
+                  },
+                  {
+                    "t_s": 43,
+                    "x_nm": 0.13,
+                    "y_nm": -0.36
+                  },
+                  {
+                    "t_s": 73,
+                    "x_nm": 0.09,
+                    "y_nm": -0.28
+                  },
+                  {
+                    "t_s": 103,
+                    "x_nm": 0.04,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 133,
+                    "x_nm": -0.01,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 163,
+                    "x_nm": -0.06,
+                    "y_nm": -0.04
+                  },
+                  {
+                    "t_s": 193,
+                    "x_nm": -0.1,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 223,
+                    "x_nm": -0.13,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 253,
+                    "x_nm": -0.15,
+                    "y_nm": 0.17
+                  },
+                  {
+                    "t_s": 283,
+                    "x_nm": -0.15,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 313,
+                    "x_nm": -0.17,
+                    "y_nm": 0.25
+                  },
+                  {
+                    "t_s": 343,
+                    "x_nm": -0.2,
+                    "y_nm": 0.3
+                  },
+                  {
+                    "t_s": 373,
+                    "x_nm": -0.24,
+                    "y_nm": 0.35
+                  },
+                  {
+                    "t_s": 403,
+                    "x_nm": -0.27,
+                    "y_nm": 0.41
+                  },
+                  {
+                    "t_s": 417,
+                    "x_nm": -0.29,
+                    "y_nm": 0.44
+                  },
+                  {
+                    "t_s": 433,
+                    "x_nm": -0.3,
+                    "y_nm": 0.48
+                  },
+                  {
+                    "t_s": 493,
+                    "x_nm": -0.33,
+                    "y_nm": 0.64
+                  },
+                  {
+                    "t_s": 523,
+                    "x_nm": -0.33,
+                    "y_nm": 0.73
+                  },
+                  {
+                    "t_s": 553,
+                    "x_nm": -0.3,
+                    "y_nm": 0.8
+                  },
+                  {
+                    "t_s": 583,
+                    "x_nm": -0.26,
+                    "y_nm": 0.87
+                  },
+                  {
+                    "t_s": 613,
+                    "x_nm": -0.19,
+                    "y_nm": 0.92
+                  },
+                  {
+                    "t_s": 643,
+                    "x_nm": -0.13,
+                    "y_nm": 0.96
+                  },
+                  {
+                    "t_s": 673,
+                    "x_nm": -0.06,
+                    "y_nm": 1.0
+                  },
+                  {
+                    "t_s": 703,
+                    "x_nm": 0.01,
+                    "y_nm": 1.04
+                  },
+                  {
+                    "t_s": 713,
+                    "x_nm": 0.04,
+                    "y_nm": 1.05
+                  },
+                  {
+                    "t_s": 733,
+                    "x_nm": 0.08,
+                    "y_nm": 1.07
+                  },
+                  {
+                    "t_s": 763,
+                    "x_nm": 0.14,
+                    "y_nm": 1.1
+                  },
+                  {
+                    "t_s": 793,
+                    "x_nm": 0.2,
+                    "y_nm": 1.14
+                  },
+                  {
+                    "t_s": 823,
+                    "x_nm": 0.26,
+                    "y_nm": 1.17
+                  },
+                  {
+                    "t_s": 853,
+                    "x_nm": 0.32,
+                    "y_nm": 1.2
+                  },
+                  {
+                    "t_s": 883,
+                    "x_nm": 0.38,
+                    "y_nm": 1.23
+                  },
+                  {
+                    "t_s": 896,
+                    "x_nm": 0.4,
+                    "y_nm": 1.24
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "tokyo-bay-enc-rv9-004",
+      "rank": 4,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 11,
+        "max_source_state_age_s": 58,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": 0.11,
+              "y_nm": -0.3
+            },
+            {
+              "label": "B",
+              "x_nm": -0.11,
+              "y_nm": 0.3
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.18,
+              "y_nm": 0.19
+            },
+            {
+              "label": "B",
+              "x_nm": -0.01,
+              "y_nm": 0.33
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.1,
+            "y_nm": 0.26
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.218047,
+        "tcpa_min": 2.6732,
+        "closest_time_t_s": 160,
+        "current_distance_nm": 0.333017,
+        "screening_score": 0.654165
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.276475,
+        "continuous_min_time_t_s": 93,
+        "dcpa_abs_error_nm": 0.058428,
+        "closest_time_abs_error_s": 66,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 882.0,
+        "common_coverage_fraction": 0.98,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 10.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 89,
+          "min_distance_nm": 0.277074
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.277074
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.301035
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": 0.18,
+            "y_nm": 0.03
+          },
+          {
+            "label": "B",
+            "x_nm": -0.06,
+            "y_nm": 0.16
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 10,
+            "end_t_s": 892,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 10,
+                    "x_nm": 0.13,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 40,
+                    "x_nm": 0.14,
+                    "y_nm": -0.14
+                  },
+                  {
+                    "t_s": 70,
+                    "x_nm": 0.14,
+                    "y_nm": -0.03
+                  },
+                  {
+                    "t_s": 93,
+                    "x_nm": 0.18,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 100,
+                    "x_nm": 0.2,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 130,
+                    "x_nm": 0.27,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 160,
+                    "x_nm": 0.35,
+                    "y_nm": 0.17
+                  },
+                  {
+                    "t_s": 190,
+                    "x_nm": 0.44,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 220,
+                    "x_nm": 0.53,
+                    "y_nm": 0.27
+                  },
+                  {
+                    "t_s": 250,
+                    "x_nm": 0.62,
+                    "y_nm": 0.33
+                  },
+                  {
+                    "t_s": 280,
+                    "x_nm": 0.71,
+                    "y_nm": 0.38
+                  },
+                  {
+                    "t_s": 310,
+                    "x_nm": 0.81,
+                    "y_nm": 0.43
+                  },
+                  {
+                    "t_s": 340,
+                    "x_nm": 0.9,
+                    "y_nm": 0.49
+                  },
+                  {
+                    "t_s": 370,
+                    "x_nm": 1.0,
+                    "y_nm": 0.54
+                  },
+                  {
+                    "t_s": 400,
+                    "x_nm": 1.1,
+                    "y_nm": 0.59
+                  },
+                  {
+                    "t_s": 430,
+                    "x_nm": 1.19,
+                    "y_nm": 0.65
+                  },
+                  {
+                    "t_s": 460,
+                    "x_nm": 1.29,
+                    "y_nm": 0.7
+                  },
+                  {
+                    "t_s": 490,
+                    "x_nm": 1.38,
+                    "y_nm": 0.75
+                  },
+                  {
+                    "t_s": 520,
+                    "x_nm": 1.48,
+                    "y_nm": 0.8
+                  },
+                  {
+                    "t_s": 550,
+                    "x_nm": 1.57,
+                    "y_nm": 0.86
+                  },
+                  {
+                    "t_s": 580,
+                    "x_nm": 1.67,
+                    "y_nm": 0.91
+                  },
+                  {
+                    "t_s": 610,
+                    "x_nm": 1.77,
+                    "y_nm": 0.96
+                  },
+                  {
+                    "t_s": 640,
+                    "x_nm": 1.87,
+                    "y_nm": 1.01
+                  },
+                  {
+                    "t_s": 670,
+                    "x_nm": 1.96,
+                    "y_nm": 1.06
+                  },
+                  {
+                    "t_s": 700,
+                    "x_nm": 2.05,
+                    "y_nm": 1.11
+                  },
+                  {
+                    "t_s": 730,
+                    "x_nm": 2.13,
+                    "y_nm": 1.15
+                  },
+                  {
+                    "t_s": 760,
+                    "x_nm": 2.21,
+                    "y_nm": 1.19
+                  },
+                  {
+                    "t_s": 790,
+                    "x_nm": 2.29,
+                    "y_nm": 1.23
+                  },
+                  {
+                    "t_s": 820,
+                    "x_nm": 2.36,
+                    "y_nm": 1.27
+                  },
+                  {
+                    "t_s": 850,
+                    "x_nm": 2.43,
+                    "y_nm": 1.3
+                  },
+                  {
+                    "t_s": 880,
+                    "x_nm": 2.5,
+                    "y_nm": 1.33
+                  },
+                  {
+                    "t_s": 892,
+                    "x_nm": 2.52,
+                    "y_nm": 1.34
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 10,
+                    "x_nm": -0.1,
+                    "y_nm": 0.27
+                  },
+                  {
+                    "t_s": 40,
+                    "x_nm": -0.09,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 70,
+                    "x_nm": -0.07,
+                    "y_nm": 0.19
+                  },
+                  {
+                    "t_s": 93,
+                    "x_nm": -0.06,
+                    "y_nm": 0.16
+                  },
+                  {
+                    "t_s": 100,
+                    "x_nm": -0.06,
+                    "y_nm": 0.14
+                  },
+                  {
+                    "t_s": 130,
+                    "x_nm": -0.05,
+                    "y_nm": 0.09
+                  },
+                  {
+                    "t_s": 160,
+                    "x_nm": -0.06,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 190,
+                    "x_nm": -0.09,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 220,
+                    "x_nm": -0.12,
+                    "y_nm": -0.07
+                  },
+                  {
+                    "t_s": 250,
+                    "x_nm": -0.16,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 280,
+                    "x_nm": -0.2,
+                    "y_nm": -0.18
+                  },
+                  {
+                    "t_s": 310,
+                    "x_nm": -0.24,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 340,
+                    "x_nm": -0.28,
+                    "y_nm": -0.28
+                  },
+                  {
+                    "t_s": 370,
+                    "x_nm": -0.32,
+                    "y_nm": -0.33
+                  },
+                  {
+                    "t_s": 400,
+                    "x_nm": -0.36,
+                    "y_nm": -0.38
+                  },
+                  {
+                    "t_s": 430,
+                    "x_nm": -0.4,
+                    "y_nm": -0.43
+                  },
+                  {
+                    "t_s": 460,
+                    "x_nm": -0.43,
+                    "y_nm": -0.46
+                  },
+                  {
+                    "t_s": 490,
+                    "x_nm": -0.45,
+                    "y_nm": -0.5
+                  },
+                  {
+                    "t_s": 520,
+                    "x_nm": -0.48,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 550,
+                    "x_nm": -0.5,
+                    "y_nm": -0.55
+                  },
+                  {
+                    "t_s": 580,
+                    "x_nm": -0.53,
+                    "y_nm": -0.57
+                  },
+                  {
+                    "t_s": 610,
+                    "x_nm": -0.55,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 640,
+                    "x_nm": -0.57,
+                    "y_nm": -0.61
+                  },
+                  {
+                    "t_s": 670,
+                    "x_nm": -0.59,
+                    "y_nm": -0.63
+                  },
+                  {
+                    "t_s": 700,
+                    "x_nm": -0.6,
+                    "y_nm": -0.64
+                  },
+                  {
+                    "t_s": 730,
+                    "x_nm": -0.61,
+                    "y_nm": -0.65
+                  },
+                  {
+                    "t_s": 760,
+                    "x_nm": -0.62,
+                    "y_nm": -0.65
+                  },
+                  {
+                    "t_s": 790,
+                    "x_nm": -0.62,
+                    "y_nm": -0.66
+                  },
+                  {
+                    "t_s": 820,
+                    "x_nm": -0.63,
+                    "y_nm": -0.66
+                  },
+                  {
+                    "t_s": 850,
+                    "x_nm": -0.64,
+                    "y_nm": -0.66
+                  },
+                  {
+                    "t_s": 880,
+                    "x_nm": -0.64,
+                    "y_nm": -0.67
+                  },
+                  {
+                    "t_s": 892,
+                    "x_nm": -0.65,
+                    "y_nm": -0.67
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "tokyo-bay-enc-rv9-005",
+      "rank": 5,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 33,
+        "max_source_state_age_s": 35,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.94,
+              "y_nm": 0.27
+            },
+            {
+              "label": "B",
+              "x_nm": 0.94,
+              "y_nm": -0.27
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": 0.16,
+              "y_nm": 0.04
+            },
+            {
+              "label": "B",
+              "x_nm": 0.13,
+              "y_nm": -0.4
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": 0.15,
+            "y_nm": -0.18
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.446833,
+        "tcpa_min": 6.144671,
+        "closest_time_t_s": 368,
+        "current_distance_nm": 0.094708,
+        "screening_score": 0.275741
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.083511,
+        "continuous_min_time_t_s": 362,
+        "dcpa_abs_error_nm": 0.363322,
+        "closest_time_abs_error_s": 7,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 881.0,
+        "common_coverage_fraction": 0.978889,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 14.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.084284
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.084284
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.084284
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": 0.24,
+            "y_nm": 0.03
+          },
+          {
+            "label": "B",
+            "x_nm": 0.19,
+            "y_nm": -0.04
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 14,
+            "end_t_s": 895,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 14,
+                    "x_nm": -0.87,
+                    "y_nm": 0.34
+                  },
+                  {
+                    "t_s": 44,
+                    "x_nm": -0.77,
+                    "y_nm": 0.37
+                  },
+                  {
+                    "t_s": 74,
+                    "x_nm": -0.66,
+                    "y_nm": 0.37
+                  },
+                  {
+                    "t_s": 104,
+                    "x_nm": -0.55,
+                    "y_nm": 0.37
+                  },
+                  {
+                    "t_s": 134,
+                    "x_nm": -0.44,
+                    "y_nm": 0.36
+                  },
+                  {
+                    "t_s": 164,
+                    "x_nm": -0.33,
+                    "y_nm": 0.34
+                  },
+                  {
+                    "t_s": 194,
+                    "x_nm": -0.23,
+                    "y_nm": 0.31
+                  },
+                  {
+                    "t_s": 224,
+                    "x_nm": -0.14,
+                    "y_nm": 0.25
+                  },
+                  {
+                    "t_s": 254,
+                    "x_nm": -0.04,
+                    "y_nm": 0.2
+                  },
+                  {
+                    "t_s": 284,
+                    "x_nm": 0.04,
+                    "y_nm": 0.16
+                  },
+                  {
+                    "t_s": 314,
+                    "x_nm": 0.12,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 344,
+                    "x_nm": 0.19,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 362,
+                    "x_nm": 0.24,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 368,
+                    "x_nm": 0.26,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 374,
+                    "x_nm": 0.27,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 404,
+                    "x_nm": 0.35,
+                    "y_nm": -0.04
+                  },
+                  {
+                    "t_s": 434,
+                    "x_nm": 0.43,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 494,
+                    "x_nm": 0.58,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 524,
+                    "x_nm": 0.65,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 554,
+                    "x_nm": 0.72,
+                    "y_nm": -0.31
+                  },
+                  {
+                    "t_s": 584,
+                    "x_nm": 0.8,
+                    "y_nm": -0.36
+                  },
+                  {
+                    "t_s": 614,
+                    "x_nm": 0.87,
+                    "y_nm": -0.42
+                  },
+                  {
+                    "t_s": 644,
+                    "x_nm": 0.94,
+                    "y_nm": -0.48
+                  },
+                  {
+                    "t_s": 674,
+                    "x_nm": 1.02,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 704,
+                    "x_nm": 1.09,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 734,
+                    "x_nm": 1.16,
+                    "y_nm": -0.63
+                  },
+                  {
+                    "t_s": 764,
+                    "x_nm": 1.22,
+                    "y_nm": -0.67
+                  },
+                  {
+                    "t_s": 794,
+                    "x_nm": 1.28,
+                    "y_nm": -0.69
+                  },
+                  {
+                    "t_s": 824,
+                    "x_nm": 1.24,
+                    "y_nm": -0.64
+                  },
+                  {
+                    "t_s": 854,
+                    "x_nm": 1.21,
+                    "y_nm": -0.6
+                  },
+                  {
+                    "t_s": 884,
+                    "x_nm": 1.17,
+                    "y_nm": -0.56
+                  },
+                  {
+                    "t_s": 895,
+                    "x_nm": 1.15,
+                    "y_nm": -0.55
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 14,
+                    "x_nm": 0.92,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 44,
+                    "x_nm": 0.86,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 74,
+                    "x_nm": 0.8,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 104,
+                    "x_nm": 0.73,
+                    "y_nm": -0.19
+                  },
+                  {
+                    "t_s": 134,
+                    "x_nm": 0.67,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 164,
+                    "x_nm": 0.61,
+                    "y_nm": -0.16
+                  },
+                  {
+                    "t_s": 194,
+                    "x_nm": 0.54,
+                    "y_nm": -0.15
+                  },
+                  {
+                    "t_s": 224,
+                    "x_nm": 0.48,
+                    "y_nm": -0.15
+                  },
+                  {
+                    "t_s": 254,
+                    "x_nm": 0.41,
+                    "y_nm": -0.13
+                  },
+                  {
+                    "t_s": 284,
+                    "x_nm": 0.35,
+                    "y_nm": -0.11
+                  },
+                  {
+                    "t_s": 314,
+                    "x_nm": 0.29,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 344,
+                    "x_nm": 0.23,
+                    "y_nm": -0.06
+                  },
+                  {
+                    "t_s": 362,
+                    "x_nm": 0.19,
+                    "y_nm": -0.04
+                  },
+                  {
+                    "t_s": 368,
+                    "x_nm": 0.18,
+                    "y_nm": -0.03
+                  },
+                  {
+                    "t_s": 374,
+                    "x_nm": 0.17,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 404,
+                    "x_nm": 0.11,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 434,
+                    "x_nm": 0.06,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 494,
+                    "x_nm": -0.06,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 524,
+                    "x_nm": -0.12,
+                    "y_nm": 0.13
+                  },
+                  {
+                    "t_s": 554,
+                    "x_nm": -0.18,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 584,
+                    "x_nm": -0.25,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 614,
+                    "x_nm": -0.31,
+                    "y_nm": 0.08
+                  },
+                  {
+                    "t_s": 644,
+                    "x_nm": -0.37,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 674,
+                    "x_nm": -0.42,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 704,
+                    "x_nm": -0.47,
+                    "y_nm": -0.04
+                  },
+                  {
+                    "t_s": 734,
+                    "x_nm": -0.51,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 764,
+                    "x_nm": -0.55,
+                    "y_nm": -0.14
+                  },
+                  {
+                    "t_s": 794,
+                    "x_nm": -0.58,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 824,
+                    "x_nm": -0.6,
+                    "y_nm": -0.18
+                  },
+                  {
+                    "t_s": 854,
+                    "x_nm": -0.62,
+                    "y_nm": -0.19
+                  },
+                  {
+                    "t_s": 884,
+                    "x_nm": -0.64,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 895,
+                    "x_nm": -0.64,
+                    "y_nm": -0.2
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "tokyo-bay-enc-rv9-006",
+      "rank": 6,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 13,
+        "max_source_state_age_s": 48,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.07,
+              "y_nm": -0.01
+            },
+            {
+              "label": "B",
+              "x_nm": 0.07,
+              "y_nm": 0.01
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.1,
+              "y_nm": -0.03
+            },
+            {
+              "label": "B",
+              "x_nm": 0.04,
+              "y_nm": 0.0
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.03,
+            "y_nm": -0.01
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.143388,
+        "tcpa_min": 0.235059,
+        "closest_time_t_s": 14,
+        "current_distance_nm": 0.082775,
+        "screening_score": 0.80811
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.05627,
+        "continuous_min_time_t_s": 276,
+        "dcpa_abs_error_nm": 0.087118,
+        "closest_time_abs_error_s": 262,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 880.0,
+        "common_coverage_fraction": 0.977778,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 12.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.056536
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.056963
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.065168
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.24,
+            "y_nm": -0.53
+          },
+          {
+            "label": "B",
+            "x_nm": -0.29,
+            "y_nm": -0.5
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 12,
+            "end_t_s": 892,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 12,
+                    "x_nm": -0.08,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 14,
+                    "x_nm": -0.08,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 42,
+                    "x_nm": -0.11,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 72,
+                    "x_nm": -0.14,
+                    "y_nm": -0.18
+                  },
+                  {
+                    "t_s": 102,
+                    "x_nm": -0.17,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 132,
+                    "x_nm": -0.2,
+                    "y_nm": -0.32
+                  },
+                  {
+                    "t_s": 162,
+                    "x_nm": -0.22,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 192,
+                    "x_nm": -0.24,
+                    "y_nm": -0.45
+                  },
+                  {
+                    "t_s": 222,
+                    "x_nm": -0.25,
+                    "y_nm": -0.5
+                  },
+                  {
+                    "t_s": 252,
+                    "x_nm": -0.25,
+                    "y_nm": -0.52
+                  },
+                  {
+                    "t_s": 276,
+                    "x_nm": -0.24,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 282,
+                    "x_nm": -0.24,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 312,
+                    "x_nm": -0.23,
+                    "y_nm": -0.54
+                  },
+                  {
+                    "t_s": 342,
+                    "x_nm": -0.23,
+                    "y_nm": -0.54
+                  },
+                  {
+                    "t_s": 372,
+                    "x_nm": -0.23,
+                    "y_nm": -0.54
+                  },
+                  {
+                    "t_s": 402,
+                    "x_nm": -0.23,
+                    "y_nm": -0.54
+                  },
+                  {
+                    "t_s": 432,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 492,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 522,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 552,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 582,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 612,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 642,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 672,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 702,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 732,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 762,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 792,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 822,
+                    "x_nm": -0.23,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 852,
+                    "x_nm": -0.23,
+                    "y_nm": -0.54
+                  },
+                  {
+                    "t_s": 882,
+                    "x_nm": -0.23,
+                    "y_nm": -0.54
+                  },
+                  {
+                    "t_s": 892,
+                    "x_nm": -0.23,
+                    "y_nm": -0.54
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 12,
+                    "x_nm": 0.05,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 14,
+                    "x_nm": 0.04,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 42,
+                    "x_nm": -0.02,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 72,
+                    "x_nm": -0.07,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 102,
+                    "x_nm": -0.12,
+                    "y_nm": -0.15
+                  },
+                  {
+                    "t_s": 132,
+                    "x_nm": -0.15,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 162,
+                    "x_nm": -0.19,
+                    "y_nm": -0.27
+                  },
+                  {
+                    "t_s": 192,
+                    "x_nm": -0.22,
+                    "y_nm": -0.33
+                  },
+                  {
+                    "t_s": 222,
+                    "x_nm": -0.25,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 252,
+                    "x_nm": -0.28,
+                    "y_nm": -0.46
+                  },
+                  {
+                    "t_s": 276,
+                    "x_nm": -0.29,
+                    "y_nm": -0.5
+                  },
+                  {
+                    "t_s": 282,
+                    "x_nm": -0.29,
+                    "y_nm": -0.51
+                  },
+                  {
+                    "t_s": 312,
+                    "x_nm": -0.3,
+                    "y_nm": -0.56
+                  },
+                  {
+                    "t_s": 342,
+                    "x_nm": -0.3,
+                    "y_nm": -0.58
+                  },
+                  {
+                    "t_s": 372,
+                    "x_nm": -0.29,
+                    "y_nm": -0.6
+                  },
+                  {
+                    "t_s": 402,
+                    "x_nm": -0.29,
+                    "y_nm": -0.61
+                  },
+                  {
+                    "t_s": 432,
+                    "x_nm": -0.29,
+                    "y_nm": -0.62
+                  },
+                  {
+                    "t_s": 492,
+                    "x_nm": -0.28,
+                    "y_nm": -0.64
+                  },
+                  {
+                    "t_s": 522,
+                    "x_nm": -0.28,
+                    "y_nm": -0.64
+                  },
+                  {
+                    "t_s": 552,
+                    "x_nm": -0.28,
+                    "y_nm": -0.64
+                  },
+                  {
+                    "t_s": 582,
+                    "x_nm": -0.28,
+                    "y_nm": -0.64
+                  },
+                  {
+                    "t_s": 612,
+                    "x_nm": -0.28,
+                    "y_nm": -0.64
+                  },
+                  {
+                    "t_s": 642,
+                    "x_nm": -0.28,
+                    "y_nm": -0.64
+                  },
+                  {
+                    "t_s": 672,
+                    "x_nm": -0.28,
+                    "y_nm": -0.64
+                  },
+                  {
+                    "t_s": 702,
+                    "x_nm": -0.28,
+                    "y_nm": -0.64
+                  },
+                  {
+                    "t_s": 732,
+                    "x_nm": -0.28,
+                    "y_nm": -0.63
+                  },
+                  {
+                    "t_s": 762,
+                    "x_nm": -0.27,
+                    "y_nm": -0.63
+                  },
+                  {
+                    "t_s": 792,
+                    "x_nm": -0.27,
+                    "y_nm": -0.63
+                  },
+                  {
+                    "t_s": 822,
+                    "x_nm": -0.27,
+                    "y_nm": -0.63
+                  },
+                  {
+                    "t_s": 852,
+                    "x_nm": -0.27,
+                    "y_nm": -0.63
+                  },
+                  {
+                    "t_s": 882,
+                    "x_nm": -0.27,
+                    "y_nm": -0.63
+                  },
+                  {
+                    "t_s": 892,
+                    "x_nm": -0.27,
+                    "y_nm": -0.63
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "tokyo-bay-enc-rv9-007",
+      "rank": 7,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 0,
+        "max_source_state_age_s": 45,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.13,
+              "y_nm": 0.28
+            },
+            {
+              "label": "B",
+              "x_nm": 0.13,
+              "y_nm": -0.28
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": 0.34,
+              "y_nm": 0.01
+            },
+            {
+              "label": "B",
+              "x_nm": 0.17,
+              "y_nm": -0.17
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": 0.26,
+            "y_nm": -0.08
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.249411,
+        "tcpa_min": 3.829595,
+        "closest_time_t_s": 229,
+        "current_distance_nm": 0.617005,
+        "screening_score": 0.586408
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.14186,
+        "continuous_min_time_t_s": 527,
+        "dcpa_abs_error_nm": 0.107551,
+        "closest_time_abs_error_s": 297,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 880.0,
+        "common_coverage_fraction": 0.977778,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 16.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.142012
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.142236
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.142882
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.01,
+            "y_nm": -0.24
+          },
+          {
+            "label": "B",
+            "x_nm": 0.11,
+            "y_nm": -0.31
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 16,
+            "end_t_s": 896,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 16,
+                    "x_nm": -0.12,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 46,
+                    "x_nm": -0.08,
+                    "y_nm": 0.18
+                  },
+                  {
+                    "t_s": 76,
+                    "x_nm": -0.04,
+                    "y_nm": 0.12
+                  },
+                  {
+                    "t_s": 106,
+                    "x_nm": -0.01,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 136,
+                    "x_nm": 0.01,
+                    "y_nm": -0.01
+                  },
+                  {
+                    "t_s": 166,
+                    "x_nm": 0.01,
+                    "y_nm": -0.07
+                  },
+                  {
+                    "t_s": 196,
+                    "x_nm": 0.01,
+                    "y_nm": -0.13
+                  },
+                  {
+                    "t_s": 226,
+                    "x_nm": 0.0,
+                    "y_nm": -0.16
+                  },
+                  {
+                    "t_s": 229,
+                    "x_nm": 0.0,
+                    "y_nm": -0.17
+                  },
+                  {
+                    "t_s": 256,
+                    "x_nm": -0.0,
+                    "y_nm": -0.19
+                  },
+                  {
+                    "t_s": 286,
+                    "x_nm": -0.0,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 316,
+                    "x_nm": -0.01,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 346,
+                    "x_nm": -0.01,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 376,
+                    "x_nm": -0.01,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 406,
+                    "x_nm": -0.01,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 436,
+                    "x_nm": -0.01,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 496,
+                    "x_nm": -0.01,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 526,
+                    "x_nm": -0.01,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 527,
+                    "x_nm": -0.01,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 556,
+                    "x_nm": -0.01,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 586,
+                    "x_nm": -0.01,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 616,
+                    "x_nm": -0.02,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 646,
+                    "x_nm": -0.02,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 676,
+                    "x_nm": -0.02,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 706,
+                    "x_nm": -0.02,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 736,
+                    "x_nm": -0.02,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 766,
+                    "x_nm": -0.02,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 796,
+                    "x_nm": -0.02,
+                    "y_nm": -0.27
+                  },
+                  {
+                    "t_s": 826,
+                    "x_nm": -0.02,
+                    "y_nm": -0.27
+                  },
+                  {
+                    "t_s": 856,
+                    "x_nm": -0.02,
+                    "y_nm": -0.28
+                  },
+                  {
+                    "t_s": 886,
+                    "x_nm": -0.02,
+                    "y_nm": -0.28
+                  },
+                  {
+                    "t_s": 896,
+                    "x_nm": -0.02,
+                    "y_nm": -0.28
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 16,
+                    "x_nm": 0.12,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 46,
+                    "x_nm": 0.12,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 76,
+                    "x_nm": 0.12,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 106,
+                    "x_nm": 0.12,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 136,
+                    "x_nm": 0.12,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 166,
+                    "x_nm": 0.12,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 196,
+                    "x_nm": 0.12,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 226,
+                    "x_nm": 0.12,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 229,
+                    "x_nm": 0.11,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 256,
+                    "x_nm": 0.11,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 286,
+                    "x_nm": 0.11,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 316,
+                    "x_nm": 0.11,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 346,
+                    "x_nm": 0.11,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 376,
+                    "x_nm": 0.11,
+                    "y_nm": -0.31
+                  },
+                  {
+                    "t_s": 406,
+                    "x_nm": 0.11,
+                    "y_nm": -0.31
+                  },
+                  {
+                    "t_s": 436,
+                    "x_nm": 0.11,
+                    "y_nm": -0.31
+                  },
+                  {
+                    "t_s": 496,
+                    "x_nm": 0.11,
+                    "y_nm": -0.31
+                  },
+                  {
+                    "t_s": 526,
+                    "x_nm": 0.11,
+                    "y_nm": -0.31
+                  },
+                  {
+                    "t_s": 527,
+                    "x_nm": 0.11,
+                    "y_nm": -0.31
+                  },
+                  {
+                    "t_s": 556,
+                    "x_nm": 0.11,
+                    "y_nm": -0.32
+                  },
+                  {
+                    "t_s": 586,
+                    "x_nm": 0.11,
+                    "y_nm": -0.33
+                  },
+                  {
+                    "t_s": 616,
+                    "x_nm": 0.11,
+                    "y_nm": -0.33
+                  },
+                  {
+                    "t_s": 646,
+                    "x_nm": 0.11,
+                    "y_nm": -0.33
+                  },
+                  {
+                    "t_s": 676,
+                    "x_nm": 0.11,
+                    "y_nm": -0.33
+                  },
+                  {
+                    "t_s": 706,
+                    "x_nm": 0.11,
+                    "y_nm": -0.33
+                  },
+                  {
+                    "t_s": 736,
+                    "x_nm": 0.11,
+                    "y_nm": -0.33
+                  },
+                  {
+                    "t_s": 766,
+                    "x_nm": 0.11,
+                    "y_nm": -0.34
+                  },
+                  {
+                    "t_s": 796,
+                    "x_nm": 0.11,
+                    "y_nm": -0.34
+                  },
+                  {
+                    "t_s": 826,
+                    "x_nm": 0.11,
+                    "y_nm": -0.35
+                  },
+                  {
+                    "t_s": 856,
+                    "x_nm": 0.11,
+                    "y_nm": -0.35
+                  },
+                  {
+                    "t_s": 886,
+                    "x_nm": 0.1,
+                    "y_nm": -0.35
+                  },
+                  {
+                    "t_s": 896,
+                    "x_nm": 0.1,
+                    "y_nm": -0.34
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "tokyo-bay-enc-rv9-008",
+      "rank": 8,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 3,
+        "max_source_state_age_s": 54,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": 0.48,
+              "y_nm": 0.09
+            },
+            {
+              "label": "B",
+              "x_nm": -0.48,
+              "y_nm": -0.09
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.13,
+              "y_nm": 0.48
+            },
+            {
+              "label": "B",
+              "x_nm": -0.14,
+              "y_nm": 0.3
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.14,
+            "y_nm": 0.39
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.180206,
+        "tcpa_min": 4.641814,
+        "closest_time_t_s": 278,
+        "current_distance_nm": 0.498938,
+        "screening_score": 0.657423
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.444547,
+        "continuous_min_time_t_s": 165,
+        "dcpa_abs_error_nm": 0.264341,
+        "closest_time_abs_error_s": 113,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 878.0,
+        "common_coverage_fraction": 0.975556,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 12.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.445145
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.450489
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.450489
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": 0.1,
+            "y_nm": 0.3
+          },
+          {
+            "label": "B",
+            "x_nm": -0.17,
+            "y_nm": -0.06
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 12,
+            "end_t_s": 890,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 12,
+                    "x_nm": 0.45,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 42,
+                    "x_nm": 0.38,
+                    "y_nm": 0.14
+                  },
+                  {
+                    "t_s": 72,
+                    "x_nm": 0.31,
+                    "y_nm": 0.18
+                  },
+                  {
+                    "t_s": 102,
+                    "x_nm": 0.24,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 132,
+                    "x_nm": 0.17,
+                    "y_nm": 0.26
+                  },
+                  {
+                    "t_s": 162,
+                    "x_nm": 0.1,
+                    "y_nm": 0.29
+                  },
+                  {
+                    "t_s": 165,
+                    "x_nm": 0.1,
+                    "y_nm": 0.3
+                  },
+                  {
+                    "t_s": 192,
+                    "x_nm": 0.04,
+                    "y_nm": 0.34
+                  },
+                  {
+                    "t_s": 222,
+                    "x_nm": -0.03,
+                    "y_nm": 0.38
+                  },
+                  {
+                    "t_s": 252,
+                    "x_nm": -0.1,
+                    "y_nm": 0.42
+                  },
+                  {
+                    "t_s": 278,
+                    "x_nm": -0.15,
+                    "y_nm": 0.45
+                  },
+                  {
+                    "t_s": 282,
+                    "x_nm": -0.16,
+                    "y_nm": 0.46
+                  },
+                  {
+                    "t_s": 312,
+                    "x_nm": -0.23,
+                    "y_nm": 0.5
+                  },
+                  {
+                    "t_s": 342,
+                    "x_nm": -0.3,
+                    "y_nm": 0.54
+                  },
+                  {
+                    "t_s": 372,
+                    "x_nm": -0.37,
+                    "y_nm": 0.58
+                  },
+                  {
+                    "t_s": 402,
+                    "x_nm": -0.42,
+                    "y_nm": 0.63
+                  },
+                  {
+                    "t_s": 432,
+                    "x_nm": -0.47,
+                    "y_nm": 0.69
+                  },
+                  {
+                    "t_s": 492,
+                    "x_nm": -0.55,
+                    "y_nm": 0.8
+                  },
+                  {
+                    "t_s": 522,
+                    "x_nm": -0.58,
+                    "y_nm": 0.85
+                  },
+                  {
+                    "t_s": 552,
+                    "x_nm": -0.61,
+                    "y_nm": 0.9
+                  },
+                  {
+                    "t_s": 582,
+                    "x_nm": -0.63,
+                    "y_nm": 0.95
+                  },
+                  {
+                    "t_s": 612,
+                    "x_nm": -0.64,
+                    "y_nm": 0.99
+                  },
+                  {
+                    "t_s": 642,
+                    "x_nm": -0.65,
+                    "y_nm": 1.03
+                  },
+                  {
+                    "t_s": 672,
+                    "x_nm": -0.64,
+                    "y_nm": 1.07
+                  },
+                  {
+                    "t_s": 702,
+                    "x_nm": -0.61,
+                    "y_nm": 1.09
+                  },
+                  {
+                    "t_s": 732,
+                    "x_nm": -0.58,
+                    "y_nm": 1.09
+                  },
+                  {
+                    "t_s": 762,
+                    "x_nm": -0.54,
+                    "y_nm": 1.08
+                  },
+                  {
+                    "t_s": 792,
+                    "x_nm": -0.53,
+                    "y_nm": 1.06
+                  },
+                  {
+                    "t_s": 822,
+                    "x_nm": -0.52,
+                    "y_nm": 1.04
+                  },
+                  {
+                    "t_s": 852,
+                    "x_nm": -0.51,
+                    "y_nm": 1.02
+                  },
+                  {
+                    "t_s": 882,
+                    "x_nm": -0.52,
+                    "y_nm": 1.0
+                  },
+                  {
+                    "t_s": 890,
+                    "x_nm": -0.53,
+                    "y_nm": 0.99
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 12,
+                    "x_nm": -0.45,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 42,
+                    "x_nm": -0.41,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 72,
+                    "x_nm": -0.35,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 102,
+                    "x_nm": -0.29,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 132,
+                    "x_nm": -0.23,
+                    "y_nm": -0.01
+                  },
+                  {
+                    "t_s": 162,
+                    "x_nm": -0.17,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 165,
+                    "x_nm": -0.17,
+                    "y_nm": -0.06
+                  },
+                  {
+                    "t_s": 192,
+                    "x_nm": -0.12,
+                    "y_nm": -0.1
+                  },
+                  {
+                    "t_s": 222,
+                    "x_nm": -0.07,
+                    "y_nm": -0.16
+                  },
+                  {
+                    "t_s": 252,
+                    "x_nm": -0.04,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 278,
+                    "x_nm": -0.06,
+                    "y_nm": -0.28
+                  },
+                  {
+                    "t_s": 282,
+                    "x_nm": -0.06,
+                    "y_nm": -0.29
+                  },
+                  {
+                    "t_s": 312,
+                    "x_nm": -0.09,
+                    "y_nm": -0.35
+                  },
+                  {
+                    "t_s": 342,
+                    "x_nm": -0.1,
+                    "y_nm": -0.38
+                  },
+                  {
+                    "t_s": 372,
+                    "x_nm": -0.11,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 402,
+                    "x_nm": -0.12,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 432,
+                    "x_nm": -0.13,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 492,
+                    "x_nm": -0.13,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 522,
+                    "x_nm": -0.13,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 552,
+                    "x_nm": -0.13,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 582,
+                    "x_nm": -0.13,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 612,
+                    "x_nm": -0.13,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 642,
+                    "x_nm": -0.13,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 672,
+                    "x_nm": -0.13,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 702,
+                    "x_nm": -0.13,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 732,
+                    "x_nm": -0.13,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 762,
+                    "x_nm": -0.13,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 792,
+                    "x_nm": -0.13,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 822,
+                    "x_nm": -0.13,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 852,
+                    "x_nm": -0.13,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 882,
+                    "x_nm": -0.13,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 890,
+                    "x_nm": -0.12,
+                    "y_nm": -0.39
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "tokyo-bay-enc-rv9-009",
+      "rank": 9,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 24,
+        "max_source_state_age_s": 50,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.49,
+              "y_nm": 0.01
+            },
+            {
+              "label": "B",
+              "x_nm": 0.49,
+              "y_nm": -0.01
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.11,
+              "y_nm": 0.61
+            },
+            {
+              "label": "B",
+              "x_nm": 0.04,
+              "y_nm": 0.26
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.04,
+            "y_nm": 0.43
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.374368,
+        "tcpa_min": 5.279673,
+        "closest_time_t_s": 316,
+        "current_distance_nm": 0.315591,
+        "screening_score": 0.390129
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.239865,
+        "continuous_min_time_t_s": 216,
+        "dcpa_abs_error_nm": 0.134503,
+        "closest_time_abs_error_s": 100,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 878.0,
+        "common_coverage_fraction": 0.975556,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 14.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.240297
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.242746
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.259834
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.04,
+            "y_nm": 0.24
+          },
+          {
+            "label": "B",
+            "x_nm": 0.07,
+            "y_nm": 0.03
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 14,
+            "end_t_s": 892,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 14,
+                    "x_nm": -0.46,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 44,
+                    "x_nm": -0.42,
+                    "y_nm": 0.08
+                  },
+                  {
+                    "t_s": 74,
+                    "x_nm": -0.36,
+                    "y_nm": 0.13
+                  },
+                  {
+                    "t_s": 104,
+                    "x_nm": -0.3,
+                    "y_nm": 0.16
+                  },
+                  {
+                    "t_s": 134,
+                    "x_nm": -0.24,
+                    "y_nm": 0.18
+                  },
+                  {
+                    "t_s": 164,
+                    "x_nm": -0.17,
+                    "y_nm": 0.2
+                  },
+                  {
+                    "t_s": 194,
+                    "x_nm": -0.1,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 216,
+                    "x_nm": -0.04,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 224,
+                    "x_nm": -0.02,
+                    "y_nm": 0.25
+                  },
+                  {
+                    "t_s": 254,
+                    "x_nm": 0.07,
+                    "y_nm": 0.26
+                  },
+                  {
+                    "t_s": 284,
+                    "x_nm": 0.16,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 314,
+                    "x_nm": 0.25,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 316,
+                    "x_nm": 0.26,
+                    "y_nm": 0.22
+                  },
+                  {
+                    "t_s": 344,
+                    "x_nm": 0.33,
+                    "y_nm": 0.18
+                  },
+                  {
+                    "t_s": 374,
+                    "x_nm": 0.42,
+                    "y_nm": 0.15
+                  },
+                  {
+                    "t_s": 404,
+                    "x_nm": 0.5,
+                    "y_nm": 0.11
+                  },
+                  {
+                    "t_s": 434,
+                    "x_nm": 0.59,
+                    "y_nm": 0.09
+                  },
+                  {
+                    "t_s": 494,
+                    "x_nm": 0.76,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 524,
+                    "x_nm": 0.85,
+                    "y_nm": 0.05
+                  },
+                  {
+                    "t_s": 554,
+                    "x_nm": 0.93,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 584,
+                    "x_nm": 1.02,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 614,
+                    "x_nm": 1.1,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 644,
+                    "x_nm": 1.19,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 674,
+                    "x_nm": 1.28,
+                    "y_nm": 0.0
+                  },
+                  {
+                    "t_s": 704,
+                    "x_nm": 1.37,
+                    "y_nm": -0.0
+                  },
+                  {
+                    "t_s": 734,
+                    "x_nm": 1.45,
+                    "y_nm": 0.0
+                  },
+                  {
+                    "t_s": 764,
+                    "x_nm": 1.54,
+                    "y_nm": 0.0
+                  },
+                  {
+                    "t_s": 794,
+                    "x_nm": 1.63,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 824,
+                    "x_nm": 1.71,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 854,
+                    "x_nm": 1.8,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 884,
+                    "x_nm": 1.88,
+                    "y_nm": 0.04
+                  },
+                  {
+                    "t_s": 892,
+                    "x_nm": 1.9,
+                    "y_nm": 0.04
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 14,
+                    "x_nm": 0.46,
+                    "y_nm": -0.0
+                  },
+                  {
+                    "t_s": 44,
+                    "x_nm": 0.41,
+                    "y_nm": 0.01
+                  },
+                  {
+                    "t_s": 74,
+                    "x_nm": 0.36,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 104,
+                    "x_nm": 0.3,
+                    "y_nm": 0.05
+                  },
+                  {
+                    "t_s": 134,
+                    "x_nm": 0.24,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 164,
+                    "x_nm": 0.17,
+                    "y_nm": 0.06
+                  },
+                  {
+                    "t_s": 194,
+                    "x_nm": 0.11,
+                    "y_nm": 0.05
+                  },
+                  {
+                    "t_s": 216,
+                    "x_nm": 0.07,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 224,
+                    "x_nm": 0.06,
+                    "y_nm": 0.02
+                  },
+                  {
+                    "t_s": 254,
+                    "x_nm": 0.04,
+                    "y_nm": -0.02
+                  },
+                  {
+                    "t_s": 284,
+                    "x_nm": 0.01,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 314,
+                    "x_nm": -0.02,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 316,
+                    "x_nm": -0.02,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 344,
+                    "x_nm": -0.04,
+                    "y_nm": -0.12
+                  },
+                  {
+                    "t_s": 374,
+                    "x_nm": -0.05,
+                    "y_nm": -0.15
+                  },
+                  {
+                    "t_s": 404,
+                    "x_nm": -0.05,
+                    "y_nm": -0.18
+                  },
+                  {
+                    "t_s": 434,
+                    "x_nm": -0.06,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 494,
+                    "x_nm": -0.06,
+                    "y_nm": -0.27
+                  },
+                  {
+                    "t_s": 524,
+                    "x_nm": -0.06,
+                    "y_nm": -0.29
+                  },
+                  {
+                    "t_s": 554,
+                    "x_nm": -0.06,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 584,
+                    "x_nm": -0.06,
+                    "y_nm": -0.32
+                  },
+                  {
+                    "t_s": 614,
+                    "x_nm": -0.06,
+                    "y_nm": -0.34
+                  },
+                  {
+                    "t_s": 644,
+                    "x_nm": -0.07,
+                    "y_nm": -0.35
+                  },
+                  {
+                    "t_s": 674,
+                    "x_nm": -0.07,
+                    "y_nm": -0.37
+                  },
+                  {
+                    "t_s": 704,
+                    "x_nm": -0.07,
+                    "y_nm": -0.38
+                  },
+                  {
+                    "t_s": 734,
+                    "x_nm": -0.08,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 764,
+                    "x_nm": -0.08,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 794,
+                    "x_nm": -0.09,
+                    "y_nm": -0.4
+                  },
+                  {
+                    "t_s": 824,
+                    "x_nm": -0.1,
+                    "y_nm": -0.41
+                  },
+                  {
+                    "t_s": 854,
+                    "x_nm": -0.1,
+                    "y_nm": -0.42
+                  },
+                  {
+                    "t_s": 884,
+                    "x_nm": -0.1,
+                    "y_nm": -0.43
+                  },
+                  {
+                    "t_s": 892,
+                    "x_nm": -0.1,
+                    "y_nm": -0.43
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "tokyo-bay-enc-rv9-010",
+      "rank": 10,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 5,
+        "max_source_state_age_s": 43,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": 0.27,
+              "y_nm": 0.43
+            },
+            {
+              "label": "B",
+              "x_nm": -0.27,
+              "y_nm": -0.43
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.12,
+              "y_nm": 0.74
+            },
+            {
+              "label": "B",
+              "x_nm": 0.1,
+              "y_nm": 0.43
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.01,
+            "y_nm": 0.58
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.366234,
+        "tcpa_min": 5.419651,
+        "closest_time_t_s": 325,
+        "current_distance_nm": 0.448797,
+        "screening_score": 0.397437
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.38567,
+        "continuous_min_time_t_s": 332,
+        "dcpa_abs_error_nm": 0.019436,
+        "closest_time_abs_error_s": 8,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 877.0,
+        "common_coverage_fraction": 0.974444,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 14.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 88,
+          "min_distance_nm": 0.385748
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.385748
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.392149
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.24,
+            "y_nm": 0.74
+          },
+          {
+            "label": "B",
+            "x_nm": 0.03,
+            "y_nm": 0.46
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 14,
+            "end_t_s": 891,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 14,
+                    "x_nm": 0.26,
+                    "y_nm": 0.44
+                  },
+                  {
+                    "t_s": 44,
+                    "x_nm": 0.21,
+                    "y_nm": 0.46
+                  },
+                  {
+                    "t_s": 74,
+                    "x_nm": 0.16,
+                    "y_nm": 0.48
+                  },
+                  {
+                    "t_s": 104,
+                    "x_nm": 0.11,
+                    "y_nm": 0.52
+                  },
+                  {
+                    "t_s": 134,
+                    "x_nm": 0.06,
+                    "y_nm": 0.55
+                  },
+                  {
+                    "t_s": 164,
+                    "x_nm": 0.01,
+                    "y_nm": 0.58
+                  },
+                  {
+                    "t_s": 194,
+                    "x_nm": -0.04,
+                    "y_nm": 0.61
+                  },
+                  {
+                    "t_s": 224,
+                    "x_nm": -0.09,
+                    "y_nm": 0.63
+                  },
+                  {
+                    "t_s": 254,
+                    "x_nm": -0.13,
+                    "y_nm": 0.67
+                  },
+                  {
+                    "t_s": 284,
+                    "x_nm": -0.17,
+                    "y_nm": 0.7
+                  },
+                  {
+                    "t_s": 314,
+                    "x_nm": -0.21,
+                    "y_nm": 0.73
+                  },
+                  {
+                    "t_s": 325,
+                    "x_nm": -0.23,
+                    "y_nm": 0.74
+                  },
+                  {
+                    "t_s": 332,
+                    "x_nm": -0.24,
+                    "y_nm": 0.74
+                  },
+                  {
+                    "t_s": 344,
+                    "x_nm": -0.25,
+                    "y_nm": 0.76
+                  },
+                  {
+                    "t_s": 374,
+                    "x_nm": -0.29,
+                    "y_nm": 0.78
+                  },
+                  {
+                    "t_s": 404,
+                    "x_nm": -0.34,
+                    "y_nm": 0.81
+                  },
+                  {
+                    "t_s": 434,
+                    "x_nm": -0.39,
+                    "y_nm": 0.86
+                  },
+                  {
+                    "t_s": 494,
+                    "x_nm": -0.48,
+                    "y_nm": 0.96
+                  },
+                  {
+                    "t_s": 524,
+                    "x_nm": -0.52,
+                    "y_nm": 1.0
+                  },
+                  {
+                    "t_s": 554,
+                    "x_nm": -0.56,
+                    "y_nm": 1.02
+                  },
+                  {
+                    "t_s": 584,
+                    "x_nm": -0.59,
+                    "y_nm": 1.04
+                  },
+                  {
+                    "t_s": 614,
+                    "x_nm": -0.63,
+                    "y_nm": 1.06
+                  },
+                  {
+                    "t_s": 644,
+                    "x_nm": -0.66,
+                    "y_nm": 1.09
+                  },
+                  {
+                    "t_s": 674,
+                    "x_nm": -0.7,
+                    "y_nm": 1.1
+                  },
+                  {
+                    "t_s": 704,
+                    "x_nm": -0.74,
+                    "y_nm": 1.12
+                  },
+                  {
+                    "t_s": 734,
+                    "x_nm": -0.78,
+                    "y_nm": 1.13
+                  },
+                  {
+                    "t_s": 764,
+                    "x_nm": -0.81,
+                    "y_nm": 1.15
+                  },
+                  {
+                    "t_s": 794,
+                    "x_nm": -0.85,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 824,
+                    "x_nm": -0.88,
+                    "y_nm": 1.18
+                  },
+                  {
+                    "t_s": 854,
+                    "x_nm": -0.91,
+                    "y_nm": 1.19
+                  },
+                  {
+                    "t_s": 884,
+                    "x_nm": -0.93,
+                    "y_nm": 1.2
+                  },
+                  {
+                    "t_s": 891,
+                    "x_nm": -0.94,
+                    "y_nm": 1.2
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 14,
+                    "x_nm": -0.25,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 44,
+                    "x_nm": -0.21,
+                    "y_nm": -0.31
+                  },
+                  {
+                    "t_s": 74,
+                    "x_nm": -0.17,
+                    "y_nm": -0.24
+                  },
+                  {
+                    "t_s": 104,
+                    "x_nm": -0.13,
+                    "y_nm": -0.16
+                  },
+                  {
+                    "t_s": 134,
+                    "x_nm": -0.1,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 164,
+                    "x_nm": -0.08,
+                    "y_nm": -0.0
+                  },
+                  {
+                    "t_s": 194,
+                    "x_nm": -0.06,
+                    "y_nm": 0.08
+                  },
+                  {
+                    "t_s": 224,
+                    "x_nm": -0.03,
+                    "y_nm": 0.16
+                  },
+                  {
+                    "t_s": 254,
+                    "x_nm": -0.02,
+                    "y_nm": 0.25
+                  },
+                  {
+                    "t_s": 284,
+                    "x_nm": 0.0,
+                    "y_nm": 0.33
+                  },
+                  {
+                    "t_s": 314,
+                    "x_nm": 0.02,
+                    "y_nm": 0.41
+                  },
+                  {
+                    "t_s": 325,
+                    "x_nm": 0.02,
+                    "y_nm": 0.45
+                  },
+                  {
+                    "t_s": 332,
+                    "x_nm": 0.03,
+                    "y_nm": 0.46
+                  },
+                  {
+                    "t_s": 344,
+                    "x_nm": 0.04,
+                    "y_nm": 0.5
+                  },
+                  {
+                    "t_s": 374,
+                    "x_nm": 0.05,
+                    "y_nm": 0.58
+                  },
+                  {
+                    "t_s": 404,
+                    "x_nm": 0.07,
+                    "y_nm": 0.66
+                  },
+                  {
+                    "t_s": 434,
+                    "x_nm": 0.09,
+                    "y_nm": 0.75
+                  },
+                  {
+                    "t_s": 494,
+                    "x_nm": 0.13,
+                    "y_nm": 0.91
+                  },
+                  {
+                    "t_s": 524,
+                    "x_nm": 0.15,
+                    "y_nm": 0.99
+                  },
+                  {
+                    "t_s": 554,
+                    "x_nm": 0.17,
+                    "y_nm": 1.08
+                  },
+                  {
+                    "t_s": 584,
+                    "x_nm": 0.2,
+                    "y_nm": 1.16
+                  },
+                  {
+                    "t_s": 614,
+                    "x_nm": 0.22,
+                    "y_nm": 1.24
+                  },
+                  {
+                    "t_s": 644,
+                    "x_nm": 0.24,
+                    "y_nm": 1.32
+                  },
+                  {
+                    "t_s": 674,
+                    "x_nm": 0.25,
+                    "y_nm": 1.4
+                  },
+                  {
+                    "t_s": 704,
+                    "x_nm": 0.26,
+                    "y_nm": 1.49
+                  },
+                  {
+                    "t_s": 734,
+                    "x_nm": 0.24,
+                    "y_nm": 1.57
+                  },
+                  {
+                    "t_s": 764,
+                    "x_nm": 0.21,
+                    "y_nm": 1.65
+                  },
+                  {
+                    "t_s": 794,
+                    "x_nm": 0.17,
+                    "y_nm": 1.72
+                  },
+                  {
+                    "t_s": 824,
+                    "x_nm": 0.13,
+                    "y_nm": 1.79
+                  },
+                  {
+                    "t_s": 854,
+                    "x_nm": 0.09,
+                    "y_nm": 1.86
+                  },
+                  {
+                    "t_s": 884,
+                    "x_nm": 0.05,
+                    "y_nm": 1.93
+                  },
+                  {
+                    "t_s": 891,
+                    "x_nm": 0.04,
+                    "y_nm": 1.95
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "tokyo-bay-enc-rv9-011",
+      "rank": 11,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 45,
+        "max_source_state_age_s": 59,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": -0.88,
+              "y_nm": -0.32
+            },
+            {
+              "label": "B",
+              "x_nm": 0.88,
+              "y_nm": 0.32
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.07,
+              "y_nm": -0.53
+            },
+            {
+              "label": "B",
+              "x_nm": -0.12,
+              "y_nm": -0.25
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.1,
+            "y_nm": -0.39
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.286654,
+        "tcpa_min": 5.988027,
+        "closest_time_t_s": 359,
+        "current_distance_nm": 1.867967,
+        "screening_score": 0.487629
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.446683,
+        "continuous_min_time_t_s": 818,
+        "dcpa_abs_error_nm": 0.160029,
+        "closest_time_abs_error_s": 459,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 875.0,
+        "common_coverage_fraction": 0.972222,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 13.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 87,
+          "min_distance_nm": 0.446695
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.447237
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.457269
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": -0.75,
+            "y_nm": -0.73
+          },
+          {
+            "label": "B",
+            "x_nm": -1.15,
+            "y_nm": -0.53
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 12,
+            "end_t_s": 887,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 12,
+                    "x_nm": -0.85,
+                    "y_nm": -0.34
+                  },
+                  {
+                    "t_s": 42,
+                    "x_nm": -0.8,
+                    "y_nm": -0.39
+                  },
+                  {
+                    "t_s": 72,
+                    "x_nm": -0.75,
+                    "y_nm": -0.44
+                  },
+                  {
+                    "t_s": 102,
+                    "x_nm": -0.7,
+                    "y_nm": -0.49
+                  },
+                  {
+                    "t_s": 132,
+                    "x_nm": -0.67,
+                    "y_nm": -0.56
+                  },
+                  {
+                    "t_s": 162,
+                    "x_nm": -0.69,
+                    "y_nm": -0.63
+                  },
+                  {
+                    "t_s": 192,
+                    "x_nm": -0.71,
+                    "y_nm": -0.69
+                  },
+                  {
+                    "t_s": 222,
+                    "x_nm": -0.73,
+                    "y_nm": -0.72
+                  },
+                  {
+                    "t_s": 252,
+                    "x_nm": -0.74,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 282,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 312,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 342,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 359,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 372,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 402,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 432,
+                    "x_nm": -0.76,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 492,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 522,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 552,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 582,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 612,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 642,
+                    "x_nm": -0.75,
+                    "y_nm": -0.74
+                  },
+                  {
+                    "t_s": 672,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 702,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 732,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 762,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 792,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 818,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 822,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 852,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 882,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  },
+                  {
+                    "t_s": 887,
+                    "x_nm": -0.75,
+                    "y_nm": -0.73
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 12,
+                    "x_nm": 0.85,
+                    "y_nm": 0.31
+                  },
+                  {
+                    "t_s": 42,
+                    "x_nm": 0.77,
+                    "y_nm": 0.26
+                  },
+                  {
+                    "t_s": 72,
+                    "x_nm": 0.69,
+                    "y_nm": 0.2
+                  },
+                  {
+                    "t_s": 102,
+                    "x_nm": 0.61,
+                    "y_nm": 0.15
+                  },
+                  {
+                    "t_s": 132,
+                    "x_nm": 0.53,
+                    "y_nm": 0.1
+                  },
+                  {
+                    "t_s": 162,
+                    "x_nm": 0.45,
+                    "y_nm": 0.05
+                  },
+                  {
+                    "t_s": 192,
+                    "x_nm": 0.37,
+                    "y_nm": -0.0
+                  },
+                  {
+                    "t_s": 222,
+                    "x_nm": 0.29,
+                    "y_nm": -0.06
+                  },
+                  {
+                    "t_s": 252,
+                    "x_nm": 0.21,
+                    "y_nm": -0.11
+                  },
+                  {
+                    "t_s": 282,
+                    "x_nm": 0.14,
+                    "y_nm": -0.16
+                  },
+                  {
+                    "t_s": 312,
+                    "x_nm": 0.07,
+                    "y_nm": -0.21
+                  },
+                  {
+                    "t_s": 342,
+                    "x_nm": 0.01,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 359,
+                    "x_nm": -0.03,
+                    "y_nm": -0.29
+                  },
+                  {
+                    "t_s": 372,
+                    "x_nm": -0.07,
+                    "y_nm": -0.3
+                  },
+                  {
+                    "t_s": 402,
+                    "x_nm": -0.15,
+                    "y_nm": -0.33
+                  },
+                  {
+                    "t_s": 432,
+                    "x_nm": -0.25,
+                    "y_nm": -0.31
+                  },
+                  {
+                    "t_s": 492,
+                    "x_nm": -0.43,
+                    "y_nm": -0.26
+                  },
+                  {
+                    "t_s": 522,
+                    "x_nm": -0.53,
+                    "y_nm": -0.23
+                  },
+                  {
+                    "t_s": 552,
+                    "x_nm": -0.62,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 582,
+                    "x_nm": -0.72,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 612,
+                    "x_nm": -0.81,
+                    "y_nm": -0.2
+                  },
+                  {
+                    "t_s": 642,
+                    "x_nm": -0.88,
+                    "y_nm": -0.22
+                  },
+                  {
+                    "t_s": 672,
+                    "x_nm": -0.95,
+                    "y_nm": -0.25
+                  },
+                  {
+                    "t_s": 702,
+                    "x_nm": -1.01,
+                    "y_nm": -0.29
+                  },
+                  {
+                    "t_s": 732,
+                    "x_nm": -1.06,
+                    "y_nm": -0.34
+                  },
+                  {
+                    "t_s": 762,
+                    "x_nm": -1.1,
+                    "y_nm": -0.41
+                  },
+                  {
+                    "t_s": 792,
+                    "x_nm": -1.12,
+                    "y_nm": -0.47
+                  },
+                  {
+                    "t_s": 818,
+                    "x_nm": -1.15,
+                    "y_nm": -0.53
+                  },
+                  {
+                    "t_s": 822,
+                    "x_nm": -1.16,
+                    "y_nm": -0.54
+                  },
+                  {
+                    "t_s": 852,
+                    "x_nm": -1.2,
+                    "y_nm": -0.59
+                  },
+                  {
+                    "t_s": 882,
+                    "x_nm": -1.25,
+                    "y_nm": -0.63
+                  },
+                  {
+                    "t_s": 887,
+                    "x_nm": -1.26,
+                    "y_nm": -0.64
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "tokyo-bay-enc-rv9-012",
+      "rank": 12,
+      "card_type": "encounter_candidate_geometric_evidence",
+      "synchronized_t0": {
+        "t_s": 0,
+        "alignment": "causal common-time grid",
+        "source_state_skew_s": 31,
+        "max_source_state_age_s": 33,
+        "relative_positions": {
+          "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+          "coordinate_unit": "nautical_mile",
+          "coordinate_precision_nm": 0.01,
+          "vessels": [
+            {
+              "label": "A",
+              "x_nm": 0.04,
+              "y_nm": -0.17
+            },
+            {
+              "label": "B",
+              "x_nm": -0.04,
+              "y_nm": 0.17
+            }
+          ],
+          "predicted_closest_positions": [
+            {
+              "label": "A",
+              "x_nm": -0.14,
+              "y_nm": 0.11
+            },
+            {
+              "label": "B",
+              "x_nm": -0.1,
+              "y_nm": 0.13
+            }
+          ],
+          "predicted_closest_midpoint": {
+            "x_nm": -0.12,
+            "y_nm": 0.12
+          }
+        }
+      },
+      "prediction": {
+        "dcpa_nm": 0.026691,
+        "tcpa_min": 2.581032,
+        "closest_time_t_s": 154,
+        "current_distance_nm": 0.050834,
+        "screening_score": 0.905078
+      },
+      "observation": {
+        "method": "continuous same-track strict-future piecewise-linear minimum",
+        "continuous_min_distance_nm": 0.082905,
+        "continuous_min_time_t_s": 870,
+        "dcpa_abs_error_nm": 0.056214,
+        "closest_time_abs_error_s": 716,
+        "closest_time_error_eligible": true
+      },
+      "coverage": {
+        "window_duration_s": 900,
+        "common_coverage_duration_s": 873.0,
+        "common_coverage_fraction": 0.97,
+        "common_sample_count": 29,
+        "scheduled_sample_count": 30,
+        "max_uncovered_gap_s": 23.0,
+        "predicted_time_window_covered": true
+      },
+      "support": {
+        "observable": true,
+        "within_0_5_nm": true,
+        "within_1_0_nm": true,
+        "status": "geometrically_supported_within_0_5_nm",
+        "interpretation": "candidate-screening geometric support only"
+      },
+      "grid_sensitivity": {
+        "10_s": {
+          "common_sample_count": 87,
+          "min_distance_nm": 0.082905
+        },
+        "30_s": {
+          "common_sample_count": 29,
+          "min_distance_nm": 0.082905
+        },
+        "60_s": {
+          "common_sample_count": 14,
+          "min_distance_nm": 0.084064
+        }
+      },
+      "future_geometry": {
+        "status": "available",
+        "reason": null,
+        "source": "same-track strict-future piecewise-linear reconstruction",
+        "time_unit": "seconds_from_t0",
+        "coordinate_frame": "local_tangent_plane_centered_at_synchronized_t0_midpoint",
+        "coordinate_unit": "nautical_mile",
+        "coordinate_precision_nm": 0.01,
+        "sampling_step_s": 30,
+        "observed_minimum_positions": [
+          {
+            "label": "A",
+            "x_nm": 0.33,
+            "y_nm": 0.86
+          },
+          {
+            "label": "B",
+            "x_nm": 0.4,
+            "y_nm": 0.91
+          }
+        ],
+        "common_segments": [
+          {
+            "start_t_s": 23,
+            "end_t_s": 896,
+            "vessels": [
+              {
+                "label": "A",
+                "points": [
+                  {
+                    "t_s": 23,
+                    "x_nm": 0.04,
+                    "y_nm": -0.13
+                  },
+                  {
+                    "t_s": 53,
+                    "x_nm": 0.04,
+                    "y_nm": -0.1
+                  },
+                  {
+                    "t_s": 83,
+                    "x_nm": 0.05,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 113,
+                    "x_nm": 0.06,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 143,
+                    "x_nm": 0.05,
+                    "y_nm": -0.09
+                  },
+                  {
+                    "t_s": 154,
+                    "x_nm": 0.05,
+                    "y_nm": -0.08
+                  },
+                  {
+                    "t_s": 173,
+                    "x_nm": 0.03,
+                    "y_nm": -0.05
+                  },
+                  {
+                    "t_s": 203,
+                    "x_nm": -0.0,
+                    "y_nm": -0.01
+                  },
+                  {
+                    "t_s": 233,
+                    "x_nm": -0.04,
+                    "y_nm": 0.03
+                  },
+                  {
+                    "t_s": 263,
+                    "x_nm": -0.07,
+                    "y_nm": 0.08
+                  },
+                  {
+                    "t_s": 293,
+                    "x_nm": -0.1,
+                    "y_nm": 0.13
+                  },
+                  {
+                    "t_s": 323,
+                    "x_nm": -0.13,
+                    "y_nm": 0.19
+                  },
+                  {
+                    "t_s": 353,
+                    "x_nm": -0.16,
+                    "y_nm": 0.24
+                  },
+                  {
+                    "t_s": 383,
+                    "x_nm": -0.17,
+                    "y_nm": 0.29
+                  },
+                  {
+                    "t_s": 413,
+                    "x_nm": -0.18,
+                    "y_nm": 0.35
+                  },
+                  {
+                    "t_s": 443,
+                    "x_nm": -0.18,
+                    "y_nm": 0.41
+                  },
+                  {
+                    "t_s": 503,
+                    "x_nm": -0.14,
+                    "y_nm": 0.51
+                  },
+                  {
+                    "t_s": 533,
+                    "x_nm": -0.11,
+                    "y_nm": 0.54
+                  },
+                  {
+                    "t_s": 563,
+                    "x_nm": -0.07,
+                    "y_nm": 0.56
+                  },
+                  {
+                    "t_s": 593,
+                    "x_nm": -0.02,
+                    "y_nm": 0.59
+                  },
+                  {
+                    "t_s": 623,
+                    "x_nm": 0.02,
+                    "y_nm": 0.62
+                  },
+                  {
+                    "t_s": 653,
+                    "x_nm": 0.06,
+                    "y_nm": 0.65
+                  },
+                  {
+                    "t_s": 683,
+                    "x_nm": 0.1,
+                    "y_nm": 0.68
+                  },
+                  {
+                    "t_s": 713,
+                    "x_nm": 0.13,
+                    "y_nm": 0.71
+                  },
+                  {
+                    "t_s": 743,
+                    "x_nm": 0.17,
+                    "y_nm": 0.74
+                  },
+                  {
+                    "t_s": 773,
+                    "x_nm": 0.22,
+                    "y_nm": 0.77
+                  },
+                  {
+                    "t_s": 803,
+                    "x_nm": 0.25,
+                    "y_nm": 0.8
+                  },
+                  {
+                    "t_s": 833,
+                    "x_nm": 0.29,
+                    "y_nm": 0.83
+                  },
+                  {
+                    "t_s": 863,
+                    "x_nm": 0.32,
+                    "y_nm": 0.86
+                  },
+                  {
+                    "t_s": 870,
+                    "x_nm": 0.33,
+                    "y_nm": 0.86
+                  },
+                  {
+                    "t_s": 893,
+                    "x_nm": 0.36,
+                    "y_nm": 0.88
+                  },
+                  {
+                    "t_s": 896,
+                    "x_nm": 0.36,
+                    "y_nm": 0.89
+                  }
+                ]
+              },
+              {
+                "label": "B",
+                "points": [
+                  {
+                    "t_s": 23,
+                    "x_nm": -0.09,
+                    "y_nm": 0.19
+                  },
+                  {
+                    "t_s": 53,
+                    "x_nm": -0.14,
+                    "y_nm": 0.21
+                  },
+                  {
+                    "t_s": 83,
+                    "x_nm": -0.18,
+                    "y_nm": 0.23
+                  },
+                  {
+                    "t_s": 113,
+                    "x_nm": -0.2,
+                    "y_nm": 0.25
+                  },
+                  {
+                    "t_s": 143,
+                    "x_nm": -0.22,
+                    "y_nm": 0.27
+                  },
+                  {
+                    "t_s": 154,
+                    "x_nm": -0.22,
+                    "y_nm": 0.28
+                  },
+                  {
+                    "t_s": 173,
+                    "x_nm": -0.23,
+                    "y_nm": 0.3
+                  },
+                  {
+                    "t_s": 203,
+                    "x_nm": -0.23,
+                    "y_nm": 0.33
+                  },
+                  {
+                    "t_s": 233,
+                    "x_nm": -0.23,
+                    "y_nm": 0.36
+                  },
+                  {
+                    "t_s": 263,
+                    "x_nm": -0.23,
+                    "y_nm": 0.4
+                  },
+                  {
+                    "t_s": 293,
+                    "x_nm": -0.22,
+                    "y_nm": 0.44
+                  },
+                  {
+                    "t_s": 323,
+                    "x_nm": -0.2,
+                    "y_nm": 0.49
+                  },
+                  {
+                    "t_s": 353,
+                    "x_nm": -0.17,
+                    "y_nm": 0.53
+                  },
+                  {
+                    "t_s": 383,
+                    "x_nm": -0.13,
+                    "y_nm": 0.57
+                  },
+                  {
+                    "t_s": 413,
+                    "x_nm": -0.07,
+                    "y_nm": 0.62
+                  },
+                  {
+                    "t_s": 443,
+                    "x_nm": -0.03,
+                    "y_nm": 0.65
+                  },
+                  {
+                    "t_s": 503,
+                    "x_nm": 0.07,
+                    "y_nm": 0.72
+                  },
+                  {
+                    "t_s": 533,
+                    "x_nm": 0.12,
+                    "y_nm": 0.75
+                  },
+                  {
+                    "t_s": 563,
+                    "x_nm": 0.16,
+                    "y_nm": 0.77
+                  },
+                  {
+                    "t_s": 593,
+                    "x_nm": 0.21,
+                    "y_nm": 0.76
+                  },
+                  {
+                    "t_s": 623,
+                    "x_nm": 0.23,
+                    "y_nm": 0.75
+                  },
+                  {
+                    "t_s": 653,
+                    "x_nm": 0.23,
+                    "y_nm": 0.74
+                  },
+                  {
+                    "t_s": 683,
+                    "x_nm": 0.24,
+                    "y_nm": 0.73
+                  },
+                  {
+                    "t_s": 713,
+                    "x_nm": 0.23,
+                    "y_nm": 0.75
+                  },
+                  {
+                    "t_s": 743,
+                    "x_nm": 0.25,
+                    "y_nm": 0.79
+                  },
+                  {
+                    "t_s": 773,
+                    "x_nm": 0.28,
+                    "y_nm": 0.82
+                  },
+                  {
+                    "t_s": 803,
+                    "x_nm": 0.32,
+                    "y_nm": 0.85
+                  },
+                  {
+                    "t_s": 833,
+                    "x_nm": 0.36,
+                    "y_nm": 0.88
+                  },
+                  {
+                    "t_s": 863,
+                    "x_nm": 0.39,
+                    "y_nm": 0.9
+                  },
+                  {
+                    "t_s": 870,
+                    "x_nm": 0.4,
+                    "y_nm": 0.91
+                  },
+                  {
+                    "t_s": 893,
+                    "x_nm": 0.43,
+                    "y_nm": 0.92
+                  },
+                  {
+                    "t_s": 896,
+                    "x_nm": 0.43,
+                    "y_nm": 0.93
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 name: san_francisco_bay
 display_name: San Francisco Bay and Port of Oakland Approaches
 description: >
-  Primary study area for the open AIS port screening reference workflow.
+  Primary study area for the open AIS port-water candidate-screening project.
   The bounding box covers San Francisco Bay, Oakland approaches, Golden Gate,
   anchorage areas, bridge-adjacent waters, and major port traffic corridors.
 

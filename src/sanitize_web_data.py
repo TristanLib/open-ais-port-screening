@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from evidence_cards import ENCOUNTER_CARD_SCHEMA_VERSION, validate_public_card_bundle
+
 
 SENSITIVE_KEYS = {
     "mmsi",
@@ -18,17 +20,26 @@ SENSITIVE_KEYS = {
     "track_id_b",
     "base_date_time",
     "time_bin",
+    "reference_time",
     "start_time",
     "end_time",
-    "reference_time",
-    "timestamp_a",
-    "timestamp_b",
+    "prediction_time",
+    "window_end",
+    "predicted_closest_time",
+    "actual_min_time",
+    "continuous_min_time",
+    "source_timestamp_a",
+    "source_timestamp_b",
+    "state_age_s_a",
+    "state_age_s_b",
     "lon_a",
     "lat_a",
     "lon_b",
     "lat_b",
     "bearing_a",
     "bearing_b",
+    "ground_track_course_a",
+    "ground_track_course_b",
     "sog_a",
     "sog_b",
 }
@@ -113,6 +124,7 @@ def sanitize_properties(properties: dict[str, Any]) -> dict[str, Any]:
 
 def sanitize_geojson(path: Path, coordinate_digits: int, max_case_points: int) -> None:
     data = json.loads(path.read_text(encoding="utf-8"))
+    source_metadata = data.get("metadata") if isinstance(data.get("metadata"), dict) else {}
     for feature in data.get("features", []):
         geometry = feature.get("geometry") or {}
         properties = feature.get("properties") or {}
@@ -127,6 +139,11 @@ def sanitize_geojson(path: Path, coordinate_digits: int, max_case_points: int) -
         feature["properties"] = sanitize_properties(properties)
 
     data["metadata"] = {
+        **{
+            key: source_metadata[key]
+            for key in ("source_count", "published_count", "geojson_limit", "selection_rule")
+            if key in source_metadata
+        },
         "publication_mode": "sanitized_research_demo",
         "disclaimer": DISCLAIMER,
         "coordinate_precision_decimals": coordinate_digits,
@@ -157,6 +174,15 @@ def sanitize_summary(path: Path) -> None:
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def validate_encounter_evidence_cards(path: Path) -> None:
+    """Fail closed if a review-v9 public card contains identity, time, or absolute-position fields."""
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if data.get("schema_version") != ENCOUNTER_CARD_SCHEMA_VERSION:
+        return
+    expected_dataset_id = "tokyo_bay" if "tokyo" in path.name else "sf_bay"
+    validate_public_card_bundle(data, expected_dataset_id=expected_dataset_id)
+
+
 def sanitize_dir(web_dir: Path, coordinate_digits: int, max_case_points: int) -> None:
     for path in sorted(web_dir.glob("*.geojson")):
         sanitize_geojson(path, coordinate_digits, max_case_points)
@@ -166,6 +192,8 @@ def sanitize_dir(web_dir: Path, coordinate_digits: int, max_case_points: int) ->
     summary = web_dir / "summary.json"
     if summary.exists():
         sanitize_summary(summary)
+    for path in sorted(web_dir.glob("*encounter_evidence_cards*.json")):
+        validate_encounter_evidence_cards(path)
 
 
 def main() -> None:

@@ -1,8 +1,8 @@
 name: tokyo_bay
 display_name: Tokyo Bay
 description: >
-  Asian port-water supplemental validation area for the open AIS
-  screening workflow. The bounding box follows the full spatial extent of the
+  Asian port-water cross-source supplemental execution area for the open AIS
+  candidate-screening workflow. The bounding box follows the full spatial extent of the
   verified Figshare AIS message dataset, rounded outward for reproducibility.
 
 data_source:
@@ -51,5 +51,5 @@ notes:
   - The source is an open research dataset collected through aisstream.io, not a Japanese government AIS archive.
   - Negative or out-of-range vessel-type values are normalized to missing.
   - Missing SOG rows are removed by the same cleaning rule used for the NOAA benchmark.
-  - Results are supplemental transferability evidence, not equalized port-safety performance.
+  - Results support cross-source executability and common output-schema generation only, not threshold transfer, cross-port performance generalization, or port-safety comparison.
   - The bounding box is not a legal port boundary.
