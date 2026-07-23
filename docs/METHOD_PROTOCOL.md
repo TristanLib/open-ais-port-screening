@@ -1,62 +1,167 @@
-# Review-v9 Frozen Method Protocol
+# Review-v10 Pre-result Method Protocol
 
-Status: frozen before review-v9 headline recomputation
+Status: frozen before authoritative review-v10 recomputation
 Freeze date: 2026-07-22
-Pre-result amendment A: 2026-07-22, before inspecting strict-future or control headline outputs
+Baseline: review-v9 commit `71891c73a5d915d8410e9c57eec53d841e86ecfd`
 Applies to: San Francisco Bay (2025-05-01 to 2025-05-07) and Tokyo Bay (2024-08-01 to 2024-08-07)
 
-This protocol fixes the primary definitions before the corrected headline results are inspected. Later code or document changes may clarify implementation details, but a change to a primary threshold must be versioned, justified, and reported as a deviation rather than silently replacing this protocol.
+This protocol is a versioned amendment to the review-v9 protocol. Review-v9 remains
+traceable and is not overwritten. Sections 1-3 below retain the review-v9 encounter
+state, trajectory-continuity, strict-future, and observability definitions. Sections
+4-6 fix the second-round expert-review findings before authoritative review-v10
+headline outputs are generated. Thresholds must not be relaxed after viewing results.
 
 ## 1. Causal common-time encounter states
 
 - Encounter opportunities are evaluated on an epoch-aligned 60 s grid.
-- For each vessel and grid time, the source state is the most recent valid AIS state at or before the grid time and no more than 60 s old. The state is propagated forward to the grid time under the same local constant-ground-track assumption used by CPA/TCPA. Future states are never used to construct a screening state.
-- A usable course is a segment-derived ground-track course computed only from two consecutive points in the same track segment. At a segment's first point, San Francisco may use a valid native COG fallback; Tokyo Bay has no native COG and therefore waits for the next same-segment point.
-- Spatial candidate generation operates on the synchronized grid positions. Bucket-search radii must be calculated dynamically from the 2 nm threshold, bucket size, and the most poleward latitude present. Exact distance filtering follows the index search.
-- Regression fixtures at high density, longitude/latitude bucket boundaries, and a 12:00:59/12:01:00 reporting boundary must produce exactly the same within-2-nm vessel-pair set as brute force.
+- For each vessel and grid time, the source state is the most recent valid AIS state
+  at or before the grid time and no more than 60 s old. It is propagated to the grid
+  time under the local constant-ground-track assumption. Future source states are
+  never used to construct a screening state.
+- A usable course is a segment-derived ground-track course computed only from
+  consecutive points in the same track segment. At a segment's first point, San
+  Francisco may use a valid native COG fallback; Tokyo Bay waits for a same-segment
+  displacement because its source has no native COG field.
+- Spatial candidate generation uses a dynamic bucket neighborhood. The final 2 nm
+  threshold is applied in the implementation's local nautical-mile tangent-plane
+  metric. Indexed and brute-force pair sets must be identical in all audited
+  production bins and regression fixtures. This is not described as an exact
+  great-circle calculation.
 
 ## 2. Strict-future trajectory reconstruction
 
-For a candidate episode, `t0` is the reference time of its first qualifying candidate record and `t1 = t0 + 15 min`.
+For a candidate episode, `t0` is the reference time of its first qualifying record
+and `t1 = t0 + 15 min`.
 
 - Every position state retains `track_id`.
-- An exact outcome position is eligible only when `t0 < t <= t1`.
-- An interpolation edge is eligible only when both endpoints satisfy `t0 < t <= t1`, both endpoints have the same non-empty `track_id`, the endpoint interval is positive and no longer than 180 s, and the edge does not cross a recorded segment break.
-- No point at or before `t0`, no point after `t1`, and no endpoint from another track segment may contribute to an outcome.
-- The primary actual minimum separation is solved continuously over all overlapping eligible piecewise-linear intervals of the two vessels in a local tangent plane. This includes a minimum occurring before the first 30 s grid point. Fixed-grid minima at 10 s, 30 s, and 60 s are retained as sensitivity checks only.
+- Eligible outcome points and interpolation endpoints satisfy `t0 < t <= t1`.
+- An interpolation edge requires two endpoints in the same non-empty `track_id`,
+  positive elapsed time no longer than 180 s, and no track-segment break.
+- No point at or before `t0`, no point after `t1`, and no cross-segment endpoint may
+  contribute to an outcome.
+- The primary minimum separation is the continuous minimum over overlapping
+  same-segment piecewise-linear intervals in a local tangent plane. Fixed 10 s,
+  30 s, and 60 s grids remain sensitivity checks.
 
-## 3. Primary observability rule
+## 3. Primary observability
 
-The 15 min future window contains 30 scheduled 30 s evaluation times (`t0+30 s` through `t1`). An episode is primary-observable only if all of the following hold:
+The primary rule remains fixed:
 
-1. at least 21 of 30 scheduled times have a valid common reconstructed position;
-2. the union of common valid continuous intervals covers at least 630 s (70% of the window);
-3. the longest uncovered run anywhere in `(t0, t1]`, including leading and trailing gaps, is no longer than 180 s.
+1. at least 21 of the 30 scheduled 30 s common samples;
+2. at least 630 s of common continuous coverage;
+3. no uncovered run longer than 180 s in `(t0, t1]`.
 
-Amendment A removed predicted-closest-time coverage from the primary observable label. That condition is label-dependent for non-candidate controls: an otherwise observable control can have undefined, negative, or beyond-window TCPA by definition. Keeping it in the shared label would select controls using the screening outcome. Coverage within the clipped interval `predicted closest time +/- 60 s` is therefore reported separately and is required only for the predicted-versus-observed closest-time error audit. The amendment was recorded before inspecting strict-future or control headline outputs.
+Predicted-time-neighborhood coverage is a separate audit condition for time-error
+reporting and is not part of the shared candidate/control observability label.
+Primary geometric outcomes are future minimum separation at or below 0.5 nm and
+1.0 nm. These remain geometric support outcomes, not incident labels.
 
-The primary support outcomes are future minimum separation at or below 0.5 nm and at or below 1.0 nm among primary-observable episodes. Coverage duration, common sample count, maximum uncovered run, and DCPA absolute error are reported for primary-observable episodes. Predicted-versus-observed closest-time absolute error is reported only where the predicted-time audit window has common coverage.
+## 4. Non-candidate control enrichment analysis
 
-Observability sensitivity is reported at 50%, 70%, and 90% common-grid coverage (15/30, 21/30, and 27/30 points), while keeping the segment and endpoint rules fixed. Minimum-distance sensitivity is reported for continuous, 10 s, 30 s, and 60 s evaluation.
+### 4.1 Cohort construction
 
-## 4. Non-candidate geometric controls
+- Candidate episode anchors remain the first qualifying record of each 15 min
+  vessel-pair/day episode so that they match the paper's encounter episode unit.
+- Potential controls are non-candidate opportunities. Candidate-window exclusion
+  (`+/-15 min`) and control thinning (at least 15 min) operate on each vessel pair's
+  continuous timestamp sequence, including across UTC midnight. A day boundary
+  cannot preserve an otherwise excluded or duplicate-nearby control.
+- Candidate and control anchors use the identical strict-future reconstruction and
+  primary observability rule.
 
-- The source population is the complete set of synchronized vessel-pair opportunities that pass the 2 nm current-distance check.
-- Candidate anchors use the first qualifying record of each 15 min pair/day episode. Potential control anchors are non-candidate opportunities thinned to at least 15 min separation for the same vessel pair and excluded when the pair has a candidate within +/-15 min.
-- The primary matched comparison is deterministic 1:1 matching without replacement on exact date, 4 h UTC block, 0.05 degree spatial block, 0.5 nm current-distance band, and within-day local pair-opportunity-exposure tertile. Unmatched anchors are reported and excluded from the matched estimate; no post-result relaxation is allowed.
-- Candidate and control anchors use the identical strict-future reconstruction and observability rule. Outcomes are future entry within 0.5 nm and 1.0 nm.
-- Report matched rates, risk difference, lift, capture among all observable opportunity anchors, calibration by predicted DCPA, TCPA, source-state skew, and current distance, and 95% vessel-pair/day cluster-bootstrap intervals with a fixed seed.
+### 4.2 Review-v10 primary matched comparison
 
-These are geometric comparison targets, not accident, near-miss, enforcement, collision-avoidance, or navigation labels.
+Matching is deterministic 1:1 without replacement. Exact strata are:
 
-## 5. Fusion-value evaluation and claim gate
+- calendar date;
+- 4 h UTC time block;
+- 0.05 degree spatial block;
+- 0.5 nm current-distance band;
+- within-day local pair-opportunity-exposure tertile.
 
-- Compare density-only, corroborated-behavior-only, encounter-only, and fused rankings at Top 5%, 10%, and 20% review-cell budgets.
-- Evaluate two targets separately: primary-supported encounter episodes and de-duplicated corroborated behavior track/day evidence.
-- Report the two-target Pareto relation, six-day-train/one-day-evaluate leave-one-day-out results, and ranking overlap/stability across held-out days.
-- A fused-only evidence case must be auditable and must explain what behavior evidence adds; it remains a review example, not an operational event label.
-- Fusion may be described as providing measured incremental ranking value only if, at two or more of the three budgets and in a majority of leave-one-day-out folds, it improves corroborated-behavior capture over encounter-only while retaining at least 95% of encounter-only supported-episode capture. Otherwise it is described as an optional multi-evidence review view and no superiority claim is made.
+Every accepted match must also satisfy all prespecified calipers:
 
-## 6. Interpretation boundary
+- absolute reference-time difference no greater than 60 min;
+- absolute relative-speed difference no greater than 5 kn;
+- absolute closing-speed difference no greater than 2.5 kn.
 
-All results remain candidate screening and geometric support. Tokyo Bay supports only cross-source executability and common output-schema generation. The analysis does not establish threshold transfer, cross-port performance generalization, port-safety comparison, accident probability, near-miss detection, enforcement findings, or certified collision avoidance.
+Within the eligible set, deterministic nearest matching uses normalized absolute
+differences in reference time, current distance, relative speed, closing speed,
+state skew, and local exposure, followed by stable identifier tie-breaks. No caliper
+is relaxed after the result is viewed.
+
+Report the full sample flow, match rate, unmatched counts, candidate-only/control-only/
+joint observability, and pre/post-match standardized mean differences for current
+distance, time of day, source-state skew, relative speed, closing speed, and local
+exposure. DCPA and TCPA define candidate assignment and are reported descriptively
+or in calibration plots; they are not balance targets.
+
+Uncertainty uses a fixed-seed bootstrap over connected components of the bipartite
+candidate-pair/day to control-pair/day match graph, so repeated pair/day use on
+either side remains in the same resampled dependency unit. If this implementation
+cannot be completed, matched-set and one-sided pair/day intervals must both be
+reported and the remaining dependence limitation stated explicitly.
+
+The primary estimands are candidate versus matched-control future-entry rates,
+risk difference, and lift at 0.5 nm and 1.0 nm, conditional on exact strata,
+calipers, and joint primary observability. Current-distance-above-0.5-nm and
+above-1.0-nm results are sensitivities.
+
+### 4.3 Removed capture claim
+
+The review-v9 values 7,945/9,198 (86.4%) and 10,244/16,487 (62.1%) were computed in
+a selected anchor sample after candidate-window exclusion and control thinning.
+They are not recall over all 300,904 pair opportunities and are removed from the
+review-v10 manuscript headline evidence. Any retained audit output must call them
+selected-anchor hit composition and explicitly state that they are not all-
+opportunity capture or recall.
+
+Review-v10 does not introduce a new all-opportunity outcome-episode endpoint. Such
+an endpoint would require a separately frozen candidate-independent de-duplication
+and lead-time design and is deferred rather than improvised before submission.
+
+## 5. Fold-specific fusion-value evaluation
+
+- Compare density-only, behavior-evidence-only, encounter-only, and fused rankings
+  at Top 5%, 10%, and 20% review-cell budgets.
+- Evaluate primary-supported encounter episodes and de-duplicated corroborated
+  behavior track/day evidence separately.
+- For every leave-one-day-out fold, only the six training days may determine
+  moving-count thresholds, regular traffic cells, dominant ground-track course,
+  training-day behavior scores, and the ranking surface.
+- Both the six training days and the held-out day are re-scored with that fold's
+  six-day traffic-pattern definition. The held-out day may form evaluation targets
+  but cannot influence any learned pattern or training score.
+- Each fold records its training dates, learned thresholds/cell counts, behavior
+  target count, and provenance hash.
+- The fusion gate remains: at two or more budgets and in a majority of the seven
+  folds, fused must improve behavior-evidence capture over encounter-only while
+  retaining at least 95% of encounter-only supported-episode capture.
+- If the gate fails after the corrected fold-specific computation, fusion is
+  described only as an optional multi-evidence review view. A pass supports only
+  internally defined multi-evidence coverage, not operational, safety, incident,
+  or analyst-efficiency superiority.
+
+## 6. Causal encounter evidence-card contract
+
+- `prediction_current_distance_nm` is the separation at the causal first candidate
+  record `t0`.
+- `min_current_distance_nm`, if retained, is explicitly an episode-wide descriptive
+  minimum and must never be labeled as current separation at `t0`.
+- Card geometry, printed current separation, predicted DCPA/TCPA, and strict-future
+  outcome must originate from the same causal record and episode.
+- For positive TCPA under the constant-relative-motion calculation,
+  `predicted DCPA <= prediction current distance + numerical tolerance`.
+- The relative `t0` coordinates and printed current separation must agree within
+  the declared plotting/rounding tolerance.
+
+## 7. Reporting and interpretation boundary
+
+- Use `behavior-evidence-only`, `encounter-only`, `fused`, `review-priority cells`,
+  `segment-derived ground-track course`, and `geometric support` consistently.
+- Do not use prediction accuracy, near-miss, risk probability, enforcement finding,
+  COLREG violation, certified collision avoidance, or demonstrated workload
+  reduction.
+- Tokyo Bay supports only cross-source executability and common output-schema
+  generation. It does not support threshold transfer, cross-port performance
+  generalization, comparative port safety, or independent operational validation.

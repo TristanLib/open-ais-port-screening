@@ -70,7 +70,7 @@ def classify_dominant_evidence(row: dict[str, str], encounter_weight: float) -> 
         else:
             evidence = "balanced anomaly-encounter evidence"
     elif anomaly_count > 0:
-        evidence = "anomaly-only candidate evidence"
+        evidence = "behavior-component-only candidate evidence"
     elif encounter_count > 0:
         evidence = "encounter-only candidate evidence"
     else:

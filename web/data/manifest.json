@@ -56,7 +56,7 @@
     },
     {
       "id": "risk_hotspots",
-      "label": "Anomaly-only evidence hotspot cells",
+      "label": "Behavior-component-only comparison cells",
       "type": "polygon-geojson",
       "path": "sf_bay_risk_hotspots_2025-05-01_to_2025-05-07.geojson",
       "value_property": "screening_score"

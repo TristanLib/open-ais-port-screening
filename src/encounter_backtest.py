@@ -185,7 +185,7 @@ def build_episode(
     highest_score_record = records_by_score[0]
     causal_record = min(records, key=lambda item: item.get("reference_time", item["time_bin"]))
     dcpa_values = [float(row["dcpa_nm"]) for row in records if row.get("dcpa_nm") is not None]
-    current_distances = [
+    episode_current_distances = [
         float(row["current_distance_nm"]) for row in records if row.get("current_distance_nm") is not None
     ]
     times = [row.get("reference_time", row["time_bin"]) for row in records]
@@ -205,9 +205,15 @@ def build_episode(
         "prediction_mid_lon": causal_record.get("prediction_mid_lon"),
         "prediction_mid_lat": causal_record.get("prediction_mid_lat"),
         "prediction_state_skew_s": causal_record.get("state_skew_s"),
+        # This is the current separation at the first causal record (t0).
+        # The episode-wide minimum below is descriptive and must not be
+        # presented as the prediction-time separation.
+        "prediction_current_distance_nm": causal_record.get("current_distance_nm"),
         "max_record_score": highest_score_record["encounter_risk_score"],
         "min_record_dcpa_nm": min(dcpa_values) if dcpa_values else None,
-        "min_current_distance_nm": min(current_distances) if current_distances else None,
+        "min_current_distance_nm": (
+            min(episode_current_distances) if episode_current_distances else None
+        ),
     }
 
 
@@ -867,6 +873,7 @@ def write_csv(output_csv: Path, rows: list[dict[str, object]]) -> None:
         "prediction_mid_lon",
         "prediction_mid_lat",
         "prediction_state_skew_s",
+        "prediction_current_distance_nm",
         "max_record_score",
         "min_record_dcpa_nm",
         "min_current_distance_nm",

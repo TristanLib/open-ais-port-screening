@@ -11,11 +11,21 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from evidence_cards import validate_public_card_bundle
 from export_web_layers import BASEMAP, DISCLAIMER, export_density_geojson
 from sanitize_web_data import SENSITIVE_KEYS, sanitize_geojson, sanitize_manifest, sanitize_summary
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+ENCOUNTER_CARD_SCHEMA_VERSION = "review-v10.encounter-evidence-card.v2"
+PUBLIC_TERM_REPLACEMENTS = {
+    "anomaly-dominated review hotspot": "behavior-component-dominated review hotspot",
+    "balanced anomaly-encounter evidence": "balanced behavior-encounter evidence",
+    "anomaly-dominated fused evidence": "behavior-component-dominated fused evidence",
+    "Combines anomaly evidence and future encounter-candidate evidence.": (
+        "Combines behavior evidence and future encounter-candidate evidence."
+    ),
+}
 SF_START = dt.date(2025, 5, 1)
 SF_END = dt.date(2025, 5, 7)
 SF_RANGE = "2025-05-01_to_2025-05-07"
@@ -35,9 +45,43 @@ def write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def normalize_public_terms(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {
+            PUBLIC_TERM_REPLACEMENTS.get(key, key): normalize_public_terms(item)
+            for key, item in value.items()
+        }
+    if isinstance(value, list):
+        return [normalize_public_terms(item) for item in value]
+    if isinstance(value, str):
+        return PUBLIC_TERM_REPLACEMENTS.get(value, value)
+    return value
+
+
+def iter_public_values(value: Any, path: tuple[str, ...] = ()):
+    if isinstance(value, dict):
+        for key, item in value.items():
+            yield path + ("<key>",), key
+            yield from iter_public_values(item, path + (str(key),))
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            yield from iter_public_values(item, path + (str(index),))
+    else:
+        yield path, value
+
+
+def write_compact_json(path: Path, value: Any) -> None:
+    path.write_text(
+        json.dumps(value, ensure_ascii=False, separators=(",", ":")) + "\n",
+        encoding="utf-8",
+    )
+
+
 def copy_required(source: Path, target: Path) -> None:
     if not source.exists():
         raise FileNotFoundError(f"required web source is missing: {source}")
+    if source.resolve() == target.resolve():
+        return
     target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(source, target)
 
@@ -218,7 +262,7 @@ def build_tokyo_summary(tables_dir: Path) -> dict[str, Any]:
 
 
 def enrich_sf_summary(tables_dir: Path, summary_path: Path) -> None:
-    """Replace every recomputed stage with current review-v9 output statistics."""
+    """Replace every recomputed stage with current review-v10 output statistics."""
     prefix = f"sf_bay_ais_{SF_RANGE}"
     summary = load_json(summary_path)
     pipeline = load_json(tables_dir / f"{prefix}_pipeline_summary.json")
@@ -335,9 +379,9 @@ def enrich_sf_summary(tables_dir: Path, summary_path: Path) -> None:
             ),
         },
         {
-            "variant": "Anomaly-only",
+            "variant": "Behavior-component-only",
             "result": f"{int(anomaly_hotspots['hotspot_cells']):,} hotspot cells",
-            "interpretation": "Finds behavior deviations but misses dense crossing/meeting evidence.",
+            "interpretation": "Finds behavior-evidence deviations but misses dense crossing/meeting evidence.",
         },
         {
             "variant": "Encounter-only",
@@ -350,7 +394,7 @@ def enrich_sf_summary(tables_dir: Path, summary_path: Path) -> None:
         {
             "variant": "Fused screening",
             "result": f"{int(fused_hotspots['hotspot_cells']):,} hotspot cells",
-            "interpretation": "Combines anomaly evidence and future encounter-candidate evidence.",
+            "interpretation": "Combines behavior evidence and future encounter-candidate evidence.",
         },
     ]
     write_json(summary_path, summary)
@@ -444,7 +488,13 @@ def build_bundle(outputs_web: Path, tables_dir: Path, target: Path) -> None:
             layer("traffic_density", "Traffic density", "polygon-geojson", sf_files[0], "density_norm"),
             layer("traffic_patterns", "Regular traffic pattern cells", "polygon-geojson", sf_files[1], "moving_points"),
             layer("anomaly_points", "Anomaly candidate points", "point-geojson", sf_files[2], "screening_score"),
-            layer("risk_hotspots", "Anomaly-only evidence hotspot cells", "polygon-geojson", sf_files[3], "screening_score"),
+            layer(
+                "risk_hotspots",
+                "Behavior-component-only comparison cells",
+                "polygon-geojson",
+                sf_files[3],
+                "screening_score",
+            ),
             layer("encounter_points", "CPA/TCPA future encounter candidate records", "point-geojson", sf_files[4], "screening_score"),
             layer("fused_risk_hotspots", "Fused review-priority cells", "polygon-geojson", sf_files[5], "screening_score"),
             layer("case_tracks", "Representative de-identified case tracks", "line-geojson", sf_files[6], "mean_screening_score"),
@@ -518,10 +568,18 @@ def build_bundle(outputs_web: Path, tables_dir: Path, target: Path) -> None:
 
     for path in sorted(target.glob("*.geojson")):
         sanitize_geojson(path, coordinate_digits=4, max_case_points=80)
+        write_compact_json(path, normalize_public_terms(load_json(path)))
     for path in sorted(target.glob("manifest*.json")):
         sanitize_manifest(path)
+        manifest_data = load_json(path)
+        for layer_meta in manifest_data.get("layers", []):
+            if layer_meta.get("id") == "risk_hotspots":
+                layer_meta["label"] = "Behavior-component-only comparison cells"
+        write_json(path, manifest_data)
     for path in sorted(target.glob("summary*.json")):
         sanitize_summary(path)
+    for path in sorted(target.glob("*.json")):
+        write_json(path, normalize_public_terms(load_json(path)))
     validate_bundle(target)
 
 
@@ -568,8 +626,32 @@ def validate_bundle(target: Path) -> None:
                 raise RuntimeError(f"encounter evidence-card dataset mismatch: {card_path}")
             if card_bundle.get("publication_mode") != "sanitized_research_demo":
                 raise RuntimeError(f"encounter evidence cards are not sanitized: {card_path}")
+            if card_bundle.get("schema_version") != ENCOUNTER_CARD_SCHEMA_VERSION:
+                raise RuntimeError(f"encounter evidence cards use a stale schema: {card_path}")
             if not isinstance(cards, list) or card_bundle.get("card_count") != len(cards):
                 raise RuntimeError(f"encounter evidence-card count mismatch: {card_path}")
+            validate_public_card_bundle(
+                card_bundle,
+                expected_dataset_id=str(manifest_data.get("dataset_id")),
+            )
+            summary = load_json(summary_path)
+            summary_cards = summary.get("encounter_evidence_cards", {})
+            if summary_cards.get("schema_version") != card_bundle.get("schema_version"):
+                raise RuntimeError(f"encounter evidence-card schema disagrees with summary: {card_path}")
+            if summary_cards.get("card_count") != card_bundle.get("card_count"):
+                raise RuntimeError(f"encounter evidence-card count disagrees with summary: {card_path}")
+
+        if manifest_data.get("dataset_id") == "sf_bay":
+            risk_layer = next(
+                (item for item in manifest_data.get("layers", []) if item.get("id") == "risk_hotspots"),
+                None,
+            )
+            if risk_layer is not None and risk_layer.get("label") != "Behavior-component-only comparison cells":
+                raise RuntimeError("San Francisco behavior-component-only layer label is stale")
+            summary = load_json(summary_path)
+            variants = [row.get("variant") for row in summary.get("ablation", [])]
+            if variants and ("Behavior-component-only" not in variants or "Anomaly-only" in variants):
+                raise RuntimeError("San Francisco ablation terminology is stale")
 
     for dataset_label, summary_name in (
         ("San Francisco Bay", "summary.json"),
@@ -618,6 +700,17 @@ def validate_bundle(target: Path) -> None:
                 raise RuntimeError(
                     f"{dataset_label} fused-hotspot summary disagrees with its published GeoJSON"
                 )
+
+    stale_public_terms = set(PUBLIC_TERM_REPLACEMENTS)
+    for path in [*sorted(target.glob("*.json")), *sorted(target.glob("*.geojson"))]:
+        string_values = {
+            value
+            for _path, value in iter_public_values(load_json(path))
+            if isinstance(value, str)
+        }
+        stale = stale_public_terms.intersection(string_values)
+        if stale:
+            raise RuntimeError(f"stale public behavior terminology remains in {path}: {sorted(stale)}")
 
 
 def build_parser() -> argparse.ArgumentParser:

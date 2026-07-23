@@ -1,4 +1,4 @@
-# Runtime dependencies for the public review-v9 analysis and Web-data pipeline.
+# Runtime dependencies for the public review-v10 analysis and Web-data pipeline.
 numpy
 scikit-learn
 matplotlib

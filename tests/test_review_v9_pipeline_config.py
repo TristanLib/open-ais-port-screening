@@ -58,6 +58,39 @@ def parse_simple_sections(path: Path) -> dict[str, dict[str, Any]]:
 
 
 class ReviewV9PipelineConfigTest(unittest.TestCase):
+    def test_tokyo_dual_ranking_forwards_fold_refit_inputs(self) -> None:
+        captured: list[str] = []
+
+        def fake_dual_main(argv: list[str]) -> int:
+            captured.extend(argv)
+            output_path = Path(argv[argv.index("--output-json") + 1])
+            output_path.write_text("{}", encoding="utf-8")
+            return 0
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            with mock.patch.object(tokyo, "dual_objective_rank_main", side_effect=fake_dual_main):
+                tokyo.build_dual_objective_ranking(
+                    start=tokyo.DEFAULT_START,
+                    end=tokyo.DEFAULT_START,
+                    dataset_prefix="fixture",
+                    processed_dir=root / "processed",
+                    tables_dir=root / "tables",
+                    track_min_points=23,
+                    anomaly_csv=root / "anomaly.csv",
+                    encounter_csv=root / "encounter.csv",
+                    pair_opportunity_csv=root / "opportunities.csv",
+                    backtest_csv=root / "backtest.csv",
+                    bbox=tokyo.DEFAULT_BBOX,
+                    cell_size_deg=0.005,
+                    output_json=root / "dual.json",
+                    output_md=root / "dual.md",
+                    overwrite=True,
+                )
+
+        self.assertEqual(captured[captured.index("--processed-dir") + 1], str(root / "processed"))
+        self.assertEqual(captured[captured.index("--track-min-points") + 1], "23")
+
     def test_tokyo_backtest_explicitly_freezes_primary_observability(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -95,12 +128,17 @@ class ReviewV9PipelineConfigTest(unittest.TestCase):
         self.assertEqual(summarize.call_args.kwargs["max_uncovered_gap_s"], 180)
         self.assertEqual(summarize.call_args.kwargs["predicted_time_tolerance_s"], 60)
 
-    def test_manifests_encode_review_v9_recomputation_contract(self) -> None:
+    def test_manifests_encode_review_v10_recomputation_contract(self) -> None:
         sf = (ROOT / "configs" / "data_manifest.yml").read_text(encoding="utf-8")
         tokyo_manifest = (ROOT / "configs" / "data_manifest_tokyo_bay.yml").read_text(
             encoding="utf-8"
         )
         full_workspace = (ROOT / "outputs" / "tables").is_dir()
+        expected_protocol = (
+            "docs/REVIEW_V10_METHOD_PROTOCOL.md"
+            if (ROOT / "docs" / "REVIEW_V10_METHOD_PROTOCOL.md").exists()
+            else "docs/METHOD_PROTOCOL.md"
+        )
 
         for text in (sf, tokyo_manifest):
             self.assertIn("time_bin_seconds: 60", text)
@@ -108,23 +146,28 @@ class ReviewV9PipelineConfigTest(unittest.TestCase):
             self.assertIn("min_common_fraction: 0.70", text)
             self.assertIn("max_uncovered_gap_s: 180", text)
             self.assertIn("predicted_time_tolerance_s: 60", text)
+            self.assertIn("review_version: review-v10", text)
+            self.assertIn(f"protocol: {expected_protocol}", text)
             if full_workspace:
                 self.assertIn("encounter_evidence_cards:", text)
                 self.assertIn("--opportunity-records-csv", text)
                 self.assertIn("geometric_control_evaluation.py", text)
                 self.assertIn("dual_objective_rank_evaluation.py", text)
                 self.assertIn("--encounter-card-output-json", text)
+                self.assertIn("--reference-time-caliper-min 60", text)
+                self.assertIn("--relative-speed-caliper-kn 5", text)
+                self.assertIn("--closing-speed-caliper-kn 2.5", text)
             else:
                 self.assertIn("encounter_evidence_card_count: 12", text)
 
-        self.assertIn("status: review_v9_recomputed_verified", sf)
-        self.assertIn("status: review_v9_recomputed_verified", tokyo_manifest)
+        self.assertIn("status: review_v10_recomputed_verified", sf)
+        self.assertIn("status: review_v10_recomputed_verified", tokyo_manifest)
         self.assertNotIn("time_bin_seconds: 300", tokyo_manifest)
         self.assertIn("verified_results:", tokyo_manifest)
-        self.assertNotIn("pending_review_v9_recomputation", tokyo_manifest)
+        self.assertNotIn("pending_review_v10_recomputation", tokyo_manifest)
         if full_workspace:
             self.assertIn(
-                "dist/open_ais_port_screening_public_review_v9_2026-07-22.zip",
+                "dist/open_ais_port_screening_public_review_v10_2026-07-22.zip",
                 sf,
             )
         else:
@@ -214,7 +257,7 @@ class ReviewV9PipelineConfigTest(unittest.TestCase):
                 "encounter_evidence_cards.json",
                 {
                     "card_count": 12,
-                    "schema_version": "review-v9.encounter-evidence-card.v1",
+                    "schema_version": "review-v10.encounter-evidence-card.v2",
                     "publication_mode": "sanitized_research_demo",
                     "cards": [{} for _ in range(12)],
                 },
@@ -240,7 +283,7 @@ class ReviewV9PipelineConfigTest(unittest.TestCase):
         ablation = {row["variant"]: row["result"] for row in summary["ablation"]}
 
         self.assertEqual(
-            ablation["Anomaly-only"],
+            ablation["Behavior-component-only"],
             f"{int(summary['hotspots']['anomaly_only_hotspots']):,} hotspot cells",
         )
         self.assertEqual(

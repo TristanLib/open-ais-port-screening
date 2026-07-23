@@ -1,5 +1,5 @@
 {
-  "schema_version": "review-v9.encounter-evidence-card.v1",
+  "schema_version": "review-v10.encounter-evidence-card.v2",
   "dataset_id": "tokyo_bay",
   "publication_mode": "sanitized_research_demo",
   "disclaimer": "De-identified historical AIS encounter-candidate evidence for human audit. Geometric support is not prediction accuracy, an incident or near-miss label, an enforcement finding, or navigation or collision-avoidance advice.",
@@ -17,7 +17,7 @@
   },
   "cards": [
     {
-      "case_id": "tokyo-bay-enc-rv9-001",
+      "case_id": "tokyo-bay-enc-rv10-001",
       "rank": 1,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -466,7 +466,7 @@
       }
     },
     {
-      "case_id": "tokyo-bay-enc-rv9-002",
+      "case_id": "tokyo-bay-enc-rv10-002",
       "rank": 2,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -915,7 +915,7 @@
       }
     },
     {
-      "case_id": "tokyo-bay-enc-rv9-003",
+      "case_id": "tokyo-bay-enc-rv10-003",
       "rank": 3,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -961,7 +961,7 @@
         "dcpa_nm": 0.107462,
         "tcpa_min": 6.951196,
         "closest_time_t_s": 417,
-        "current_distance_nm": 0.037162,
+        "current_distance_nm": 1.032307,
         "screening_score": 0.698105
       },
       "observation": {
@@ -1364,7 +1364,7 @@
       }
     },
     {
-      "case_id": "tokyo-bay-enc-rv9-004",
+      "case_id": "tokyo-bay-enc-rv10-004",
       "rank": 4,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -1410,7 +1410,7 @@
         "dcpa_nm": 0.218047,
         "tcpa_min": 2.6732,
         "closest_time_t_s": 160,
-        "current_distance_nm": 0.333017,
+        "current_distance_nm": 0.637373,
         "screening_score": 0.654165
       },
       "observation": {
@@ -1813,7 +1813,7 @@
       }
     },
     {
-      "case_id": "tokyo-bay-enc-rv9-005",
+      "case_id": "tokyo-bay-enc-rv10-005",
       "rank": 5,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -1859,7 +1859,7 @@
         "dcpa_nm": 0.446833,
         "tcpa_min": 6.144671,
         "closest_time_t_s": 368,
-        "current_distance_nm": 0.094708,
+        "current_distance_nm": 1.965514,
         "screening_score": 0.275741
       },
       "observation": {
@@ -2262,7 +2262,7 @@
       }
     },
     {
-      "case_id": "tokyo-bay-enc-rv9-006",
+      "case_id": "tokyo-bay-enc-rv10-006",
       "rank": 6,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -2308,7 +2308,7 @@
         "dcpa_nm": 0.143388,
         "tcpa_min": 0.235059,
         "closest_time_t_s": 14,
-        "current_distance_nm": 0.082775,
+        "current_distance_nm": 0.144034,
         "screening_score": 0.80811
       },
       "observation": {
@@ -2711,7 +2711,7 @@
       }
     },
     {
-      "case_id": "tokyo-bay-enc-rv9-007",
+      "case_id": "tokyo-bay-enc-rv10-007",
       "rank": 7,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -3160,7 +3160,7 @@
       }
     },
     {
-      "case_id": "tokyo-bay-enc-rv9-008",
+      "case_id": "tokyo-bay-enc-rv10-008",
       "rank": 8,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -3206,7 +3206,7 @@
         "dcpa_nm": 0.180206,
         "tcpa_min": 4.641814,
         "closest_time_t_s": 278,
-        "current_distance_nm": 0.498938,
+        "current_distance_nm": 0.97155,
         "screening_score": 0.657423
       },
       "observation": {
@@ -3609,7 +3609,7 @@
       }
     },
     {
-      "case_id": "tokyo-bay-enc-rv9-009",
+      "case_id": "tokyo-bay-enc-rv10-009",
       "rank": 9,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -3655,7 +3655,7 @@
         "dcpa_nm": 0.374368,
         "tcpa_min": 5.279673,
         "closest_time_t_s": 316,
-        "current_distance_nm": 0.315591,
+        "current_distance_nm": 0.971162,
         "screening_score": 0.390129
       },
       "observation": {
@@ -4058,7 +4058,7 @@
       }
     },
     {
-      "case_id": "tokyo-bay-enc-rv9-010",
+      "case_id": "tokyo-bay-enc-rv10-010",
       "rank": 10,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -4104,7 +4104,7 @@
         "dcpa_nm": 0.366234,
         "tcpa_min": 5.419651,
         "closest_time_t_s": 325,
-        "current_distance_nm": 0.448797,
+        "current_distance_nm": 1.01171,
         "screening_score": 0.397437
       },
       "observation": {
@@ -4507,7 +4507,7 @@
       }
     },
     {
-      "case_id": "tokyo-bay-enc-rv9-011",
+      "case_id": "tokyo-bay-enc-rv10-011",
       "rank": 11,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -4956,7 +4956,7 @@
       }
     },
     {
-      "case_id": "tokyo-bay-enc-rv9-012",
+      "case_id": "tokyo-bay-enc-rv10-012",
       "rank": 12,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -5002,7 +5002,7 @@
         "dcpa_nm": 0.026691,
         "tcpa_min": 2.581032,
         "closest_time_t_s": 154,
-        "current_distance_nm": 0.050834,
+        "current_distance_nm": 0.346989,
         "screening_score": 0.905078
       },
       "observation": {

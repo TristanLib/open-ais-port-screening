@@ -1,5 +1,5 @@
 {
-  "schema_version": "review-v9.encounter-evidence-card.v1",
+  "schema_version": "review-v10.encounter-evidence-card.v2",
   "dataset_id": "sf_bay",
   "publication_mode": "sanitized_research_demo",
   "disclaimer": "De-identified historical AIS encounter-candidate evidence for human audit. Geometric support is not prediction accuracy, an incident or near-miss label, an enforcement finding, or navigation or collision-avoidance advice.",
@@ -17,7 +17,7 @@
   },
   "cards": [
     {
-      "case_id": "sf-bay-enc-rv9-001",
+      "case_id": "sf-bay-enc-rv10-001",
       "rank": 1,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -63,7 +63,7 @@
         "dcpa_nm": 0.410512,
         "tcpa_min": 11.019048,
         "closest_time_t_s": 661,
-        "current_distance_nm": 0.201955,
+        "current_distance_nm": 1.875027,
         "screening_score": 0.209223
       },
       "observation": {
@@ -466,7 +466,7 @@
       }
     },
     {
-      "case_id": "sf-bay-enc-rv9-002",
+      "case_id": "sf-bay-enc-rv10-002",
       "rank": 2,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -905,7 +905,7 @@
       }
     },
     {
-      "case_id": "sf-bay-enc-rv9-003",
+      "case_id": "sf-bay-enc-rv10-003",
       "rank": 3,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -951,7 +951,7 @@
         "dcpa_nm": 0.050084,
         "tcpa_min": 5.851226,
         "closest_time_t_s": 351,
-        "current_distance_nm": 0.118268,
+        "current_distance_nm": 0.742672,
         "screening_score": 0.798362
       },
       "observation": {
@@ -1354,7 +1354,7 @@
       }
     },
     {
-      "case_id": "sf-bay-enc-rv9-004",
+      "case_id": "sf-bay-enc-rv10-004",
       "rank": 4,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -1400,7 +1400,7 @@
         "dcpa_nm": 0.138225,
         "tcpa_min": 3.223767,
         "closest_time_t_s": 193,
-        "current_distance_nm": 0.323037,
+        "current_distance_nm": 1.572179,
         "screening_score": 0.745087
       },
       "observation": {
@@ -1803,7 +1803,7 @@
       }
     },
     {
-      "case_id": "sf-bay-enc-rv9-005",
+      "case_id": "sf-bay-enc-rv10-005",
       "rank": 5,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -1849,7 +1849,7 @@
         "dcpa_nm": 0.120511,
         "tcpa_min": 4.106825,
         "closest_time_t_s": 246,
-        "current_distance_nm": 0.384322,
+        "current_distance_nm": 1.107511,
         "screening_score": 0.747509
       },
       "observation": {
@@ -2252,7 +2252,7 @@
       }
     },
     {
-      "case_id": "sf-bay-enc-rv9-006",
+      "case_id": "sf-bay-enc-rv10-006",
       "rank": 6,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -2298,7 +2298,7 @@
         "dcpa_nm": 0.034159,
         "tcpa_min": 3.691265,
         "closest_time_t_s": 221,
-        "current_distance_nm": 0.247545,
+        "current_distance_nm": 1.108881,
         "screening_score": 0.869463
       },
       "observation": {
@@ -2701,7 +2701,7 @@
       }
     },
     {
-      "case_id": "sf-bay-enc-rv9-007",
+      "case_id": "sf-bay-enc-rv10-007",
       "rank": 7,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -2747,7 +2747,7 @@
         "dcpa_nm": 0.48489,
         "tcpa_min": 3.120116,
         "closest_time_t_s": 187,
-        "current_distance_nm": 0.040389,
+        "current_distance_nm": 1.025063,
         "screening_score": 0.296841
       },
       "observation": {
@@ -3150,7 +3150,7 @@
       }
     },
     {
-      "case_id": "sf-bay-enc-rv9-008",
+      "case_id": "sf-bay-enc-rv10-008",
       "rank": 8,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -3196,7 +3196,7 @@
         "dcpa_nm": 0.214383,
         "tcpa_min": 6.533182,
         "closest_time_t_s": 391,
-        "current_distance_nm": 0.392019,
+        "current_distance_nm": 1.774364,
         "screening_score": 0.568861
       },
       "observation": {
@@ -3599,7 +3599,7 @@
       }
     },
     {
-      "case_id": "sf-bay-enc-rv9-009",
+      "case_id": "sf-bay-enc-rv10-009",
       "rank": 9,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -4048,7 +4048,7 @@
       }
     },
     {
-      "case_id": "sf-bay-enc-rv9-010",
+      "case_id": "sf-bay-enc-rv10-010",
       "rank": 10,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -4094,7 +4094,7 @@
         "dcpa_nm": 0.235571,
         "tcpa_min": 4.636874,
         "closest_time_t_s": 278,
-        "current_distance_nm": 1.017365,
+        "current_distance_nm": 1.450106,
         "screening_score": 0.585563
       },
       "observation": {
@@ -4497,7 +4497,7 @@
       }
     },
     {
-      "case_id": "sf-bay-enc-rv9-011",
+      "case_id": "sf-bay-enc-rv10-011",
       "rank": 11,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {
@@ -4543,7 +4543,7 @@
         "dcpa_nm": 0.030388,
         "tcpa_min": 3.012026,
         "closest_time_t_s": 180,
-        "current_distance_nm": 0.799,
+        "current_distance_nm": 1.82618,
         "screening_score": 0.890215
       },
       "observation": {
@@ -4946,7 +4946,7 @@
       }
     },
     {
-      "case_id": "sf-bay-enc-rv9-012",
+      "case_id": "sf-bay-enc-rv10-012",
       "rank": 12,
       "card_type": "encounter_candidate_geometric_evidence",
       "synchronized_t0": {

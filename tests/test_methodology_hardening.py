@@ -91,6 +91,8 @@ class FutureOnlyBacktestTest(unittest.TestCase):
         self.assertEqual(episode["prediction_time"], t0)
         self.assertEqual(episode["predicted_dcpa_nm"], 0.40)
         self.assertEqual(episode["predicted_tcpa_min"], 10.0)
+        self.assertEqual(episode["prediction_current_distance_nm"], 1.0)
+        self.assertEqual(episode["min_current_distance_nm"], 0.5)
 
     def test_geometric_check_uses_only_times_after_prediction(self) -> None:
         t0 = dt.datetime(2025, 5, 1, 12, 0)

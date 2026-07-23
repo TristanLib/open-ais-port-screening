@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 import sys
 import tempfile
 import unittest
@@ -11,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from evidence_cards import build_encounter_card_bundle, validate_public_card_bundle
+from evidence_cards import build_encounter_card_bundle, make_encounter_card, validate_public_card_bundle
 
 
 def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
@@ -31,7 +32,7 @@ class ReviewV9EncounterEvidenceCardTest(unittest.TestCase):
             source,
         )
         self.assertIn("state.evidenceCards?.schema_version", source)
-        self.assertIn("review-v9.encounter-evidence-card.v1", source)
+        self.assertIn("review-v10.encounter-evidence-card.v2", source)
 
     def test_builds_relative_deidentified_auditable_card(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -68,6 +69,32 @@ class ReviewV9EncounterEvidenceCardTest(unittest.TestCase):
                         "encounter_risk_score": 0.88,
                         "track_id_a": "111111111_0001",
                         "track_id_b": "222222222_0001",
+                    },
+                    {
+                        "date": "2025-05-01",
+                        "time_bin": "2025-05-01 12:00:30",
+                        "reference_time": "2025-05-01 12:00:30",
+                        "timestamp_a": "2025-05-01 12:00:21",
+                        "timestamp_b": "2025-05-01 12:00:28",
+                        "state_skew_s": 7,
+                        "state_age_s_a": 9,
+                        "state_age_s_b": 2,
+                        "mmsi_a": "111111111",
+                        "mmsi_b": "222222222",
+                        "lon_a": -122.002,
+                        "lat_a": 37.0,
+                        "lon_b": -121.998,
+                        "lat_b": 37.0,
+                        "sog_a": 12,
+                        "sog_b": 12,
+                        "bearing_a": 90,
+                        "bearing_b": 270,
+                        "dcpa_nm": 0.05,
+                        "tcpa_min": 0.5,
+                        "current_distance_nm": 0.2,
+                        "encounter_risk_score": 0.95,
+                        "track_id_a": "111111111_0001",
+                        "track_id_b": "222222222_0001",
                     }
                 ],
             )
@@ -85,7 +112,8 @@ class ReviewV9EncounterEvidenceCardTest(unittest.TestCase):
                         "predicted_tcpa_min": 1,
                         "prediction_record_score": 0.88,
                         "prediction_state_skew_s": 7,
-                        "min_current_distance_nm": 0.42,
+                        "prediction_current_distance_nm": 0.42,
+                        "min_current_distance_nm": 0.2,
                         "actual_min_distance_nm": 0.2,
                         "actual_min_time": "2025-05-01 12:00:50",
                         "continuous_min_distance_nm": 0.2,
@@ -198,18 +226,35 @@ class ReviewV9EncounterEvidenceCardTest(unittest.TestCase):
             )
             validate_public_card_bundle(bundle, expected_dataset_id="sf_bay")
 
-            self.assertEqual(bundle["schema_version"], "review-v9.encounter-evidence-card.v1")
+            self.assertEqual(bundle["schema_version"], "review-v10.encounter-evidence-card.v2")
             self.assertEqual(bundle["card_count"], 1)
             card = bundle["cards"][0]
-            self.assertEqual(card["case_id"], "sf-bay-enc-rv9-001")
+            self.assertEqual(card["case_id"], "sf-bay-enc-rv10-001")
             self.assertEqual(card["synchronized_t0"]["t_s"], 0)
             self.assertEqual(card["synchronized_t0"]["source_state_skew_s"], 7)
             self.assertEqual(card["prediction"]["closest_time_t_s"], 60)
+            self.assertEqual(card["prediction"]["current_distance_nm"], 0.42)
             self.assertEqual(card["observation"]["continuous_min_time_t_s"], 50)
             self.assertEqual(card["observation"]["closest_time_abs_error_s"], 10)
             self.assertTrue(card["observation"]["closest_time_error_eligible"])
             self.assertEqual(card["coverage"]["common_sample_count"], 22)
             self.assertEqual(card["support"]["status"], "geometrically_supported_within_0_5_nm")
+
+            relative_positions = card["synchronized_t0"]["relative_positions"]["vessels"]
+            relative_distance = math.hypot(
+                relative_positions[1]["x_nm"] - relative_positions[0]["x_nm"],
+                relative_positions[1]["y_nm"] - relative_positions[0]["y_nm"],
+            )
+            self.assertAlmostEqual(
+                card["prediction"]["current_distance_nm"],
+                relative_distance,
+                delta=0.05,
+            )
+            if card["prediction"]["tcpa_min"] > 0:
+                self.assertLessEqual(
+                    card["prediction"]["dcpa_nm"],
+                    card["prediction"]["current_distance_nm"] + 1e-6,
+                )
 
             segments = card["future_geometry"]["common_segments"]
             self.assertEqual(len(segments), 1)
@@ -246,18 +291,97 @@ class ReviewV9EncounterEvidenceCardTest(unittest.TestCase):
             self.assertEqual(without_geometry["cards"][0]["future_geometry"]["status"], "unavailable")
             self.assertEqual(without_geometry["cards"][0]["future_geometry"]["common_segments"], [])
 
+    def test_zero_causal_distance_does_not_truthiness_fallback(self) -> None:
+        prediction_time = "2025-05-01 12:00:00"
+        card = make_encounter_card(
+            rank=1,
+            dataset_id="sf_bay",
+            backtest_row={
+                "mmsi_a": "111111111",
+                "mmsi_b": "222222222",
+                "prediction_time": prediction_time,
+                "window_end": "2025-05-01 12:15:00",
+                "predicted_closest_time": prediction_time,
+                "predicted_dcpa_nm": 0,
+                "predicted_tcpa_min": 0,
+                "prediction_current_distance_nm": 0,
+                "min_current_distance_nm": 0,
+                "observable_followup": "0",
+            },
+            encounter_row={
+                "mmsi_a": "111111111",
+                "mmsi_b": "222222222",
+                "current_distance_nm": "0.42",
+            },
+            positions={},
+            lookahead_min=15,
+            max_interpolation_gap_s=180,
+            geometry_step_s=30,
+            max_geometry_points=32,
+        )
+
+        self.assertEqual(card["prediction"]["current_distance_nm"], 0.0)
+
+    def test_public_validator_rejects_noncausal_geometry_and_window_leaks(self) -> None:
+        bundle = {
+            "schema_version": "review-v10.encounter-evidence-card.v2",
+            "dataset_id": "sf_bay",
+            "publication_mode": "sanitized_research_demo",
+            "card_count": 1,
+            "cards": [
+                {
+                    "case_id": "sf-bay-enc-rv10-001",
+                    "synchronized_t0": {
+                        "t_s": 0,
+                        "relative_positions": {
+                            "vessels": [
+                                {"label": "A", "x_nm": -0.2, "y_nm": 0.0},
+                                {"label": "B", "x_nm": 0.2, "y_nm": 0.0},
+                            ]
+                        },
+                    },
+                    "prediction": {
+                        "current_distance_nm": 0.8,
+                        "dcpa_nm": 0.2,
+                        "tcpa_min": 1.0,
+                    },
+                    "coverage": {"window_duration_s": 900},
+                    "future_geometry": {"status": "unavailable", "common_segments": []},
+                }
+            ],
+        }
+        with self.assertRaisesRegex(ValueError, "causal t0 distance"):
+            validate_public_card_bundle(bundle, expected_dataset_id="sf_bay")
+
+        bundle["cards"][0]["prediction"]["current_distance_nm"] = 0.4
+        bundle["cards"][0]["future_geometry"] = {
+            "status": "available",
+            "common_segments": [
+                {
+                    "start_t_s": 0,
+                    "end_t_s": 30,
+                    "vessels": [
+                        {"label": "A", "points": [{"t_s": 0, "x_nm": -0.2, "y_nm": 0.0}]},
+                        {"label": "B", "points": [{"t_s": 0, "x_nm": 0.2, "y_nm": 0.0}]},
+                    ],
+                }
+            ],
+        }
+        with self.assertRaisesRegex(ValueError, "strict-future window"):
+            validate_public_card_bundle(bundle, expected_dataset_id="sf_bay")
+
     def test_public_validator_rejects_identity_and_exact_time_leaks(self) -> None:
         bundle = {
-            "schema_version": "review-v9.encounter-evidence-card.v1",
+            "schema_version": "review-v10.encounter-evidence-card.v2",
             "dataset_id": "tokyo_bay",
             "publication_mode": "sanitized_research_demo",
             "card_count": 1,
-            "cards": [{"case_id": "tokyo-bay-enc-rv9-001", "mmsi": "431000001"}],
+            "cards": [{"case_id": "tokyo-bay-enc-rv10-001", "mmsi": "431000001"}],
         }
         with self.assertRaisesRegex(ValueError, "sensitive key"):
             validate_public_card_bundle(bundle, expected_dataset_id="tokyo_bay")
 
-        bundle["cards"] = [{"case_id": "tokyo-bay-enc-rv9-001", "note": "2024-08-01 12:30:00"}]
+        bundle["cards"] = [{"case_id": "tokyo-bay-enc-rv10-001", "note": "2024-08-01 12:30:00"}]
         with self.assertRaisesRegex(ValueError, "exact timestamp"):
             validate_public_card_bundle(bundle, expected_dataset_id="tokyo_bay")
 

@@ -81,13 +81,9 @@ def polygon_for_cell(
     return [[west, south], [east, south], [east, north], [west, north], [west, south]]
 
 
-def learn_patterns(
-    start: dt.date,
-    end: dt.date,
+def learn_pattern_rows(
+    dates: list[dt.date],
     processed_dir: Path,
-    output_csv: Path,
-    output_geojson: Path,
-    stats_json: Path,
     bbox: tuple[float, float, float, float],
     cell_size_deg: float,
     min_sog: float,
@@ -95,11 +91,17 @@ def learn_patterns(
     min_tracks: int,
     dataset_prefix: str = "sf_bay_ais",
     track_min_points: int = 20,
-) -> dict[str, object]:
+) -> tuple[list[dict[str, object]], dict[str, object]]:
+    """Learn traffic-pattern rows from exactly the supplied dates.
+
+    Keeping the date list explicit is important for fold-specific evaluation:
+    a held-out date must never participate in route-cell thresholds or
+    dominant-direction estimates.
+    """
     cells: dict[tuple[int, int], dict[str, object]] = {}
     counters: Counter[str] = Counter()
 
-    for day in iter_dates(start, end):
+    for day in dates:
         path = processed_dir / f"{dataset_prefix}_{day.isoformat()}_tracks_min{track_min_points}.csv"
         with path.open("r", encoding="utf-8", newline="") as handle:
             reader = csv.DictReader(handle)
@@ -187,6 +189,70 @@ def learn_patterns(
         )
 
     rows.sort(key=lambda item: int(item["moving_points"]), reverse=True)
+    stats: dict[str, object] = {
+        "dates": [day.isoformat() for day in dates],
+        "input_rows": counters["input_rows"],
+        "used_rows": counters["used_rows"],
+        "skip_low_speed": counters["skip_low_speed"],
+        "skip_missing_bearing": counters["skip_missing_bearing"],
+        "skip_missing_position": counters["skip_missing_position"],
+        "skip_outside_bbox": counters["skip_outside_bbox"],
+        "nonempty_moving_cells": len(rows),
+        "normal_route_cells": sum(int(item["is_normal_route_cell"]) for item in rows),
+        "high_confidence_route_cells": sum(int(item["is_high_confidence_route_cell"]) for item in rows),
+        "min_sog": min_sog,
+        "cell_size_deg": cell_size_deg,
+        "normal_threshold": normal_threshold,
+        "high_threshold": high_threshold,
+        "min_tracks": min_tracks,
+        "dataset_prefix": dataset_prefix,
+        "track_min_points": track_min_points,
+    }
+    return rows, stats
+
+
+def patterns_from_rows(rows: list[dict[str, object]]) -> dict[str, dict[str, object]]:
+    """Return the anomaly scorer's in-memory regular-cell model."""
+    patterns: dict[str, dict[str, object]] = {}
+    for row in rows:
+        if int(row["is_normal_route_cell"]) != 1:
+            continue
+        patterns[str(row["cell_id"])] = {
+            "dominant_direction_bin": int(row["dominant_direction_bin"]),
+            "dominant_direction": row["dominant_direction"],
+            "is_high_confidence_route_cell": int(row["is_high_confidence_route_cell"]) == 1,
+            "mean_sog": float(row["mean_sog"]),
+            "moving_points": int(row["moving_points"]),
+        }
+    return patterns
+
+
+def learn_patterns(
+    start: dt.date,
+    end: dt.date,
+    processed_dir: Path,
+    output_csv: Path,
+    output_geojson: Path,
+    stats_json: Path,
+    bbox: tuple[float, float, float, float],
+    cell_size_deg: float,
+    min_sog: float,
+    min_points: int,
+    min_tracks: int,
+    dataset_prefix: str = "sf_bay_ais",
+    track_min_points: int = 20,
+) -> dict[str, object]:
+    rows, learned_stats = learn_pattern_rows(
+        iter_dates(start, end),
+        processed_dir,
+        bbox,
+        cell_size_deg,
+        min_sog,
+        min_points,
+        min_tracks,
+        dataset_prefix,
+        track_min_points,
+    )
     fieldnames = [
         "cell_id",
         "row",
@@ -248,17 +314,17 @@ def learn_patterns(
     stats: dict[str, object] = {
         "start": start.isoformat(),
         "end": end.isoformat(),
-        "input_rows": counters["input_rows"],
-        "used_rows": counters["used_rows"],
-        "skip_low_speed": counters["skip_low_speed"],
-        "skip_missing_bearing": counters["skip_missing_bearing"],
-        "nonempty_moving_cells": len(rows),
-        "normal_route_cells": sum(int(item["is_normal_route_cell"]) for item in rows),
-        "high_confidence_route_cells": sum(int(item["is_high_confidence_route_cell"]) for item in rows),
+        "input_rows": learned_stats["input_rows"],
+        "used_rows": learned_stats["used_rows"],
+        "skip_low_speed": learned_stats["skip_low_speed"],
+        "skip_missing_bearing": learned_stats["skip_missing_bearing"],
+        "nonempty_moving_cells": learned_stats["nonempty_moving_cells"],
+        "normal_route_cells": learned_stats["normal_route_cells"],
+        "high_confidence_route_cells": learned_stats["high_confidence_route_cells"],
         "min_sog": min_sog,
         "cell_size_deg": cell_size_deg,
-        "normal_threshold": normal_threshold,
-        "high_threshold": high_threshold,
+        "normal_threshold": learned_stats["normal_threshold"],
+        "high_threshold": learned_stats["high_threshold"],
         "min_tracks": min_tracks,
         "dataset_prefix": dataset_prefix,
         "track_min_points": track_min_points,

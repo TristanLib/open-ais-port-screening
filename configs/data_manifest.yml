@@ -56,7 +56,7 @@ pipeline_parameters:
     max_state_skew_s: 60
     max_state_age_s: 60
     state_alignment: epoch-aligned causal grid with latest valid state propagated forward
-    spatial_index: dynamic bucket radius plus exact 2 nm distance filter
+    spatial_index: dynamic bucket radius plus post-index 2 nm threshold in the local nautical-mile metric
     min_sog_kn: 1.0
     max_current_distance_nm: 2.0
     dcpa_threshold_nm: 0.5
@@ -72,6 +72,23 @@ pipeline_parameters:
     predicted_time_tolerance_s: 60
     primary_minimum: continuous same-segment piecewise-linear solution
     grid_sensitivity_s: 10, 30, 60
+  geometric_controls:
+    candidate_episode_gap_min: 15
+    control_exclusion_min: 15
+    control_thinning_min: 15
+    exact_strata: date, 4-hour UTC block, 0.05-degree area, 0.5-nm current-distance band, local-exposure tertile
+    reference_time_caliper_min: 60
+    relative_speed_caliper_kn: 5
+    closing_speed_caliper_kn: 2.5
+    matching: deterministic 1-to-1 without replacement on six normalized differences
+    bootstrap_unit: connected component of candidate/control vessel-pair-day bipartite graph
+    bootstrap_iterations: 2000
+    bootstrap_seed: 20260722
+  dual_objective_ranking:
+    budgets: 0.05, 0.10, 0.20
+    lodo_pattern_refit: six training days only
+    held_out_isolation: held-out rows excluded from pattern learning and training behavior scoring
+    interpretation: internal multi-evidence coverage only
   fused_hotspots:
     encounter_weight: 0.75
     top_percent: 0.10
@@ -81,8 +98,9 @@ pipeline_parameters:
     min_encounter_count: 20
 
 result_state:
-  review_version: review-v9
-  status: review_v9_recomputed_verified
+  review_version: review-v10
+  status: review_v10_recomputed_verified
+  protocol_commit: f755aa0
   verified_at: 2026-07-22
   protocol: docs/METHOD_PROTOCOL.md
   authoritative_source: public manifest and sanitized Web summaries
@@ -112,13 +130,21 @@ headline_results:
   common_coverage_duration_s_median: 712.0
   predicted_dcpa_abs_error_nm_median: 0.16883
   predicted_closest_time_abs_error_min_median: 1.583869
-  controls_matched_both_observable: 5337
-  control_0_5nm_candidate_rate: 0.635376
-  control_0_5nm_control_rate: 0.098557
-  control_0_5nm_lift: 6.446768
-  control_1_0nm_candidate_rate: 0.870152
-  control_1_0nm_control_rate: 0.423084
-  control_1_0nm_lift: 2.056687
+  control_candidate_episode_anchors: 19805
+  control_potential_anchors: 37781
+  controls_matched_pairs: 5685
+  controls_candidate_match_rate: 0.287049
+  controls_matched_both_observable: 2339
+  control_0_5nm_candidate_count: 1359
+  control_0_5nm_control_count: 374
+  control_0_5nm_candidate_rate: 0.581018
+  control_0_5nm_control_rate: 0.159897
+  control_0_5nm_risk_difference: 0.421120
+  control_0_5nm_lift: 3.633690
+  control_1_0nm_candidate_rate: 0.852074
+  control_1_0nm_control_rate: 0.595126
+  control_1_0nm_lift: 1.431753
+  control_post_match_max_abs_smd: 0.140545
   fused_hotspot_cells: 57
   fusion_incremental_value_gate_passed: true
   fusion_gate_passing_budgets: 0.05, 0.10

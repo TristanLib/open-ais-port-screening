@@ -225,7 +225,7 @@ def main(argv: list[str] | None = None) -> int:
         },
         {
             "id": "risk_hotspots",
-            "label": "Anomaly-only evidence hotspot cells",
+            "label": "Behavior-component-only comparison cells",
             "type": "polygon-geojson",
             "path": f"{args.layer_prefix}_risk_hotspots_{range_label}.geojson",
             "value_property": "screening_score",

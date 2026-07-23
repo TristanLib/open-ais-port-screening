@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import csv
 import datetime as dt
+import hashlib
 import json
 import math
 import statistics
@@ -17,7 +18,9 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable
 
+from anomaly_score import score_row
 from risk_hotspots import calculate_cell_components, cell_id_for_point
+from traffic_patterns import learn_pattern_rows, patterns_from_rows
 
 
 TOP_FRACTIONS = (0.05, 0.10, 0.20)
@@ -149,7 +152,7 @@ def evaluate_rankings(
 
 
 def evaluate_fusion_claim_gate(fold_rows: list[dict[str, Any]]) -> dict[str, Any]:
-    """Apply the review-v9 pre-registered fusion claim gate."""
+    """Apply the frozen internal multi-evidence coverage gate."""
     required_retention = 0.95
     budgets = sorted({float(row["top_fraction"]) for row in fold_rows})
     dates = sorted({str(row["held_out_date"]) for row in fold_rows})
@@ -197,7 +200,7 @@ def evaluate_fusion_claim_gate(fold_rows: list[dict[str, Any]]) -> dict[str, Any
         "passing_budgets": passing_budgets,
         "passes_incremental_value_gate": passes_gate,
         "paper_position": (
-            "measured incremental multi-evidence ranking value"
+            "internally measured multi-evidence coverage trade-off"
             if passes_gate
             else "optional multi-evidence review view"
         ),
@@ -224,17 +227,16 @@ def empty_daily_cell() -> dict[str, float]:
     }
 
 
-def load_daily_evidence(
+def load_daily_context_evidence(
     dates: list[str],
     tables_dir: Path,
     dataset_prefix: str,
-    anomaly_csv: Path,
     encounter_csv: Path,
     pair_opportunity_csv: Path,
     bbox: tuple[float, float, float, float],
     cell_size_deg: float,
-    low_support_weight: float = 0.25,
-) -> tuple[dict[str, dict[str, dict[str, float]]], list[dict[str, Any]]]:
+) -> dict[str, dict[str, dict[str, float]]]:
+    """Load exposure and encounter evidence that does not depend on behavior patterns."""
     daily: dict[str, dict[str, dict[str, float]]] = {date: {} for date in dates}
 
     def cell(day: str, cell_id: str) -> dict[str, float]:
@@ -247,27 +249,6 @@ def load_daily_evidence(
                 record = cell(day, row["cell_id"])
                 record["point_count"] += float(row.get("point_count", 0) or 0)
                 record["moving_count"] += float(row.get("moving_count", 0) or 0)
-
-    behavior_by_track_day: dict[tuple[str, str], dict[str, list[float]]] = defaultdict(dict)
-    with anomaly_csv.open("r", encoding="utf-8", newline="") as handle:
-        for row in csv.DictReader(handle):
-            day = str(row.get("base_date_time", ""))[:10]
-            cell_id = str(row.get("cell_id") or "")
-            if day not in daily or not cell_id:
-                continue
-            record = cell(day, cell_id)
-            score = float(row.get("anomaly_score", 0) or 0)
-            corroborated = row.get("corroborated_candidate") == "1" or row.get("evidence_tier") == "corroborated_candidate"
-            weight = 1.0 if corroborated else low_support_weight
-            record["anomaly_count"] += 1
-            record["weighted_anomaly_count"] += weight
-            record["weighted_anomaly_score_sum"] += score * weight
-            track_id = str(row.get("track_id") or "")
-            if corroborated and track_id:
-                track_cells = behavior_by_track_day[(day, track_id)]
-                values = track_cells.setdefault(cell_id, [0.0, 0.0])
-                values[0] += 1
-                values[1] += score
 
     with encounter_csv.open("r", encoding="utf-8", newline="") as handle:
         for row in csv.DictReader(handle):
@@ -292,6 +273,35 @@ def load_daily_evidence(
             cell_id = str(row.get("cell_id") or "")
             if day in daily and cell_id:
                 cell(day, cell_id)["pair_opportunity_count"] += float(row.get("pair_opportunity_count", 0) or 0)
+    return daily
+
+
+def add_behavior_csv_evidence(
+    daily: dict[str, dict[str, dict[str, float]]],
+    anomaly_csv: Path,
+    low_support_weight: float = 0.25,
+) -> list[dict[str, Any]]:
+    """Add a precomputed behavior stream, used only for the full-window diagnostic."""
+    behavior_by_track_day: dict[tuple[str, str], dict[str, list[float]]] = defaultdict(dict)
+    with anomaly_csv.open("r", encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            day = str(row.get("base_date_time", ""))[:10]
+            cell_id = str(row.get("cell_id") or "")
+            if day not in daily or not cell_id:
+                continue
+            record = daily.setdefault(day, {}).setdefault(cell_id, empty_daily_cell())
+            score = float(row.get("anomaly_score", 0) or 0)
+            corroborated = row.get("corroborated_candidate") == "1" or row.get("evidence_tier") == "corroborated_candidate"
+            weight = 1.0 if corroborated else low_support_weight
+            record["anomaly_count"] += 1
+            record["weighted_anomaly_count"] += weight
+            record["weighted_anomaly_score_sum"] += score * weight
+            track_id = str(row.get("track_id") or "")
+            if corroborated and track_id:
+                track_cells = behavior_by_track_day[(day, track_id)]
+                values = track_cells.setdefault(cell_id, [0.0, 0.0])
+                values[0] += 1
+                values[1] += score
 
     behavior_targets: list[dict[str, Any]] = []
     for (day, track_id), cells in behavior_by_track_day.items():
@@ -300,7 +310,229 @@ def load_daily_evidence(
             key=lambda cell_id: (-cells[cell_id][0], -cells[cell_id][1], cell_id),
         )
         behavior_targets.append({"date": day, "track_id": track_id, "cell_id": representative})
+    return behavior_targets
+
+
+def load_daily_evidence(
+    dates: list[str],
+    tables_dir: Path,
+    dataset_prefix: str,
+    anomaly_csv: Path,
+    encounter_csv: Path,
+    pair_opportunity_csv: Path,
+    bbox: tuple[float, float, float, float],
+    cell_size_deg: float,
+    low_support_weight: float = 0.25,
+) -> tuple[dict[str, dict[str, dict[str, float]]], list[dict[str, Any]]]:
+    daily = load_daily_context_evidence(
+        dates,
+        tables_dir,
+        dataset_prefix,
+        encounter_csv,
+        pair_opportunity_csv,
+        bbox,
+        cell_size_deg,
+    )
+    behavior_targets = add_behavior_csv_evidence(daily, anomaly_csv, low_support_weight)
     return daily, behavior_targets
+
+
+def canonical_sha256(value: Any) -> str:
+    payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def build_fold_specific_behavior_evidence(
+    *,
+    training_dates: list[str],
+    held_out_date: str,
+    processed_dir: Path,
+    dataset_prefix: str,
+    bbox: tuple[float, float, float, float],
+    cell_size_deg: float,
+    pattern_min_sog: float = 1.0,
+    pattern_min_points: int = 50,
+    pattern_min_tracks: int = 5,
+    track_min_points: int = 20,
+    moving_sog: float = 1.0,
+    min_anomaly_score: float = 0.35,
+    low_support_weight: float = 0.25,
+) -> dict[str, Any]:
+    """Refit behavior support on training dates and score the complete fold.
+
+    Training cells and scores use only the supplied training dates.  The
+    held-out feature file is evaluated by that frozen fold model and is never
+    added to training evidence.
+    """
+    if held_out_date in training_dates:
+        raise ValueError("held_out_date must not be present in training_dates")
+    if not training_dates:
+        raise ValueError("at least one training date is required")
+
+    training_days = [dt.date.fromisoformat(day) for day in training_dates]
+    pattern_rows, pattern_stats = learn_pattern_rows(
+        training_days,
+        processed_dir,
+        bbox,
+        cell_size_deg,
+        pattern_min_sog,
+        pattern_min_points,
+        pattern_min_tracks,
+        dataset_prefix,
+        track_min_points,
+    )
+    patterns = patterns_from_rows(pattern_rows)
+    scored_dates = [*training_dates, held_out_date]
+    daily_behavior: dict[str, dict[str, dict[str, float]]] = {
+        day: {} for day in scored_dates
+    }
+    behavior_by_track_day: dict[tuple[str, str], dict[str, list[float]]] = defaultdict(dict)
+    selected_records: dict[str, list[dict[str, Any]]] = {day: [] for day in scored_dates}
+    daily_scoring: list[dict[str, Any]] = []
+
+    for day in scored_dates:
+        input_rows = 0
+        scorable_rows = 0
+        selected_rows = 0
+        corroborated_rows = 0
+        feature_path = processed_dir / f"{dataset_prefix}_{day}_features.csv"
+        with feature_path.open("r", encoding="utf-8", newline="") as handle:
+            for row in csv.DictReader(handle):
+                input_rows += 1
+                scored = score_row(row, patterns, bbox, cell_size_deg, moving_sog)
+                if scored is None:
+                    continue
+                scorable_rows += 1
+                score = float(scored["anomaly_score"])
+                if score < min_anomaly_score:
+                    continue
+                selected_rows += 1
+                cell_id = str(scored["cell_id"])
+                corroborated = (
+                    int(scored["corroborated_candidate"]) == 1
+                    or scored["evidence_tier"] == "corroborated_candidate"
+                )
+                corroborated_rows += int(corroborated)
+                weight = 1.0 if corroborated else low_support_weight
+                record = daily_behavior[day].setdefault(cell_id, empty_daily_cell())
+                record["anomaly_count"] += 1
+                record["weighted_anomaly_count"] += weight
+                record["weighted_anomaly_score_sum"] += score * weight
+
+                track_id = str(scored.get("track_id") or "")
+                if corroborated and track_id:
+                    track_cells = behavior_by_track_day[(day, track_id)]
+                    values = track_cells.setdefault(cell_id, [0.0, 0.0])
+                    values[0] += 1
+                    values[1] += score
+                selected_records[day].append(
+                    {
+                        "mmsi": str(scored.get("mmsi") or ""),
+                        "track_id": track_id,
+                        "base_date_time": str(scored.get("base_date_time") or ""),
+                        "cell_id": cell_id,
+                        "anomaly_score": score,
+                        "evidence_tier": str(scored["evidence_tier"]),
+                        "indicator_count": int(scored["indicator_count"]),
+                        "reasons": str(scored["reasons"]),
+                    }
+                )
+        daily_scoring.append(
+            {
+                "date": day,
+                "role": "held_out" if day == held_out_date else "training",
+                "source_file": str(feature_path),
+                "input_rows": input_rows,
+                "scorable_rows": scorable_rows,
+                "selected_behavior_rows": selected_rows,
+                "corroborated_behavior_rows": corroborated_rows,
+            }
+        )
+
+    targets_by_date: dict[str, list[dict[str, Any]]] = {
+        day: [] for day in scored_dates
+    }
+    for (day, track_id), cells in behavior_by_track_day.items():
+        representative = min(
+            cells,
+            key=lambda cell_id: (-cells[cell_id][0], -cells[cell_id][1], cell_id),
+        )
+        targets_by_date[day].append(
+            {"date": day, "track_id": track_id, "cell_id": representative}
+        )
+    for rows in targets_by_date.values():
+        rows.sort(key=lambda row: (str(row["track_id"]), str(row["cell_id"])))
+
+    training_records = [
+        row for day in training_dates for row in selected_records[day]
+    ]
+    held_out_records = selected_records[held_out_date]
+    training_targets = [
+        row for day in training_dates for row in targets_by_date[day]
+    ]
+    pattern_hash_rows = sorted(pattern_rows, key=lambda row: str(row["cell_id"]))
+    provenance = {
+        "evaluation_design": "fold-specific six-day traffic-pattern refit and scoring",
+        "held_out_date": held_out_date,
+        "training_dates": training_dates,
+        "pattern_source_files": [
+            str(processed_dir / f"{dataset_prefix}_{day}_tracks_min{track_min_points}.csv")
+            for day in training_dates
+        ],
+        "feature_source_files": {
+            "training": [
+                str(processed_dir / f"{dataset_prefix}_{day}_features.csv")
+                for day in training_dates
+            ],
+            "held_out": str(processed_dir / f"{dataset_prefix}_{held_out_date}_features.csv"),
+        },
+        "parameters": {
+            "bbox": list(bbox),
+            "cell_size_deg": cell_size_deg,
+            "pattern_min_sog": pattern_min_sog,
+            "pattern_min_points": pattern_min_points,
+            "pattern_min_tracks": pattern_min_tracks,
+            "track_min_points": track_min_points,
+            "moving_sog": moving_sog,
+            "min_anomaly_score": min_anomaly_score,
+            "low_support_weight": low_support_weight,
+        },
+        "pattern_stats": pattern_stats,
+        "pattern_model_sha256": canonical_sha256(
+            {"rows": pattern_hash_rows, "stats": pattern_stats}
+        ),
+        "training_behavior_evidence_sha256": canonical_sha256(training_records),
+        "held_out_behavior_evidence_sha256": canonical_sha256(held_out_records),
+        "training_behavior_targets_sha256": canonical_sha256(training_targets),
+        "held_out_behavior_targets_sha256": canonical_sha256(
+            targets_by_date[held_out_date]
+        ),
+        "training_behavior_target_count": sum(
+            len(targets_by_date[day]) for day in training_dates
+        ),
+        "held_out_behavior_target_count": len(targets_by_date[held_out_date]),
+        "daily_scoring": daily_scoring,
+    }
+    return {
+        "daily_behavior": daily_behavior,
+        "held_out_behavior_targets": targets_by_date[held_out_date],
+        "provenance": provenance,
+    }
+
+
+def combine_daily_evidence(
+    context_daily: dict[str, dict[str, dict[str, float]]],
+    behavior_daily: dict[str, dict[str, dict[str, float]]],
+) -> dict[str, dict[str, dict[str, float]]]:
+    combined: dict[str, dict[str, dict[str, float]]] = {}
+    for day in sorted(set(context_daily) | set(behavior_daily)):
+        combined[day] = {}
+        for source in (context_daily.get(day, {}), behavior_daily.get(day, {})):
+            for cell_id, values in source.items():
+                target = combined[day].setdefault(cell_id, empty_daily_cell())
+                for key in target:
+                    target[key] += float(values.get(key, 0.0))
+    return combined
 
 
 def load_supported_encounter_targets(
@@ -392,18 +624,49 @@ def pairwise_jaccard(sets: list[set[str]]) -> dict[str, float | None]:
 
 def run_leave_one_day_out(
     dates: list[str],
-    daily: dict[str, dict[str, dict[str, float]]],
+    context_daily: dict[str, dict[str, dict[str, float]]],
     encounter_targets: list[dict[str, Any]],
-    behavior_targets: list[dict[str, Any]],
+    *,
+    processed_dir: Path,
+    dataset_prefix: str,
+    bbox: tuple[float, float, float, float],
+    cell_size_deg: float,
+    pattern_min_sog: float = 1.0,
+    pattern_min_points: int = 50,
+    pattern_min_tracks: int = 5,
+    track_min_points: int = 20,
+    moving_sog: float = 1.0,
+    min_anomaly_score: float = 0.35,
+    low_support_weight: float = 0.25,
 ) -> dict[str, Any]:
+    """Run genuine fold-specific behavior refitting and held-out evaluation."""
     fold_rows: list[dict[str, Any]] = []
     selected_sets: dict[tuple[str, float], list[set[str]]] = defaultdict(list)
     fold_summaries: list[dict[str, Any]] = []
     for held_out in dates:
         training_dates = [date for date in dates if date != held_out]
-        cells = aggregate_training_cells(daily, training_dates)
+        fold_behavior = build_fold_specific_behavior_evidence(
+            training_dates=training_dates,
+            held_out_date=held_out,
+            processed_dir=processed_dir,
+            dataset_prefix=dataset_prefix,
+            bbox=bbox,
+            cell_size_deg=cell_size_deg,
+            pattern_min_sog=pattern_min_sog,
+            pattern_min_points=pattern_min_points,
+            pattern_min_tracks=pattern_min_tracks,
+            track_min_points=track_min_points,
+            moving_sog=moving_sog,
+            min_anomaly_score=min_anomaly_score,
+            low_support_weight=low_support_weight,
+        )
+        fold_daily = combine_daily_evidence(
+            context_daily,
+            fold_behavior["daily_behavior"],
+        )
+        cells = aggregate_training_cells(fold_daily, training_dates)
         held_encounter = [row for row in encounter_targets if row["date"] == held_out]
-        held_behavior = [row for row in behavior_targets if row["date"] == held_out]
+        held_behavior = fold_behavior["held_out_behavior_targets"]
         result = evaluate_rankings(cells, held_encounter, held_behavior)
         fold_summaries.append(
             {
@@ -412,6 +675,7 @@ def run_leave_one_day_out(
                 "eligible_training_cells": result["eligible_cells"],
                 "supported_encounter_targets": result["supported_encounter_targets"],
                 "corroborated_behavior_targets": result["corroborated_behavior_track_day_targets"],
+                "behavior_refit_provenance": fold_behavior["provenance"],
             }
         )
         for method, rows in result["rankings"].items():
@@ -438,6 +702,15 @@ def run_leave_one_day_out(
         for (method, fraction), sets in sorted(selected_sets.items())
     ]
     return {
+        "evaluation_design": (
+            "For each held-out day, traffic-pattern cells and dominant directions "
+            "are learned only from the other dates; the frozen fold model then "
+            "rescored both training and held-out feature files."
+        ),
+        "held_out_isolation": (
+            "Held-out rows do not contribute to pattern thresholds, regular cells, "
+            "dominant directions, or training behavior scores."
+        ),
         "folds": fold_summaries,
         "fold_rows": fold_rows,
         "ranking_stability": stability,
@@ -470,9 +743,10 @@ def fused_only_cases(
 
 def write_markdown(path: Path, result: dict[str, Any]) -> None:
     lines = [
-        "# Review-v9 Dual-Objective Ranking Evaluation",
+        "# Fold-Specific Dual-Objective Ranking Evaluation",
         "",
         "Targets are strict-future geometric support and corroborated behavior track/day evidence. They are not accident or near-miss labels.",
+        "Each held-out fold relearns traffic patterns from the remaining dates and rescored all fold dates with that frozen model.",
         "",
         "| Ranking | Budget | Encounter capture | Behavior capture |",
         "|---|---:|---:|---:|",
@@ -506,6 +780,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--start", type=dt.date.fromisoformat, required=True)
     parser.add_argument("--end", type=dt.date.fromisoformat, required=True)
     parser.add_argument("--dataset-prefix", default="sf_bay_ais")
+    parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--tables-dir", type=Path, default=Path("outputs/tables"))
     parser.add_argument("--anomaly-csv", type=Path, required=True)
     parser.add_argument("--encounter-csv", type=Path, required=True)
@@ -513,6 +788,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--backtest-csv", type=Path, required=True)
     parser.add_argument("--bbox", type=float, nargs=4, required=True)
     parser.add_argument("--cell-size-deg", type=float, default=0.005)
+    parser.add_argument("--pattern-min-sog", type=float, default=1.0)
+    parser.add_argument("--pattern-min-points", type=int, default=50)
+    parser.add_argument("--pattern-min-tracks", type=int, default=5)
+    parser.add_argument("--track-min-points", type=int, default=20)
+    parser.add_argument("--moving-sog", type=float, default=1.0)
+    parser.add_argument("--min-anomaly-score", type=float, default=0.35)
+    parser.add_argument("--low-support-weight", type=float, default=0.25)
     parser.add_argument("--output-json", type=Path, required=True)
     parser.add_argument("--output-md", type=Path, required=True)
     return parser
@@ -522,23 +804,46 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     dates = date_range(args.start, args.end)
     bbox = tuple(args.bbox)
-    daily, behavior_targets = load_daily_evidence(
+    context_daily = load_daily_context_evidence(
         dates,
         args.tables_dir,
         args.dataset_prefix,
-        args.anomaly_csv,
         args.encounter_csv,
         args.pair_opportunity_csv,
         bbox,
         args.cell_size_deg,
     )
+    daily = combine_daily_evidence(context_daily, {})
+    behavior_targets = add_behavior_csv_evidence(
+        daily,
+        args.anomaly_csv,
+        args.low_support_weight,
+    )
     encounter_targets = load_supported_encounter_targets(args.backtest_csv, bbox, args.cell_size_deg)
     full_cells = aggregate_training_cells(daily, dates)
     full_window = evaluate_rankings(full_cells, encounter_targets, behavior_targets)
-    lodo = run_leave_one_day_out(dates, daily, encounter_targets, behavior_targets)
+    lodo = run_leave_one_day_out(
+        dates,
+        context_daily,
+        encounter_targets,
+        processed_dir=args.processed_dir,
+        dataset_prefix=args.dataset_prefix,
+        bbox=bbox,
+        cell_size_deg=args.cell_size_deg,
+        pattern_min_sog=args.pattern_min_sog,
+        pattern_min_points=args.pattern_min_points,
+        pattern_min_tracks=args.pattern_min_tracks,
+        track_min_points=args.track_min_points,
+        moving_sog=args.moving_sog,
+        min_anomaly_score=args.min_anomaly_score,
+        low_support_weight=args.low_support_weight,
+    )
     result = {
         "protocol": "docs/METHOD_PROTOCOL.md",
-        "interpretation": "dual evidence-target review prioritization; not operational accuracy",
+        "interpretation": (
+            "internal dual evidence-target review prioritization; not out-of-sample "
+            "operational utility, safety prediction, or near-miss accuracy"
+        ),
         "dates": dates,
         "full_window": full_window,
         "leave_one_day_out": lodo,

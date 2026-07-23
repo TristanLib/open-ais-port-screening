@@ -1,4 +1,4 @@
-# Locked runtime dependencies for the public review-v9 reproducibility pipeline.
+# Locked runtime dependencies for the public review-v10 reproducibility pipeline.
 # Document-generation dependencies are intentionally excluded.
 contourpy==1.3.3
 cycler==0.12.1

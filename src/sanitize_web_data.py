@@ -70,7 +70,7 @@ MANIFEST_VALUE_PROPERTIES = {
 
 MANIFEST_LABELS = {
     "anomaly_points": "Anomaly candidate points",
-    "risk_hotspots": "Anomaly-only evidence hotspot cells",
+    "risk_hotspots": "Behavior-component-only comparison cells",
     "encounter_points": "CPA/TCPA future encounter candidate records",
     "fused_risk_hotspots": "Fused first-pass evidence hotspot cells",
     "case_tracks": "Representative de-identified case tracks",

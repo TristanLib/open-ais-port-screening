@@ -180,9 +180,9 @@ def main() -> None:
                 "interpretation": "High-density cells include berth/anchorage behavior and are not sufficient as safety evidence.",
             },
             {
-                "variant": "Anomaly-only",
+                "variant": "Behavior-component-only",
                 "result": f"{anomaly_hotspots.get('hotspot_cells')} hotspot cells",
-                "interpretation": "Finds behavior deviations but misses dense crossing/meeting evidence.",
+                "interpretation": "Finds behavior-evidence deviations but misses dense crossing/meeting evidence.",
             },
             {
                 "variant": "Encounter-only",
@@ -192,7 +192,7 @@ def main() -> None:
             {
                 "variant": "Fused screening",
                 "result": f"{fused_hotspots.get('hotspot_cells')} hotspot cells",
-                "interpretation": "Combines anomaly evidence and future encounter-candidate evidence.",
+                "interpretation": "Combines behavior evidence and future encounter-candidate evidence.",
             },
         ],
         "cases": {

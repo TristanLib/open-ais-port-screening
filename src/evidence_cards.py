@@ -24,7 +24,7 @@ from encounter_backtest import (
 )
 
 
-ENCOUNTER_CARD_SCHEMA_VERSION = "review-v9.encounter-evidence-card.v1"
+ENCOUNTER_CARD_SCHEMA_VERSION = "review-v10.encounter-evidence-card.v2"
 ENCOUNTER_CARD_DISCLAIMER = (
     "De-identified historical AIS encounter-candidate evidence for human audit. "
     "Geometric support is not prediction accuracy, an incident or near-miss label, "
@@ -767,9 +767,12 @@ def make_encounter_card(
     dcpa_error = optional_float(backtest_row.get("predicted_dcpa_abs_error_nm"))
     if dcpa_error is None and predicted_dcpa is not None and observed_distance is not None:
         dcpa_error = round(abs(observed_distance - predicted_dcpa), 6)
+    causal_current_distance = optional_float(backtest_row.get("prediction_current_distance_nm"))
+    if causal_current_distance is None:
+        causal_current_distance = optional_float((encounter_row or {}).get("current_distance_nm"))
     slug = dataset_id.replace("_", "-")
     card = {
-        "case_id": f"{slug}-enc-rv9-{rank:03d}",
+        "case_id": f"{slug}-enc-rv10-{rank:03d}",
         "rank": rank,
         "card_type": "encounter_candidate_geometric_evidence",
         "synchronized_t0": {
@@ -783,10 +786,7 @@ def make_encounter_card(
             "dcpa_nm": predicted_dcpa,
             "tcpa_min": tcpa_min,
             "closest_time_t_s": predicted_offset,
-            "current_distance_nm": optional_float(
-                backtest_row.get("min_current_distance_nm")
-                or (encounter_row or {}).get("current_distance_nm")
-            ),
+            "current_distance_nm": causal_current_distance,
             "screening_score": optional_float(backtest_row.get("prediction_record_score")),
         },
         "observation": {
@@ -850,7 +850,7 @@ def build_encounter_card_bundle(
     geometry_step_s: int = 30,
     max_geometry_points: int = 32,
 ) -> dict[str, Any]:
-    """Build compact public encounter cards from private review-v9 evidence."""
+    """Build compact public encounter cards from private review-v10 evidence."""
     if lookahead_min <= 0:
         raise ValueError("lookahead_min must be positive")
     if max_interpolation_gap_s <= 0:
@@ -944,7 +944,7 @@ def validate_public_card_bundle(bundle: dict[str, Any], expected_dataset_id: str
     cards = bundle.get("cards")
     if not isinstance(cards, list) or bundle.get("card_count") != len(cards):
         raise ValueError("evidence-card count does not match cards")
-    expected_prefix = str(bundle.get("dataset_id") or "").replace("_", "-") + "-enc-rv9-"
+    expected_prefix = str(bundle.get("dataset_id") or "").replace("_", "-") + "-enc-rv10-"
     for card in cards:
         if not isinstance(card, dict) or not str(card.get("case_id") or "").startswith(expected_prefix):
             raise ValueError("evidence card has an invalid de-identified case_id")
@@ -957,6 +957,53 @@ def validate_public_card_bundle(bundle: dict[str, Any], expected_dataset_id: str
                 raise ValueError(f"exact timestamp remains in evidence card: {'.'.join(path)}")
             if MMSI_LIKE_RE.search(value):
                 raise ValueError(f"MMSI-like identifier remains in evidence card: {'.'.join(path)}")
+    for card in cards:
+        synchronized_t0 = card.get("synchronized_t0", {})
+        if synchronized_t0.get("t_s") != 0:
+            raise ValueError("encounter evidence card must use t0 = 0")
+        vessels = (synchronized_t0.get("relative_positions") or {}).get("vessels")
+        if not isinstance(vessels, list) or len(vessels) != 2:
+            raise ValueError("encounter evidence card is missing synchronized t0 geometry")
+        try:
+            current_distance = float(card["prediction"]["current_distance_nm"])
+            relative_distance = math.hypot(
+                float(vessels[1]["x_nm"]) - float(vessels[0]["x_nm"]),
+                float(vessels[1]["y_nm"]) - float(vessels[0]["y_nm"]),
+            )
+        except (KeyError, TypeError, ValueError):
+            raise ValueError("encounter evidence card has incomplete causal t0 distance fields") from None
+        if not math.isfinite(current_distance) or current_distance < 0:
+            raise ValueError("encounter evidence card has invalid causal t0 distance")
+        if abs(relative_distance - current_distance) > 0.05:
+            raise ValueError("causal t0 distance disagrees with synchronized relative geometry")
+
+        prediction = card.get("prediction", {})
+        tcpa_min = optional_float(prediction.get("tcpa_min"))
+        dcpa_nm = optional_float(prediction.get("dcpa_nm"))
+        if tcpa_min is not None and tcpa_min > 0 and dcpa_nm is not None:
+            if dcpa_nm > current_distance + 0.05:
+                raise ValueError("positive-TCPA DCPA exceeds the causal t0 separation")
+
+        window_duration_s = optional_float(card.get("coverage", {}).get("window_duration_s"))
+        if window_duration_s is None or window_duration_s <= 0:
+            raise ValueError("encounter evidence card has an invalid future window")
+        geometry = card.get("future_geometry", {})
+        for segment in geometry.get("common_segments", []):
+            start_t_s = optional_float(segment.get("start_t_s"))
+            end_t_s = optional_float(segment.get("end_t_s"))
+            if (
+                start_t_s is None
+                or end_t_s is None
+                or start_t_s <= 0
+                or end_t_s < start_t_s
+                or end_t_s > window_duration_s
+            ):
+                raise ValueError("future geometry extends outside the strict-future window")
+            for vessel in segment.get("vessels", []):
+                for point in vessel.get("points", []):
+                    t_s = optional_float(point.get("t_s"))
+                    if t_s is None or t_s <= 0 or t_s > window_duration_s:
+                        raise ValueError("future geometry point extends outside the strict-future window")
 
 
 def write_csv(path: Path, cards_json: dict[str, Any]) -> None:
@@ -1030,7 +1077,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--encounter-card-output-json",
         type=Path,
-        help="Optional review-v9 de-identified CPA/TCPA encounter evidence-card JSON.",
+        help="Optional review-v10 de-identified CPA/TCPA encounter evidence-card JSON.",
     )
     parser.add_argument(
         "--encounter-card-web-json",

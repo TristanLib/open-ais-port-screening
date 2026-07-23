@@ -52,7 +52,7 @@ const COPY = {
       traffic_density: "Traffic density",
       traffic_patterns: "Regular traffic pattern cells",
       anomaly_points: "Anomaly candidate points",
-      risk_hotspots: "Anomaly-only evidence hotspot cells",
+      risk_hotspots: "Behavior-component-only comparison cells",
       encounter_points: "CPA/TCPA future encounter candidate records",
       fused_risk_hotspots: "Fused review-priority cells",
       case_tracks: "Representative de-identified case tracks",
@@ -313,7 +313,7 @@ const COPY = {
       "San Francisco Bay and Port of Oakland approaches": "旧金山湾与奥克兰港进近水域",
       "Tokyo Bay": "东京湾",
       "Density-only": "仅密度",
-      "Anomaly-only": "仅异常",
+      "Behavior-component-only": "仅行为证据分量",
       "Encounter-only": "仅会遇",
       "Fused screening": "融合筛查",
       "Descriptive baseline": "描述性基线",
@@ -322,19 +322,19 @@ const COPY = {
       "57 hotspot cells": "57 个热区网格",
       "High-density cells include berth/anchorage behavior and are not sufficient as safety evidence.":
         "高密度网格包含泊位、锚地等常规作业，不能单独作为安全证据。",
-      "Finds behavior deviations but misses dense crossing/meeting evidence.": "能发现行为偏离，但会遗漏密集交叉/对遇证据。",
+      "Finds behavior-evidence deviations but misses dense crossing/meeting evidence.": "能发现行为证据偏离，但会遗漏密集交叉/对遇证据。",
       "Captures close-quarters candidates but lacks behavioral context.": "能捕捉近距离会遇候选，但缺少行为背景。",
-      "Combines anomaly evidence and future encounter-candidate evidence.": "融合异常证据与未来会遇候选证据。",
+      "Combines behavior evidence and future encounter-candidate evidence.": "融合行为证据与未来会遇候选证据。",
       "event-sensitive review hotspot": "事件敏感型复核热区",
       "stable-exposure review hotspot": "稳定交通暴露复核热区",
       "persistent candidate-evidence hotspot": "持续候选证据热区",
       "fused-evidence review hotspot": "融合证据复核热区",
       "encounter-dominated review hotspot": "会遇主导复核热区",
-      "anomaly-dominated review hotspot": "异常主导复核热区",
+      "behavior-component-dominated review hotspot": "行为证据分量主导复核热区",
       "encounter-dominated fused evidence": "会遇主导融合证据",
-      "balanced anomaly-encounter evidence": "异常-会遇均衡证据",
-      "anomaly-dominated fused evidence": "异常主导融合证据",
-      "anomaly-only candidate evidence": "仅异常候选证据",
+      "balanced behavior-encounter evidence": "行为-会遇均衡证据",
+      "behavior-component-dominated fused evidence": "行为证据分量主导融合证据",
+      "behavior-component-only candidate evidence": "仅行为证据分量候选",
       "event-sensitive candidate hotspot": "事件敏感候选热区",
       "stable traffic-exposure hotspot": "稳定交通暴露热区",
       "high-exposure context cell": "高暴露背景网格",
@@ -941,7 +941,7 @@ function renderEvidenceCards() {
     container.append(empty);
     return;
   }
-  if (state.evidenceCards?.schema_version === "review-v9.encounter-evidence-card.v1") {
+  if (state.evidenceCards?.schema_version === "review-v10.encounter-evidence-card.v2") {
     renderEncounterEvidenceCards(container, cards);
     return;
   }

@@ -108,8 +108,8 @@ def main() -> int:
 
     tokyo_manifest = (ROOT / "configs/data_manifest_tokyo_bay.yml").read_text(encoding="utf-8")
     required_tokyo_values = (
-        "review_version: review-v9",
-        "status: review_v9_recomputed_verified",
+        "review_version: review-v10",
+        "status: review_v10_recomputed_verified",
         "time_bin_seconds: 60",
         "max_state_skew_s: 60",
         "evaluated_pair_opportunities: 180585",
@@ -124,8 +124,8 @@ def main() -> int:
             errors.append(f"Tokyo reference manifest is missing: {value}")
     for private_reference in (
         "baseline_commit:",
-        "REVIEW_V9_METHOD_CHANGES.md",
-        "REVIEW_V9_RESULTS_AUDIT.md",
+        "REVIEW_V10_METHOD_CHANGES.md",
+        "REVIEW_V10_RESULTS_AUDIT.md",
     ):
         if private_reference in tokyo_manifest:
             errors.append(f"private Tokyo manifest reference remains: {private_reference}")
@@ -134,8 +134,8 @@ def main() -> int:
 
     sf_manifest = (ROOT / "configs/data_manifest.yml").read_text(encoding="utf-8")
     required_sf_values = (
-        "review_version: review-v9",
-        "status: review_v9_recomputed_verified",
+        "review_version: review-v10",
+        "status: review_v10_recomputed_verified",
         "time_bin_seconds: 60",
         "max_state_skew_s: 60",
         "evaluated_pair_opportunities: 300904",
@@ -150,8 +150,8 @@ def main() -> int:
             errors.append(f"San Francisco reference manifest is missing: {value}")
     for private_reference in (
         "baseline_commit:",
-        "REVIEW_V9_METHOD_CHANGES.md",
-        "REVIEW_V9_RESULTS_AUDIT.md",
+        "REVIEW_V10_METHOD_CHANGES.md",
+        "REVIEW_V10_RESULTS_AUDIT.md",
     ):
         if private_reference in sf_manifest:
             errors.append(f"private San Francisco manifest reference remains: {private_reference}")
@@ -160,28 +160,28 @@ def main() -> int:
 
     method_protocol = (ROOT / "docs/METHOD_PROTOCOL.md").read_text(encoding="utf-8")
     required_method_terms = (
-        "exactly the same within-2-nm vessel-pair set as brute force",
+        "Indexed and brute-force pair sets must be identical",
         "same non-empty `track_id`",
-        "at least 21 of 30 scheduled times",
-        "at least 630 s",
-        "solved continuously over all overlapping eligible piecewise-linear intervals",
-        "cross-source executability and common output-schema generation",
+        "at least 21 of the 30 scheduled 30 s common samples",
+        "at least 630 s of common continuous coverage",
+        "continuous minimum over overlapping",
+        "cross-source executability and common output-schema",
     )
     for term in required_method_terms:
         if term not in method_protocol:
-            errors.append(f"review-v9 method contract is missing: {term}")
+            errors.append(f"review-v10 method contract is missing: {term}")
 
     for summary_name in ("summary.json", "summary_tokyo_bay.json"):
         summary_path = ROOT / "web/data" / summary_name
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
-        if summary.get("encounter_evidence_cards", {}).get("schema_version") != "review-v9.encounter-evidence-card.v1":
+        if summary.get("encounter_evidence_cards", {}).get("schema_version") != "review-v10.encounter-evidence-card.v2":
             errors.append(f"unexpected evidence-card schema in {summary_path.relative_to(ROOT)}")
         if summary.get("ranking_evaluation", {}).get("protocol") != "docs/METHOD_PROTOCOL.md":
             errors.append(f"non-public protocol path in {summary_path.relative_to(ROOT)}")
 
     sf_summary = json.loads((ROOT / "web/data/summary.json").read_text(encoding="utf-8"))
     expected_ablation = {
-        "Anomaly-only": "35 hotspot cells",
+        "Behavior-component-only": "35 hotspot cells",
         "Encounter-only": "56,221 records; 19,805 episodes",
         "Fused screening": "57 hotspot cells",
     }
